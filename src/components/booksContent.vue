@@ -77,6 +77,13 @@ export default {
   beforeMount() {
     this;
   },
+  watch: {
+    content(val, oldVal) {
+      if (val !== oldVal) {
+        return val;
+      }
+    },
+  },
   computed: {
     selfBook() {
       return this.bookInfo;

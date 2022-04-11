@@ -147,6 +147,7 @@ export default {
       this.searchBook(1);
     }
   },
+  deactivated() {},
   computed: {
     isNight() {
       return this.$store.getters.isNight;

@@ -36,7 +36,7 @@
                       <li
                         v-for="(item, index) in catalogList"
                         :key="item.index"
-                        @click="changeCatalog(item)"
+                        @click="toNextChapter(index + 1)"
                       >
                         <a :class="selfBook.index === index + 1 ? 'on' : ''">{{
                           item.title
@@ -89,9 +89,6 @@ export default {
       bookContent: "",
       // 内容遮罩框
       bookLoading: true,
-
-      // 内容块是否错误
-      isContentError: false,
 
       // 是否刷新
       tryRefresh: true,
@@ -163,6 +160,9 @@ export default {
   },
   activated() {
     this.init();
+  },
+  deactivated() {
+    // this.init();
   },
   watch: {
     // 监听当前阅读的书籍
@@ -253,21 +253,35 @@ export default {
         onError && onError();
       }
     },
-    // 下一章
-    toNextChapter(onError) {
+
+    // 查询指定章节内容
+    toChapter(index) {
       let readingBook = this.readingBook;
 
       if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
-        onError && onError();
+        this.$message.error("章节错误");
         return;
       }
 
-      let index = readingBook.index;
-      index++;
       if (typeof readingBook.catalog[index] !== "undefined") {
         this.getContent(index);
       } else {
-        onError && onError();
+        this.$message.error("目录错误或已最新");
+      }
+    },
+    // 下一章
+    toNextChapter(index) {
+      let readingBook = this.readingBook;
+
+      if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
+        this.$message.error("章节错误");
+        return;
+      }
+
+      if (typeof readingBook.catalog[index] !== "undefined") {
+        this.getContent(index);
+      } else {
+        // onError && onError();
         this.$message.error("本章是最后一章");
       }
     },
@@ -292,12 +306,15 @@ export default {
             300
           );
         } else {
-          this.toNextChapter(() => {
-            if (typeof moveX !== "undefined") {
-              // 没有下一章，但是已经做了动画，恢复
-              this.showPage(this.currentPage, 0);
-            }
-          });
+          this.toNextChapter();
+
+          //   () => {
+          //   if (typeof moveX !== "undefined") {
+          //     // 没有下一章，但是已经做了动画，恢复
+          //     this.showPage(this.currentPage, 0);
+          //   }
+          // }
+          // ();
         }
       } else {
         if (
@@ -377,7 +394,6 @@ export default {
           } else {
             this.bookTitle = "获取章节失败，请刷新界面";
             this.bookContent = "获取章节目录失败！\n" + res.data.errorMsg;
-            this.isContentError = true;
             this.bookLoading = false;
           }
         },
@@ -419,6 +435,17 @@ export default {
       let readingBook = this.readingBook;
       let catalogList = readingBook.catalog;
 
+      if (index > catalogList.length) {
+        this.$message.error(`无法找到第${index}章，请刷新页面试试。`);
+        // this.refreshCatalog(); //刷新章节
+        return;
+      }
+
+      if (index < 0) {
+        this.$message.error(`已是第一章。`);
+        return;
+      }
+
       //强制滚回顶层
       jump(this.$refs.top, { duration: 0 });
 
@@ -433,59 +460,30 @@ export default {
         index: index,
       });
 
-      // 如果超出目录范围，尝试刷新目录
-      if (!catalogList[index]) {
-        if (this.tryRefresh) {
-          this.tryRefresh = false;
-          this.bookContent = "获取章节内容失败，请更新目录！";
-          this.isContentError = true;
-        } else {
-          this.tryRefresh = true;
-          this.refreshCatalog();
-        }
-        this.bookLoading = false;
-        return;
-      }
       // 设置章节名称
       this.bookTitle = catalogList[index].title;
-      let bookUrl = readingBook.bookUrl;
       this.bookLoading = true;
-
       // 获取正文内容
-      this.getBookContent(catalogList[index].index).then(
+      this.getBookContent(index).then(
         (res) => {
           this.bookLoading = false;
-          if (bookUrl !== readingBook.bookUrl || index !== readingBook.index) {
-            // 已经换书或者换章节了
-            return;
-          }
-          if (res.data.isSuccess) {
-            let data = res.data.data;
-            this.bookContent = data;
-            this.isContentError = false;
-          } else {
-            this.bookContent = "获取章节内容失败！\n" + res.data.errorMsg;
-            this.isContentError = true;
-          }
+          let str = res.data.isSuccess
+            ? res.data.data
+            : "获取章节内容失败！\n" + res.data.errorMsg;
+
+          this.bookContent = str;
         },
         (error) => {
+          let errorStr = "获取章节内容失败！\n" + (error && error.toString());
           this.bookLoading = false;
-          if (bookUrl !== readingBook.bookUrl || index !== readingBook.index) {
-            // 已经换书或者换章节了
-            return;
-          }
-          this.bookContent =
-            "获取章节内容失败！\n" + (error && error.toString());
-          this.isContentError = true;
-          this.$message.error(
-            "获取章节内容失败 " + (error && error.toString())
-          );
+          this.bookContent = errorStr;
+          this.$message.error(errorStr);
           throw error;
         }
       );
     },
     // 请求书籍内容
-    async getBookContent(chapterIndex, options) {
+    async getBookContent(chapterIndex) {
       let readingBook = this.readingBook;
 
       return cacheFirstRequest(
@@ -498,7 +496,6 @@ export default {
               chapterIndex,
             {
               timeout: 30000,
-              ...options,
             }
           ),
         readingBook.bookName +
@@ -683,37 +680,6 @@ export default {
         },
         onEnd,
       });
-    },
-    // 地址改变
-    epubLocationChangeHandler(url) {
-      function getPathname(path) {
-        const a = document.createElement("a");
-        a.href = path;
-        return decodeURIComponent(a.pathname);
-      }
-      url = getPathname(url);
-      // 判断是否跳转了其他章节
-      const currentChapter = this.catalog[this.chapterIndex];
-      if (currentChapter) {
-        const chapterPrefix = this.bookContent.replace(currentChapter.url, "");
-        const iframeUrlPath = url.replace(chapterPrefix, "");
-        let newChapterIndex = -1;
-        for (let i = 0; i < this.catalog.length; i++) {
-          if (this.catalog[i].url === iframeUrlPath) {
-            newChapterIndex = i;
-            break;
-          }
-        }
-        if (newChapterIndex >= 0) {
-          let book = { ...this.readingBook };
-          book.index = newChapterIndex;
-
-          // 加入书源 缓存
-          this.$store.commit("caches/setReadBooks", book);
-          this.$store.commit("caches/setReadingBook", book);
-          this.bookTitle = this.readingBook.catalog[newChapterIndex].title;
-        }
-      }
     },
     // 内容点击事件
     eventHandler(point) {
