@@ -2,6 +2,7 @@
   <div class="reader-content">
     <div class="content-inner">
       <booksContent
+        v-loading="bookLoading"
         class="book-content"
         :bookInfo="readingBook"
         :title="bookTitle"
@@ -29,9 +30,8 @@ export default {
       bookTitle: "",
       // 正文内容
       bookContent: "",
-
-      // 是否展示内容
-      showContent: false,
+      // 内容遮罩框
+      bookLoading: true,
 
       // 内容块是否错误
       isContentError: false,
@@ -104,44 +104,12 @@ export default {
       );
     },
   },
-  // activated() {
-  //   this.init();
-  // },
-  // deactivated() {
-  //   this.startSavePosition = false;
-  //   this.lastReadingBook = this.$store.state.readingBook;
-  //   this.timer && clearInterval(this.timer);
-  // },
-  mounted() {
+  activated() {
     this.init();
   },
   watch: {
-    isSlideRead(val) {
-      if (!val) {
-        this.contentStyle = {};
-        this.transformX = 0;
-      }
-      this.$nextTick(() => {
-        this.contentChange(() => {
-          if (this.currentParagraph) {
-            this.showParagraph(this.currentParagraph, true);
-          } else {
-            this.showPage(this.currentPage, 0);
-          }
-        });
-      });
-    },
-    // 窗口高度变化
-    windowSize() {
-      this.$nextTick(() => {
-        this.contentChange(() => {
-          this.showPage(this.currentPage, 0);
-        });
-      });
-    },
     // 监听当前阅读的书籍
     readingBook(val, oldVal) {
-      debugger;
       if (val.bookUrl !== oldVal.bookUrl) {
         this.startSavePosition = false;
         this.autoShowPosition();
@@ -156,15 +124,7 @@ export default {
           !this.lastReadingBook ||
           this.lastReadingBook.bookUrl !== this.readingBook.bookUrl
         ) {
-          this.title = "";
-          this.showContent = false;
-          // this.loading = this.$loading({
-          //   target: this.$refs.content,
-          //   lock: true,
-          //   text: "正在获取内容",
-          //   spinner: "el-icon-loading",
-          //   background: "rgba(0,0,0,0)",
-          // });
+          this.bookTitle = "";
           this.lastReadingBook = this.$store.state.readingBook;
           // 跳转记住的位置
           this.autoShowPosition();
@@ -183,36 +143,6 @@ export default {
       } else {
         this.$message.error("请在书架选择书籍");
       }
-    },
-    // 正文加载成功后的回调
-    iframeLoad() {
-      this.contentChange();
-    },
-    // 修改内容后
-    contentChange(cb) {
-      let bookContentRef = this.$refs.bookContentRef;
-
-      if (!bookContentRef || !bookContentRef.$el) {
-        setTimeout(() => {
-          this.contentChange(cb);
-        }, 30);
-        return;
-      }
-      if (this.isSlideRead) {
-        this.totalPages = Math.ceil(
-          bookContentRef.$el.scrollWidth / (this.windowSize.width - 16)
-        );
-      } else {
-        this.totalPages = Math.ceil(
-          bookContentRef.$el.scrollHeight /
-            (this.windowSize.height - this.scrollOffset)
-        );
-      }
-      if (this.showLastPage) {
-        this.showPage(this.totalPages, 0);
-        this.showLastPage = false;
-      }
-      cb && cb();
     },
     goHome() {
       this.$router.push({
@@ -247,8 +177,6 @@ export default {
       };
       if (immediate) {
         handler();
-      } else {
-        // this.$once("showContent", handler);
       }
     },
     // 上一章
@@ -288,7 +216,7 @@ export default {
     },
     // 下一页
     nextPage(moveX) {
-      if (!this.showContent || this.transforming) {
+      if (this.transforming) {
         return false;
       }
 
@@ -332,7 +260,7 @@ export default {
     },
     // 上一页
     prevPage(moveX) {
-      if (!this.showContent || this.transforming) {
+      if (this.transforming) {
         return false;
       }
 
@@ -373,6 +301,7 @@ export default {
     },
     // 全部目录
     loadCatalog(refresh) {
+      this.bookLoading = true;
       this.getCatalog(refresh).then(
         (res) => {
           if (res.data.isSuccess) {
@@ -381,19 +310,16 @@ export default {
               ...this.readingBook,
               catalog: res.data.data,
             });
-
             this.getContent(this.readingBook.index || 0);
           } else {
             this.bookTitle = "获取章节失败，请刷新界面";
             this.bookContent = "获取章节目录失败！\n" + res.data.errorMsg;
             this.isContentError = true;
-            this.showContent = true;
-            // this.$emit("showContent");
-            // this.loading.close();
+            this.bookLoading = false;
           }
         },
         (error) => {
-          // this.loading.close();
+          this.bookLoading = false;
           this.$message.error(
             "获取书籍目录列表 " + (error && error.toString())
           );
@@ -430,8 +356,6 @@ export default {
       let readingBook = this.readingBook;
       let catalogList = readingBook.catalog;
 
-      //展示进度条
-      this.showContent = false;
       //强制滚回顶层
       jump(this.$refs.top, { duration: 0 });
 
@@ -447,21 +371,22 @@ export default {
           this.tryRefresh = false;
           this.bookContent = "获取章节内容失败，请更新目录！";
           this.isContentError = true;
-          this.showContent = true;
-          // this.$emit("showContent");
-          // this.loading.close();
         } else {
           this.tryRefresh = true;
           this.refreshCatalog();
         }
+        this.bookLoading = false;
         return;
       }
       // 设置章节名称
       this.bookTitle = catalogList[index].title;
       let bookUrl = readingBook.bookUrl;
+      this.bookLoading = true;
+
       // 获取正文内容
       this.getBookContent(catalogList[index].index).then(
         (res) => {
+          this.bookLoading = false;
           if (bookUrl !== readingBook.bookUrl || index !== readingBook.index) {
             // 已经换书或者换章节了
             return;
@@ -469,18 +394,14 @@ export default {
           if (res.data.isSuccess) {
             let data = res.data.data;
             this.bookContent = data;
-            // this.loading.close();
             this.isContentError = false;
-            // this.$emit("showContent");
           } else {
             this.bookContent = "获取章节内容失败！\n" + res.data.errorMsg;
             this.isContentError = true;
-            // this.$emit("showContent");
-            // this.loading.close();
           }
-          this.showContent = true;
         },
         (error) => {
+          this.bookLoading = false;
           if (bookUrl !== readingBook.bookUrl || index !== readingBook.index) {
             // 已经换书或者换章节了
             return;
@@ -488,9 +409,6 @@ export default {
           this.bookContent =
             "获取章节内容失败！\n" + (error && error.toString());
           this.isContentError = true;
-          this.showContent = true;
-          this.$emit("showContent");
-          // this.loading.close();
           this.$message.error(
             "获取章节内容失败 " + (error && error.toString())
           );
@@ -651,9 +569,6 @@ export default {
     },
     // 展示当前页数
     showPage(page, duration) {
-      if (!this.showContent) {
-        return;
-      }
       this.currentPage = Math.min(page, this.totalPages);
       if (this.isSlideRead) {
         const moveX =
@@ -725,7 +640,7 @@ export default {
           let book = { ...this.readingBook };
           book.index = newChapterIndex;
           this.$store.commit("caches/setReadingBook", book);
-          this.title = this.readingBook.catalog[newChapterIndex].title;
+          this.bookTitle = this.readingBook.catalog[newChapterIndex].title;
         }
       }
     },

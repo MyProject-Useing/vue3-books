@@ -138,6 +138,15 @@ export default {
       showBookDetailsDialog: false,
     };
   },
+  activated() {
+    if (this.keywords === this.$route.query.keywords) {
+      return false;
+    }
+    this.keywords = this.$route.query.keywords ?? "";
+    if (this.keywords) {
+      this.searchBook(1);
+    }
+  },
   computed: {
     isNight() {
       return this.$store.getters.isNight;
@@ -168,12 +177,12 @@ export default {
       return noImage;
     },
   },
-  mounted() {
-    this.keywords = this.$route.query.keywords ?? "";
-    if (this.keywords) {
-      this.searchBook(1);
-    }
-  },
+  // mounted() {
+  //   this.keywords = this.$route.query.keywords ?? "";
+  //   if (this.keywords) {
+  //     this.searchBook(1);
+  //   }
+  // },
   watch: {
     // 查询模式监听
     searchConfig: {
