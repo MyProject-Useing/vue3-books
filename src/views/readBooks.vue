@@ -1,6 +1,6 @@
 <template>
   <div class="reader-content">
-    <div class="content-inner">
+    <div class="main-read-container">
       <booksContent
         v-loading="bookLoading"
         class="book-content"
@@ -9,7 +9,13 @@
         :content="bookContent"
         ref="bookContentRef"
       />
-
+      <div class="chapter-control dib-wrap">
+        <a>上一章</a>
+        <span>|</span>
+        <a target="_blank">目录</a>
+        <span>|</span>
+        <a>下一章</a>
+      </div>
       <div class="left-bar-list">
         <dl>
           <dd>
@@ -18,6 +24,7 @@
               :width="800"
               trigger="click"
               class="setting-popover"
+              v-model:visible="catalogPopover"
             >
               <template #reference>
                 <a href="javascript:">
@@ -25,27 +32,11 @@
                   <span>目录</span>
                 </a>
               </template>
-              <div class="catalog-list">
-                <div class="catalog-list-title"></div>
-                <div class="catalog-tab dib-wrap">
-                  <span class="lang act">目录</span>
-                </div>
-                <div class="catalog-list-wrap">
-                  <div class="volume-list">
-                    <ul>
-                      <li
-                        v-for="(item, index) in catalogList"
-                        :key="item.index"
-                        @click="toNextChapter(index + 1)"
-                      >
-                        <a :class="selfBook.index === index + 1 ? 'on' : ''">{{
-                          item.title
-                        }}</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <catalogList
+                :bookInfo="readingBook"
+                :catalogList="catalogList"
+                @changeChapter="toChapter"
+              />
             </el-popover>
           </dd>
           <dd class="">
@@ -65,7 +56,9 @@
   </div>
 </template>
 <script>
-import booksContent from "@/components/booksContent.vue";
+import booksContent from "@/components/books/booksContent.vue";
+import catalogList from "@/components/books/catalogList.vue";
+
 import { cacheFirstRequest, networkFirstRequest } from "@/plugins/helper";
 import jump from "@/plugins/jump";
 import Animate from "@/plugins/animate";
@@ -78,6 +71,7 @@ export default {
   components: {
     booksContent,
     CollectionTag,
+    catalogList,
     Grid,
     Tools,
   },
@@ -121,6 +115,9 @@ export default {
 
       // 最后阅读的书籍
       lastReadingBook: {},
+
+      // 目录弹出框
+      catalogPopover: false,
     };
   },
   computed: {
@@ -128,13 +125,9 @@ export default {
     readingBook() {
       return this.$store.state.caches.readingBook || {};
     },
-    // 路径信息
-    catalog() {
-      return (this.readingBook || {}).catalog || [];
-    },
-    // 章节
-    chapterIndex() {
-      return ((this.readingBook || {}).index || 0) | 0;
+    // 目录
+    catalogList() {
+      return this.readingBook.catalog;
     },
     // 窗口高度
     windowSize() {
@@ -253,16 +246,15 @@ export default {
         onError && onError();
       }
     },
-
+    saveBook() {},
     // 查询指定章节内容
     toChapter(index) {
+      this.catalogPopover = false;
       let readingBook = this.readingBook;
-
       if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
         this.$message.error("章节错误");
         return;
       }
-
       if (typeof readingBook.catalog[index] !== "undefined") {
         this.getContent(index);
       } else {
@@ -306,15 +298,7 @@ export default {
             300
           );
         } else {
-          this.toNextChapter();
-
-          //   () => {
-          //   if (typeof moveX !== "undefined") {
-          //     // 没有下一章，但是已经做了动画，恢复
-          //     this.showPage(this.currentPage, 0);
-          //   }
-          // }
-          // ();
+          this.toNextChapter(this.readingBook.index + 1);
         }
       } else {
         if (
@@ -328,7 +312,7 @@ export default {
           this.scrollContent(moveY, 300);
         } else {
           this.currentPage = 1;
-          this.toNextChapter();
+          this.toNextChapter(this.readingBook.index + 1);
         }
       }
     },

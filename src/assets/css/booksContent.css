@@ -36,25 +36,14 @@ body {
   -moz-font-smoothing: antialiased;
 }
 
-.read-panle {
-  background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
-  height: 100%;
-  width: 100%;
-}
-
-.main-read-container {
-  position: relative;
-  z-index: 100;
-  width: 940px;
-  margin: 0 auto;
-}
-
 .read-main-wrap {
+  width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  /* background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat; */
   font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
   font-size: 18px;
-  width: 800px;
-  margin: 0 auto;
 }
 .main-text-wrap {
   padding: 60px 64px;
@@ -62,6 +51,7 @@ body {
 
 .text-wrap {
   min-height: 600px;
+  width: 100%;
   margin-bottom: 24px;
   border: 1px solid #d8d8d8;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
@@ -134,32 +124,4 @@ i {
 p {
   word-wrap: break-word;
   word-break: break-all;
-}
-
-.dib-wrap {
-  font-size: 0;
-}
-
-.chapter-control {
-  height: 70px;
-  margin-bottom: 24px;
-  text-align: center;
-  border: 1px solid #d8d8d8;
-  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
-}
-.chapter-control span {
-  height: 32px;
-  border-right: 1px solid #d8d8d8;
-}
-.dib-wrap a,
-.dib-wrap span {
-  display: inline-block;
-  vertical-align: middle;
-  letter-spacing: normal;
-  word-spacing: normal;
-}
-.chapter-control a {
-  font: 18px/70px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  width: 33.2%;
 }

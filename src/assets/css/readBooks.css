@@ -46,59 +46,46 @@
   color: rgba(0, 0, 0, 0.4);
 }
 
-.catalog-list {
-  padding: 40px 0 40px 0px;
+.reader-content {
+  background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
+  height: 100%;
+  width: 100%;
 }
 
-.catalog-list .catalog-tab {
-  margin: 0 0 20px 24px;
-}
-.catalog-tab span.act {
-  border-bottom: 1px solid #ed4259;
-}
-.catalog-list .catalog-tab span {
-  font-size: 18px;
-  line-height: 22px;
-  margin-right: 20px;
-  padding: 0 2px 4px;
-  cursor: pointer;
-  transition: color 0.3s;
-  color: #ed4259;
-}
-.lang {
-  font-weight: 500;
-}
-
-.catalog-list-wrap .volume-list {
-  display: block;
-  clear: both;
-  margin-right: -4px;
-  margin-bottom: 20px;
-}
-.catalog-list-wrap .volume-list ul {
-  overflow: hidden;
-  padding-left: 24px;
-}
-.catalog-list-wrap .volume-list li {
-  font: 16px/40px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  float: left;
-  width: 368px;
-  border-top: 1px solid #f2f2f2;
-}
-li, ol, ul {
-  list-style: none outside none;
-}
-.catalog-list-wrap {
-  overflow: auto;
-  overflow-x: hidden;
+.main-read-container {
   position: relative;
-  z-index: 1;
-  min-height: 235px;
-  max-height: 450px;
+  z-index: 100;
+  width: 940px;
+  margin: 0 auto;
 }
 
-.catalog-list-wrap .volume-list li.on a {
-  color: #ed4259;
+/*上、下一章*/
+.dib-wrap {
+  font-size: 0;
 }
 
+.chapter-control {
+  height: 70px;
+  margin-bottom: 24px;
+  text-align: center;
+  border: 1px solid #d8d8d8;
+  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
+}
+.chapter-control span {
+  height: 32px;
+  border-right: 1px solid #d8d8d8;
+}
+.dib-wrap a,
+.dib-wrap span {
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+.chapter-control a {
+  font: 18px/70px PingFangSC-Regular, HelveticaNeue-Light,
+    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
+  width: 33.2%;
+}
+
+/*上、下一章*/
