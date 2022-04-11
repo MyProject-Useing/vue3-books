@@ -81,8 +81,6 @@ export default {
         author: book.author,
         origin: book.origin,
       };
-      // 加入书源 缓存
-      this.$store.commit("caches/setReadBooks", cacheBook);
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", cacheBook);
       this.$router.push({ path: "/readBooks", query: { search: 1 } });

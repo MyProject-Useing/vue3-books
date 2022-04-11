@@ -9,6 +9,58 @@
         :content="bookContent"
         ref="bookContentRef"
       />
+
+      <div class="left-bar-list">
+        <dl>
+          <dd>
+            <el-popover
+              placement="right"
+              :width="800"
+              trigger="click"
+              class="setting-popover"
+            >
+              <template #reference>
+                <a href="javascript:">
+                  <el-icon><Grid /></el-icon>
+                  <span>目录</span>
+                </a>
+              </template>
+              <div class="catalog-list">
+                <div class="catalog-list-title"></div>
+                <div class="catalog-tab dib-wrap">
+                  <span class="lang act">目录</span>
+                </div>
+                <div class="catalog-list-wrap">
+                  <div class="volume-list">
+                    <ul>
+                      <li
+                        v-for="(item, index) in catalogList"
+                        :key="item.index"
+                        @click="changeCatalog(item)"
+                      >
+                        <a :class="selfBook.index === index + 1 ? 'on' : ''">{{
+                          item.title
+                        }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </el-popover>
+          </dd>
+          <dd class="">
+            <a href="javascript:">
+              <el-icon><Tools /></el-icon>
+              <span>设置</span></a
+            >
+          </dd>
+          <dd>
+            <a class="add-book" href="javascript:">
+              <el-icon><collection-tag /></el-icon><span>书架</span></a
+            >
+          </dd>
+        </dl>
+      </div>
     </div>
   </div>
 </template>
@@ -19,11 +71,16 @@ import jump from "@/plugins/jump";
 import Animate from "@/plugins/animate";
 
 import request from "@/plugins/axios";
-
+import { CollectionTag, Grid, Tools } from "@element-plus/icons";
 // 书籍详情
 export default {
   name: "readBooks",
-  components: { booksContent },
+  components: {
+    booksContent,
+    CollectionTag,
+    Grid,
+    Tools,
+  },
   data() {
     return {
       // 章节目录
@@ -305,7 +362,12 @@ export default {
       this.getCatalog(refresh).then(
         (res) => {
           if (res.data.isSuccess) {
-            debugger;
+            // 加入书源 缓存
+            this.$store.commit("caches/setReadBooks", {
+              ...this.readingBook,
+              catalog: res.data.data,
+            });
+
             // 更新书籍目录
             this.$store.commit("caches/setReadingBook", {
               ...this.readingBook,
@@ -360,6 +422,11 @@ export default {
       //强制滚回顶层
       jump(this.$refs.top, { duration: 0 });
 
+      // 加入书源 缓存
+      this.$store.commit("caches/setReadBooks", {
+        ...readingBook,
+        index: index,
+      });
       // 保存阅读进度
       this.$store.commit("caches/setReadingBook", {
         ...readingBook,
@@ -640,6 +707,9 @@ export default {
         if (newChapterIndex >= 0) {
           let book = { ...this.readingBook };
           book.index = newChapterIndex;
+
+          // 加入书源 缓存
+          this.$store.commit("caches/setReadBooks", book);
           this.$store.commit("caches/setReadingBook", book);
           this.bookTitle = this.readingBook.catalog[newChapterIndex].title;
         }
@@ -723,5 +793,5 @@ export default {
 
 <style scoped>
 @import url("@/assets/css/base.css");
-/* @import url("@/assets/css/searchResult.css"); */
+@import url("@/assets/css/readBooks.css");
 </style>

@@ -47,68 +47,14 @@
         </div>
       </div>
     </div>
-    <div class="left-bar-list">
-      <dl>
-        <dd>
-          <el-popover
-            placement="right"
-            :width="800"
-            trigger="click"
-            class="setting-popover"
-          >
-            <template #reference>
-              <a href="javascript:">
-                <el-icon><grid /></el-icon>
-                <span>目录</span>
-              </a>
-            </template>
-            <div class="catalog-list">
-              <div class="catalog-list-title"></div>
-              <div class="catalog-tab dib-wrap">
-                <span class="lang act">目录</span>
-              </div>
-              <div class="catalog-list-wrap">
-                <div class="volume-list">
-                  <ul>
-                    <li v-for="(item, index) in catalogList" :key="item.index">
-                      <a :class="selfBook.index === index + 1 ? 'on' : ''">{{
-                        item.title
-                      }}</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </el-popover>
-        </dd>
-        <dd class="">
-          <a href="javascript:">
-            <el-icon><tools /></el-icon>
-            <span>设置</span></a
-          >
-        </dd>
-        <dd>
-          <a class="add-book" href="javascript:">
-            <el-icon><collection-tag /></el-icon><span>书架</span></a
-          >
-        </dd>
-      </dl>
-    </div>
   </div>
 </template>
 
 <script>
-import {
-  CollectionTag,
-  Grid,
-  Tools,
-  Avatar,
-  Management,
-  TrendCharts,
-} from "@element-plus/icons";
+import { Avatar, Management, TrendCharts } from "@element-plus/icons";
 export default {
   name: "booksContent",
-  components: { CollectionTag, Grid, Tools, Avatar, Management, TrendCharts },
+  components: { Avatar, Management, TrendCharts },
   data() {
     return {};
   },
@@ -143,7 +89,9 @@ export default {
       return this.content.replace(/&nbsp;/g, "").split("\n");
     },
   },
-  methods: {},
+  methods: {
+    changeCatalog() {},
+  },
 };
 </script>
 <style scoped>
