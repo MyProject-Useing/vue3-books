@@ -52,6 +52,10 @@
   width: 100%;
 }
 
+.el-loading-mask{
+  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
+}
+
 .main-read-container {
   position: relative;
   z-index: 100;
