@@ -141,6 +141,7 @@ export default {
     },
     // 监听当前阅读的书籍
     readingBook(val, oldVal) {
+      debugger;
       if (val.bookUrl !== oldVal.bookUrl) {
         this.startSavePosition = false;
         this.autoShowPosition();

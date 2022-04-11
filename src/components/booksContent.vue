@@ -34,32 +34,12 @@
               </div>
             </div>
             <div class="read-content">
-              <p>
-                <span class="content-wrap">{{ content }}</span>
-              </p>
-              <p>
-                <span class="content-wrap">“雪花飘飘北风萧萧”</span>
-              </p>
-              <p>
-                <span class="content-wrap">“天地一片苍茫”</span>
-              </p>
-              <p>
-                <span class="content-wrap">“一剪寒梅傲立雪中”</span>
-              </p>
-              <p>
-                <span class="content-wrap"
-                  >昼夜颠倒更是家常便饭，灵感来了大半夜爬起来敲键盘。</span
-                >
-              </p>
-              <p>
-                <span class="content-wrap"
-                  >由于常年码字，生活作息不规律，熬夜，久坐不运动，吃油炸食品……每个月靠着六百块全勤吃饭，有一顿没一顿的情况下，终于倒在了键盘上。</span
-                >
+              <p v-for="(item, index) in contentList" :key="index">
+                <span class="content-wrap" v-html="item"></span>
               </p>
             </div>
           </div>
         </div>
-
         <div class="chapter-control dib-wrap">
           <a id="j_chapterPrev">上一章</a><span>|</span>
           <a target="_blank">目录</a><span>|</span>
@@ -67,7 +47,6 @@
         </div>
       </div>
     </div>
-
     <div class="left-bar-list">
       <dl>
         <dd data-eid="qd_R42">
@@ -129,6 +108,9 @@ export default {
   computed: {
     selfBook() {
       return this.bookInfo;
+    },
+    contentList() {
+      return this.content.replace(/&nbsp;/g, "").split("\n");
     },
   },
   methods: {},
