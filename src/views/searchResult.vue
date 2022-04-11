@@ -46,6 +46,11 @@
                 fit="cover"
                 lazy
               >
+                <template #error>
+                  <div class="image-slot">
+                    <el-image :src="noImg"></el-image>
+                  </div>
+                </template>
               </el-image>
             </div>
             <div class="book-info">
@@ -103,12 +108,12 @@
 </template>
 
 <script>
-import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
+import noImage from "@/assets/imgs/noImage.png";
 
+import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 // 书籍详情
 export default {
   name: "searchResult",
-  components: {},
   data() {
     return {
       // 查询关键字
@@ -158,6 +163,9 @@ export default {
         newList.push({ value: d, address: d });
       });
       return newList;
+    },
+    noImg() {
+      return noImage;
     },
   },
   mounted() {
