@@ -305,6 +305,7 @@ export default {
       this.getCatalog(refresh).then(
         (res) => {
           if (res.data.isSuccess) {
+            debugger;
             // 更新书籍目录
             this.$store.commit("caches/setReadingBook", {
               ...this.readingBook,

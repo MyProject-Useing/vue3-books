@@ -49,11 +49,37 @@
     </div>
     <div class="left-bar-list">
       <dl>
-        <dd data-eid="qd_R42">
-          <a href="javascript:">
-            <el-icon><grid /></el-icon>
-            <span>目录</span>
-          </a>
+        <dd>
+          <el-popover
+            placement="right"
+            :width="800"
+            trigger="click"
+            class="setting-popover"
+          >
+            <template #reference>
+              <a href="javascript:">
+                <el-icon><grid /></el-icon>
+                <span>目录</span>
+              </a>
+            </template>
+            <div class="catalog-list">
+              <div class="catalog-list-title"></div>
+              <div class="catalog-tab dib-wrap">
+                <span class="lang act">目录</span>
+              </div>
+              <div class="catalog-list-wrap">
+                <div class="volume-list">
+                  <ul>
+                    <li v-for="(item, index) in catalogList" :key="item.index">
+                      <a :class="selfBook.index === index + 1 ? 'on' : ''">{{
+                        item.title
+                      }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </el-popover>
         </dd>
         <dd class="">
           <a href="javascript:">
@@ -109,6 +135,10 @@ export default {
     selfBook() {
       return this.bookInfo;
     },
+    // 目录
+    catalogList() {
+      return this.selfBook.catalog;
+    },
     contentList() {
       return this.content.replace(/&nbsp;/g, "").split("\n");
     },
@@ -119,4 +149,9 @@ export default {
 <style scoped>
 @import url("@/assets/css/base.css");
 @import url("@/assets/css/booksContent.css");
+</style>
+<style>
+.setting-popover {
+  left: -11px;
+}
 </style>
