@@ -101,7 +101,7 @@ export default {
     toDetail(book) {
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
-      this.$router.push({ path: "/readBooks", query: { search: 1 } });
+      this.$router.push({ path: "/readBooks", query: { search: book.index } });
     },
     searchDetails() {
       this.$router.push({
