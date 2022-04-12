@@ -143,24 +143,28 @@ export const cacheFirstRequest = async function (
       }
     }
   }
-  return requestFunc().then((res) => {
-    debugger;
-    if (
-      (forceCache || !window.serviceWorkerReady) &&
-      res.data &&
-      res.data.isSuccess
-    ) {
-      try {
-        window.localStorage &&
-          window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
-      } catch (error) {
-        ElMessage({
-          message: "本地空间已满，请清空缓存",
-          duration: 500,
-          type: "error",
-        });
+
+  return new Promise(function (resolve, reject) {
+    requestFunc().then((res) => {
+      if (
+        (forceCache || !window.serviceWorkerReady) &&
+        res.data &&
+        res.data.isSuccess
+      ) {
+        try {
+          window.localStorage &&
+            window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
+          resolve(res);
+        } catch (error) {
+          ElMessage({
+            message: "本地空间已满，请清空缓存",
+            duration: 500,
+            type: "error",
+          });
+          reject("本地空间已满，请清空缓存");
+        }
       }
-    }
+    });
   });
 
   // return res;

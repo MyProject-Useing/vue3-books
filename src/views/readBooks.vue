@@ -152,7 +152,6 @@ export default {
     },
   },
   activated() {
-    debugger;
     this.init();
   },
   deactivated() {
@@ -431,7 +430,6 @@ export default {
         ...readingBook,
         index: index,
       });
-      debugger;
       // 获取正文内容
       this.getBookContent(index).then(
         (res) => {
@@ -464,7 +462,7 @@ export default {
         bookUrl +
         "@chapterContent-" +
         chapterIndex;
-      debugger;
+
       return cacheFirstRequest(
         () =>
           request.get(
