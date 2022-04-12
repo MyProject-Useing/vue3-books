@@ -113,11 +113,11 @@ export default {
       // 展示工具栏
       showToolBar: true,
 
-      // 最后阅读的书籍
-      lastReadingBook: {},
-
       // 目录弹出框
       catalogPopover: false,
+
+      // 目录
+      catalogList: [],
     };
   },
   computed: {
@@ -126,9 +126,9 @@ export default {
       return this.$store.state.caches.readingBook || {};
     },
     // 目录
-    catalogList() {
-      return this.readingBook.catalog;
-    },
+    // catalogList() {
+    //   return this.readingBook.catalog;
+    // },
     // 窗口高度
     windowSize() {
       return this.$store.state.windowSize;
@@ -167,29 +167,13 @@ export default {
     },
   },
   methods: {
-    init(refresh) {
+    init() {
       if (this.readingBook) {
-        if (
-          refresh ||
-          !this.lastReadingBook ||
-          this.lastReadingBook.bookUrl !== this.readingBook.bookUrl
-        ) {
-          this.bookTitle = "";
-          this.lastReadingBook = this.$store.state.readingBook;
-          // 跳转记住的位置
-          this.autoShowPosition();
-          this.loadCatalog(false);
-        } else {
-          if (this.isEpub) {
-            // 跳转记住的位置
-            this.autoShowPosition(true);
-          } else {
-            this.startSavePosition = true;
-          }
-          setTimeout(() => {
-            this.$store.commit("caches/setReadingBook", this.lastReadingBook);
-          }, 100);
-        }
+        this.bookTitle = "";
+        // 跳转记住的位置
+        this.autoShowPosition();
+        this.loadCatalog(false);
+        // this.getContent(this.readingBook.index || 0);
       } else {
         this.$message.error("请在书架选择书籍");
       }
@@ -233,13 +217,13 @@ export default {
     toLastChapter(onError) {
       let readingBook = this.readingBook;
 
-      if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
+      if (!readingBook || !readingBook.bookUrl || !catalogList) {
         onError && onError();
         return;
       }
       let index = readingBook.index;
       index--;
-      if (typeof readingBook.catalog[index] !== "undefined") {
+      if (typeof catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         this.$message.error("本章是第一章");
@@ -251,11 +235,11 @@ export default {
     toChapter(index) {
       this.catalogPopover = false;
       let readingBook = this.readingBook;
-      if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
+      if (!readingBook || !readingBook.bookUrl || !catalogList) {
         this.$message.error("章节错误");
         return;
       }
-      if (typeof readingBook.catalog[index] !== "undefined") {
+      if (typeof catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         this.$message.error("目录错误或已最新");
@@ -265,12 +249,12 @@ export default {
     toNextChapter(index) {
       let readingBook = this.readingBook;
 
-      if (!readingBook || !readingBook.bookUrl || !readingBook.catalog) {
+      if (!readingBook || !readingBook.bookUrl || !catalogList) {
         this.$message.error("章节错误");
         return;
       }
 
-      if (typeof readingBook.catalog[index] !== "undefined") {
+      if (typeof catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         // onError && onError();
@@ -363,20 +347,21 @@ export default {
       this.getCatalog(refresh).then(
         (res) => {
           if (res.data.isSuccess) {
+            this.catalogList = res.data.data;
             // 加入书源 缓存
-            this.$store.commit("caches/setBooksList", {
-              ...this.readingBook,
-              catalog: res.data.data,
-            });
+            // this.$store.commit("caches/setBooksList", {
+            //   ...this.readingBook,
+            //   catalog: res.data.data,
+            // });
 
             // 更新书籍目录
-            this.$store.commit("caches/setReadingBook", {
-              ...this.readingBook,
-              catalog: res.data.data,
-            });
+            // this.$store.commit("caches/setReadingBook", {
+            //   ...this.readingBook,
+            //   catalog: res.data.data,
+            // });
             this.getContent(this.readingBook.index || 0);
           } else {
-            this.bookTitle = "获取章节失败，请刷新界面";
+            this.bookTitle = "获取章节失败";
             this.bookContent = "获取章节目录失败！\n" + res.data.errorMsg;
             this.bookLoading = false;
           }
@@ -417,9 +402,7 @@ export default {
     // 获取文章内容块
     getContent(index) {
       let readingBook = this.readingBook;
-      let catalogList = readingBook.catalog;
-
-      if (index > catalogList.length) {
+      if (index > this.catalogList.length) {
         this.$message.error(`无法找到第${index}章，请刷新页面试试。`);
         // this.refreshCatalog(); //刷新章节
         return;
