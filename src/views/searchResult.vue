@@ -31,18 +31,13 @@
     <div class="search-content-panle" v-loading="refreshLoading">
       <div class="books-wrapper" ref="bookList">
         <ul class="wrapper">
-          <li
-            class="book-item"
-            :style="{ minWidth: '360px' }"
-            v-for="(book, bi) in searchResult"
-            :key="bi"
-            @click="toDetail(book)"
-          >
-            <div class="cover-img" @click.stop="toDetail(book)">
+          <li class="book-item" v-for="(book, bi) in searchResult" :key="bi">
+            <div class="cover-img">
               <el-image
                 class="cover"
                 :src="getCover(book.coverUrl, true)"
                 :key="book.coverUrl"
+                @click.stop="toDetail(book)"
                 fit="cover"
               >
                 <template #error>
@@ -53,11 +48,12 @@
               </el-image>
             </div>
             <div class="book-info">
-              <div class="book-name ellipsis">
+              <div
+                class="book-name ellipsis"
+                :title="book.name"
+                @click.stop="toDetail(book)"
+              >
                 {{ book.name }}
-              </div>
-              <div class="book-author ellipsis">
-                {{ book.author || "" }}
               </div>
               <div class="book-content-details">
                 <div class="sub">
@@ -80,7 +76,10 @@
                   }}：{{ book.latestChapterTitle }}
                 </div>
               </div>
-              <div class="book-bottom-btn" @click.stop="() => {}">
+              <div class="book-author ellipsis" :title="book.author">
+                <el-icon><avatar /></el-icon> {{ book.author || "" }}
+              </div>
+              <!-- <div class="book-bottom-btn" @click.stop="() => {}">
                 <el-tag
                   v-if="isCollect(book)"
                   type="success"
@@ -98,7 +97,7 @@
                 >
                   <i class="el-icon-circle-plus-outline"></i> 加入收藏
                 </el-tag>
-              </div>
+              </div> -->
             </div>
           </li>
           <!-- <div
@@ -116,11 +115,12 @@
 
 <script>
 import noImage from "@/assets/imgs/noImage.png";
-
+import { Avatar } from "@element-plus/icons";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 // 书籍详情
 export default {
   name: "searchResult",
+  components: { Avatar },
   data() {
     return {
       // 查询关键字

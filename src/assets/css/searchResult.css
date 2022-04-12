@@ -118,10 +118,9 @@
 
 .result-content .books-wrapper .book-item {
   display: flex;
-  cursor: pointer;
-  width: 423px;
+  width: 339px;
   float: left;
-  margin-bottom: 25px;
+  margin-bottom: 37px;
 }
 
 .result-content .books-wrapper {
@@ -130,8 +129,9 @@
   width: 100%;
 }
 .result-content .cover-img {
-  width: 100px;
-  height: 133px;
+  width: 72px;
+  height: 96px;
+  cursor: pointer;
 }
 
 .result-content .book-info {
@@ -143,33 +143,44 @@
 
 .result-content .book-name {
   font-size: 16px;
-  font-weight: 700;
-  color: #33373d;
+  color: #1a1a1a;
+  transition: color 0.3s, background-color 0.3s;
   margin-right: 38px;
   max-height: 45px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  cursor: pointer;
 }
-
+.result-content .book-name:hover {
+  color: #ed4259;
+}
 .result-content .book-author {
   font-size: 12px;
-  font-weight: 600;
-  color: #969ba3;
-  margin-bottom: 15px;
+  height: 18px;
+  color: #a6a6a6;
+  display: flex;
+  align-items: center;
 }
+.result-content .book-author i {
+  margin-right: 5px;
+}
+
 .result-content .book-operation {
   position: absolute;
   right: 0px;
 }
 
 .result-content .last-chapter {
+  color: #666;
   margin-bottom: 14px;
+  font-size: 12px;
 }
 .result-content .el-image {
   height: 100%;
   width: 100%;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 35%), inset 0 0 5px #f9f2e9;
 }
 .result-content .book-content-details {
-  height: 48px;
+  height: 51px;
 }
 
 .result-content .el-tag {
