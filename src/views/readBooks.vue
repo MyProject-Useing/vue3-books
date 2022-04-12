@@ -213,7 +213,7 @@ export default {
           window.localStorage &&
           window.localStorage.getItem(
             "bookChapterProgress@" +
-              this.readingBook.bookName +
+              this.readingBook.name +
               "_" +
               this.readingBook.author
           );
@@ -401,7 +401,7 @@ export default {
       }
 
       const catchData =
-        this.readingBook.bookName +
+        this.readingBook.name +
         "_" +
         this.readingBook.author +
         "@" +
@@ -482,7 +482,7 @@ export default {
               timeout: 30000,
             }
           ),
-        readingBook.bookName +
+        readingBook.name +
           "_" +
           readingBook.author +
           "@" +
@@ -515,7 +515,7 @@ export default {
       window.localStorage &&
         window.localStorage.setItem(
           "bookChapterProgress@" +
-            this.readingBook.bookName +
+            this.readingBook.name +
             "_" +
             this.readingBook.author,
           position

@@ -45,9 +45,7 @@
           </el-image>
         </div>
         <div class="tile-title">
-          <span class="ellipsis" :title="item.name || item.bookName">
-            {{ item.name || item.bookName }}</span
-          >
+          <span class="ellipsis" :title="item.name"> {{ item.name }}</span>
         </div>
       </a>
     </div>

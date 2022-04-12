@@ -272,21 +272,11 @@ export default {
     popupWidth() {
       return this.collapseMenu ? this.$store.state.windowSize.width : "600";
     },
-    readingRecent() {
-      return this.$store.state.caches.readingBook &&
-        this.$store.state.caches.readingBook.bookName
-        ? this.$store.state.caches.readingBook
-        : {
-            bookName: "尚无阅读记录",
-            bookUrl: "",
-            index: 0,
-          };
-    },
-    // 書源緩存
+    // 书源缓存
     bookSourceList() {
       return this.$store.state.bookSourceList;
     },
-    // 查詢模式設置
+    // 查询模式设置
     searchConfig: {
       get() {
         return this.$store.state.searchConfig;

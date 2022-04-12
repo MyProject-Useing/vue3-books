@@ -113,15 +113,7 @@ export default {
       );
     },
     changeBook(book) {
-      const readingBook = {
-        bookName: book.name,
-        bookUrl: book.bookUrl,
-        index: book.durChapterIndex,
-        type: book.type,
-        coverUrl: book.coverUrl,
-        author: book.author,
-      };
-      this.$emit("changeBook", readingBook);
+      this.$emit("changeBook", book);
     },
     refreshShelf() {
       if (this.refreshLoading) return;
