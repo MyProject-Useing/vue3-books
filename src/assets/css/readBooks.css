@@ -52,7 +52,7 @@
   width: 100%;
 }
 
-.search-content-panle .el-loading-mask{
+.book-content .el-loading-mask{
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
 

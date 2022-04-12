@@ -70,7 +70,6 @@
                 <div class="dur-chapter" v-if="book.durChapterTitle">
                   已读：{{ book.durChapterTitle }}
                 </div>
-
                 <div
                   class="last-chapter ellipsis"
                   v-if="book.latestChapterTitle"
@@ -82,10 +81,19 @@
                   }}：{{ book.latestChapterTitle }}
                 </div>
               </div>
-              <div class="book-bottom-btn">
+              <div class="book-bottom-btn" @click.stop="() => {}">
                 <el-tag
+                  v-if="isCollect(book)"
                   type="success"
-                  :effect="isNight ? 'dark' : 'light'"
+                  effect="light"
+                  class="setting-connect"
+                >
+                  <i class="el-icon-check"></i> 已收藏
+                </el-tag>
+                <el-tag
+                  v-else
+                  type="success"
+                  effect="light"
                   class="setting-connect"
                   @click.stop="saveBook(book)"
                 >
@@ -178,12 +186,6 @@ export default {
       return noImage;
     },
   },
-  // mounted() {
-  //   this.keywords = this.$route.query.keywords ?? "";
-  //   if (this.keywords) {
-  //     this.searchBook(1);
-  //   }
-  // },
   watch: {
     // 查询模式监听
     searchConfig: {
@@ -195,6 +197,15 @@ export default {
     },
   },
   methods: {
+    isCollect(book) {
+      let filData = this.cacheBookList.filter(
+        (d) =>
+          d.author === book.author &&
+          d.name === book.name &&
+          d.origin === book.origin
+      )[0];
+      return filData ? true : false;
+    },
     getCover(coverUrl, normal) {
       return getCover(coverUrl, normal);
     },
@@ -227,7 +238,7 @@ export default {
         return;
       }
       // 加入书源 缓存
-      this.$store.commit("caches/setReadBooks", book);
+      this.$store.commit("caches/setBooksList", book);
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
 
@@ -388,13 +399,11 @@ export default {
         }
       });
     },
-    // 查看书籍详情
-    showDetails(book) {
-      this.BookDetailsInfo = book;
-      this.showBookDetailsDialog = true;
-    },
-    closeDetails() {
-      // this.showBookDetailsDialog = false;
+    // 加入收藏
+    saveBook(book) {
+      // 加入书源 缓存
+      this.$store.commit("caches/setBooksList", book);
+      this.$message.success("收藏成功。");
     },
   },
 };

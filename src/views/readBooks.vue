@@ -364,7 +364,7 @@ export default {
         (res) => {
           if (res.data.isSuccess) {
             // 加入书源 缓存
-            this.$store.commit("caches/setReadBooks", {
+            this.$store.commit("caches/setBooksList", {
               ...this.readingBook,
               catalog: res.data.data,
             });
@@ -434,7 +434,7 @@ export default {
       jump(this.$refs.top, { duration: 0 });
 
       // 加入书源 缓存
-      this.$store.commit("caches/setReadBooks", {
+      this.$store.commit("caches/setBooksList", {
         ...readingBook,
         index: index,
       });

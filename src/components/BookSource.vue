@@ -144,7 +144,7 @@ export default {
                 typeof searchBook.coverUrl !== "undefined"
                   ? searchBook.coverUrl
                   : book.coverUrl;
-              this.$store.commit("caches/setReadBooks", book);
+              this.$store.commit("caches/setBooksList", book);
               this.$emit("changeBookSource");
 
               // 重新加载书架

@@ -6,10 +6,24 @@ function setBooks(list, item) {
       element.origin === item.origin
   )[0];
 
+  let book = {
+    author: item.author, //作者
+    bookUrl: item.bookUrl,
+    coverUrl: item.coverUrl,
+    intro: item.intro, //描述
+    kind: item.kind,
+    latestChapterTitle: item.latestChapterTitle, //最后一章
+    name: item.name, // 书名
+    origin: item.origin, // 源网站地址
+    originName: item.originName, // 源网站名称
+    wordCount: item.originName, // 总文字
+    readIndex: item.readIndex ?? 0, //当前阅读的章节
+  };
+
   if (filData) {
-    filData = item;
+    filData = book;
   } else {
-    list.push(item);
+    list.push(book);
   }
   return list;
 }
@@ -57,7 +71,7 @@ const mutations = {
       JSON.stringify(state.searchHistoryList)
     );
   },
-  setReadBooks(state, val) {
+  setBooksList(state, val) {
     state.readBooksList = setBooks(state.readBooksList, val);
     localStorage.setItem("ReadBooksList", JSON.stringify(state.readBooksList));
   },
@@ -74,8 +88,8 @@ const actions = {
   setSearchHistory({ commit }, val) {
     commit("setSearchHistory", val);
   },
-  setReadBooks({ commit }, val) {
-    commit("setReadBooks", val);
+  setBooksList({ commit }, val) {
+    commit("setBooksList", val);
   },
   deleteReadBooks({ commit }, val) {
     commit("deleteReadBooks", val);

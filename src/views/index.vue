@@ -96,11 +96,16 @@ export default {
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
+    // 直接阅读缓存的书籍
     toDetail(book) {
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
-      this.$router.push({ path: "/readBooks", query: { search: book.index } });
+      this.$router.push({
+        path: "/readBooks",
+        query: { search: book.readIndex || 0 },
+      });
     },
+    // 跳转查询详情页面
     searchDetails() {
       this.$router.push({
         path: "/searchResult",
