@@ -20,12 +20,34 @@
         v-for="(item, index) in cacheBookList"
         :key="index"
         @click="toDetail(item)"
+        @mouseover="item.isActive = true"
+        @mouseout="item.isActive = false"
       >
+        <el-icon
+          v-show="item.isActive"
+          class="delete-books"
+          @click.stop="deleteBook(item)"
+          ><delete
+        /></el-icon>
+
         <div class="tile-icon">
-          <i class="logo-bg"></i>
+          <el-image
+            class="cover"
+            :src="getCover(item.coverUrl, true)"
+            :key="item.coverUrl"
+            fit="cover"
+          >
+            <template #error>
+              <div class="image-slot">
+                <el-image :src="noImg"></el-image>
+              </div>
+            </template>
+          </el-image>
         </div>
-        <div class="tile-title title-ltr">
-          <span> {{ item.bookName }}</span>
+        <div class="tile-title">
+          <span class="ellipsis" :title="item.name || item.bookName">
+            {{ item.name || item.bookName }}</span
+          >
         </div>
       </a>
     </div>
@@ -33,12 +55,20 @@
 </template>
 
 <script>
+import noImage from "@/assets/imgs/noImage.png";
+import { getCover } from "@/plugins/utils.js";
+import { Delete } from "@element-plus/icons";
+
 export default {
   name: "homeIndex",
   data() {
     return { keywords: "" };
   },
+  components: { Delete },
   computed: {
+    noImg() {
+      return noImage;
+    },
     cacheBookList() {
       return this.$store.state.caches.readBooksList;
     },
@@ -69,20 +99,8 @@ export default {
       cb(results);
     },
     toDetail(book) {
-      if (!book.bookUrl) {
-        return;
-      }
-      let cacheBook = {
-        bookName: book.bookName || book.name,
-        bookUrl: book.bookUrl,
-        index: book.index ?? book.durChapterIndex ?? 0,
-        type: book.type,
-        coverUrl: book.coverUrl,
-        author: book.author,
-        origin: book.origin,
-      };
       // 当前正在阅读的书籍
-      this.$store.commit("caches/setReadingBook", cacheBook);
+      this.$store.commit("caches/setReadingBook", book);
       this.$router.push({ path: "/readBooks", query: { search: 1 } });
     },
     searchDetails() {
@@ -90,6 +108,13 @@ export default {
         path: "/searchResult",
         query: { keywords: this.keywords },
       });
+    },
+    getCover(coverUrl, normal) {
+      return getCover(coverUrl, normal);
+    },
+    deleteBook(book) {
+      // 删除当前书籍
+      this.$store.commit("caches/deleteReadBooks", book);
     },
   },
 };

@@ -42,16 +42,23 @@
 .search-collet {
   display: flex;
   flex-wrap: wrap;
-  height: 114px;
+  height: 347px;
+  min-height: 124px;
   justify-content: center;
   padding: 2px;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
-  width: 465px;
+  width: 581px;
+  overflow-y: auto;
 }
 .el-input {
   height: 44px;
 }
+
+.title-ltr {
+  direction: ltr;
+}
+
 .search-collet a {
   align-items: center;
   border-radius: 4px;
@@ -84,9 +91,9 @@
   width: 48px;
 }
 
-.tile-icon i{
-    width: 24px;
-    height: 24px;
+.tile-icon i {
+  width: 24px;
+  height: 24px;
 }
 
 .tile-title {
@@ -98,18 +105,35 @@
   line-height: 16px;
   margin-top: 6px;
   padding: 2px 8px;
-  width: 88px;
+  width: 100%;
 }
 
 .tile-title span {
   font-weight: 400;
-  overflow: hidden;
   text-align: center;
-  text-overflow: ellipsis;
   text-shadow: none;
-  white-space: nowrap;
   width: 100%;
 }
 
+.tile-icon .el-image {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
 
+.delete-books {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  opacity: 1;
+  transition-delay: 400ms;
+  height: 28px;
+  width: 28px;
+  transition: opacity 100ms ease-in-out;
+  font-size: 16px;
+  margin: 4px 2px;
+}
 
+.search-collet a:hover{
+  background-color: rgba(32, 33, 36, .1);
+}

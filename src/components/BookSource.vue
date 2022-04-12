@@ -28,14 +28,14 @@
           ref="source"
         >
           <div class="source-title">
-            <div class="source-name">
+            <div class="source-name ellipsis">
               {{ searchBook.originName }}
             </div>
             <div class="source-time">
               {{ searchBook.time ? "⏱ " + searchBook.time + "ms" : "" }}
             </div>
           </div>
-          <div class="source-latest-chapter">
+          <div class="source-latest-chapter ellipsis">
             {{ searchBook.latestChapterTitle || "无最新章节" }}
           </div>
         </div>
@@ -311,9 +311,6 @@ export default {
         }
 
         .source-latest-chapter {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           color: #888;
           font-size: 14px;
           margin-top: 6px;

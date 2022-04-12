@@ -55,45 +55,6 @@
   color: #fff;
 }
 
-.tile-icon {
-  align-items: center;
-  background-color: rgba(241, 243, 244, 1);
-  border-radius: 50%;
-  display: flex;
-  flex-shrink: 0;
-  height: 48px;
-  justify-content: center;
-  margin-top: 16px;
-  width: 48px;
-}
-
-.tile-icon i {
-  width: 24px;
-  height: 24px;
-}
-
-.tile-title {
-  align-items: center;
-  border-radius: 18px;
-  color: rgb(60, 64, 67);
-  display: flex;
-  height: 32px;
-  line-height: 16px;
-  margin-top: 6px;
-  padding: 2px 8px;
-  width: 88px;
-}
-
-.tile-title span {
-  font-weight: 400;
-  overflow: hidden;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-shadow: none;
-  white-space: nowrap;
-  width: 100%;
-}
-
 .setting-txt {
   text-decoration: none;
   line-height: 24px;
@@ -177,12 +138,6 @@
   right: 0px;
   width: calc(100% - 100px);
   padding-left: 15px;
-}
-
-.ellipsis {
-  word-wrap: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .book-name {

@@ -2,7 +2,7 @@ function setBooks(list, item) {
   let filData = list.filter(
     (element) =>
       element.author === item.author &&
-      element.bookName === item.bookName &&
+      element.name === item.name &&
       element.origin === item.origin
   )[0];
 
@@ -16,10 +16,10 @@ function setBooks(list, item) {
 
 function deleteBooks(list, item) {
   let deleteIndex = -1;
-  list.array.forEach((d, index) => {
+  list.forEach((d, index) => {
     if (
       d.author === item.author &&
-      d.bookName === item.bookName &&
+      d.name === item.name &&
       d.origin === item.origin
     ) {
       deleteIndex = index;
@@ -77,7 +77,7 @@ const actions = {
   setReadBooks({ commit }, val) {
     commit("setReadBooks", val);
   },
-  deleteReadBook({ commit }, val) {
+  deleteReadBooks({ commit }, val) {
     commit("deleteReadBooks", val);
   },
   setReadingBook({ commit }, val) {
