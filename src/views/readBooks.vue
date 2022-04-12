@@ -32,7 +32,7 @@
                   <span>目录</span>
                 </a>
               </template>
-              <catalogList
+              <catalog
                 :bookInfo="readingBook"
                 :catalogList="catalogList"
                 @changeChapter="toChapter"
@@ -57,7 +57,7 @@
 </template>
 <script>
 import booksContent from "@/components/books/booksContent.vue";
-import catalogList from "@/components/books/catalogList.vue";
+import catalog from "@/components/books/catalogList.vue";
 
 import { cacheFirstRequest, networkFirstRequest } from "@/plugins/helper";
 import jump from "@/plugins/jump";
@@ -71,7 +71,7 @@ export default {
   components: {
     booksContent,
     CollectionTag,
-    catalogList,
+    catalog,
     Grid,
     Tools,
   },
@@ -217,13 +217,13 @@ export default {
     toLastChapter(onError) {
       let readingBook = this.readingBook;
 
-      if (!readingBook || !readingBook.bookUrl || !catalogList) {
+      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
         onError && onError();
         return;
       }
       let index = readingBook.index;
       index--;
-      if (typeof catalogList[index] !== "undefined") {
+      if (typeof this.catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         this.$message.error("本章是第一章");
@@ -235,11 +235,11 @@ export default {
     toChapter(index) {
       this.catalogPopover = false;
       let readingBook = this.readingBook;
-      if (!readingBook || !readingBook.bookUrl || !catalogList) {
+      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
         this.$message.error("章节错误");
         return;
       }
-      if (typeof catalogList[index] !== "undefined") {
+      if (typeof this.catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         this.$message.error("目录错误或已最新");
@@ -249,12 +249,12 @@ export default {
     toNextChapter(index) {
       let readingBook = this.readingBook;
 
-      if (!readingBook || !readingBook.bookUrl || !catalogList) {
+      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
         this.$message.error("章节错误");
         return;
       }
 
-      if (typeof catalogList[index] !== "undefined") {
+      if (typeof this.catalogList[index] !== "undefined") {
         this.getContent(index);
       } else {
         // onError && onError();
@@ -419,7 +419,7 @@ export default {
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", {
         ...readingBook,
-        index: index,
+        readIndex: index,
       });
       // 保存阅读进度
       this.$store.commit("caches/setReadingBook", {
@@ -428,7 +428,7 @@ export default {
       });
 
       // 设置章节名称
-      this.bookTitle = catalogList[index].title;
+      this.bookTitle = this.catalogList[index].title;
       this.bookLoading = true;
       // 获取正文内容
       this.getBookContent(index).then(

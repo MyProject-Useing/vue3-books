@@ -269,7 +269,7 @@ export default {
       if (this.loadingMore) {
         return;
       }
-      // 缓存当前的查询记录
+      // 缓存查询记录
       this.$store.commit("caches/setSearchHistory", this.keywords);
       // 多源查询
       if (this.searchConfig.searchType === "multi" && window.EventSource) {
