@@ -128,46 +128,42 @@ export const cacheFirstRequest = async function (
   // validateCache === true 时，直接刷新缓存
   if (validateCache !== true) {
     if (forceCache || !window.serviceWorkerReady) {
-      try {
-        let cacheResponse =
-          window.localStorage && window.localStorage.getItem(cacheKey);
+      let cacheResponse =
+        window.localStorage && window.localStorage.getItem(cacheKey);
+      if (cacheResponse) {
+        cacheResponse = JSON.parse(cacheResponse);
         if (cacheResponse) {
-          cacheResponse = JSON.parse(cacheResponse);
-          if (cacheResponse) {
-            if (
-              !validateCache ||
-              (validateCache && validateCache(cacheResponse))
-            ) {
-              return { data: cacheResponse };
-            }
+          if (
+            !validateCache ||
+            (validateCache && validateCache(cacheResponse))
+          ) {
+            return { data: cacheResponse };
           }
         }
-      } catch (error) {
-        //
       }
     }
   }
-  const res = await requestFunc();
-  if (
-    (forceCache || !window.serviceWorkerReady) &&
-    res.data &&
-    res.data.isSuccess
-  ) {
-    try {
-      window.localStorage &&
-        window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
-    } catch (error) {
-      Math.random() > 0.7 &&
-        setTimeout(() => {
-          ElMessage({
-            message: "本地空间已满，请去书架页面清空缓存",
-            duration: 500,
-            type: "error",
-          });
-        }, 1000);
+  return requestFunc().then((res) => {
+    debugger;
+    if (
+      (forceCache || !window.serviceWorkerReady) &&
+      res.data &&
+      res.data.isSuccess
+    ) {
+      try {
+        window.localStorage &&
+          window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
+      } catch (error) {
+        ElMessage({
+          message: "本地空间已满，请清空缓存",
+          duration: 500,
+          type: "error",
+        });
+      }
     }
-  }
-  return res;
+  });
+
+  // return res;
 };
 
 export const isMiniInterface = () => window.innerWidth <= 750;

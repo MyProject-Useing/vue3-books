@@ -152,6 +152,7 @@ export default {
     },
   },
   activated() {
+    debugger;
     this.init();
   },
   deactivated() {
@@ -413,6 +414,10 @@ export default {
         return;
       }
 
+      // 设置章节名称
+      this.bookTitle = this.catalogList[index].title;
+      this.bookLoading = true;
+
       //强制滚回顶层
       jump(this.$refs.top, { duration: 0 });
 
@@ -426,10 +431,7 @@ export default {
         ...readingBook,
         index: index,
       });
-
-      // 设置章节名称
-      this.bookTitle = this.catalogList[index].title;
-      this.bookLoading = true;
+      debugger;
       // 获取正文内容
       this.getBookContent(index).then(
         (res) => {
@@ -437,7 +439,6 @@ export default {
           let str = res.data.isSuccess
             ? res.data.data
             : "获取章节内容失败！\n" + res.data.errorMsg;
-
           this.bookContent = str;
         },
         (error) => {
@@ -453,25 +454,30 @@ export default {
     async getBookContent(chapterIndex) {
       let readingBook = this.readingBook;
 
+      let bookUrl = readingBook.bookUrl;
+
+      let cacheStr =
+        readingBook.name +
+        "_" +
+        readingBook.author +
+        "@" +
+        bookUrl +
+        "@chapterContent-" +
+        chapterIndex;
+      debugger;
       return cacheFirstRequest(
         () =>
           request.get(
             this.$store.state.api +
               "/getBookContent?url=" +
-              encodeURIComponent(readingBook.bookUrl) +
+              encodeURIComponent(bookUrl) +
               "&index=" +
               chapterIndex,
             {
               timeout: 30000,
             }
           ),
-        readingBook.name +
-          "_" +
-          readingBook.author +
-          "@" +
-          readingBook.bookUrl +
-          "@chapterContent-" +
-          chapterIndex
+        cacheStr
       );
     },
     // 保存阅读进度
