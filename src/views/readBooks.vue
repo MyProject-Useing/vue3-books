@@ -2,19 +2,19 @@
   <div class="reader-content">
     <div class="main-read-container">
       <booksContent
-        v-loading="bookLoading"
         class="book-content"
+        :loading="bookLoading"
         :bookInfo="readingBook"
         :title="bookTitle"
         :content="bookContent"
         ref="bookContentRef"
       />
       <div class="chapter-control dib-wrap">
-        <a>上一章</a>
+        <a @click="toNextChapter">上一章</a>
         <span>|</span>
         <a target="_blank">目录</a>
         <span>|</span>
-        <a>下一章</a>
+        <a @click="toNextChapter(true)">下一章</a>
       </div>
       <div class="left-bar-list">
         <dl>
@@ -84,9 +84,6 @@ export default {
       // 内容遮罩框
       bookLoading: true,
 
-      // 是否刷新
-      tryRefresh: true,
-
       // 正文样式
       contentStyle: {},
 
@@ -104,9 +101,6 @@ export default {
       // 动画效果
       transformX: 0,
       transforming: false,
-
-      // 文本过滤弹出框
-      showTextFilterPrompting: false,
 
       // 是否展示菜单栏
       showReadBar: false,
@@ -213,24 +207,6 @@ export default {
         handler();
       }
     },
-    // 上一章
-    toLastChapter(onError) {
-      let readingBook = this.readingBook;
-
-      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
-        onError && onError();
-        return;
-      }
-      let index = readingBook.index;
-      index--;
-      if (typeof this.catalogList[index] !== "undefined") {
-        this.getContent(index);
-      } else {
-        this.$message.error("本章是第一章");
-        onError && onError();
-      }
-    },
-    saveBook() {},
     // 查询指定章节内容
     toChapter(index) {
       this.catalogPopover = false;
@@ -246,19 +222,22 @@ export default {
       }
     },
     // 下一章
-    toNextChapter(index) {
+    toNextChapter(isNext) {
       let readingBook = this.readingBook;
 
       if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
-        this.$message.error("章节错误");
+        this.$message.error("章节错误，请返回首页");
         return;
       }
+      let index = readingBook.index;
+      isNext ? index++ : index--;
 
-      if (typeof this.catalogList[index] !== "undefined") {
-        this.getContent(index);
-      } else {
-        // onError && onError();
+      if (index > this.catalogList.length) {
         this.$message.error("本章是最后一章");
+      } else if (index < 0) {
+        this.$message.error("本章是最后一章");
+      } else {
+        this.getContent(index);
       }
     },
     // 下一页
@@ -282,7 +261,7 @@ export default {
             300
           );
         } else {
-          this.toNextChapter(this.readingBook.index + 1);
+          this.toNextChapter(true);
         }
       } else {
         if (
@@ -296,7 +275,7 @@ export default {
           this.scrollContent(moveY, 300);
         } else {
           this.currentPage = 1;
-          this.toNextChapter(this.readingBook.index + 1);
+          this.toNextChapter(true);
         }
       }
     },
@@ -320,7 +299,7 @@ export default {
           );
         } else {
           this.showLastPage = true;
-          this.toLastChapter(() => {
+          this.toNextChapter(false, () => {
             if (typeof moveX !== "undefined") {
               // 没有下一章，但是已经做了动画，恢复
               this.showPage(this.currentPage, 0);
@@ -337,7 +316,7 @@ export default {
           this.scrollContent(moveY, 300);
         } else {
           this.currentPage = 1;
-          this.toLastChapter();
+          this.toNextChapter();
         }
       }
     },

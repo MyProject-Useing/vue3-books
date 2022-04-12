@@ -1,16 +1,16 @@
-.search-content {
+.home-content {
   width: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 56px);
+  height: 100vh;
   min-width: fit-content;
   padding-top: 56px;
   position: relative;
   z-index: 1;
 }
 
-.logo {
+.home-content .logo {
   margin-bottom: 38px;
   z-index: 1;
   display: flex;
@@ -20,12 +20,12 @@
   min-height: 200px;
 }
 
-#logo {
+.home-content #logo {
   height: 92px;
   width: 272px;
 }
 
-.search-btn-group {
+.home-content .search-btn-group {
   height: 44px;
   width: 561px;
   position: relative;
@@ -33,13 +33,13 @@
   min-height: 44px;
 }
 
-.search-btn {
+.home-content .search-btn-group .search-btn {
   height: 100%;
   width: 100%;
   font-size: 16px;
 }
 
-.search-collet {
+.home-content .search-collet {
   display: flex;
   flex-wrap: wrap;
   height: 347px;
@@ -51,15 +51,15 @@
   width: 581px;
   overflow-y: auto;
 }
-.el-input {
+.home-content .el-input {
   height: 44px;
 }
 
-.title-ltr {
+.home-content .title-ltr {
   direction: ltr;
 }
 
-.search-collet a {
+.home-content .search-collet a {
   align-items: center;
   border-radius: 4px;
   opacity: 1;
@@ -79,7 +79,7 @@
   color: rgb(60, 64, 67);
 }
 
-.tile-icon {
+.home-content .tile-icon {
   align-items: center;
   background-color: rgba(241, 243, 244, 1);
   border-radius: 50%;
@@ -91,12 +91,12 @@
   width: 48px;
 }
 
-.tile-icon i {
+.home-content .tile-icon i {
   width: 24px;
   height: 24px;
 }
 
-.tile-title {
+.home-content .tile-title {
   align-items: center;
   border-radius: 18px;
   color: rgb(60, 64, 67);
@@ -108,20 +108,20 @@
   width: 100%;
 }
 
-.tile-title span {
+.home-content .tile-title span {
   font-weight: 400;
   text-align: center;
   text-shadow: none;
   width: 100%;
 }
 
-.tile-icon .el-image {
+.home-content .tile-icon .el-image {
   height: 100%;
   width: 100%;
   border-radius: 50%;
 }
 
-.delete-books {
+.home-content .delete-books {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -134,6 +134,6 @@
   margin: 4px 2px;
 }
 
-.search-collet a:hover{
-  background-color: rgba(32, 33, 36, .1);
+.home-content .search-collet a:hover {
+  background-color: rgba(32, 33, 36, 0.1);
 }

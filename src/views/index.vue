@@ -1,5 +1,5 @@
 <template>
-  <div class="search-content">
+  <div class="home-content">
     <div class="logo">
       <div id="logo" class="logo-bg"></div>
     </div>

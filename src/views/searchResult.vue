@@ -44,7 +44,6 @@
                 :src="getCover(book.coverUrl, true)"
                 :key="book.coverUrl"
                 fit="cover"
-                lazy
               >
                 <template #error>
                   <div class="image-slot">
@@ -413,7 +412,7 @@ export default {
 @import url("@/assets/css/base.css");
 @import url("@/assets/css/searchResult.css");
 
-:deep(.el-input__inner) {
+.result-content :deep(.el-input__inner) {
   border: 2px solid #c4c7ce;
   border-radius: 10px 0 0 10px;
   border-right: 0;
@@ -427,11 +426,11 @@ export default {
   caret-color: #404246;
 }
 
-:deep(.el-input__inner::placeholder) {
+.result-content :deep(.el-input__inner::placeholder) {
   color: #626770;
 }
 
-:deep(.el-input__icon),
+.result-content :deep(.el-input__icon),
 :deep(.el-input__clear:hover) {
   font-size: 19px;
 }

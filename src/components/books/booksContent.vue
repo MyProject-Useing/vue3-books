@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div class="read-content">
+        <div class="read-content" v-loading="loading">
           <p v-for="(item, index) in contentList" :key="index">
             <span class="content-wrap" v-html="item"></span>
           </p>
@@ -61,6 +61,10 @@ export default {
     title: {
       type: String,
       default: "",
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   },
   watch: {

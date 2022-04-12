@@ -52,7 +52,7 @@
   width: 100%;
 }
 
-.book-content .el-loading-mask{
+.book-content .el-loading-mask {
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
 
@@ -61,6 +61,7 @@
   z-index: 100;
   width: 940px;
   margin: 0 auto;
+  height: 100%;
 }
 
 /*上、下一章*/
@@ -70,7 +71,8 @@
 
 .chapter-control {
   height: 70px;
-  margin-bottom: 24px;
+  width: 800px;
+  margin: auto;
   text-align: center;
   border: 1px solid #d8d8d8;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
@@ -78,6 +80,7 @@
 .chapter-control span {
   height: 32px;
   border-right: 1px solid #d8d8d8;
+  cursor: pointer;
 }
 .dib-wrap a,
 .dib-wrap span {
@@ -90,6 +93,7 @@
   font: 18px/70px PingFangSC-Regular, HelveticaNeue-Light,
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
   width: 33.2%;
+  cursor: pointer;
 }
 
 /*上、下一章*/
