@@ -1,4 +1,4 @@
-import { ElMessage } from "element-plus";
+import { message } from "ant-design-vue";
 
 export const formatSize = function (value, scale) {
   if (value == null || value == "") {
@@ -107,11 +107,7 @@ export const networkFirstRequest = async function (
     } catch (error) {
       Math.random() > 0.7 &&
         setTimeout(() => {
-          ElMessage({
-            message: "本地空间已满，请去书架页面清空缓存",
-            duration: 500,
-            type: "error",
-          });
+          message.error("本地空间已满，请去书架页面清空缓存");
         }, 1000);
     }
   }
@@ -156,11 +152,7 @@ export const cacheFirstRequest = async function (
             window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
           resolve(res);
         } catch (error) {
-          ElMessage({
-            message: "本地空间已满，请清空缓存",
-            duration: 500,
-            type: "error",
-          });
+          message.error('本地空间已满，请清空缓存');
           reject("本地空间已满，请清空缓存");
         }
       }

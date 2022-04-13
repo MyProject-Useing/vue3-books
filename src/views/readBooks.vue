@@ -11,8 +11,12 @@
       />
       <div class="chapter-control dib-wrap">
         <a
-          @click="catalogList.length > 0 ? toNextChapter(false) : false"
-          :class="catalogList.length > 0 ? '' : 'disabled'"
+          @click="
+            catalogList.length == 0 || bookLoading
+              ? false
+              : toNextChapter(false)
+          "
+          :class="catalogList.length == 0 || bookLoading ? 'disabled' : ''"
           >上一章</a
         >
         <span>|</span>
@@ -25,8 +29,10 @@
         >
         <span>|</span>
         <a
-          :class="catalogList.length > 0 ? '' : 'disabled'"
-          @click="catalogList.length > 0 ? toNextChapter(true) : false"
+          :class="catalogList.length == 0 || bookLoading ? 'disabled' : ''"
+          @click="
+            catalogList.length == 0 || bookLoading ? false : toNextChapter(true)
+          "
           >下一章</a
         >
       </div>
@@ -41,38 +47,19 @@
                 catalogList.length > 0 ? (catalogPopover = true) : false
               "
             >
-              <el-icon><Grid /></el-icon>
+              <Grid />
               <span>目录</span>
             </a>
-            <!-- <el-popover
-              placement="right"
-              :width="800"
-              trigger="click"
-              class="setting-popover"
-              v-model:visible="catalogPopover"
-            >
-              <template #reference>
-                <a href="javascript:">
-                  <el-icon><Grid /></el-icon>
-                  <span>目录</span>
-                </a>
-              </template>
-              <catalog
-                :bookInfo="readingBook"
-                :catalogList="catalogList"
-                @changeChapter="toChapter"
-              />
-            </el-popover> -->
           </dd>
           <dd class="">
             <a href="javascript:">
-              <el-icon><Tools /></el-icon>
+             <Tools />
               <span>设置</span></a
             >
           </dd>
           <dd>
             <a class="add-book" href="javascript:">
-              <el-icon><collection-tag /></el-icon><span>书架</span></a
+              <collection-tag /><span>书架</span></a
             >
           </dd>
         </dl>
@@ -96,7 +83,7 @@ import jump from "@/plugins/jump";
 import Animate from "@/plugins/animate";
 
 import request from "@/plugins/axios";
-import { CollectionTag, Grid, Tools } from "@element-plus/icons";
+import { CollectionTag, Grid, Tools } from "@ant-design-vue/icons";
 // 书籍详情
 export default {
   name: "readBooks",
@@ -186,7 +173,6 @@ export default {
     },
   },
   activated() {
-    debugger;
     this.init();
   },
   deactivated() {
@@ -441,7 +427,7 @@ export default {
       // 设置章节名称
       this.bookTitle = this.catalogList[index].title;
       this.bookLoading = true;
-
+      this.bookContent = "";
       //强制滚回顶层
       jump(this.$refs.top, { duration: 0 });
 

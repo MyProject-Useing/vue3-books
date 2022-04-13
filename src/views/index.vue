@@ -4,7 +4,7 @@
       <div id="logo" class="logo-bg"></div>
     </div>
     <div class="search-btn-group">
-      <el-autocomplete
+      <a-auto-complete
         placeholder="请输入小说或作者名称"
         class="search-btn"
         prefix-icon="el-icon-search"
@@ -12,7 +12,7 @@
         clearable
         @keyup.enter="searchDetails()"
         :fetch-suggestions="querySearch"
-      ></el-autocomplete>
+      ></a-auto-complete>
     </div>
 
     <div class="search-collet">
@@ -23,24 +23,22 @@
         @mouseover="item.isActive = true"
         @mouseout="item.isActive = false"
       >
-        <el-icon
-          v-show="item.isActive"
-          class="delete-books"
-          @click.stop="deleteBook(item)"
-          ><delete
-        /></el-icon>
+         <delete-outlined  
+           v-show="item.isActive"
+           class="delete-books"
+           @click.stop="deleteBook(item)"/>
 
         <div class="tile-icon">
-          <el-image
+          <a-image
             class="cover"
             :src="getCover(item.coverUrl, true)"
             :key="item.coverUrl"
             fit="cover"
           >
             <template #error>
-              <el-image :src="noImg"></el-image>
+              <a-image :src="noImg"></a-image>
             </template>
-          </el-image>
+          </a-image>
         </div>
         <div class="tile-title">
           <span class="ellipsis" :title="item.name"> {{ item.name }}</span>
@@ -53,14 +51,14 @@
 <script>
 import noImage from "@/assets/imgs/noImage.png";
 import { getCover } from "@/plugins/utils.js";
-import { Delete } from "@element-plus/icons";
+import { DeleteOutlined } from "@ant-design-vue/icons";
 
 export default {
   name: "homeIndex",
   data() {
     return { keywords: "" };
   },
-  components: { Delete },
+  components: { DeleteOutlined },
   computed: {
     noImg() {
       return noImage;

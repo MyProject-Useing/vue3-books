@@ -1,7 +1,7 @@
 "use strict";
 
 import Axios from "axios";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { message, ElMessageBox } from "ant-design-vue";
 import { errorTypeList } from "./config";
 import store from "@/store";
 
@@ -76,31 +76,9 @@ export const request = async ({
 
   const { isSuccess, errorMsg } = res;
   if (!isSuccess) {
-    let result;
     switch (res.data) {
       case "NEED_LOGIN":
         // 需要登录
-        // setTimeout(() => {
-        //   errorMsg && ElMessage.error({ message: errorMsg, duration: 2000 });
-        // }, 200);
-        break;
-      case "NEED_SECURE_KEY":
-        result = await ElMessageBox.prompt(
-          "请输入管理密码后继续操作",
-          "操作确认"
-        );
-        if (result && result.action === "confirm" && result.value) {
-          params.secureKey = result.value;
-          store.commit("setSecureKey", result.value);
-          return await request({
-            url,
-            method,
-            params,
-            data,
-            headers,
-            alert,
-          });
-        }
         break;
       default:
         if (params.bookSourceUrl) {
@@ -120,14 +98,14 @@ export const request = async ({
           }
         }
         if (!options.silent) {
-          errorMsg && ElMessage.error({ message: errorMsg, duration: 2000 });
+          errorMsg && message.error(errorMsg);
         }
         break;
     }
   } else {
     alert &&
       errorMsg &&
-      ElMessage.success({ message: errorMsg, duration: 1500 });
+      message.success(errorMsg);
   }
 
   return response;

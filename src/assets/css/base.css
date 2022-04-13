@@ -27,3 +27,14 @@ body {
   width: 100%;
 }
 
+/*遮罩框*/
+.el-loading-spinner .el-loading-text {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.el-loading-spinner .path {
+  stroke: rgba(0, 0, 0, 0.4);
+}
+.el-loading-mask .el-loading-spinner p.el-loading-text{
+  font-size: 16px;
+}

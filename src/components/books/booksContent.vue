@@ -9,15 +9,15 @@
           <div class="text-info cf">
             <div class="info fl">
               <a>
-                <el-icon><management /></el-icon>
+                <management />
                 <span> {{ selfBook.name }}</span></a
               >
               <a
-                ><el-icon><avatar /></el-icon>
+                ><avatar />
                 <span> {{ selfBook.author }}</span>
               </a>
               <a
-                ><el-icon :size="17"><trend-charts /></el-icon>
+                ><trend-charts />
                 <span>
                   {{ (selfBook.wordCount || "0").replace("字", "") }}字</span
                 >
@@ -29,7 +29,11 @@
             </div>
           </div>
         </div>
-        <div class="read-content" v-loading="loading">
+        <div
+          class="read-content"
+          v-loading="loading"
+          element-loading-text="内容加载中..."
+        >
           <p v-for="(item, index) in contentList" :key="index">
             <span class="content-wrap" v-html="item"></span>
           </p>
@@ -40,7 +44,8 @@
 </template>
 
 <script>
-import { Avatar, Management, TrendCharts } from "@element-plus/icons";
+import { Avatar, Management, TrendCharts } from "@ant-design-vue/icons";
+
 export default {
   name: "booksContent",
   components: { Avatar, Management, TrendCharts },
@@ -83,7 +88,17 @@ export default {
     },
   },
   methods: {
-    changeCatalog() {},
+    getSvg() {
+      return `
+      <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>`;
+    },
   },
 };
 </script>

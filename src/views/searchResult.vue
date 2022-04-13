@@ -3,17 +3,17 @@
     <div class="search-title">
       <div class="logo-bg" @click="goHome"></div>
       <div class="search-btn-group">
-        <el-autocomplete
+        <a-auto-complete
           placeholder="请输入小说或作者名称"
           class="search-btn"
           v-model.trim="keywords"
           clearable
           @keyup.enter="searchBook(1)"
           :fetch-suggestions="querySearch"
-        ></el-autocomplete>
+        ></a-auto-complete>
 
-        <el-button class="search-text-btn" @click="searchBook(1)"
-          >全网搜小说</el-button
+        <a-button class="search-text-btn" @click="searchBook(1)"
+          >全网搜小说</a-button
         >
       </div>
       <div class="search-right">
@@ -24,7 +24,7 @@
 
     <div class="search-filter">
       <span class="filter-txt filter-active">
-        <i class="el-icon-search"></i>
+        <i class="a-icon-search"></i>
         小说</span
       >
     </div>
@@ -33,7 +33,7 @@
         <ul class="wrapper">
           <li class="book-item" v-for="(book, bi) in searchResult" :key="bi">
             <div class="cover-img">
-              <el-image
+              <a-image
                 class="cover"
                 :src="getCover(book.coverUrl, true)"
                 :key="book.coverUrl"
@@ -41,9 +41,9 @@
                 fit="cover"
               >
                 <template #error>
-                  <el-image :src="noImg"></el-image>
+                  <a-image :src="noImg"></a-image>
                 </template>
-              </el-image>
+              </a-image>
             </div>
             <div class="book-info">
               <div
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <div class="book-author ellipsis" :title="book.author">
-                <el-icon><avatar /></el-icon> {{ book.author || "" }}
+                <avatar /> {{ book.author || "" }}
               </div>
               <!-- <div class="book-bottom-btn" @click.stop="() => {}">
                 <el-tag
@@ -113,7 +113,7 @@
 
 <script>
 import noImage from "@/assets/imgs/noImage.png";
-import { Avatar } from "@element-plus/icons";
+import { Avatar } from "@ant-design-vue/icons";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 // 书籍详情
 export default {
