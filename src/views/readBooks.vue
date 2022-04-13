@@ -10,16 +10,25 @@
         ref="bookContentRef"
       />
       <div class="chapter-control dib-wrap">
-        <a @click="toNextChapter(false)">上一章</a>
+        <a
+          @click="catalogList.length > 0 ? toNextChapter(false) : false"
+          :class="catalogList.length > 0 ? '' : 'disabled'"
+          >上一章</a
+        >
         <span>|</span>
         <a
           id="catalog_curr"
           href="javascript:"
-          @click.stop="catalogPopover = true"
+          :class="catalogList.length > 0 ? '' : 'disabled'"
+          @click.stop="catalogList.length > 0 ? (catalogPopover = true) : false"
           >目录</a
         >
         <span>|</span>
-        <a @click="toNextChapter(true)">下一章</a>
+        <a
+          :class="catalogList.length > 0 ? '' : 'disabled'"
+          @click="catalogList.length > 0 ? toNextChapter(true) : false"
+          >下一章</a
+        >
       </div>
       <div class="left-bar-list">
         <dl>
@@ -27,7 +36,10 @@
             <a
               id="catalog_bottom"
               href="javascript:"
-              @click.stop="catalogPopover = true"
+              :class="catalogList.length > 0 ? '' : 'disabled'"
+              @click.stop="
+                catalogList.length > 0 ? (catalogPopover = true) : false
+              "
             >
               <el-icon><Grid /></el-icon>
               <span>目录</span>

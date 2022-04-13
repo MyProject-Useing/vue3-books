@@ -94,3 +94,9 @@
 }
 
 /*上、下一章*/
+
+a.disabled {
+  cursor: default;
+  color: #ccc;
+  background: 0 0;
+}
