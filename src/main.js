@@ -4,6 +4,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+import "@/assets/css/base.css";
+
 // 引入axios
 // import installAxios from "@/plugins/axios";
 

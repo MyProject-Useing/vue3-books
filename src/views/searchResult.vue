@@ -407,7 +407,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/assets/css/base.css");
 @import url("@/assets/css/searchResult.css");
 
 .result-content :deep(.el-input__inner) {

@@ -122,7 +122,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/assets/css/base.css");
 @import url("@/assets/css/homeIndex.css");
 
 :deep(.el-input__inner) {
