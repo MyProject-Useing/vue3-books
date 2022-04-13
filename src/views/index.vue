@@ -5,7 +5,7 @@
     </div>
     <div class="search-btn-group">
       <el-autocomplete
-        placeholder="请输入小说名称"
+        placeholder="请输入小说或作者名称"
         class="search-btn"
         prefix-icon="el-icon-search"
         v-model.trim="keywords"
@@ -38,9 +38,7 @@
             fit="cover"
           >
             <template #error>
-              <div class="image-slot">
-                <el-image :src="noImg"></el-image>
-              </div>
+              <el-image :src="noImg"></el-image>
             </template>
           </el-image>
         </div>

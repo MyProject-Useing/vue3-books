@@ -3,16 +3,25 @@ const routes = [
   {
     path: "/",
     name: "index",
+    meta: {
+      keepAlive: false,
+    },
     component: () => import("@/views/index.vue"),
   },
   {
     path: "/readBooks",
     name: "readBooks",
+    meta: {
+      keepAlive: false,
+    },
     component: () => import("@/views/readBooks.vue"),
   },
   {
     path: "/searchResult",
     name: "searchResult",
+    meta: {
+      keepAlive: true,
+    },
     component: () => import("@/views/searchResult.vue"),
   },
 ];

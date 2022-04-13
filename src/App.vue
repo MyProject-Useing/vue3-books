@@ -4,8 +4,17 @@
   </keep-alive> -->
   <router-view v-slot="{ Component }">
     <keep-alive>
-      <component :is="Component" :key="$route.name" />
+      <component
+        :key="$route.name"
+        :is="Component"
+        v-if="$route.meta.keepAlive"
+      />
     </keep-alive>
+    <component
+      :key="$route.name"
+      :is="Component"
+      v-if="!$route.meta.keepAlive"
+    />
   </router-view>
 </template>
 

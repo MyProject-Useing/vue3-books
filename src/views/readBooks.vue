@@ -10,7 +10,7 @@
         ref="bookContentRef"
       />
       <div class="chapter-control dib-wrap">
-        <a @click="toNextChapter">上一章</a>
+        <a @click="toNextChapter(false)">上一章</a>
         <span>|</span>
         <a target="_blank">目录</a>
         <span>|</span>
@@ -316,7 +316,7 @@ export default {
           this.scrollContent(moveY, 300);
         } else {
           this.currentPage = 1;
-          this.toNextChapter();
+          this.toNextChapter(false);
         }
       }
     },
