@@ -147,6 +147,7 @@ export default {
     };
   },
   mounted() {
+    this.init();
     window.onclick = (e) => {
       let $catalog_bottom = document.getElementById("catalog_bottom");
       let $catalog_curr = document.getElementById("catalog_curr");
@@ -162,10 +163,6 @@ export default {
     readingBook() {
       return this.$store.state.caches.readingBook || {};
     },
-    // 目录
-    // catalogList() {
-    //   return this.readingBook.catalog;
-    // },
     // 窗口高度
     windowSize() {
       return this.$store.state.windowSize;
@@ -189,6 +186,7 @@ export default {
     },
   },
   activated() {
+    debugger;
     this.init();
   },
   deactivated() {
@@ -208,7 +206,7 @@ export default {
       if (this.readingBook) {
         this.bookTitle = "";
         // 跳转记住的位置
-        this.autoShowPosition();
+        // this.autoShowPosition();
         this.loadCatalog(false);
         // this.getContent(this.readingBook.index || 0);
       } else {
@@ -460,11 +458,9 @@ export default {
       // 获取正文内容
       this.getBookContent(index).then(
         (res) => {
-          this.bookLoading = false;
-          let str = res.data.isSuccess
-            ? res.data.data
-            : "获取章节内容失败！\n" + res.data.errorMsg;
+          let str = res.data.isSuccess ? res.data.data : "获取章节内容失败！";
           this.bookContent = str;
+          this.bookLoading = false;
         },
         (error) => {
           let errorStr = "获取章节内容失败！\n" + (error && error.toString());

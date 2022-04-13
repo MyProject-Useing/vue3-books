@@ -36,7 +36,6 @@
   height: 16px;
   margin: 0 auto 6px;
   transition: color 0.3s;
-  color: #000;
 }
 .left-bar-list dd a span {
   transition: color 0.3s;
