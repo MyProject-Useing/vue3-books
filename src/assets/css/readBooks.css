@@ -1,13 +1,10 @@
 .left-bar-list {
   z-index: 102;
-  top: 19px;
-  left: 50%;
-  margin-left: -468px;
-}
-.left-bar-list {
+  top: 0px;
   position: fixed;
   width: 60px;
 }
+
 .left-bar-list dd {
   position: relative;
   z-index: 100;
@@ -53,7 +50,7 @@
 }
 
 .book-content .el-loading-mask {
-  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
+  background: none;
 }
 
 .main-read-container {

@@ -12,14 +12,27 @@
       <div class="chapter-control dib-wrap">
         <a @click="toNextChapter(false)">上一章</a>
         <span>|</span>
-        <a target="_blank">目录</a>
+        <a
+          id="catalog_curr"
+          href="javascript:"
+          @click.stop="catalogPopover = true"
+          >目录</a
+        >
         <span>|</span>
         <a @click="toNextChapter(true)">下一章</a>
       </div>
       <div class="left-bar-list">
         <dl>
           <dd>
-            <el-popover
+            <a
+              id="catalog_bottom"
+              href="javascript:"
+              @click.stop="catalogPopover = true"
+            >
+              <el-icon><Grid /></el-icon>
+              <span>目录</span>
+            </a>
+            <!-- <el-popover
               placement="right"
               :width="800"
               trigger="click"
@@ -37,7 +50,7 @@
                 :catalogList="catalogList"
                 @changeChapter="toChapter"
               />
-            </el-popover>
+            </el-popover> -->
           </dd>
           <dd class="">
             <a href="javascript:">
@@ -51,6 +64,13 @@
             >
           </dd>
         </dl>
+        <div class="setting-popover" v-show="catalogPopover">
+          <catalog
+            :bookInfo="readingBook"
+            :catalogList="catalogList"
+            @changeChapter="toChapter"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -112,6 +132,17 @@ export default {
 
       // 目录
       catalogList: [],
+    };
+  },
+  mounted() {
+    window.onclick = (e) => {
+      let $catalog_bottom = document.getElementById("catalog_bottom");
+      let $catalog_curr = document.getElementById("catalog_curr");
+      if (e.path.includes($catalog_bottom) || e.path.includes($catalog_curr)) {
+        return false;
+      } else {
+        this.catalogPopover = false;
+      }
     };
   },
   computed: {
@@ -225,11 +256,16 @@ export default {
     toNextChapter(isNext) {
       let readingBook = this.readingBook;
 
-      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
+      if (
+        !readingBook ||
+        !readingBook.bookUrl ||
+        !this.catalogList ||
+        this.catalogList.length === 0
+      ) {
         this.$message.error("章节错误，请返回首页");
         return;
       }
-      let index = readingBook.index;
+      let index = readingBook.index || 0;
       isNext ? index++ : index--;
 
       if (index > this.catalogList.length) {

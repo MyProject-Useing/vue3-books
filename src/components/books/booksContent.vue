@@ -91,8 +91,4 @@ export default {
 @import url("@/assets/css/base.css");
 @import url("@/assets/css/booksContent.css");
 </style>
-<style>
-.setting-popover {
-  left: -11px;
-}
-</style>
+<style></style>

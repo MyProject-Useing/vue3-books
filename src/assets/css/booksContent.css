@@ -37,6 +37,7 @@ ul {
 .main-text-wrap {
   padding: 60px 64px;
   height: 100%;
+  min-height: 600px;
 }
 
 .text-wrap {
@@ -101,7 +102,7 @@ i {
 
 .read-content {
   position: relative;
-  min-height: calc(100% - 90px - 70px);
+  min-height: 500px;
 }
 
 .main-text-wrap .read-content p {
@@ -111,7 +112,15 @@ i {
   text-indent: 2em;
   font-size: 18px;
 }
-下 p {
+p {
   word-wrap: break-word;
   word-break: break-all;
+}
+
+.setting-popover {
+  position: absolute;
+  width: 800px;
+  top: 0px;
+  left: 71px;
+  background-color: #fff;
 }
