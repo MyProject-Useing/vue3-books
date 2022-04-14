@@ -5,14 +5,17 @@
     </div>
     <div class="search-btn-group">
       <a-auto-complete
-        placeholder="请输入小说或作者名称"
         class="search-btn"
         v-model:value.trim="keywords"
+        placeholder="请输入小说或作者名称"
         @keyup.enter="searchDetails"
         @search="searchDetails"
         :options="historyList"
         :filter-option="filterOption"
       >
+        <!-- <template #placeholder>
+          <span class="search-placeholder">请输入小说或作者名称</span>
+        </template> -->
         <a-input-search size="large" enter-button></a-input-search>
       </a-auto-complete>
     </div>
@@ -128,10 +131,12 @@ export default {
 }
 .search-btn-group :deep(.ant-btn) {
   height: 44px;
+  padding-left: 15px;
 }
 
-:deep(.ant-select-selection-search-input::placeholder) {
-  color: #626770;
+.search-btn-group :deep(.ant-select-selection-placeholder) {
   line-height: 44px;
+  padding-left: 15px;
+  color: rgb(117, 117, 117);
 }
 </style>

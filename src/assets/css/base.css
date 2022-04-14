@@ -6,7 +6,14 @@ body {
   color: rgb(0, 0, 0);
   min-height: 100vh;
 }
-
+::-webkit-input-placeholder {
+  -webkit-text-security: none;
+  color: rgb(117, 117, 117);
+  direction: inherit;
+  pointer-events: none;
+  text-orientation: inherit;
+  writing-mode: inherit;
+}
 * {
   box-sizing: border-box;
 }
@@ -36,4 +43,3 @@ body {
   width: 100%;
   height: 100%;
 }
-
