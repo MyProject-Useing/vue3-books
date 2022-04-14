@@ -152,7 +152,7 @@ export const cacheFirstRequest = async function (
             window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
           resolve(res);
         } catch (error) {
-          message.error('本地空间已满，请清空缓存');
+          message.error("本地空间已满，请清空缓存");
           reject("本地空间已满，请清空缓存");
         }
       }

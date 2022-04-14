@@ -9,15 +9,15 @@
           <div class="text-info cf">
             <div class="info fl">
               <a>
-                <management />
+                <ReadOutlined />
                 <span> {{ selfBook.name }}</span></a
               >
               <a
-                ><avatar />
+                ><UserOutlined />
                 <span> {{ selfBook.author }}</span>
               </a>
               <a
-                ><trend-charts />
+                ><UserOutlined />
                 <span>
                   {{ (selfBook.wordCount || "0").replace("字", "") }}字</span
                 >
@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import { Avatar, Management, TrendCharts } from "@ant-design-vue/icons";
+import { UserOutlined, ReadOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "booksContent",
-  components: { Avatar, Management, TrendCharts },
+  components: { UserOutlined, ReadOutlined },
   data() {
     return {};
   },

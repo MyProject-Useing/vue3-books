@@ -75,7 +75,7 @@
                 </div>
               </div>
               <div class="book-author ellipsis" :title="book.author">
-                <avatar /> {{ book.author || "" }}
+                <UserOutlined /> {{ book.author || "" }}
               </div>
               <!-- <div class="book-bottom-btn" @click.stop="() => {}">
                 <el-tag
@@ -113,12 +113,12 @@
 
 <script>
 import noImage from "@/assets/imgs/noImage.png";
-import { Avatar } from "@ant-design-vue/icons";
+import { UserOutlined } from "@ant-design/icons-vue";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 // 书籍详情
 export default {
   name: "searchResult",
-  components: { Avatar },
+  components: { UserOutlined },
   data() {
     return {
       // 查询关键字

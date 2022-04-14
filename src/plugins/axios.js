@@ -1,7 +1,7 @@
 "use strict";
 
 import Axios from "axios";
-import { message, ElMessageBox } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { errorTypeList } from "./config";
 import store from "@/store";
 
@@ -103,9 +103,7 @@ export const request = async ({
         break;
     }
   } else {
-    alert &&
-      errorMsg &&
-      message.success(errorMsg);
+    alert && errorMsg && message.success(errorMsg);
   }
 
   return response;

@@ -47,19 +47,19 @@
                 catalogList.length > 0 ? (catalogPopover = true) : false
               "
             >
-              <Grid />
+              <UnorderedListOutlined />
               <span>目录</span>
             </a>
           </dd>
           <dd class="">
             <a href="javascript:">
-             <Tools />
+              <SettingOutlined />
               <span>设置</span></a
             >
           </dd>
           <dd>
             <a class="add-book" href="javascript:">
-              <collection-tag /><span>书架</span></a
+              <BookOutlined /><span>书架</span></a
             >
           </dd>
         </dl>
@@ -83,16 +83,20 @@ import jump from "@/plugins/jump";
 import Animate from "@/plugins/animate";
 
 import request from "@/plugins/axios";
-import { CollectionTag, Grid, Tools } from "@ant-design-vue/icons";
+import {
+  BookOutlined,
+  UnorderedListOutlined,
+  SettingOutlined,
+} from "@ant-design/icons-vue";
 // 书籍详情
 export default {
   name: "readBooks",
   components: {
     booksContent,
-    CollectionTag,
+    BookOutlined,
     catalog,
-    Grid,
-    Tools,
+    UnorderedListOutlined,
+    SettingOutlined,
   },
   data() {
     return {

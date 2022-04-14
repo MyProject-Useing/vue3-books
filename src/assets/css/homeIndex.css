@@ -33,12 +33,6 @@
   min-height: 44px;
 }
 
-.home-content .search-btn-group .search-btn {
-  height: 100%;
-  width: 100%;
-  font-size: 16px;
-}
-
 .home-content .search-collet {
   display: flex;
   flex-wrap: wrap;
@@ -136,4 +130,15 @@
 
 .home-content .search-collet a:hover {
   background-color: rgba(32, 33, 36, 0.1);
+}
+
+.home-content .search-btn {
+  height: 100%;
+  width: 100%;
+  border: none;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  color: #404246;
+  position: relative;
+  font-size: 16px;
+  caret-color: #404246;
 }
