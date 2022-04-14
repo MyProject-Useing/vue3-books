@@ -28,13 +28,14 @@ body {
 }
 
 /*遮罩框*/
-.el-loading-spinner .el-loading-text {
-  color: rgba(0, 0, 0, 0.4);
+.ant-select-single .ant-select-selector .ant-select-selection-search-input {
+  width: 100%;
+  height: 100%;
 }
-
-.el-loading-spinner .path {
-  stroke: rgba(0, 0, 0, 0.4);
+.ant-input-group {
+  width: 100%;
+  height: 100%;
 }
-.el-loading-mask .el-loading-spinner p.el-loading-text{
-  font-size: 16px;
+.ant-input {
+  height: 100%;
 }
