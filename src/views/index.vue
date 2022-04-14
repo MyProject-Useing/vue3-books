@@ -7,12 +7,14 @@
       <a-auto-complete
         placeholder="请输入小说或作者名称"
         class="search-btn"
-        prefix-icon="el-icon-search"
-        v-model.trim="keywords"
-        clearable
-        @keyup.enter="searchDetails()"
-        :fetch-suggestions="querySearch"
-      ></a-auto-complete>
+        v-model:value.trim="keywords"
+        @keyup.enter="searchDetails"
+        @search="searchDetails"
+        :options="historyList"
+        :filter-option="filterOption"
+      >
+        <a-input-search size="large" enter-button></a-input-search>
+      </a-auto-complete>
     </div>
 
     <div class="search-collet">
@@ -23,11 +25,13 @@
         @mouseover="item.isActive = true"
         @mouseout="item.isActive = false"
       >
-         <delete-outlined  
-           v-show="item.isActive"
-           class="delete-books"
-           @click.stop="deleteBook(item)"/>
-
+        <span
+          v-show="item.isActive"
+          class="delete-books"
+          @click.stop="deleteBook(item)"
+        >
+          <DeleteOutlined />
+        </span>
         <div class="tile-icon">
           <a-image
             class="cover"
@@ -51,7 +55,7 @@
 <script>
 import noImage from "@/assets/imgs/noImage.png";
 import { getCover } from "@/plugins/utils.js";
-import { DeleteOutlined } from "@ant-design-vue/icons";
+import { DeleteOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "homeIndex",
@@ -71,7 +75,7 @@ export default {
       let newList = [];
 
       list.forEach((d) => {
-        newList.push({ value: d, address: d });
+        newList.push({ value: d });
       });
       return newList;
     },
@@ -80,17 +84,8 @@ export default {
     this.keywords = this.$route.query.keywords ?? "";
   },
   methods: {
-    querySearch(queryString, cb) {
-      var historyList = this.historyList;
-      var lowerQuery = queryString.toLowerCase();
-      var results = queryString
-        ? historyList.filter((d) => {
-            let value = d.value.toLowerCase();
-            return value === lowerQuery || value.indexOf(lowerQuery) != -1;
-          })
-        : historyList;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
+    filterOption(input, option) {
+      return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
     },
     // 直接阅读缓存的书籍
     toDetail(book) {
@@ -122,21 +117,12 @@ export default {
 <style scoped>
 @import url("@/assets/css/homeIndex.css");
 
-:deep(.el-input__inner) {
-  border-radius: 22px;
+.search-btn-group :deep(.ant-select-selector) {
   height: 100%;
   width: 100%;
-  border: none;
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-  color: #404246;
-  padding-inline-end: 44px;
-  padding-inline-start: 52px;
-  position: relative;
-  font-size: 16px;
-  caret-color: #404246;
 }
 
-:deep(.el-input__inner::placeholder) {
+:deep(.ant-select-selection-search-input::placeholder) {
   color: #626770;
 }
 
