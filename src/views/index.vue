@@ -122,14 +122,16 @@ export default {
   width: 100%;
 }
 
-:deep(.ant-select-selection-search-input::placeholder) {
-  color: #626770;
+.search-btn-group :deep(.ant-input) {
+  height: 100%;
+  border: 0px;
+}
+.search-btn-group :deep(.ant-btn) {
+  height: 44px;
 }
 
-:deep(.el-input__prefix) {
-  width: 40px;
-  color: #404246;
-  line-height: 45px;
-  font-size: 16px;
+:deep(.ant-select-selection-search-input::placeholder) {
+  color: #626770;
+  line-height: 44px;
 }
 </style>
