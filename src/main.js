@@ -12,5 +12,4 @@ import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
 
 const app = createApp(App);
 
-app.use(Antd);
-app.use(store).use(router).mount("#app");
+app.use(store).use(router).use(Antd).mount("#app");

@@ -36,6 +36,11 @@
   width: 590px;
   font-size: 16px;
 }
+
+.result-content .search-btn-group .ant-select-selector {
+  height: 100%;
+}
+
 .result-content .search-text-btn {
   width: 120px;
   cursor: pointer;

@@ -4,17 +4,15 @@
       <div class="logo-bg" @click="goHome"></div>
       <div class="search-btn-group">
         <a-auto-complete
-          placeholder="请输入小说或作者名称"
           class="search-btn"
-          v-model.trim="keywords"
-          clearable
-          @keyup.enter="searchBook(1)"
-          :fetch-suggestions="querySearch"
-        ></a-auto-complete>
-
-        <a-button class="search-text-btn" @click="searchBook(1)"
-          >全网搜小说</a-button
+          v-model:value.trim="keywords"
+          enter-button="Search"
+          placeholder="请输入小说或作者名称"
+          :options="historyList"
+          :filter-option="filterOption"
         >
+        </a-auto-complete>
+        <a-button type="primary" @click="searchBook(1)">全网搜小说</a-button>
       </div>
       <div class="search-right">
         <span class="setting-txt" @click="goHome">系统首页</span>
@@ -28,65 +26,61 @@
         小说</span
       >
     </div>
-    <div class="search-content-panle" v-loading="refreshLoading">
-      <div class="books-wrapper" ref="bookList">
-        <ul class="wrapper">
-          <li class="book-item" v-for="(book, bi) in searchResult" :key="bi">
-            <div class="cover-img">
-              <a-image
-                class="cover"
-                :src="getCover(book.coverUrl, true)"
-                :key="book.coverUrl"
-                @click.stop="toDetail(book)"
-                fit="cover"
-              >
-                <template #error>
-                  <a-image :src="noImg"></a-image>
-                </template>
-              </a-image>
-            </div>
-            <div class="book-info">
-              <div
-                class="book-name ellipsis"
-                :title="book.name"
-                @click.stop="toDetail(book)"
-              >
-                {{ book.name }}
+    <div class="search-content-panle">
+      <div class="books-wrapper">
+        <a-spin :spinning="refreshLoading">
+          <ul class="wrapper">
+            <li class="book-item" v-for="(book, bi) in searchResult" :key="bi">
+              <div class="cover-img">
+                <a-image
+                  class="cover"
+                  :src="getCover(book.coverUrl, true)"
+                  fallback="data:image/png;base64,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"
+                >
+                </a-image>
               </div>
-              <div class="book-content-details">
-                <div class="sub">
-                  <div class="dot" v-if="book.totalChapterNum">•</div>
-                  <div class="size" v-if="book.totalChapterNum">
-                    共{{ book.totalChapterNum }}章
+              <div class="book-info">
+                <div
+                  class="book-name ellipsis"
+                  :title="book.name"
+                  @click.stop="toDetail(book)"
+                >
+                  {{ book.name }}
+                </div>
+                <div class="book-content-details">
+                  <div class="sub">
+                    <div class="dot" v-if="book.totalChapterNum">•</div>
+                    <div class="size" v-if="book.totalChapterNum">
+                      共{{ book.totalChapterNum }}章
+                    </div>
+                  </div>
+                  <div class="dur-chapter" v-if="book.durChapterTitle">
+                    已读：{{ book.durChapterTitle }}
+                  </div>
+                  <div
+                    class="last-chapter ellipsis"
+                    v-if="book.latestChapterTitle"
+                  >
+                    {{
+                      book.lastCheckTime
+                        ? dateFormat(book.lastCheckTime)
+                        : "最新"
+                    }}：{{ book.latestChapterTitle }}
                   </div>
                 </div>
-                <div class="dur-chapter" v-if="book.durChapterTitle">
-                  已读：{{ book.durChapterTitle }}
+                <div class="book-author ellipsis" :title="book.author">
+                  <UserOutlined /> {{ book.author || "" }}
                 </div>
-                <div
-                  class="last-chapter ellipsis"
-                  v-if="book.latestChapterTitle"
-                >
-                  {{
-                    book.lastCheckTime
-                      ? dateFormat(book.lastCheckTime)
-                      : "最新"
-                  }}：{{ book.latestChapterTitle }}
-                </div>
-              </div>
-              <div class="book-author ellipsis" :title="book.author">
-                <UserOutlined /> {{ book.author || "" }}
-              </div>
-              <!-- <div class="book-bottom-btn" @click.stop="() => {}">
-                <el-tag
+                <!-- <div class="book-bottom-btn" @click.stop="() => {}">
+                <a-tag
                   v-if="isCollect(book)"
                   type="success"
                   effect="light"
                   class="setting-connect"
                 >
                   <i class="el-icon-check"></i> 已收藏
-                </el-tag>
-                <el-tag
+                </a-tag>
+                <a-tag
                   v-else
                   type="success"
                   effect="light"
@@ -94,25 +88,18 @@
                   @click.stop="saveBook(book)"
                 >
                   <i class="el-icon-circle-plus-outline"></i> 加入收藏
-                </el-tag>
+                </a-tag>
               </div> -->
-            </div>
-          </li>
-          <!-- <div
-            class="title-btn"
-            v-if="isSearchResult && loadingMore"
-            @click="loadMore"
-          >
-            {{ "加载更多" }}
-          </div> -->
-        </ul>
+              </div>
+            </li>
+          </ul>
+        </a-spin>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import noImage from "@/assets/imgs/noImage.png";
 import { UserOutlined } from "@ant-design/icons-vue";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 // 书籍详情
@@ -152,11 +139,7 @@ export default {
       this.searchBook(1);
     }
   },
-  deactivated() {},
   computed: {
-    isNight() {
-      return this.$store.getters.isNight;
-    },
     cacheBookList() {
       return this.$store.state.caches.readBooksList;
     },
@@ -179,9 +162,6 @@ export default {
       });
       return newList;
     },
-    noImg() {
-      return noImage;
-    },
   },
   watch: {
     // 查询模式监听
@@ -194,6 +174,9 @@ export default {
     },
   },
   methods: {
+    filterOption(input, option) {
+      return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
+    },
     isCollect(book) {
       let filData = this.cacheBookList.filter(
         (d) =>
@@ -208,20 +191,6 @@ export default {
     },
     dateFormat(t) {
       return dateFormat(t);
-    },
-    // 输入框 历史记录
-    querySearch(queryString, cb) {
-      var historyList = this.historyList;
-      var lowerQuery = queryString.toLowerCase();
-
-      var results = queryString
-        ? historyList.filter((d) => {
-            let value = d.value.toLowerCase();
-            return value === lowerQuery || value.indexOf(lowerQuery) != -1;
-          })
-        : historyList;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
     },
     goHome() {
       this.$router.push({
@@ -352,7 +321,6 @@ export default {
       this.searchEventSource = new EventSource(url, {
         withCredentials: true,
       });
-
       // websocket 请求
       this.searchEventSource.addEventListener("error", (e) => {
         this.loadingMore = false;
@@ -409,26 +377,29 @@ export default {
 <style scoped>
 @import url("@/assets/css/searchResult.css");
 
-.result-content :deep(.el-input__inner) {
+.result-content :deep(.ant-select-selector) {
+  height: 100%;
+  width: 100%;
   border: 2px solid #c4c7ce;
   border-radius: 10px 0 0 10px;
   border-right: 0;
-  height: 100%;
-  width: 100%;
   color: #404246;
-  padding-inline-end: 44px;
-  padding-inline-start: 16px;
   position: relative;
   font-size: 16px;
-  caret-color: #404246;
 }
 
-.result-content :deep(.el-input__inner::placeholder) {
-  color: #626770;
+.result-content .search-btn :deep(.ant-select-selection-placeholder) {
+  line-height: 35px !important;
+  padding-left: 13px;
+  color: rgb(117, 117, 117);
 }
-
-.result-content :deep(.el-input__icon),
-:deep(.el-input__clear:hover) {
-  font-size: 19px;
+</style>
+<style>
+.result-content
+  .ant-select.ant-select-auto-complete
+  .ant-select-selector
+  .ant-select-selection-search
+  .ant-select-selection-search-input {
+  padding-left: 8px;
 }
 </style>
