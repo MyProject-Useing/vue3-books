@@ -140,7 +140,7 @@
   height: 100%;
   width: 100%;
   border: none;
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  /* box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%); */
   color: #404246;
   position: relative;
   font-size: 16px;

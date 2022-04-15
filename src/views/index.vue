@@ -7,16 +7,15 @@
       <a-auto-complete
         class="search-btn"
         v-model:value.trim="keywords"
+        enter-button="Search"
         placeholder="请输入小说或作者名称"
-        @keyup.enter="searchDetails"
-        @search="searchDetails"
         :options="historyList"
         :filter-option="filterOption"
       >
         <!-- <template #placeholder>
           <span class="search-placeholder">请输入小说或作者名称</span>
         </template> -->
-        <a-input-search size="large" enter-button></a-input-search>
+        <a-input-search size="large" enter-button="全网查询"></a-input-search>
       </a-auto-complete>
     </div>
 
@@ -101,6 +100,7 @@ export default {
     },
     // 跳转查询详情页面
     searchDetails() {
+      debugger;
       this.$router.push({
         path: "/searchResult",
         query: { keywords: this.keywords },
@@ -127,16 +127,27 @@ export default {
 
 .search-btn-group :deep(.ant-input) {
   height: 100%;
-  border: 0px;
-}
-.search-btn-group :deep(.ant-btn) {
-  height: 44px;
-  padding-left: 15px;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #c4c7ce;
+  padding-left: 20px;
 }
 
-.search-btn-group :deep(.ant-select-selection-placeholder) {
+.search-btn-group :deep(.ant-input):focus {
+  border-color: #c4c7ce;
+  box-shadow: none;
+}
+
+.home-content .search-btn-group :deep(.ant-select-selection-placeholder) {
   line-height: 44px;
-  padding-left: 15px;
+  padding-left: 24px;
   color: rgb(117, 117, 117);
+}
+
+.home-content .search-btn-group :deep(.ant-input-group-addon) {
+  border: 2px solid #1890ff;
+}
+
+.home-content .search-btn-group :deep(.ant-input-group-addon) button.ant-btn {
+  border-radius: 0px;
 }
 </style>
