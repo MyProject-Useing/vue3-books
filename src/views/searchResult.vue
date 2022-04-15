@@ -377,21 +377,26 @@ export default {
 <style scoped>
 @import url("@/assets/css/searchResult.css");
 
-.result-content :deep(.ant-select-selector) {
+.result-content .search-btn-group :deep(.ant-select-selector) {
   height: 100%;
   width: 100%;
-  border: 2px solid #c4c7ce;
+  border: 2px solid #4569ff;
   border-radius: 10px 0 0 10px;
   border-right: 0;
   color: #404246;
-  position: relative;
-  font-size: 16px;
 }
 
-.result-content .search-btn :deep(.ant-select-selection-placeholder) {
-  line-height: 35px !important;
+.result-content .search-btn-group :deep(.ant-select-selection-placeholder) {
+  line-height: 35px;
   padding-left: 13px;
   color: rgb(117, 117, 117);
+}
+
+.result-content .search-btn-group button.ant-btn {
+  border-radius: 0 10px 10px 0;
+  height: 100%;
+  background: #4e6ef2;
+  color: #fff;
 }
 </style>
 <style>
