@@ -35,10 +35,19 @@ body {
 }
 
 /*遮罩框*/
+
 .ant-select-single .ant-select-selector .ant-select-selection-search-input {
   width: 100%;
   height: 100%;
 }
+.ant-select.ant-select-auto-complete
+  .ant-select-selector
+  .ant-select-selection-search
+  .ant-select-selection-search-input {
+  width: 100%;
+  height: 100%;
+}
+
 .ant-input-group {
   width: 100%;
   height: 100%;

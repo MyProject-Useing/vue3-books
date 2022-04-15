@@ -15,8 +15,13 @@
         <!-- <template #placeholder>
           <span class="search-placeholder">请输入小说或作者名称</span>
         </template> -->
-        <a-input-search size="large" enter-button="全网查询"></a-input-search>
+        <!-- <a-input-search
+          size="large"
+          enter-button="全网查询"
+          @click="searchDetails()"
+        ></a-input-search> -->
       </a-auto-complete>
+      <a-button type="primary" @click="searchDetails()">全网查询</a-button>
     </div>
 
     <div class="search-collet">
@@ -139,7 +144,7 @@ export default {
 
 .home-content .search-btn-group :deep(.ant-select-selection-placeholder) {
   line-height: 44px;
-  padding-left: 24px;
+  padding-left: 13px;
   color: rgb(117, 117, 117);
 }
 
@@ -147,7 +152,18 @@ export default {
   border: 2px solid #1890ff;
 }
 
-.home-content .search-btn-group :deep(.ant-input-group-addon) button.ant-btn {
+.home-content .search-btn-group button.ant-btn {
   border-radius: 0px;
+  height: 100%;
+}
+</style>
+
+<style>
+.home-content
+  .ant-select.ant-select-auto-complete
+  .ant-select-selector
+  .ant-select-selection-search
+  .ant-select-selection-search-input {
+  padding-left: 8px;
 }
 </style>
