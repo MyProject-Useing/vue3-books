@@ -29,15 +29,14 @@
             </div>
           </div>
         </div>
-        <div
-          class="read-content"
-          v-loading="loading"
-          element-loading-text="内容加载中..."
-        >
-          <p v-for="(item, index) in contentList" :key="index">
-            <span class="content-wrap" v-html="item"></span>
-          </p>
-        </div>
+
+        <a-spin :spinning="loading">
+          <div class="read-content" element-loading-text="内容加载中...">
+            <p v-for="(item, index) in contentList" :key="index">
+              <span class="content-wrap" v-html="item"></span>
+            </p>
+          </div>
+        </a-spin>
       </div>
     </div>
   </div>
