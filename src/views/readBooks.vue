@@ -201,7 +201,7 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.readingBook.index == 0
+        this.readingBook.readIndex == 0
       ) {
         return "disabled";
       }
@@ -211,7 +211,7 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.readingBook.index == this.catalogList.length - 1
+        this.readingBook.readIndex == this.catalogList.length - 1
       ) {
         return "disabled";
       }
@@ -303,7 +303,7 @@ export default {
         this.$message.error("章节错误，请返回首页");
         return;
       }
-      let index = readingBook.index || 0;
+      let index = readingBook.readIndex || 0;
       isNext ? index++ : index--;
       if (index >= this.catalogList.length) {
         this.$message.error("本章是最后一章");
@@ -411,7 +411,7 @@ export default {
             //   ...this.readingBook,
             //   catalog: res.data.data,
             // });
-            this.getContent(this.readingBook.index || 0);
+            this.getContent(this.readingBook.readIndex || 0);
           } else {
             this.bookTitle = "获取章节失败";
             this.bookContent = "获取章节目录失败！\n" + res.data.errorMsg;
@@ -479,7 +479,7 @@ export default {
       // 保存阅读进度
       this.$store.commit("caches/setReadingBook", {
         ...readingBook,
-        index: index,
+        readIndex: index,
       });
       // 获取正文内容
       this.getBookContent(index).then(
