@@ -37,14 +37,21 @@
   margin: 0 auto 6px;
   transition: color 0.3s;
 }
-.left-bar-list dd a span {
+
+.left-bar-list dd a span:first-child {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.left-bar-list dd a span:last-child {
   transition: color 0.3s;
   color: rgba(0, 0, 0, 0.4);
+  display: block;
 }
 
 .reader-content {
   background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
-  height: 100%;
   width: 100%;
 }
 

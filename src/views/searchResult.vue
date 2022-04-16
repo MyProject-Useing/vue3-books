@@ -5,11 +5,11 @@
       <div class="search-btn-group">
         <a-auto-complete
           class="search-btn"
-          v-model:value.trim="keywords"
           enter-button="Search"
           placeholder="请输入小说或作者名称"
           :options="historyList"
           :filter-option="filterOption"
+          v-model:value.trim="keywords"
         >
         </a-auto-complete>
         <a-button type="primary" @click="searchBook(1)">全网搜小说</a-button>
