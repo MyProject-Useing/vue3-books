@@ -30,7 +30,7 @@
           class="delete-books"
           @click.stop="deleteBook(item)"
         >
-          <DeleteOutlined />
+          <DeleteOutlined title="删除" />
         </span>
         <div class="tile-icon">
           <a-image

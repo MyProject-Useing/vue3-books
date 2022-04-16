@@ -9,15 +9,15 @@
           <div class="text-info cf">
             <div class="info fl">
               <a>
-                <ReadOutlined />
+                <database-outlined title="书名" />
                 <span> {{ selfBook.name }}</span></a
               >
               <a
-                ><UserOutlined />
+                ><solution-outlined title="作者" />
                 <span> {{ selfBook.author }}</span>
               </a>
-              <a
-                ><UserOutlined />
+              <a>
+                <ReadOutlined title="字数" />
                 <span>
                   {{ (selfBook.wordCount || "0").replace("字", "") }}字</span
                 >
@@ -45,11 +45,15 @@
 </template>
 
 <script>
-import { UserOutlined, ReadOutlined } from "@ant-design/icons-vue";
+import {
+  DatabaseOutlined,
+  ReadOutlined,
+  SolutionOutlined,
+} from "@ant-design/icons-vue";
 
 export default {
   name: "booksContent",
-  components: { UserOutlined, ReadOutlined },
+  components: { DatabaseOutlined, ReadOutlined, SolutionOutlined },
   data() {
     return {};
   },
@@ -117,4 +121,3 @@ export default {
 @import url("@/assets/css/base.css");
 @import url("@/assets/css/booksContent.css");
 </style>
-<style></style>

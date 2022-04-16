@@ -56,17 +56,18 @@ export default {
   methods: {
     getTitle(title) {
       let str = title || "";
-      if (str.includes(" ")) {
-        let valueList = str.split(" ");
-        let first = "第" + valueList[0] + "章";
-        return first + " " + valueList[1];
-      } else if (str.includes(".")) {
-        let valueList = str.split(".");
-        let first = "第" + valueList[0] + "章";
-        return first + " " + valueList[1];
-      } else {
-        return str;
-      }
+      return str;
+      // if (str.includes(" ")) {
+      //   let valueList = str.split(" ");
+      //   let first = "第" + valueList[0] + "章";
+      //   return first + " " + valueList[1];
+      // } else if (str.includes(".")) {
+      //   let valueList = str.split(".");
+      //   let first = "第" + valueList[0] + "章";
+      //   return first + " " + valueList[1];
+      // } else {
+      //   return str;
+      // }
     },
 
     // 查询指定章节内容
