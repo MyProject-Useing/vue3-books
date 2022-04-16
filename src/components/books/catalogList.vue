@@ -63,6 +63,8 @@ export default {
 <style lang="scss" scoped>
 .catalog-list {
   padding: 40px 0 40px 0px;
+  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
+  box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
 }
 
 .catalog-list .catalog-tab {

@@ -16,20 +16,20 @@
               ? false
               : toNextChapter(false)
           "
-          :class="catalogList.length == 0 || bookLoading ? 'disabled' : ''"
+          :class="firstClass"
           >上一章</a
         >
         <span>|</span>
         <a
           id="catalog_curr"
           href="javascript:"
-          :class="catalogList.length > 0 ? '' : 'disabled'"
+          :class="catalogClass"
           @click.stop="catalogList.length > 0 ? (catalogPopover = true) : false"
           >目录</a
         >
         <span>|</span>
         <a
-          :class="catalogList.length == 0 || bookLoading ? 'disabled' : ''"
+          :class="nextClass"
           @click="
             catalogList.length == 0 || bookLoading ? false : toNextChapter(true)
           "
@@ -175,13 +175,35 @@ export default {
           2
       );
     },
+    // 目录是否禁用
+    catalogClass() {
+      return this.catalogList.length == 0 || this.bookLoading ? "disabled" : "";
+    },
+    firstClass() {
+      if (
+        this.catalogList.length == 0 ||
+        this.bookLoading ||
+        this.readingBook.index == 0
+      ) {
+        return "disabled";
+      }
+      return "";
+    },
+    nextClass() {
+      if (
+        this.catalogList.length == 0 ||
+        this.bookLoading ||
+        this.readingBook.index == this.catalogList.length - 1
+      ) {
+        return "disabled";
+      }
+      return "";
+    },
   },
   activated() {
     this.init();
   },
-  deactivated() {
-    // this.init();
-  },
+  deactivated() {},
   watch: {
     // 监听当前阅读的书籍
     readingBook(val, oldVal) {
@@ -192,13 +214,12 @@ export default {
     },
   },
   methods: {
+    isDisabled() {},
     init() {
       if (this.readingBook) {
         this.bookTitle = "";
         // 跳转记住的位置
-        // this.autoShowPosition();
         this.loadCatalog(false);
-        // this.getContent(this.readingBook.index || 0);
       } else {
         this.$message.error("请在书架选择书籍");
       }
@@ -267,11 +288,10 @@ export default {
       }
       let index = readingBook.index || 0;
       isNext ? index++ : index--;
-
-      if (index > this.catalogList.length) {
+      if (index >= this.catalogList.length) {
         this.$message.error("本章是最后一章");
       } else if (index < 0) {
-        this.$message.error("本章是最后一章");
+        this.$message.error("本章已是第一章");
       } else {
         this.getContent(index);
       }
