@@ -8,12 +8,14 @@
       <div class="volume-list">
         <ul>
           <li
+            class="ellipsis"
             v-for="(item, index) in catalogList"
             :key="item.index"
             :class="currPageIndex === index ? 'on' : ''"
-            @click="toChapter(index)"
           >
-            <a>{{ item.title }}</a>
+            <a :title="getTitle(item.title)" @click="toChapter(index)">
+              {{ getTitle(item.title) }}</a
+            >
           </li>
         </ul>
       </div>
@@ -52,6 +54,17 @@ export default {
     },
   },
   methods: {
+    getTitle(title) {
+      let str = title || "";
+      if (str.includes(" ")) {
+        let valueList = (title || "").split(" ");
+        let first = "第" + valueList[0] + "章";
+        return first + " " + valueList[1];
+      } else {
+        return str;
+      }
+    },
+
     // 查询指定章节内容
     toChapter(index) {
       this.$emit("changeChapter", index);
@@ -100,7 +113,7 @@ export default {
   font: 16px/40px PingFangSC-Regular, HelveticaNeue-Light,
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
   float: left;
-  width: 368px;
+  width: 378px;
   border-top: 1px solid #f2f2f2;
 }
 li,
@@ -120,6 +133,10 @@ ul {
   cursor: pointer;
 }
 .catalog-list-wrap .volume-list li.on a {
+  color: #ed4259;
+}
+
+.catalog-list-wrap .volume-list li a:hover {
   color: #ed4259;
 }
 </style>

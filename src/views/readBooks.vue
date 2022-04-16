@@ -214,7 +214,6 @@ export default {
     },
   },
   methods: {
-    isDisabled() {},
     init() {
       if (this.readingBook) {
         this.bookTitle = "";
