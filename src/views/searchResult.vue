@@ -7,9 +7,10 @@
           class="search-btn"
           enter-button="Search"
           placeholder="请输入小说或作者名称"
+          v-model:value.trim="keywords"
           :options="historyList"
           :filter-option="filterOption"
-          v-model:value.trim="keywords"
+          @keyup.enter.stop="searchBook(1)"
         >
         </a-auto-complete>
         <a-button type="primary" @click="searchBook(1)">全网搜小说</a-button>

@@ -39,6 +39,12 @@
       <div class="left-bar-list">
         <dl>
           <dd>
+            <a href="javascript:" @click="goHome">
+              <bank-outlined />
+              <span>首页</span>
+            </a>
+          </dd>
+          <dd>
             <a
               id="catalog_bottom"
               href="javascript:"
@@ -87,7 +93,9 @@ import {
   BookOutlined,
   UnorderedListOutlined,
   SettingOutlined,
+  BankOutlined,
 } from "@ant-design/icons-vue";
+
 // 书籍详情
 export default {
   name: "readBooks",
@@ -97,6 +105,7 @@ export default {
     catalog,
     UnorderedListOutlined,
     SettingOutlined,
+    BankOutlined,
   },
   data() {
     return {
@@ -242,10 +251,7 @@ export default {
       }
     },
     goHome() {
-      this.$router.push({
-        path: "/",
-        query: { keywords: this.keywords },
-      });
+      this.$router.push({ path: "/" });
     },
     // 自动记住位置
     autoShowPosition(immediate) {
@@ -400,17 +406,6 @@ export default {
         (res) => {
           if (res.data.isSuccess) {
             this.catalogList = res.data.data;
-            // 加入书源 缓存
-            // this.$store.commit("caches/setBooksList", {
-            //   ...this.readingBook,
-            //   catalog: res.data.data,
-            // });
-
-            // 更新书籍目录
-            // this.$store.commit("caches/setReadingBook", {
-            //   ...this.readingBook,
-            //   catalog: res.data.data,
-            // });
             this.getContent(this.readingBook.readIndex || 0);
           } else {
             this.bookTitle = "获取章节失败";
@@ -481,6 +476,7 @@ export default {
         ...readingBook,
         readIndex: index,
       });
+
       // 获取正文内容
       this.getBookContent(index).then(
         (res) => {
