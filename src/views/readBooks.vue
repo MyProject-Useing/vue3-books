@@ -139,6 +139,7 @@ export default {
   },
   mounted() {
     this.init();
+
     window.onclick = (e) => {
       let $catalog_bottom = document.getElementById("catalog_bottom");
       let $catalog_curr = document.getElementById("catalog_curr");
@@ -146,6 +147,23 @@ export default {
         return false;
       } else {
         this.catalogPopover = false;
+      }
+    };
+
+    window.onkeydown = (e) => {
+      if (
+        !this.bookLoading &&
+        this.readingBook &&
+        this.catalogList.length > 0
+      ) {
+        // 右键翻页
+        if (e.keyCode === 39) {
+          this.toNextChapter(true);
+        }
+        // 左键翻页
+        else if (e.keyCode === 37) {
+          this.toNextChapter(false);
+        }
       }
     };
   },
@@ -446,7 +464,6 @@ export default {
         this.$message.error(`已是第一章。`);
         return;
       }
-
       // 设置章节名称
       this.bookTitle = this.catalogList[index].title;
       this.bookLoading = true;

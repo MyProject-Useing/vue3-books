@@ -4,7 +4,7 @@
       <div class="main-text-wrap">
         <div class="text-head">
           <h3>
-            <span class="content-wrap">{{ title }}</span>
+            <span class="content-wrap">{{ getTitle }}</span>
           </h3>
           <div class="text-info cf">
             <div class="info fl">
@@ -84,6 +84,16 @@ export default {
     },
     contentList() {
       return this.content.replace(/&nbsp;/g, "").split("\n");
+    },
+    getTitle() {
+      let str = this.title || "";
+      if (str.includes(".")) {
+        let valueList = str.split(".");
+        let first = "第" + valueList[0] + "章";
+        return first + " " + valueList[1];
+      } else {
+        return str;
+      }
     },
   },
   methods: {
