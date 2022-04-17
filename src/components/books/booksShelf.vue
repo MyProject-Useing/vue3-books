@@ -24,7 +24,6 @@
               class="delete-books"
               @click.stop="deleteBook(item)"
             >
-              <DeleteOutlined title="删除" />
             </span>
             <h3 class="books-name-p">
               <span
@@ -44,6 +43,8 @@
               <div class="book-author ellipsis" :title="item.author">
                 <UserOutlined /> {{ item.author || "" }}
               </div>
+
+              <DeleteOutlined title="删除" />
             </div>
           </div>
         </li>
@@ -94,11 +95,16 @@ export default {
   width: 100%;
   position: relative;
   min-height: 200px;
-  padding: 0px 8px;
+  padding: 40px 0 40px 0px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMV…C/PBIMuF+vSSYSaxoVt90EO3Gu1zrMuMRGUk7Ffv3L+A931Gsb/yBoIgAAAABJRU5ErkJggg==)
+    repeat;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .books-panle {
-  margin-top: 4px;
+  padding-left: 24px;
+  position: relative;
+  min-height: 200px;
 }
 
 .bookShelf-title {
@@ -119,25 +125,10 @@ export default {
   color: #ed4259;
 }
 
-.bookShelf-list .books-item .delete-books {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  opacity: 1;
-  transition-delay: 400ms;
-  height: 28px;
-  width: 28px;
-  transition: opacity 100ms ease-in-out;
-  font-size: 16px;
-  margin: 4px 2px;
-  color: rgb(0 0 0 / 25%);
-  cursor: pointer;
-}
-
 .bookShelf-list .books-item {
   display: flex;
   float: left;
-  width: 261px;
+  width: 258px;
   position: relative;
   margin-bottom: 15px;
 }
@@ -169,6 +160,12 @@ export default {
   height: 46px;
 }
 
+.books-item .img-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .books-item .book-author {
   color: #a6a6a6;
   display: block;
@@ -176,6 +173,13 @@ export default {
   margin-top: 2px;
   overflow: hidden;
   padding-right: 10px;
+}
+
+.books-item .img-bottom .anticon-delete {
+  font-size: 15px;
+  margin-right: 10px;
+  color: #a6a6a6;
+  cursor: pointer;
 }
 </style>
 <style>
