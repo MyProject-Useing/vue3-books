@@ -25,11 +25,11 @@
               @click.stop="deleteBook(item)"
             >
             </span>
-            <h3 class="books-name-p">
+            <h3 class="books-name-p ellipsis">
               <span
                 :title="item.name"
                 @click="toDetail(item)"
-                class="books-name ellipsis"
+                class="books-name"
               >
                 {{ item.name }}
               </span>
@@ -94,7 +94,7 @@ export default {
   height: 100%;
   width: 100%;
   position: relative;
-  min-height: 200px;
+  min-height: 212px;
   padding: 40px 0 40px 0px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMV…C/PBIMuF+vSSYSaxoVt90EO3Gu1zrMuMRGUk7Ffv3L+A931Gsb/yBoIgAAAABJRU5ErkJggg==)
     repeat;
@@ -104,7 +104,7 @@ export default {
 .books-panle {
   padding-left: 24px;
   position: relative;
-  min-height: 200px;
+  min-height: 212px;
 }
 
 .bookShelf-title {
