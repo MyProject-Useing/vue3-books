@@ -60,3 +60,7 @@ body {
   .ant-select-selector {
   border-color: #4569ff !important;
 }
+
+.ant-spin-nested-loading .ant-spin-container::after {
+  background: none;
+}

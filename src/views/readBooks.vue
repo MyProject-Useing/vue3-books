@@ -64,11 +64,16 @@
             >
           </dd>
           <dd>
-            <a class="add-book" href="javascript:">
+            <a
+              class="add-book"
+              href="javascript:"
+              @click.stop="bookShelfPopover = true"
+            >
               <BookOutlined /><span>书架</span></a
             >
           </dd>
         </dl>
+        <!-- 目录 -->
         <div class="setting-popover" v-show="catalogPopover">
           <catalog
             :bookInfo="readingBook"
@@ -76,13 +81,23 @@
             @changeChapter="toChapter"
           />
         </div>
+        <!-- 书架 -->
+        <div class="setting-popover" v-show="bookShelfPopover">
+          <booksShelf />
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+// 文章
 import booksContent from "@/components/books/booksContent.vue";
+
+// 书架
 import catalog from "@/components/books/catalogList.vue";
+
+// 书架
+import booksShelf from "@/components/books/booksShelf.vue";
 
 import { cacheFirstRequest, networkFirstRequest } from "@/plugins/helper";
 import jump from "@/plugins/jump";
@@ -101,6 +116,7 @@ export default {
   name: "readBooks",
   components: {
     booksContent,
+    booksShelf,
     BookOutlined,
     catalog,
     UnorderedListOutlined,
@@ -144,6 +160,9 @@ export default {
 
       // 目录
       catalogList: [],
+
+      // 书架弹出框
+      bookShelfPopover: false,
     };
   },
   mounted() {

@@ -1,7 +1,6 @@
 <template>
   <div class="catalog-list">
-    <div class="catalog-list-title"></div>
-    <div class="catalog-tab dib-wrap">
+    <div class="catalog-tab">
       <span class="lang act">目录</span>
     </div>
     <div class="catalog-list-wrap">
