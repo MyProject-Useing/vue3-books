@@ -84,9 +84,8 @@
           id="bookShelf_panle"
           class="setting-popover"
           v-show="bookShelfPopover"
-          @changeChapter="toChapter"
         >
-          <booksShelf />
+          <booksShelf @changeChapter="toChapter" />
         </div>
       </div>
     </div>
@@ -344,8 +343,9 @@ export default {
     },
     // 查询指定章节内容
     toChapter(index) {
-      debugger;
       this.catalogPopover = false;
+      this.bookShelfPopover = false;
+
       let readingBook = this.readingBook;
       if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
         this.$message.error("章节错误");

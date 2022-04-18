@@ -74,7 +74,6 @@ export default {
     },
     // 直接阅读缓存的书籍
     toDetail(book) {
-      debugger;
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
       // 查询指定章节内容
