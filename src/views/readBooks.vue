@@ -24,7 +24,7 @@
           id="catalog_curr"
           href="javascript:"
           :class="catalogClass"
-          @click.stop="catalogList.length > 0 ? (catalogPopover = true) : false"
+          @click.stop="catalogList.length > 0 ? showCatalog() : false"
           >目录</a
         >
         <span>|</span>
@@ -49,9 +49,7 @@
               id="catalog_bottom"
               href="javascript:"
               :class="catalogList.length > 0 ? '' : 'disabled'"
-              @click.stop="
-                catalogList.length > 0 ? (catalogPopover = true) : false
-              "
+              @click.stop="catalogList.length > 0 ? showCatalog() : false"
             >
               <UnorderedListOutlined />
               <span>目录</span>
@@ -65,16 +63,16 @@
           </dd>
           <dd>
             <a
-              class="add-book"
+              id="bookshelf_btn"
               href="javascript:"
-              @click.stop="bookShelfPopover = true"
+              @click.stop="showBookShelf"
             >
               <BookOutlined /><span>书架</span></a
             >
           </dd>
         </dl>
         <!-- 目录 -->
-        <div class="setting-popover" v-show="catalogPopover">
+        <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
           <catalog
             :bookInfo="readingBook"
             :catalogList="catalogList"
@@ -82,7 +80,11 @@
           />
         </div>
         <!-- 书架 -->
-        <div class="setting-popover" v-show="bookShelfPopover">
+        <div
+          id="bookShelf_panle"
+          class="setting-popover"
+          v-show="bookShelfPopover"
+        >
           <booksShelf />
         </div>
       </div>
@@ -171,10 +173,31 @@ export default {
     window.onclick = (e) => {
       let $catalog_bottom = document.getElementById("catalog_bottom");
       let $catalog_curr = document.getElementById("catalog_curr");
-      if (e.path.includes($catalog_bottom) || e.path.includes($catalog_curr)) {
-        return false;
-      } else {
-        this.catalogPopover = false;
+
+      let $catalog_panle = document.getElementById("catalog_panle");
+      let $bookShelf_panle = document.getElementById("bookShelf_panle");
+      let $bookshelf_btn = document.getElementById("bookshelf_btn");
+
+      // 点击空白 关闭 目录和书签
+      if (this.catalogPopover === true) {
+        if (
+          e.path.includes($catalog_bottom) ||
+          e.path.includes($catalog_curr) ||
+          e.path.includes($catalog_panle)
+        ) {
+          return false;
+        } else {
+          this.catalogPopover = false;
+        }
+      } else if (this.bookShelfPopover === true) {
+        if (
+          e.path.includes($bookshelf_btn) ||
+          e.path.includes($bookShelf_panle)
+        ) {
+          return false;
+        } else {
+          this.bookShelfPopover = false;
+        }
       }
     };
 
@@ -247,6 +270,11 @@ export default {
     },
   },
   activated() {
+    // 隐藏目录
+    this.catalogPopover = false;
+    // 隐藏 书架
+    this.bookShelfPopover = false;
+
     this.init();
   },
   deactivated() {},
@@ -271,6 +299,18 @@ export default {
     },
     goHome() {
       this.$router.push({ path: "/" });
+    },
+    // 展示目录
+    showCatalog() {
+      this.catalogPopover = true;
+      // 隐藏 书架
+      this.bookShelfPopover = false;
+    },
+    showBookShelf() {
+      // 隐藏目录
+      this.catalogPopover = false;
+      // 隐藏 书架
+      this.bookShelfPopover = true;
     },
     // 自动记住位置
     autoShowPosition(immediate) {
