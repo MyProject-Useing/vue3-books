@@ -74,12 +74,15 @@ export default {
     },
     // 直接阅读缓存的书籍
     toDetail(book) {
+      debugger;
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
-      this.$router.push({
-        path: "/readBooks",
-        query: { search: book.readIndex || 0 },
-      });
+      // 查询指定章节内容
+      this.$emit("changeChapter", book.readIndex || 0);
+      // this.$router.push({
+      //   path: "/readBooks",
+      //   query: { search: book.readIndex || 0 },
+      // });
     },
     deleteBook(book) {
       // 删除当前书籍

@@ -84,6 +84,7 @@
           id="bookShelf_panle"
           class="setting-popover"
           v-show="bookShelfPopover"
+          @changeChapter="toChapter"
         >
           <booksShelf />
         </div>
@@ -343,6 +344,7 @@ export default {
     },
     // 查询指定章节内容
     toChapter(index) {
+      debugger;
       this.catalogPopover = false;
       let readingBook = this.readingBook;
       if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
