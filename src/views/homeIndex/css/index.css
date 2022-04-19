@@ -1,16 +1,16 @@
-.home-content {
-  width: 100%;
+.home-index-panle {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 56px);
   min-width: fit-content;
   padding-top: 56px;
   position: relative;
   z-index: 1;
 }
 
-.home-content .logo {
+/*logo*/
+.home-index-panle .home-logo {
   margin-bottom: 38px;
   z-index: 1;
   display: flex;
@@ -20,21 +20,59 @@
   min-height: 200px;
 }
 
-.home-content #logo {
+.home-index-panle .home-logo #logo {
+  forced-color-adjust: none;
   height: 92px;
   width: 272px;
 }
+/*logo*/
 
-.home-content .search-btn-group {
-  height: 44px;
+/*查询栏*/
+.home-index-panle .home-search-group {
   width: 561px;
-  position: relative;
   margin-bottom: 16px;
-  min-height: 44px;
+  border-radius: calc(0.5 * 44px);
+  font-size: 16px;
+  height: 44px;
   display: flex;
 }
+.home-index-panle .home-search-group .search-btn {
+  width: calc(100% - 101px);
+  height: 44px;
+}
 
-.home-content .search-collet {
+.home-index-panle .home-search-group .ant-btn {
+  width: 101px;
+  height: 100%;
+  background: #4e6ef2;
+  color: #fff;
+  font-size: 17px;
+}
+
+.home-index-panle .home-search-group .ant-select-selector {
+  height: 44px;
+  border: 2px solid #4569ff;
+  border-radius: 10px 0 0 10px;
+  border-right: 0;
+  color: #222;
+}
+
+.home-index-panle .home-search-group .ant-select-selection-search {
+  left: 20px;
+  font-size: 17px;
+}
+
+.home-index-panle .home-search-group .ant-select-selection-placeholder {
+  line-height: 40px;
+  padding-left: 13px;
+  color: rgb(117, 117, 117);
+  font-size: 15px;
+}
+/*查询栏*/
+
+/*缓存列表*/
+
+.home-index-panle .search-collet {
   display: flex;
   flex-wrap: wrap;
   height: 347px;
@@ -46,15 +84,15 @@
   width: 581px;
   overflow-y: auto;
 }
-.home-content .el-input {
+.home-index-panle .el-input {
   height: 44px;
 }
 
-.home-content .title-ltr {
+.home-index-panle .title-ltr {
   direction: ltr;
 }
 
-.home-content .search-collet a {
+.home-index-panle .search-collet a {
   align-items: center;
   border-radius: 4px;
   opacity: 1;
@@ -74,7 +112,7 @@
   color: rgb(60, 64, 67);
 }
 
-.home-content .tile-icon {
+.home-index-panle .tile-icon {
   align-items: center;
   background-color: rgba(241, 243, 244, 1);
   border-radius: 50%;
@@ -86,12 +124,12 @@
   width: 48px;
 }
 
-.home-content .tile-icon i {
+.home-index-panle .tile-icon i {
   width: 24px;
   height: 24px;
 }
 
-.home-content .tile-title {
+.home-index-panle .tile-title {
   align-items: center;
   border-radius: 18px;
   color: rgb(60, 64, 67);
@@ -103,24 +141,24 @@
   width: 100%;
 }
 
-.home-content .tile-title span {
+.home-index-panle .tile-title span {
   font-weight: 400;
   text-align: center;
   text-shadow: none;
   width: 100%;
 }
-.home-content .tile-icon .ant-image {
+.home-index-panle .tile-icon .ant-image {
   height: 100%;
   width: 100%;
 }
 
-.home-content .tile-icon .ant-image-img {
+.home-index-panle .tile-icon .ant-image-img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
 }
 
-.home-content .delete-books {
+.home-index-panle .delete-books {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -134,17 +172,8 @@
   color: rgb(0 0 0 / 25%);
 }
 
-.home-content .search-collet a:hover {
+.home-index-panle .search-collet a:hover {
   background-color: rgba(32, 33, 36, 0.1);
 }
 
-.home-content .search-btn {
-  height: 100%;
-  width: 100%;
-  border: none;
-  /* box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%); */
-  color: #404246;
-  position: relative;
-  font-size: 16px;
-  caret-color: #404246;
-}
+/*缓存列表*/

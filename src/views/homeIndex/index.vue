@@ -1,9 +1,9 @@
 <template>
-  <div class="home-content">
-    <div class="logo">
+  <div class="home-index-panle">
+    <div class="home-logo">
       <div id="logo" class="logo-bg"></div>
     </div>
-    <div class="search-btn-group">
+    <div class="home-search-group">
       <a-auto-complete
         class="search-btn"
         enter-button="Search"
@@ -111,37 +111,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/assets/css/homeIndex.css");
-
-.search-btn-group :deep(.ant-select-selector) {
-  height: 100%;
-  width: 100%;
-  border: 2px solid #4569ff;
-  border-radius: 10px 0 0 10px;
-  border-right: 0;
-  color: #404246;
-}
-
-.home-content .search-btn-group :deep(.ant-select-selection-placeholder) {
-  line-height: 40px;
-  padding-left: 13px;
-  color: rgb(117, 117, 117);
-}
-
-.home-content .search-btn-group button.ant-btn {
-  border-radius: 0 10px 10px 0;
-  height: 100%;
-  background: #4e6ef2;
-  color: #fff;
-}
-</style>
-
-<style>
-.home-content
-  .ant-select.ant-select-auto-complete
-  .ant-select-selector
-  .ant-select-selection-search
-  .ant-select-selection-search-input {
-  padding-left: 8px;
-}
+@import url("./css/index.css");
 </style>
