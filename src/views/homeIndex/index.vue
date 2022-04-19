@@ -112,4 +112,7 @@ export default {
 
 <style scoped>
 @import url("./css/index.css");
+.home-index-panle {
+  min-height: 100%;
+}
 </style>
