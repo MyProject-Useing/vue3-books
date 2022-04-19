@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 56px);
+  height: calc(100% - 56px);
   min-width: fit-content;
   padding-top: 56px;
   position: relative;

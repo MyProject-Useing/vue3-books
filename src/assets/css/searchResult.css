@@ -11,7 +11,7 @@
   min-width: fit-content;
   position: relative;
   z-index: 1;
-  height: 100vh;
+  height: 100%;
 }
 .result-content .search-title {
   display: flex;
@@ -106,7 +106,7 @@
 }
 
 .result-content .search-content-panle {
-  height: calc(100vh - 114px);
+  height: calc(100% - 114px);
   min-height: 400px;
   overflow-y: auto;
   position: relative;

@@ -28,7 +28,7 @@ ul {
 
 .read-main-wrap {
   width: 800px;
-  min-height: calc(100vh - 95px);
+  min-height: calc(100%- 95px);
   margin: 0 auto;
   font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
@@ -42,7 +42,7 @@ ul {
 
 .text-wrap {
   /* min-height: 600px; */
-  min-height: calc(100vh - 95px);
+  min-height: calc(100% - 95px);
   width: 100%;
   height: 100%;
   margin-bottom: 24px;

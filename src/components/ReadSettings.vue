@@ -662,7 +662,7 @@ export default {
   }
 
   .setting-list {
-    max-height: 45vh;
+    max-height: 45%;
     overflow-y: auto;
     ul {
       list-style: none outside none;
