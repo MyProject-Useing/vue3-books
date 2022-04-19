@@ -75,7 +75,6 @@
 .home-index-panle .search-collet {
   display: flex;
   flex-wrap: wrap;
-  height: 347px;
   min-height: 124px;
   justify-content: center;
   padding: 2px;
