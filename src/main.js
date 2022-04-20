@@ -12,6 +12,7 @@ import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
 
 // import "lib-flexible";
 
+import "lib-flexible/flexible.js";
 const app = createApp(App);
 
 app.use(store).use(router).use(Antd).mount("#app");
