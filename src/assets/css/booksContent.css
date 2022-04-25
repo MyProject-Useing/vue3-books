@@ -30,7 +30,6 @@ ul {
   width: 100%;
   font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
-  height: 100%;
 }
 .main-text-wrap {
   padding: 45px 45px;
@@ -39,7 +38,6 @@ ul {
 
 .text-wrap {
   width: 100%;
-  height: 100%;
   border: 1px solid #d8d8d8;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
