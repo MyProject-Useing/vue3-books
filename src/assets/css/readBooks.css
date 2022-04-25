@@ -53,6 +53,7 @@
 .reader-content {
   background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
   width: 100%;
+  height: 100%;
 }
 
 .book-content .el-loading-mask {
