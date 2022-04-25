@@ -1,5 +1,5 @@
 <template>
-  <div class="reader-content">
+  <div class="reader-content" :class="isMobileClass ? 'mobile' : ''">
     <div class="main-read-container">
       <booksContent
         class="book-content"
@@ -8,8 +8,9 @@
         :title="bookTitle"
         :content="bookContent"
         ref="bookContentRef"
-      />
-      <div class="chapter-control dib-wrap">
+      >
+      </booksContent>
+      <div class="chapter-control dib-wrap" v-show="!bookLoading">
         <a
           @click="
             catalogList.length == 0 || bookLoading
@@ -101,6 +102,7 @@ import catalog from "@/components/books/catalogList.vue";
 // 书架
 import booksShelf from "@/components/books/booksShelf.vue";
 
+import { isMobile } from "@/plugins/utils";
 import { cacheFirstRequest, networkFirstRequest } from "@/plugins/helper";
 import jump from "@/plugins/jump";
 import Animate from "@/plugins/animate";
@@ -219,6 +221,10 @@ export default {
     };
   },
   computed: {
+    // 是否为移动端
+    isMobileClass() {
+      return isMobile();
+    },
     // 读取当前书籍
     readingBook() {
       return this.$store.state.caches.readingBook || {};

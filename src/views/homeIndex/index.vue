@@ -21,7 +21,6 @@
       <a
         v-for="(item, index) in cacheBookList"
         :key="index"
-        @click="toDetail(item)"
         @mouseover="item.isActive = true"
         @mouseout="item.isActive = false"
       >
@@ -40,7 +39,7 @@
           >
           </a-image>
         </div>
-        <div class="tile-title">
+        <div class="tile-title" @click="toDetail(item)">
           <span class="ellipsis" :title="item.name"> {{ item.name }}</span>
         </div>
       </a>

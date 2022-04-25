@@ -1,12 +1,12 @@
 <template>
-  <div class="read-main-wrap">
+  <div class="read-main-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="text-wrap">
       <div class="main-text-wrap">
         <div class="text-head">
           <h3>
             <span class="content-wrap">{{ getTitle }}</span>
           </h3>
-          <div class="text-info cf">
+          <div class="text-info">
             <div class="info fl">
               <a>
                 <database-outlined title="书名" />
@@ -37,7 +37,7 @@
             </p>
           </div>
         </a-spin>
-
+        <slot></slot>
         <a-back-top />
       </div>
     </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { isMobile } from "@/plugins/utils";
 import {
   DatabaseOutlined,
   ReadOutlined,
@@ -85,6 +86,10 @@ export default {
     },
   },
   computed: {
+    // 是否为移动端
+    isMobileClass() {
+      return isMobile();
+    },
     selfBook() {
       return this.bookInfo;
     },

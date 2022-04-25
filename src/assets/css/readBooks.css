@@ -2,7 +2,6 @@
   z-index: 102;
   top: 0px;
   position: fixed;
-  width: 60px;
   margin-left: -60px;
 }
 
@@ -10,7 +9,6 @@
   position: relative;
   z-index: 100;
   cursor: pointer;
-  border: 1px solid #d8d8d8;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-top: none;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
@@ -52,10 +50,8 @@
 
 .reader-content {
   background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
-  /* width: 100%; */
+  width: 100%;
   height: 100%;
-  width: 940px;
-    margin: 0 auto;
 }
 
 .book-content .el-loading-mask {
@@ -67,10 +63,7 @@
   z-index: 100;
   margin: 0 auto;
   height: 100%;
-  /* max-width: 940px; */
-  /* width: calc(100% - 30px); */
-  width: 800px;
-  margin: 0 auto;
+  max-width: 940px; 
 }
 
 /*上、下一章*/
@@ -81,7 +74,7 @@
 .chapter-control {
   height: 70px;
   width: 100%;
-  margin: auto;
+  margin-top: 24px;
   text-align: center;
   border: 1px solid #d8d8d8;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
@@ -112,3 +105,14 @@ a.disabled {
   color: #ccc;
   background: 0 0;
 }
+
+
+/*移动端*/
+.reader-content.mobile  .main-read-container{
+  width: 100%;
+}
+
+.reader-content.mobile  .left-bar-list{
+ display: none;
+}
+
