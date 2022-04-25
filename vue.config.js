@@ -1,5 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
+const CompressionPlugin = require("compression-webpack-plugin");
 module.exports = defineConfig({
+  publicPath: "./", // 设置打包路径
   transpileDependencies: true,
   // 修改或新增html-webpack-plugin的值，在index.html里面能读取htmlWebpackPlugin.options.title
   chainWebpack: (config) => {
@@ -7,6 +9,32 @@ module.exports = defineConfig({
       args[0].title = "yy-综合网站";
       return args;
     });
+  },
+  configureWebpack: (config) => {
+    if (process.env.NODE_ENV === "production") {
+      config.plugins.push(
+        new CompressionPlugin({
+          // gzip压缩配置
+          test: /\.js$|\.html$|\.css/, // 匹配文件名
+          threshold: 10240, // 对超过10kb的数据进行压缩
+          deleteOriginalAssets: false, // 是否删除原文件
+        })
+      );
+    }
+  },
+
+  devServer: {
+    proxy: {
+      "/reader3": {
+        target: "https://reader.htmake.com/reader3",
+        ws: true, //代理websocked
+        changeOrigin: true, //虚拟的站点需要更管origin
+        secure: true, //是否https接口
+        pathRewrite: {
+          "^/reader3": "/reader3",
+        },
+      },
+    },
   },
 });
 

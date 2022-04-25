@@ -11,6 +11,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.1.1",
+    "compression-webpack-plugin": "^9.2.0",
     "core-js": "^3.8.3",
     "lib-flexible": "^0.3.2",
     "postcss-px2rem-exclude": "^0.0.6",

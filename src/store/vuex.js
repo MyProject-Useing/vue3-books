@@ -11,7 +11,7 @@ const builtInBookGroup = [
 export default {
   state: {
     connected: false,
-    api: "https://reader.htmake.com/reader3",
+    api: "/reader3",
     shelfBooks: [],
     readingBook: {},
     cacheBokks: {},
@@ -75,68 +75,7 @@ export default {
         };
       });
     },
-    updateShelfBook(state, book) {
-      const index = state.shelfBooks.findIndex(
-        (v) => v.bookUrl === book.bookUrl
-      );
-      if (index >= 0) {
-        state.shelfBooks[index] = {
-          ...state.shelfBooks[index],
-          ...{
-            author: book.author || state.shelfBooks[index].author,
-            bookUrl: book.bookUrl || state.shelfBooks[index].bookUrl,
-            coverUrl: book.coverUrl || state.shelfBooks[index].coverUrl,
-            durChapterIndex:
-              book.durChapterIndex || state.shelfBooks[index].durChapterIndex,
-            durChapterPos:
-              book.durChapterPos || state.shelfBooks[index].durChapterPos,
-            durChapterTime:
-              book.durChapterTime || state.shelfBooks[index].durChapterTime,
-            durChapterTitle:
-              book.durChapterTitle || state.shelfBooks[index].durChapterTitle,
-            kind: book.kind || state.shelfBooks[index].kind,
-            intro: book.intro || state.shelfBooks[index].intro,
-            lastCheckTime:
-              book.lastCheckTime || state.shelfBooks[index].lastCheckTime,
-            latestChapterTitle:
-              book.latestChapterTitle ||
-              state.shelfBooks[index].latestChapterTitle,
-            name: book.name || state.shelfBooks[index].name,
-            origin: book.origin || state.shelfBooks[index].origin,
-            originName: book.originName || state.shelfBooks[index].originName,
-            totalChapterNum:
-              book.totalChapterNum || state.shelfBooks[index].totalChapterNum,
-            type: book.type || state.shelfBooks[index].type,
-            group: book.group || state.shelfBooks[index].group,
-          },
-        };
-        state.shelfBooks = [].concat(state.shelfBooks);
-      }
-    },
-    setReadingBook(state, readingBook) {
-      state.readingBook = readingBook;
-      // 更新书架信息
-      setTimeout(() => {
-        for (let i = 0; i < state.shelfBooks.length; i++) {
-          if (state.shelfBooks[i].bookUrl === readingBook.bookUrl) {
-            const title = ((readingBook.catalog || [])[readingBook.index] || {})
-              .title;
-            state.shelfBooks[i] = {
-              ...state.shelfBooks[i],
-              durChapterTime: new Date().getTime(),
-              durChapterIndex: readingBook.index,
-              ...(title ? { durChapterTitle: title } : {}),
-            };
-            break;
-          }
-        }
-        state.shelfBooks = [].concat(state.shelfBooks);
-      }, 100);
-      // eslint-disable-next-line no-unused-vars
-      const { catalog, ...info } = readingBook;
-      window.localStorage &&
-        window.localStorage.setItem("readingRecent", JSON.stringify(info));
-    },
+
     setConfig(state, config) {
       if (
         config.theme !== settings.defaultNightTheme &&
@@ -438,87 +377,5 @@ export default {
       }, {});
     },
   },
-  actions: {
-    syncFromLocalStorage({ commit }) {
-      if (!window.localStorage) {
-        return;
-      }
-      try {
-        // 获取配置
-        const config = JSON.parse(window.localStorage.getItem("config"));
-        if (config && typeof config === "object") {
-          commit("setConfig", { ...settings.config, ...config });
-        }
-      } catch (error) {
-        //
-      }
-      try {
-        // 获取最近阅读书籍
-        const readingRecent = JSON.parse(
-          window.localStorage.getItem("readingRecent")
-        );
-        if (readingRecent && typeof readingRecent === "object") {
-          if (typeof readingRecent.index == "undefined") {
-            readingRecent.index = 0;
-          }
-          commit("setReadingBook", readingRecent);
-        }
-      } catch (error) {
-        //
-      }
-      try {
-        // 获取过滤规则
-        const filterRules = JSON.parse(
-          window.localStorage.getItem("filterRules")
-        );
-        if (filterRules && Array.isArray(filterRules)) {
-          commit("setFilterRules", filterRules);
-        }
-      } catch (error) {
-        //
-      }
-      try {
-        // 获取听书配置
-        const speechVoiceConfig = JSON.parse(
-          window.localStorage.getItem("speechVoiceConfig")
-        );
-        if (speechVoiceConfig && typeof speechVoiceConfig === "object") {
-          commit("setSpeechVoiceConfig", {
-            ...settings.speechVoiceConfig,
-            ...speechVoiceConfig,
-          });
-        }
-      } catch (error) {
-        //
-      }
-      try {
-        // 获取书架设置
-        const shelfConfig = JSON.parse(
-          window.localStorage.getItem("shelfConfig")
-        );
-        if (shelfConfig && typeof shelfConfig === "object") {
-          commit("setShelfConfig", {
-            ...settings.shelfConfig,
-            ...shelfConfig,
-          });
-        }
-      } catch (error) {
-        //
-      }
-      try {
-        // 获取搜索设置
-        const searchConfig = JSON.parse(
-          window.localStorage.getItem("searchConfig")
-        );
-        if (searchConfig && typeof searchConfig === "object") {
-          commit("setSearchConfig", {
-            ...settings.searchConfig,
-            ...searchConfig,
-          });
-        }
-      } catch (error) {
-        //
-      }
-    },
-  },
+  actions: {},
 };
