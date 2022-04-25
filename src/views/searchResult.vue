@@ -1,5 +1,5 @@
 <template>
-  <div class="result-content">
+  <div class="result-content" :class="isMobileClass ? 'mobile' : ''">
     <div class="search-title">
       <div class="logo-bg" @click="goHome"></div>
       <div class="search-btn-group">
@@ -13,7 +13,7 @@
           @keyup.enter.stop="searchBook(1)"
         >
         </a-auto-complete>
-        <a-button type="primary" @click="searchBook(1)">全网搜小说</a-button>
+        <a-button type="primary" @click="searchBook(1)">全网搜</a-button>
       </div>
       <div class="search-right">
         <span class="setting-txt" @click="goHome">系统首页</span>
@@ -103,6 +103,9 @@
 <script>
 import { UserOutlined } from "@ant-design/icons-vue";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
+
+import { isMobile } from "@/plugins/utils";
+
 // 书籍详情
 export default {
   name: "searchResult",
@@ -141,6 +144,10 @@ export default {
     }
   },
   computed: {
+    // 是否为移动端
+    isMobileClass() {
+      return isMobile();
+    },
     cacheBookList() {
       return this.$store.state.caches.readBooksList;
     },

@@ -25,7 +25,8 @@
 .result-content .search-btn-group {
   height: 40px;
   min-height: 40px;
-  width: 700px;
+  max-width: 700px;
+  width: 88%;
   position: relative;
   margin: 15px 0px 10px 0px;
   display: flex;
@@ -33,7 +34,8 @@
 
 .result-content .search-btn-group .search-btn {
   height: 100%;
-  width: 590px;
+  max-width: 590px;
+  width: calc(100% - 67px);
   font-size: 16px;
 }
 
@@ -107,7 +109,7 @@
 
 .result-content .search-content-panle {
   height: calc(100% - 114px);
-  min-height: 400px;
+  min-height: 200px;
   overflow-y: auto;
   position: relative;
   padding-left: 154px;
@@ -130,8 +132,7 @@
 }
 
 .result-content .books-wrapper {
-  min-height: 400px;
-  height: auto;
+  height: 100%;
   width: 100%;
 }
 .result-content .cover-img {
@@ -198,4 +199,24 @@
   height: 100%;
   width: 100%;
   border-radius: 0px;
+}
+
+/*移动端*/
+
+.result-content.mobile .logo-bg {
+  display: none;
+}
+
+
+.result-content.mobile .search-right{
+  display: none;
+}
+
+.result-content.mobile .search-filter {
+  padding-left: 18px;
+}
+
+.result-content.mobile .search-content-panle{
+  padding-left: 18px;
+    padding-right: 18px;
 }

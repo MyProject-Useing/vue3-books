@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height:100%;
+  height: 100%;
   min-width: fit-content;
   padding-top: 56px;
   position: relative;
@@ -30,7 +30,8 @@
 
 /*查询栏*/
 .home-index-panle .home-search-group {
-  width: 561px;
+  max-width: 561px;
+  width: 88%;
   margin-bottom: 16px;
   border-radius: calc(0.5 * 44px);
   font-size: 16px;
@@ -81,7 +82,8 @@
   padding: 2px;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
-  width: 581px;
+  max-width: 581px;
+  width: 88%;
   overflow-y: auto;
 }
 .home-index-panle .el-input {

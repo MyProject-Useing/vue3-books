@@ -3,6 +3,7 @@
   top: 0px;
   position: fixed;
   width: 60px;
+  margin-left: -60px;
 }
 
 .left-bar-list dd {
@@ -26,8 +27,7 @@
 }
 
 .left-bar-list dd:first-child {
-  border-top: 1px solid #d8d8d8;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #0000001a;
 }
 .left-bar-list dd a i {
   font-size: 16px;
@@ -52,8 +52,10 @@
 
 .reader-content {
   background: #ede7da url(@/assets/imgs/booksContent/body_base_bg.png) repeat;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
+  width: 940px;
+    margin: 0 auto;
 }
 
 .book-content .el-loading-mask {
@@ -63,9 +65,12 @@
 .main-read-container {
   position: relative;
   z-index: 100;
-  width: 940px;
   margin: 0 auto;
   height: 100%;
+  /* max-width: 940px; */
+  /* width: calc(100% - 30px); */
+  width: 800px;
+  margin: 0 auto;
 }
 
 /*上、下一章*/
@@ -75,7 +80,7 @@
 
 .chapter-control {
   height: 70px;
-  width: 800px;
+  width: 100%;
   margin: auto;
   text-align: center;
   border: 1px solid #d8d8d8;
@@ -96,7 +101,7 @@
 .chapter-control a {
   font: 18px/70px PingFangSC-Regular, HelveticaNeue-Light,
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  width: 33.2%;
+  width: 32.2%;
   cursor: pointer;
 }
 

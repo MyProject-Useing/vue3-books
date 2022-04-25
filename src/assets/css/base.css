@@ -79,3 +79,9 @@ body {
 .ant-spin-nested-loading .ant-spin-container::after {
   background: none;
 }
+
+.ant-spin-nested-loading{
+  height: 100%;
+}
+/* 移动端 */
+/* .mobile {} */

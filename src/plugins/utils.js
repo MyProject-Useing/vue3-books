@@ -85,7 +85,7 @@ export function isIOS() {
 }
 
 // 判断是否为移动端
-export function isBobile() {
+export function isMobile() {
   let isTrue = isMobileDevice() || isMobilePhone();
   return isTrue;
 }
