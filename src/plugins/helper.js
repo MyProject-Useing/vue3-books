@@ -162,4 +162,5 @@ export const cacheFirstRequest = async function (
   // return res;
 };
 
+// 是否小屏
 export const isMiniInterface = () => window.innerWidth <= 750;

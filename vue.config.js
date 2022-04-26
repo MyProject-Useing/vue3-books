@@ -22,20 +22,19 @@ module.exports = defineConfig({
       );
     }
   },
-
-  devServer: {
-    proxy: {
-      "/reader3": {
-        target: "https://reader.htmake.com/reader3",
-        ws: true, //代理websocked
-        changeOrigin: true, //虚拟的站点需要更管origin
-        secure: true, //是否https接口
-        pathRewrite: {
-          "^/reader3": "/reader3",
-        },
-      },
-    },
-  },
+  // devServer: {
+  //   proxy: {
+  //     "/reader3": {
+  //       target: "https://reader.htmake.com/reader3",
+  //       ws: true, //代理websocked
+  //       changeOrigin: true, //虚拟的站点需要更管origin
+  //       secure: true, //是否https接口
+  //       pathRewrite: {
+  //         "^/reader3": "/reader3",
+  //       },
+  //     },
+  //   },
+  // },
 });
 
 // "postcss": {
