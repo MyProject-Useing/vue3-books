@@ -6,7 +6,7 @@ import store from "@/store";
 
 const service = Axios.create({
   baseURL: store.state.api,
-  withCredentials: true,
+  // withCredentials: true,
   timeout: 5 * 60 * 1000,
 });
 
@@ -40,7 +40,7 @@ export const request = async ({
   if (alert === undefined) {
     alert = method === "post";
   }
-  params.accessToken = store.state.token;
+  // params.accessToken = store.state.token;
 
   const query = {
     url,
@@ -51,6 +51,7 @@ export const request = async ({
     ...options,
   };
   const response = await service(query).catch((e) => {
+    debugger;
     if (params.bookSourceUrl) {
       // 判断是否失效书源
       const errorMsg = e.toString();

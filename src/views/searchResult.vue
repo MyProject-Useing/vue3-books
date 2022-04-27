@@ -105,7 +105,7 @@ import { UserOutlined } from "@ant-design/icons-vue";
 import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
 
 import { isMobile } from "@/plugins/utils";
-
+import request from "@/plugins/axios";
 // 书籍详情
 export default {
   name: "searchResult",
@@ -232,27 +232,43 @@ export default {
         this.searchResult = [];
       }
 
-      if (
-        this.searchConfig.searchType === "single" &&
-        !this.searchConfig.bookSourceUrl
-      ) {
-        return;
-      }
+      // if (
+      //   this.searchConfig.searchType === "single" &&
+      //   !this.searchConfig.bookSourceUrl
+      // ) {
+      //   return;
+      // }
 
       // 防止重复查询
       if (this.loadingMore) {
         return;
       }
+      this.searchList();
       // 缓存查询记录
-      this.$store.commit("caches/setSearchHistory", this.keywords);
-      // 多源查询
-      if (this.searchConfig.searchType === "multi" && window.EventSource) {
-        this.searchMore(page);
-      } else {
-        // 单源查询
-        this.searchSingleData(page);
-      }
+      // this.$store.commit("caches/setSearchHistory", this.keywords);
+      // // 多源查询
+      // if (this.searchConfig.searchType === "multi" && window.EventSource) {
+      //   this.searchMore(page);
+      // } else {
+      //   // 单源查询
+      //   this.searchSingleData(page);
+      // }
     },
+
+    searchList() {
+      this.loadingMore = true;
+      this.refreshLoading = true;
+      const params = {
+        keywords: this.keywords,
+      };
+      request
+        .post("http://localhost:3000/api/common/postSearch", params)
+        .then((res) => {
+          debugger;
+          console.log(res);
+        });
+    },
+
     // 查询单源
     searchSingleData(page) {
       this.loadingMore = true;
@@ -266,7 +282,7 @@ export default {
         lastIndex: this.searchLastIndex, // 多源搜索时的索引
         page: page, // 单源搜索时的page
       };
-      this.axios
+      request
         .get(
           this.$store.state.api +
             (this.searchConfig.searchType === "single"
