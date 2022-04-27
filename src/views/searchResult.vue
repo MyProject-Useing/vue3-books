@@ -43,30 +43,27 @@
               <div class="book-info">
                 <div
                   class="book-name ellipsis"
-                  :title="book.name"
+                  :title="book.title"
                   @click.stop="toDetail(book)"
                 >
-                  {{ book.name }}
+                  {{ book.title }}
                 </div>
                 <div class="book-content-details">
-                  <div class="sub">
+                  <!-- <div class="sub">
                     <div class="dot" v-if="book.totalChapterNum">•</div>
                     <div class="size" v-if="book.totalChapterNum">
                       共{{ book.totalChapterNum }}章
                     </div>
-                  </div>
-                  <div class="dur-chapter" v-if="book.durChapterTitle">
+                  </div> -->
+                  <!-- <div class="dur-chapter" v-if="book.durChapterTitle">
                     已读：{{ book.durChapterTitle }}
+                  </div> -->
+
+                  <div class="last-chapter ellipsis" v-if="book.newest">
+                    最新：{{ book.newest }}
                   </div>
-                  <div
-                    class="last-chapter ellipsis"
-                    v-if="book.latestChapterTitle"
-                  >
-                    {{
-                      book.lastCheckTime
-                        ? dateFormat(book.lastCheckTime)
-                        : "最新"
-                    }}：{{ book.latestChapterTitle }}
+                  <div class="last-chapter ellipsis" v-if="book.newest">
+                    {{ dateFormat(book.lastTime) }}
                   </div>
                 </div>
                 <div class="book-author ellipsis" :title="book.author">
@@ -232,20 +229,13 @@ export default {
         this.searchResult = [];
       }
 
-      // if (
-      //   this.searchConfig.searchType === "single" &&
-      //   !this.searchConfig.bookSourceUrl
-      // ) {
-      //   return;
-      // }
-
       // 防止重复查询
       if (this.loadingMore) {
         return;
       }
       this.searchList();
       // 缓存查询记录
-      // this.$store.commit("caches/setSearchHistory", this.keywords);
+      this.$store.commit("caches/setSearchHistory", this.keywords);
       // // 多源查询
       // if (this.searchConfig.searchType === "multi" && window.EventSource) {
       //   this.searchMore(page);
@@ -262,10 +252,24 @@ export default {
         keywords: this.keywords,
       };
       request
-        .post("http://localhost:3000/api/common/postSearch", params)
-        .then((res) => {
+        .post(this.$store.state.api + "api/common/postSearch", params)
+        .then((result) => {
           debugger;
-          console.log(res);
+          this.loadingMore = false;
+          this.refreshLoading = false;
+          if (result.data.data) {
+            var data = [];
+            result.data.data.forEach((v) => {
+              if (!this.searchResultMap[v.bookUrl]) {
+                data.push(v);
+              }
+            });
+            this.searchResult = data;
+          }
+        })
+        .catch(() => {
+          this.loadingMore = false;
+          this.refreshLoading = false;
         });
     },
 

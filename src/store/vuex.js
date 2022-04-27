@@ -1,8 +1,7 @@
 export default {
   state: {
-    connected: false,
     // api: "/reader3",
-    api: "https://reader.htmake.com/reader3",
+    api: "http://localhost:3000/",
     windowSize: {
       width: window.innerWidth,
       height: window.innerHeight,
