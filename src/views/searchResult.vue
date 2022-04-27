@@ -10,10 +10,10 @@
           v-model:value.trim="keywords"
           :options="historyList"
           :filter-option="filterOption"
-          @keyup.enter.stop="searchBook(1)"
+          @keyup.enter.stop="searchBook()"
         >
         </a-auto-complete>
-        <a-button type="primary" @click="searchBook(1)">全网搜</a-button>
+        <a-button type="primary" @click="searchBook()">全网搜</a-button>
       </div>
       <div class="search-right">
         <span class="setting-txt" @click="goHome">系统首页</span>
@@ -60,10 +60,10 @@
                   </div> -->
 
                   <div class="last-chapter ellipsis" v-if="book.newest">
-                    最新：{{ book.newest }}
+                    最新章节：{{ book.newest }}
                   </div>
                   <div class="last-chapter ellipsis" v-if="book.newest">
-                    {{ dateFormat(book.lastTime) }}
+                    更新时间：{{ dateFormat(book.lastTime) }}
                   </div>
                 </div>
                 <div class="book-author ellipsis" :title="book.author">
@@ -112,11 +112,6 @@ export default {
       // 查询关键字
       keywords: "",
 
-      // 页数
-      searchPage: 1,
-      //最后一次查询的页数
-      searchLastIndex: -1,
-
       // 是否展示加载更多
       loadingMore: false,
 
@@ -137,7 +132,7 @@ export default {
     }
     this.keywords = this.$route.query.keywords ?? "";
     if (this.keywords) {
-      this.searchBook(1);
+      this.searchBook();
     }
   },
   computed: {
@@ -173,7 +168,7 @@ export default {
     searchConfig: {
       handler(val) {
         this.$store.commit("setSearchConfig", val);
-        this.searchBook(1);
+        this.searchBook();
       },
       deep: true,
     },
@@ -216,35 +211,26 @@ export default {
       this.$router.push({ path: "/readBooks", query: { search: 1 } });
     },
     // 查询
-    searchBook(page) {
+    searchBook() {
       if (!this.keywords) {
         this.$message.error("请输入关键词进行搜索");
         return;
       }
 
-      this.searchPage = page;
-      if (page === 1) {
-        // 重新搜索
-        this.searchLastIndex = -1;
-        this.searchResult = [];
-      }
+      // 重新搜索
+      this.searchResult = [];
 
       // 防止重复查询
       if (this.loadingMore) {
         return;
       }
-      this.searchList();
       // 缓存查询记录
       this.$store.commit("caches/setSearchHistory", this.keywords);
-      // // 多源查询
-      // if (this.searchConfig.searchType === "multi" && window.EventSource) {
-      //   this.searchMore(page);
-      // } else {
-      //   // 单源查询
-      //   this.searchSingleData(page);
-      // }
+
+      this.searchList();
     },
 
+    // 查询数据
     searchList() {
       this.loadingMore = true;
       this.refreshLoading = true;
@@ -254,7 +240,6 @@ export default {
       request
         .post(this.$store.state.api + "api/common/postSearch", params)
         .then((result) => {
-          debugger;
           this.loadingMore = false;
           this.refreshLoading = false;
           if (result.data.data) {
@@ -273,125 +258,6 @@ export default {
         });
     },
 
-    // 查询单源
-    searchSingleData(page) {
-      this.loadingMore = true;
-      this.refreshLoading = true;
-
-      const params = {
-        key: this.keywords,
-        bookSourceUrl: this.searchConfig.bookSourceUrl,
-        bookSourceGroup: this.searchConfig.bookSourceGroup,
-        concurrentCount: this.searchConfig.concurrentCount,
-        lastIndex: this.searchLastIndex, // 多源搜索时的索引
-        page: page, // 单源搜索时的page
-      };
-      request
-        .get(
-          this.$store.state.api +
-            (this.searchConfig.searchType === "single"
-              ? "/searchBook"
-              : "/searchBookMulti"),
-          {
-            timeout: this.searchConfig.searchType === "single" ? 30000 : 180000,
-            params,
-          }
-        )
-        .then(
-          (res) => {
-            this.loadingMore = false;
-            this.refreshLoading = false;
-            if (res.data.isSuccess) {
-              let resultList = [];
-              if (this.searchConfig.searchType === "single") {
-                resultList = res.data.data;
-              } else {
-                this.searchLastIndex = res.data.data.lastIndex;
-                resultList = res.data.data.list;
-              }
-              var data = [].concat(this.searchResult);
-              var length = data.length;
-              resultList.forEach((v) => {
-                if (!this.searchResultMap[v.bookUrl]) {
-                  data.push(v);
-                }
-              });
-              this.searchResult = data;
-              if (data.length === length) {
-                this.$message.error("没有更多啦");
-              }
-            }
-          },
-          (error) => {
-            this.$message.error("搜索书籍失败 " + (error && error.toString()));
-          }
-        );
-    },
-    // 查询多源
-    searchMore(page) {
-      const params = {
-        accessToken: this.$store.state.token,
-        key: this.keywords,
-        bookSourceUrl: this.searchConfig.bookSourceUrl,
-        bookSourceGroup: this.searchConfig.bookSourceGroup,
-        concurrentCount: this.searchConfig.concurrentCount,
-        lastIndex: this.searchLastIndex, // 多源搜索时的索引
-        page: page, // 单源搜索时的page
-      };
-
-      this.loadingMore = true;
-      this.refreshLoading = true;
-      const url = buildURL(
-        this.$store.state.api + "/searchBookMultiSSE",
-        params
-      );
-
-      this.searchEventSource = new EventSource(url, {
-        withCredentials: true,
-      });
-      // websocket 请求
-      this.searchEventSource.addEventListener("error", (e) => {
-        this.loadingMore = false;
-        this.refreshLoading = false;
-        this.searchEventSource.close();
-        if (e.data) {
-          const result = JSON.parse(e.data);
-          if (result && result.errorMsg) {
-            this.$message.error(result.errorMsg);
-          }
-        }
-      });
-      this.searchEventSource.addEventListener("end", (e) => {
-        this.loadingMore = false;
-        this.refreshLoading = false;
-        this.searchEventSource.close();
-        if (e.data) {
-          const result = JSON.parse(e.data);
-          if (result && result.lastIndex) {
-            this.searchLastIndex = result.lastIndex;
-          }
-        }
-      });
-      this.searchEventSource.addEventListener("message", (e) => {
-        if (e.data) {
-          this.loadingMore = false;
-          this.refreshLoading = false;
-          const result = JSON.parse(e.data);
-          if (result && result.lastIndex) {
-            this.searchLastIndex = result.lastIndex;
-          }
-          if (result.data) {
-            var data = [].concat(this.searchResult);
-            result.data.forEach((v) => {
-              if (!this.searchResultMap[v.bookUrl]) {
-                data.push(v);
-              }
-            });
-            this.searchResult = data;
-          }
-        }
-      });
-    },
     // 加入收藏
     saveBook(book) {
       // 加入书源 缓存
