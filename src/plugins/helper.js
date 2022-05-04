@@ -149,7 +149,6 @@ export const cacheFirstRequest = function (
         }
       })
       .catch((error) => {
-        debugger;
         console.log(error);
       });
   });

@@ -420,7 +420,6 @@ export default {
       // 获取正文内容
       this.getBookContent(bookUrl).then(
         (res) => {
-          debugger;
           let str =
             res.data.code === 200 ? res.data.data : "获取章节内容失败！";
           this.bookContent = str;
