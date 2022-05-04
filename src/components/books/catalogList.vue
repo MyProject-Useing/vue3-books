@@ -10,9 +10,9 @@
             class="ellipsis"
             v-for="(item, index) in catalogList"
             :key="item.index"
-            :class="currPageIndex === index ? 'on' : ''"
+            :class="currPageIndex === index + 1 ? 'on' : ''"
           >
-            <a :title="getTitle(item.title)" @click="toChapter(index)">
+            <a :title="getTitle(item.title)" @click="toChapter(index + 1)">
               {{ getTitle(item.title) }}</a
             >
           </li>
@@ -49,7 +49,7 @@ export default {
       return this.bookInfo;
     },
     currPageIndex() {
-      return this.bookInfo.index;
+      return this.bookInfo.readIndex;
     },
   },
   methods: {

@@ -84,7 +84,7 @@ export default {
       this.$store.commit("caches/setReadingBook", book);
       this.$router.push({
         path: "/readBooks",
-        query: { search: book.readIndex || 0 },
+        query: { page: book.readIndex || 1, booksUrl: escape(book.booksUrl) },
       });
     },
     // 跳转查询详情页面

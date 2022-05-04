@@ -72,15 +72,16 @@ export const LimitResquest = function (limit, process) {
   return handler;
 };
 
-export const networkFirstRequest = async function (
-  requestFunc,
-  cacheKey,
-  forceCache
-) {
+export const getCacheRequest = async function (requestFunc, cacheKey) {
   cacheKey = "localCache@" + cacheKey;
+
+  if (window.localStorage && window.localStorage.getItem(cacheKey)) {
+    requestFunc(JSON.stringify(res.data));
+  }
+
   const res = await requestFunc().catch((err) => {
     // 请求出错，使用缓存
-    if (forceCache || !window.serviceWorkerReady) {
+    if (!window.serviceWorkerReady) {
       try {
         let cacheResponse =
           window.localStorage && window.localStorage.getItem(cacheKey);
@@ -96,34 +97,26 @@ export const networkFirstRequest = async function (
     }
     throw err;
   });
-  if (
-    (forceCache || !window.serviceWorkerReady) &&
-    res.data &&
-    res.data.isSuccess
-  ) {
+  if (!window.serviceWorkerReady && res.data && res.data.isSuccess) {
     try {
       window.localStorage &&
         window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
     } catch (error) {
-      Math.random() > 0.7 &&
-        setTimeout(() => {
-          message.error("本地空间已满，请去书架页面清空缓存");
-        }, 1000);
+      message.error("本地空间已满，请去书架页面清空缓存");
     }
   }
   return res;
 };
 
-export const cacheFirstRequest = async function (
+export const cacheFirstRequest = function (
   requestFunc,
   cacheKey,
-  validateCache,
-  forceCache
+  validateCache
 ) {
   cacheKey = "localCache@" + cacheKey;
   // validateCache === true 时，直接刷新缓存
   if (validateCache !== true) {
-    if (forceCache || !window.serviceWorkerReady) {
+    if (!window.serviceWorkerReady) {
       let cacheResponse =
         window.localStorage && window.localStorage.getItem(cacheKey);
       if (cacheResponse) {
@@ -141,22 +134,24 @@ export const cacheFirstRequest = async function (
   }
 
   return new Promise(function (resolve, reject) {
-    requestFunc().then((res) => {
-      if (
-        (forceCache || !window.serviceWorkerReady) &&
-        res.data &&
-        res.data.isSuccess
-      ) {
-        try {
-          window.localStorage &&
-            window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
-          resolve(res);
-        } catch (error) {
-          message.error("本地空间已满，请清空缓存");
-          reject("本地空间已满，请清空缓存");
+    requestFunc()
+      .then((res) => {
+        resolve(res);
+        if (!window.serviceWorkerReady && res.data && res.data.isSuccess) {
+          try {
+            window.localStorage &&
+              window.localStorage.setItem(cacheKey, JSON.stringify(res.data));
+            resolve(res);
+          } catch (error) {
+            message.error("本地空间已满，请清空缓存");
+            reject("本地空间已满，请清空缓存");
+          }
         }
-      }
-    });
+      })
+      .catch((error) => {
+        debugger;
+        console.log(error);
+      });
   });
 
   // return res;

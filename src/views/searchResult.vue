@@ -99,7 +99,7 @@
 
 <script>
 import { UserOutlined } from "@ant-design/icons-vue";
-import { buildURL, getCover, dateFormat } from "@/plugins/utils.js";
+import { getCover, dateFormat } from "@/plugins/utils.js";
 
 import { isMobile } from "@/plugins/utils";
 import request from "@/plugins/axios";
@@ -143,13 +143,10 @@ export default {
     cacheBookList() {
       return this.$store.state.caches.readBooksList;
     },
-    searchConfig() {
-      return this.$store.state.searchConfig;
-    },
     // 用于过滤 重复的数据
     searchResultMap() {
       return this.searchResult.reduce((c, v) => {
-        c[v.bookUrl] = v;
+        c[v.booksUrl] = v;
         return c;
       }, {});
     },
@@ -161,16 +158,6 @@ export default {
         newList.push({ value: d, address: d });
       });
       return newList;
-    },
-  },
-  watch: {
-    // 查询模式监听
-    searchConfig: {
-      handler(val) {
-        this.$store.commit("setSearchConfig", val);
-        this.searchBook();
-      },
-      deep: true,
     },
   },
   methods: {
@@ -200,7 +187,7 @@ export default {
     },
     // 书籍详情
     toDetail(book) {
-      if (!book.bookUrl) {
+      if (!book.booksUrl) {
         return;
       }
       // 加入书源 缓存
@@ -208,7 +195,10 @@ export default {
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
 
-      this.$router.push({ path: "/readBooks", query: { search: 1 } });
+      this.$router.push({
+        path: "/readBooks",
+        query: { page: book.readIndex || 1, booksUrl: escape(book.booksUrl) },
+      });
     },
     // 查询
     searchBook() {
@@ -238,14 +228,14 @@ export default {
         keywords: this.keywords,
       };
       request
-        .post(this.$store.state.api + "api/common/postSearch", params)
+        .post(this.$store.state.api + "api/common/searchBooksList", params)
         .then((result) => {
           this.loadingMore = false;
           this.refreshLoading = false;
           if (result.data.data) {
             var data = [];
             result.data.data.forEach((v) => {
-              if (!this.searchResultMap[v.bookUrl]) {
+              if (!this.searchResultMap[v.booksUrl]) {
                 data.push(v);
               }
             });

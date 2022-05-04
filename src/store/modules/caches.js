@@ -1,27 +1,10 @@
 function setBooks(list, item) {
   let isUpdate = false;
   let newList = JSON.parse(JSON.stringify(list));
-  let book = {
-    author: item.author, //作者
-    bookUrl: item.bookUrl,
-    coverUrl: item.coverUrl,
-    intro: item.intro, //描述
-    kind: item.kind,
-    latestChapterTitle: item.latestChapterTitle, //最后一章
-    name: item.name, // 书名
-    origin: item.origin, // 源网站地址
-    originName: item.originName, // 源网站名称
-    wordCount: item.originName, // 总文字
-    readIndex: item.readIndex ?? 0, //当前阅读的章节
-  };
-
+  let book = { ...item, readIndex: item.readIndex ?? 0 };
   for (let index = 0; index < newList.length; index++) {
     const element = newList[index];
-    if (
-      element.author === item.author &&
-      element.name === item.name &&
-      element.origin === item.origin
-    ) {
+    if (element.booksUrl === item.booksUrl) {
       newList[index] = book;
       isUpdate = true;
       break;
@@ -37,11 +20,7 @@ function setBooks(list, item) {
 function deleteBooks(list, item) {
   let deleteIndex = -1;
   list.forEach((d, index) => {
-    if (
-      d.author === item.author &&
-      d.name === item.name &&
-      d.origin === item.origin
-    ) {
+    if (d.booksUrl === item.booksUrl) {
       deleteIndex = index;
       return false;
     }

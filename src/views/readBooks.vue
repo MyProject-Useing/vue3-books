@@ -103,7 +103,7 @@ import catalog from "@/components/books/catalogList.vue";
 import booksShelf from "@/components/books/booksShelf.vue";
 
 import { isMobile } from "@/plugins/utils";
-import { cacheFirstRequest, networkFirstRequest } from "@/plugins/helper";
+import { cacheFirstRequest } from "@/plugins/helper";
 import jump from "@/plugins/jump";
 
 import request from "@/plugins/axios";
@@ -269,7 +269,7 @@ export default {
   watch: {
     // 监听当前阅读的书籍
     readingBook(val, oldVal) {
-      if (val.bookUrl !== oldVal.bookUrl) {
+      if (val.booksUrl !== oldVal.booksUrl) {
         this.startSavePosition = false;
         this.autoShowPosition();
       }
@@ -280,7 +280,7 @@ export default {
       if (this.readingBook) {
         this.bookTitle = "";
         // 跳转记住的位置
-        this.loadCatalog(false);
+        this.getCatalog(this.$route.query.booksUrl);
       } else {
         this.$message.error("请在书架选择书籍");
       }
@@ -333,9 +333,8 @@ export default {
     toChapter(index) {
       this.catalogPopover = false;
       this.bookShelfPopover = false;
-
       let readingBook = this.readingBook;
-      if (!readingBook || !readingBook.bookUrl || !this.catalogList) {
+      if (!readingBook || !readingBook.booksUrl || !this.catalogList) {
         this.$message.error("章节错误");
         return;
       }
@@ -348,77 +347,48 @@ export default {
     // 下一章
     toNextChapter(isNext) {
       let readingBook = this.readingBook;
-
       if (
         !readingBook ||
-        !readingBook.bookUrl ||
+        !readingBook.booksUrl ||
         !this.catalogList ||
         this.catalogList.length === 0
       ) {
         this.$message.error("章节错误，请返回首页");
         return;
       }
-      let index = readingBook.readIndex || 0;
+      let index = readingBook.readIndex || 1;
       isNext ? index++ : index--;
-      if (index >= this.catalogList.length) {
+      if (index >= this.catalogList.length + 1) {
         this.$message.error("本章是最后一章");
-      } else if (index < 0) {
+      } else if (index < 1) {
         this.$message.error("本章已是第一章");
       } else {
         this.getContent(index);
       }
     },
-    // 全部目录
-    loadCatalog(refresh) {
-      this.bookLoading = true;
-      this.getCatalog(refresh).then(
-        (res) => {
-          if (res.data.isSuccess) {
-            this.catalogList = res.data.data;
-            this.getContent(this.readingBook.readIndex || 0);
+    // 加载目录
+    getCatalog(booksUrl) {
+      request
+        .post(this.$store.state.api + "api/common/getCatalog", { booksUrl })
+        .then((result) => {
+          if (result.data.data) {
+            this.catalogList = result.data.data;
+            this.getContent(this.readingBook.readIndex || 1);
           } else {
             this.bookTitle = "获取章节失败";
-            this.bookContent = "获取章节目录失败！\n" + res.data.errorMsg;
+            this.bookContent = "获取章节目录失败！\n" + result.data.msg;
             this.bookLoading = false;
           }
-        },
-        (error) => {
+        })
+        .catch(() => {
           this.bookLoading = false;
-          this.$message.error(
-            "获取书籍目录列表 " + (error && error.toString())
-          );
-        }
-      );
-    },
-    // 加载目录
-    getCatalog(refresh) {
-      const params = {
-        url: this.readingBook.bookUrl,
-        refresh: refresh ? 1 : 0,
-      };
-      if (this.$route.query.search) {
-        // 来自搜索结果，请求需要带上 书源链接
-        params.bookSourceUrl = this.readingBook.origin;
-      }
-
-      const catchData =
-        this.readingBook.name +
-        "_" +
-        this.readingBook.author +
-        "@" +
-        this.readingBook.bookUrl +
-        "@chapterList";
-
-      return networkFirstRequest(
-        () =>
-          request.get(this.$store.state.api + "/getChapterList", { params }),
-        catchData
-      );
+          this.$message.error("获取目录失败");
+        });
     },
     // 获取文章内容块
     getContent(index) {
       let readingBook = this.readingBook;
-      if (index > this.catalogList.length) {
+      if (index > this.catalogList.length + 1) {
         this.$message.error(`无法找到第${index}章，请刷新页面试试。`);
         // this.refreshCatalog(); //刷新章节
         return;
@@ -429,6 +399,8 @@ export default {
         return;
       }
       // 设置章节名称
+      let bookUrl =
+        this.catalogList[index].booksUrl + this.catalogList[index].href;
       this.bookTitle = this.catalogList[index].title;
       this.bookLoading = true;
       this.bookContent = "";
@@ -445,11 +417,12 @@ export default {
         ...readingBook,
         readIndex: index,
       });
-
       // 获取正文内容
-      this.getBookContent(index).then(
+      this.getBookContent(bookUrl).then(
         (res) => {
-          let str = res.data.isSuccess ? res.data.data : "获取章节内容失败！";
+          debugger;
+          let str =
+            res.data.code === 200 ? res.data.data : "获取章节内容失败！";
           this.bookContent = str;
           this.bookLoading = false;
         },
@@ -463,32 +436,13 @@ export default {
       );
     },
     // 请求书籍内容
-    async getBookContent(chapterIndex) {
-      let readingBook = this.readingBook;
-
-      let bookUrl = readingBook.bookUrl;
-
-      let cacheStr =
-        readingBook.name +
-        "_" +
-        readingBook.author +
-        "@" +
-        bookUrl +
-        "@chapterContent-" +
-        chapterIndex;
-
+    async getBookContent(url) {
+      let cacheStr = url + "@chapterContent";
       return cacheFirstRequest(
         () =>
-          request.get(
-            this.$store.state.api +
-              "/getBookContent?url=" +
-              encodeURIComponent(bookUrl) +
-              "&index=" +
-              chapterIndex,
-            {
-              timeout: 30000,
-            }
-          ),
+          request.post(this.$store.state.api + "api/common/getBooksText", {
+            booksUrl: url,
+          }),
         cacheStr
       );
     },

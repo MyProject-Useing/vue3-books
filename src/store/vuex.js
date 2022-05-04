@@ -7,22 +7,11 @@ export default {
       height: window.innerHeight,
     },
     token: "danhua:1f9429a21f824828694e5f138f0aad5e",
-    searchConfig: {
-      searchType: "multi",
-      bookSourceGroup: "",
-      bookSourceUrl: "",
-      concurrentCount: 24,
-    },
   },
   mutations: {
-    setSearchConfig(state, searchConfig) {
-      state.searchConfig = searchConfig;
-      window.localStorage &&
-        window.localStorage.setItem(
-          "searchConfig",
-          JSON.stringify(searchConfig)
-        );
-    },
+    // setSearchConfig(state, searchConfig) {
+    //   state.searchConfig = searchConfig;
+    // },
   },
   getters: {
     api: (state) => {
