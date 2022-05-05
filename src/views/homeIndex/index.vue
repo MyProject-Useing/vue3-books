@@ -40,7 +40,7 @@
           </a-image>
         </div>
         <div class="tile-title" @click="toDetail(item)">
-          <span class="ellipsis" :title="item.name"> {{ item.name }}</span>
+          <span class="ellipsis" :title="item.title"> {{ item.title }}</span>
         </div>
       </a>
     </div>

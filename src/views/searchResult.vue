@@ -63,7 +63,7 @@
                     最新章节：{{ book.newest }}
                   </div>
                   <div class="last-chapter ellipsis" v-if="book.newest">
-                    更新时间：{{ dateFormat(book.lastTime) }}
+                    更新时间：{{ book.lastTime }}
                   </div>
                 </div>
                 <div class="book-author ellipsis" :title="book.author">
