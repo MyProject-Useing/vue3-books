@@ -123,6 +123,5 @@ export default {
 };
 </script>
 <style scoped>
-@import url("@/assets/css/base.css");
 @import url("@/assets/css/booksContent.css");
 </style>

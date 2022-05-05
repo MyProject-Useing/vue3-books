@@ -1,7 +1,7 @@
 <template>
   <div class="bookShelf-list">
     <div class="bookShelf-title">
-      <span class="lang act">书架</span>
+      <span class="act">书架</span>
     </div>
     <div class="books-panle">
       <ul>
@@ -77,7 +77,7 @@ export default {
       // 当前正在阅读的书籍
       this.$store.commit("caches/setReadingBook", book);
       // 查询指定章节内容
-      this.$emit("changeChapter", book.readIndex || 0);
+      this.$emit("changeChapter", book.readIndex || 1);
       // this.$router.push({
       //   path: "/readBooks",
       //   query: { search: book.readIndex || 0 },

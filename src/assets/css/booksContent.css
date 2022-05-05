@@ -33,7 +33,7 @@ ul {
 }
 .main-text-wrap {
   padding: 45px 45px;
-  height: 100%;
+  min-height: calc(100vh - 97px);
 }
 
 .text-wrap {
@@ -116,20 +116,19 @@ p {
 
 .setting-popover {
   position: absolute;
-  width: 100%;
   top: 0px;
-  left: 31px;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMVEX28ef48+n69esoK7jYAAAB4UlEQVQozw2OsW4bQQxEhwLXkDrysGdEqRRgVShfQQq8wOr2jD0jSpXCLvwXbtKfADlFqgSwC/9ljqweZgYzQFnb/QGepYhA9jzmTc1WaSEtQpbFgjWATI00ZZtIckXx8q2Oe5yEByBy+RHOTcM+VVTadULsvxvRC/q8WTwgcWGD+Mnaqa0oy2gw2pKFzK+PzEsus5hP9AHojKslVynLlioVTBEN8cjDNnZoR1uMGTiZAAN47HxMtEkGUE9b8HWzkqNX5Lpk0yVziAJOs46rK1pG/xNuXLjz95fSDoJE5IqG23MAYPtWoeWPvfVtIV/Ng9oH3W0gGMPIOqd4MK4QZ55dV61gOb8Zxp7I9qayaGxp6Q91cmC0ZRdBwEQVHWzSAanlZwVWc9yljeTCeaHjBVvlPSLeyeBUT2rPdJegQI103jVS3uYkyIx1il6mslMDedZuOkwzolsagvPuQAfp7cYg7k9V1NOxfq64PNSvMdwONV4VYEmqlbpZy5OAakRKkjPnL4CBv5/OZRgoWHBmNbxB0LgB1I4vXFj93UoF2/0TPEsWwV9EhbIiTPqYoTHYoMn3enTDjmrFeDTIzaL1bUC/PBIMuF+vSSYSaxoVt90EO3Gu1zrMuMRGUk7Ffv3L+A931Gsb/yBoIgAAAABJRU5ErkJggg==)
-    repeat;
+  left: 68px;
+  background: url(/src/assets/imgs/booksContent/base_theme_popup.png) repeat;
+  box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
   min-height: 212px;
+  max-width: 800px;
+  width: 800px;
 }
-
 
 /*移动端*/
-.read-main-wrap.mobile  .text-info{
- display: none;
+.read-main-wrap.mobile .text-info {
+  display: none;
 }
-
 
 .read-main-wrap.mobile .read-content p {
   font-size: 1em;

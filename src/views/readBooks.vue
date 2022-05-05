@@ -338,7 +338,7 @@ export default {
         this.$message.error("章节错误");
         return;
       }
-      if (typeof this.catalogList[index] !== "undefined") {
+      if (typeof this.catalogList[index - 1] !== "undefined") {
         this.getContent(index);
       } else {
         this.$message.error("目录错误或已最新");
@@ -360,7 +360,7 @@ export default {
       isNext ? index++ : index--;
       if (index >= this.catalogList.length + 1) {
         this.$message.error("本章是最后一章");
-      } else if (index < 1) {
+      } else if (index < 2) {
         this.$message.error("本章已是第一章");
       } else {
         this.getContent(index);
@@ -394,14 +394,15 @@ export default {
         return;
       }
 
-      if (index < 0) {
+      if (index < 1) {
         this.$message.error(`已是第一章。`);
         return;
       }
+
+      let selfBooks = this.catalogList[index - 1];
       // 设置章节名称
-      let bookUrl =
-        this.catalogList[index].booksUrl + this.catalogList[index].href;
-      this.bookTitle = this.catalogList[index].title;
+      let bookUrl = selfBooks.booksUrl + selfBooks.href;
+      this.bookTitle = selfBooks.title;
       this.bookLoading = true;
       this.bookContent = "";
       //强制滚回顶层
