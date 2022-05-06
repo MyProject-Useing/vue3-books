@@ -151,8 +151,6 @@ ul {
   border-color: #3f5a93;
 }
 
-
-
 .book-information .book-info .tag + p + p + p a {
   font: 14px/34px PingFangSC-Regular, "-apple-system", Simsun;
   display: inline-block;
@@ -206,3 +204,14 @@ ul {
 }
 
 /*标签分页*/
+
+/*目录*/
+.chapter-wrap .chapter h3,
+.volume h3 {
+  font: 700 18px/24px PingFangSC-Regular, HelveticaNeue-Light,
+    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+  height: 24px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #666;
+} /*目录*/

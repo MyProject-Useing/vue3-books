@@ -11,8 +11,10 @@
       </div>
       <div class="book-info">
         <h1>
-          <em>我在异界肝经验</em>
-          <span><span>卒印</span> 著</span>
+          <em>{{ bookInfo.bookTitle }}</em>
+          <span
+            ><span>{{ bookInfo.author }}</span> 著</span
+          >
         </h1>
         <p class="tag">
           <span class="blue">连载</span>
@@ -26,10 +28,7 @@
           ><cite>周推荐</cite>
         </p>
         <p>
-          <a
-            class="blue-btn"
-            href="//read.qidian.com/chapter/mT-d-k_P9qSIRkU8pnqrJw2/nqyNH8zOVm5OBDFlr9quQA2/"
-            >免费试读</a
+          <a class="blue-btn" href="javascript:">免费试读</a
           ><a class="blue-btn add-book" href="javascript:">加入书架</a>
         </p>
       </div>
@@ -47,13 +46,20 @@
                   <li class="update">
                     <b>最新章节</b>
                     <div class="detail">
-                      <p class="cf charpter-container">
+                      <p
+                        class="cf charpter-container"
+                        v-for="item in catalogList
+                          .concat([])
+                          .reverse()
+                          .splice(0, 10)"
+                        :key="item.href"
+                      >
                         <a
                           class="blue charpter-link"
-                          href="//read.qidian.com/chapter/mT-d-k_P9qSIRkU8pnqrJw2/JbcFH8tD4fFMs5iq0oQwLQ2/"
-                          title="我在异界肝经验 第六十章 魄力在线阅读"
-                          >第六十章 魄力</a
-                        ><i>·</i><em class="time">18小时前</em>
+                          href="javascript:"
+                          :title="item.title"
+                          >{{ item.title }}</a
+                        ><i>·</i><em class="time">0小时前</em>
                       </p>
                     </div>
                   </li>
@@ -62,9 +68,24 @@
             </div>
           </div></a-tab-pane
         >
-        <a-tab-pane key="2" tab="目录" force-render
-          >Content of Tab Pane 2</a-tab-pane
-        >
+        <a-tab-pane key="2" tab="目录" force-render class="catalog-tab">
+          <h3>
+            <a class="subscri" href="javascript:"></a>
+            正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span class="free">
+              免费</span
+            >
+          </h3>
+          <ul>
+            <li
+              v-for="item in catalogList.concat([]).reverse().splice(0, 10)"
+              :key="item.href"
+            >
+              <h2 class="book_name">
+                <a href="javascript:" :title="item.title">{{ item.title }}</a>
+              </h2>
+            </li>
+          </ul>
+        </a-tab-pane>
       </a-tabs>
     </div>
   </div>
