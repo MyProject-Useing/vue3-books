@@ -369,22 +369,33 @@ export default {
     },
     // 加载目录
     getCatalog(bookUrl) {
-      request
-        .post(this.$store.state.api + "api/common/getCatalog", { bookUrl })
-        .then((result) => {
-          if (result.data.data) {
-            this.catalogList = result.data.data;
-            this.getContent(this.$route.query.page);
-          } else {
-            this.bookTitle = "获取章节失败";
-            this.bookContent = "获取章节目录失败！\n" + result.data.msg;
+      debugger;
+      let sessionData = JSON.parse(
+        sessionStorage.getItem("catalog@" + bookUrl)
+      );
+      if (sessionData) {
+        this.catalogList = sessionData.catalogList;
+        this.getContent(this.$route.query.page);
+      } else {
+        this.bookLoading = true;
+        request
+          .post(this.$store.state.api + "api/common/getCatalog", { bookUrl })
+          .then((result) => {
+            debugger;
+            if (result.data.data) {
+              this.catalogList = result.data.data;
+              this.getContent(this.$route.query.page);
+            } else {
+              this.bookTitle = "获取章节失败";
+              this.bookContent = "获取章节目录失败！\n" + result.data.msg;
+              this.bookLoading = false;
+            }
+          })
+          .catch(() => {
             this.bookLoading = false;
-          }
-        })
-        .catch(() => {
-          this.bookLoading = false;
-          message.error("获取目录失败。");
-        });
+            message.error("获取目录失败。");
+          });
+      }
     },
     // 获取文章内容块
     getContent(index) {
