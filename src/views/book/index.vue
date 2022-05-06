@@ -101,7 +101,7 @@ export default {
       let sessionData = JSON.parse(sessionStorage.getItem("catalog@" + newUrl));
       if (sessionData) {
         this.catalogList = sessionData.catalogList;
-        this.bookInfo = sessionData.bookInfo;
+        this.bookInfo = sessionData.info;
       } else {
         this.bookLoading = true;
         request
@@ -131,6 +131,16 @@ export default {
 
 <style scoped>
 @import url("./css/index.css");
+
+.book-information .book-img img {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -ms-transition: -ms-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  color: #fcfcfa;
+}
 
 /*最新章节*/
 .content-nav-wrap :deep(.left-wrap) {
