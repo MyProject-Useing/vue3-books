@@ -60,7 +60,8 @@
                   </div> -->
 
                   <div class="last-chapter ellipsis" v-if="book.newest">
-                    最新章节：{{ book.newest }}
+                    最新章节：
+                    <a @click="jumpNewest(book)"> {{ book.newest }}</a>
                   </div>
                   <div class="last-chapter ellipsis" v-if="book.newest">
                     更新时间：{{ book.lastTime }}
@@ -185,6 +186,30 @@ export default {
         query: { keywords: this.keywords },
       });
     },
+
+    // 查看最新章节
+    jumpNewest(book) {
+      if (!book.booksUrl) {
+        return;
+      }
+
+      let newestUrl = book.booksUrl + book.newestUrl.split("/")[3];
+
+      // 加入书源 缓存
+      this.$store.commit("caches/setBooksList", book);
+      // 当前正在阅读的书籍
+      this.$store.commit("caches/setReadingBook", book);
+
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          page: book.readIndex || 1,
+          booksUrl: escape(book.booksUrl),
+          readUrl: escape(newestUrl),
+        },
+      });
+    },
+
     // 书籍详情
     toDetail(book) {
       if (!book.booksUrl) {

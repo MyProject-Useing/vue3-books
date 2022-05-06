@@ -21,6 +21,34 @@ body {
   z-index: 0;
 }
 
+a,
+blockquote,
+body,
+dd,
+div,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 ::-webkit-input-placeholder {
   -webkit-text-security: none;
   color: rgb(117, 117, 117);
@@ -80,7 +108,7 @@ body {
   background: none;
 }
 
-.ant-spin-nested-loading{
+.ant-spin-nested-loading {
   height: 100%;
 }
 /* 移动端 */

@@ -180,6 +180,19 @@
   color: #666;
   font-size: 12px;
 }
+
+.result-content .last-chapter a {
+  color: #666;
+}
+
+.result-content .last-chapter a:active {
+  color: #096dd9;
+}
+
+.result-content .last-chapter a:hover {
+  color: #40a9ff;
+}
+
 .result-content .el-image {
   height: 100%;
   width: 100%;
@@ -206,8 +219,7 @@
   display: none;
 }
 
-
-.result-content.mobile .search-right{
+.result-content.mobile .search-right {
   display: none;
 }
 
@@ -215,7 +227,7 @@
   padding-left: 18px;
 }
 
-.result-content.mobile .search-content-panle{
+.result-content.mobile .search-content-panle {
   padding-left: 18px;
-    padding-right: 18px;
+  padding-right: 18px;
 }

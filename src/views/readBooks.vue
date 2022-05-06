@@ -279,7 +279,6 @@ export default {
     init() {
       if (this.readingBook) {
         this.bookTitle = "";
-        // 跳转记住的位置
         this.getCatalog(this.$route.query.booksUrl);
       } else {
         this.$message.error("请在书架选择书籍");
@@ -373,7 +372,7 @@ export default {
         .then((result) => {
           if (result.data.data) {
             this.catalogList = result.data.data;
-            this.getContent(this.readingBook.readIndex || 1);
+            this.getContent(this.$route.query.page);
           } else {
             this.bookTitle = "获取章节失败";
             this.bookContent = "获取章节目录失败！\n" + result.data.msg;
@@ -390,18 +389,18 @@ export default {
       let readingBook = this.readingBook;
       if (index > this.catalogList.length + 1) {
         this.$message.error(`无法找到第${index}章，请刷新页面试试。`);
-        // this.refreshCatalog(); //刷新章节
         return;
       }
 
       if (index < 1) {
-        this.$message.error(`已是第一章。`);
+        this.$message.error(`章节错误。`);
         return;
       }
 
       let selfBooks = this.catalogList[index - 1];
       // 设置章节名称
       let bookUrl = selfBooks.booksUrl + selfBooks.href;
+
       this.bookTitle = selfBooks.title;
       this.bookLoading = true;
       this.bookContent = "";
@@ -413,11 +412,13 @@ export default {
         ...readingBook,
         readIndex: index,
       });
+
       // 保存阅读进度
       this.$store.commit("caches/setReadingBook", {
         ...readingBook,
         readIndex: index,
       });
+
       // 获取正文内容
       this.getBookContent(bookUrl).then(
         (res) => {
@@ -448,28 +449,6 @@ export default {
     },
     // 内容点击事件
     eventHandler(point) {
-      // if (
-      //   this.popBookSourceVisible ||
-      //   this.popBookShelfVisible ||
-      //   this.popCataVisible ||
-      //   this.readSettingsVisible
-      // ) {
-      //   if (this.isEpub) {
-      //     this.popBookSourceVisible = false;
-      //     this.popBookShelfVisible = false;
-      //     this.popCataVisible = false;
-      //     this.readSettingsVisible = false;
-      //   }
-      //   return;
-      // }
-      // if (this.isAudio) {
-      //   // 音频
-      //   // 点击中部区域显示菜单
-      //   if (!this.showReadBar) {
-      //     this.showToolBar = !this.showToolBar;
-      //   }
-      //   return;
-      // }
       // 根据点击位置判断操作
       const midX = this.windowSize.width / 3;
       const midY = this.windowSize.height / 3;
