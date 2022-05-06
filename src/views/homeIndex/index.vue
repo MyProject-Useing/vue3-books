@@ -40,7 +40,9 @@
           </a-image>
         </div>
         <div class="tile-title" @click="toDetail(item)">
-          <span class="ellipsis" :title="item.title"> {{ item.title }}</span>
+          <span class="ellipsis" :title="item.booktitle">
+            {{ item.booktitle }}</span
+          >
         </div>
       </a>
     </div>
@@ -84,7 +86,7 @@ export default {
       this.$store.commit("caches/setReadingBook", book);
       this.$router.push({
         path: "/readBooks",
-        query: { page: book.readIndex || 1, booksUrl: escape(book.booksUrl) },
+        query: { page: book.readIndex || 1, bookUrl: escape(book.bookUrl) },
       });
     },
     // 跳转查询详情页面

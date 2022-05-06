@@ -16,6 +16,16 @@ const routes = [
     },
     component: () => import("@/views/readBooks.vue"),
   },
+
+  {
+    path: "/book",
+    name: "book",
+    meta: {
+      keepAlive: false,
+    },
+    component: () => import("@/views/book/index.vue"),
+  },
+
   {
     path: "/searchResult",
     name: "searchResult",

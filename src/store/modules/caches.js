@@ -4,7 +4,7 @@ function setBooks(list, item) {
   let book = { ...item, readIndex: item.readIndex ?? 0 };
   for (let index = 0; index < newList.length; index++) {
     const element = newList[index];
-    if (element.booksUrl === item.booksUrl) {
+    if (element.bookUrl === item.bookUrl) {
       newList[index] = book;
       isUpdate = true;
       break;
@@ -20,7 +20,7 @@ function setBooks(list, item) {
 function deleteBooks(list, item) {
   let deleteIndex = -1;
   list.forEach((d, index) => {
-    if (d.booksUrl === item.booksUrl) {
+    if (d.bookUrl === item.bookUrl) {
       deleteIndex = index;
       return false;
     }

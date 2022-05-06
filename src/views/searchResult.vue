@@ -43,10 +43,10 @@
               <div class="book-info">
                 <div
                   class="book-name ellipsis"
-                  :title="book.title"
-                  @click.stop="toDetail(book)"
+                  :title="book.booktitle"
+                  @click.stop="toBookIndex(book)"
                 >
-                  {{ book.title }}
+                  {{ book.booktitle }}
                 </div>
                 <div class="book-content-details">
                   <!-- <div class="sub">
@@ -58,12 +58,11 @@
                   <!-- <div class="dur-chapter" v-if="book.durChapterTitle">
                     已读：{{ book.durChapterTitle }}
                   </div> -->
-
-                  <div class="last-chapter ellipsis" v-if="book.newest">
+                  <div class="last-chapter ellipsis" v-if="book.newestTitle">
                     最新章节：
-                    <a @click="jumpNewest(book)"> {{ book.newest }}</a>
+                    <a @click="jumpNewest(book)"> {{ book.newestTitle }}</a>
                   </div>
-                  <div class="last-chapter ellipsis" v-if="book.newest">
+                  <div class="last-chapter ellipsis" v-if="book.lastTime">
                     更新时间：{{ book.lastTime }}
                   </div>
                 </div>
@@ -101,8 +100,8 @@
 <script>
 import { UserOutlined } from "@ant-design/icons-vue";
 import { getCover, dateFormat } from "@/plugins/utils.js";
-
 import { isMobile } from "@/plugins/utils";
+import { message } from "ant-design-vue";
 import request from "@/plugins/axios";
 // 书籍详情
 export default {
@@ -147,7 +146,7 @@ export default {
     // 用于过滤 重复的数据
     searchResultMap() {
       return this.searchResult.reduce((c, v) => {
-        c[v.booksUrl] = v;
+        c[v.bookUrl] = v;
         return c;
       }, {});
     },
@@ -174,12 +173,15 @@ export default {
       )[0];
       return filData ? true : false;
     },
+
     getCover(coverUrl, normal) {
       return getCover(coverUrl, normal);
     },
+
     dateFormat(t) {
       return dateFormat(t);
     },
+
     goHome() {
       this.$router.push({
         path: "/",
@@ -189,30 +191,36 @@ export default {
 
     // 查看最新章节
     jumpNewest(book) {
-      if (!book.booksUrl) {
+      if (!book.bookUrl) {
         return;
       }
 
-      let newestUrl = book.booksUrl + book.newestUrl.split("/")[3];
+      let newestUrl = book.bookUrl + book.newestUrl;
 
       // 加入书源 缓存
-      this.$store.commit("caches/setBooksList", book);
+      this.$store.commit("caches/setBooksList", {
+        ...book,
+        readUrl: newestUrl,
+      });
+
       // 当前正在阅读的书籍
-      this.$store.commit("caches/setReadingBook", book);
+      this.$store.commit("caches/setReadingBook", {
+        ...book,
+        readUrl: newestUrl,
+      });
 
       this.$router.push({
         path: "/readBooks",
         query: {
-          page: book.readIndex || 1,
-          booksUrl: escape(book.booksUrl),
+          bookUrl: escape(book.bookUrl),
           readUrl: escape(newestUrl),
         },
       });
     },
 
     // 书籍详情
-    toDetail(book) {
-      if (!book.booksUrl) {
+    toBookIndex(book) {
+      if (!book.bookUrl) {
         return;
       }
       // 加入书源 缓存
@@ -221,14 +229,14 @@ export default {
       this.$store.commit("caches/setReadingBook", book);
 
       this.$router.push({
-        path: "/readBooks",
-        query: { page: book.readIndex || 1, booksUrl: escape(book.booksUrl) },
+        path: "/book",
+        query: { bookUrl: escape(book.bookUrl) },
       });
     },
+
     // 查询
     searchBook() {
       if (!this.keywords) {
-        this.$message.error("请输入关键词进行搜索");
         return;
       }
 
@@ -260,7 +268,7 @@ export default {
           if (result.data.data) {
             var data = [];
             result.data.data.forEach((v) => {
-              if (!this.searchResultMap[v.booksUrl]) {
+              if (!this.searchResultMap[v.bookUrl]) {
                 data.push(v);
               }
             });
@@ -277,7 +285,7 @@ export default {
     saveBook(book) {
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", book);
-      this.$message.success("收藏成功。");
+      message.success("收藏成功。");
     },
   },
 };
