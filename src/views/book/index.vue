@@ -201,24 +201,19 @@ export default {
 
 /*最新章节*/
 .content-nav-wrap :deep(.left-wrap) {
-  width: 700px;
-  padding-bottom: 40px;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-info-detail {
-  margin-bottom: 20px;
-}
-
-.content-nav-wrap :deep(.left-wrap) .book-intro {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e6e6e6;
+  width: calc(100% - 30%);
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-intro p {
   font: 14px/28px PingFangSC-Regular, "-apple-system", Simsun;
   overflow: hidden;
   margin: 0px;
-  padding-left: 23px;
+  text-indent: 22px;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state {
@@ -296,6 +291,11 @@ export default {
 .content-nav-wrap :deep(.ant-tabs-tab) {
   color: #a6a6a6;
 }
+
+.content-nav-wrap :deep(.ant-tabs-nav)::before {
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .catalog-tab-title span {
   font-size: 14px;
 }

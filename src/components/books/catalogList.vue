@@ -101,7 +101,6 @@ export default {
   line-height: 22px;
   margin-right: 20px;
   padding: 0 2px 4px;
-  cursor: pointer;
   color: #ed4259;
   font-weight: 500;
 }
@@ -171,7 +170,6 @@ export default {
   height: 41px;
   margin-left: 24px;
   padding-bottom: 6px;
-  cursor: pointer;
   border-bottom: 1px solid #e5e5e5;
 }
 </style>
