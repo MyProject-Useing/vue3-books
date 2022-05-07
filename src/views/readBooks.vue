@@ -96,7 +96,7 @@
 // 文章
 import booksContent from "@/components/books/booksContent.vue";
 
-// 书架
+// 目录
 import catalog from "@/components/books/catalogList.vue";
 
 // 书架
@@ -222,10 +222,13 @@ export default {
     windowSize() {
       return this.$store.state.windowSize;
     },
+
     // 目录是否禁用
     catalogClass() {
       return this.catalogList.length == 0 || this.bookLoading ? "disabled" : "";
     },
+
+    // 上一章
     firstClass() {
       if (
         this.catalogList.length == 0 ||
@@ -236,6 +239,7 @@ export default {
       }
       return "";
     },
+    // 下一章
     nextClass() {
       if (
         this.catalogList.length == 0 ||
@@ -246,6 +250,7 @@ export default {
       }
       return "";
     },
+    // 书籍地址
     bookUrl() {
       return unescape(this.$route.query.bookUrl || "");
     },
@@ -268,6 +273,7 @@ export default {
         message.error("请重新选择书籍。");
       }
     },
+    // 返回首页
     goHome() {
       this.$router.push({ path: "/" });
     },
@@ -388,14 +394,25 @@ export default {
       }
     },
 
+    // 获取 正文
     getBookContent(readUrl) {
       // 设置当前章节的基础信息
       this.selfBook =
         this.catalogList.filter((d) => d.href === readUrl)[0] || {};
+      // 修改章节名称
       this.bookTitle = this.selfBook.title || "";
+
       this.bookLoading = true;
-      this.bookContent = "";
+      // 重置内容
+      // this.bookContent = "";
+      // 隐藏目录
+      this.catalogPopover = false;
+      // 隐藏 书架
+      this.bookShelfPopover = false;
+
+      // 重置滚动条
       jump(this.$refs.top, { duration: 0 });
+
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", {
         bookUrl: this.bookUrl,

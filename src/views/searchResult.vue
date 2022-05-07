@@ -43,10 +43,10 @@
               <div class="book-info">
                 <div
                   class="book-name ellipsis"
-                  :title="book.booktitle"
+                  :title="book.bookTitle"
                   @click.stop="toBookIndex(book)"
                 >
-                  {{ book.booktitle }}
+                  {{ book.bookTitle }}
                 </div>
                 <div class="book-content-details">
                   <!-- <div class="sub">
