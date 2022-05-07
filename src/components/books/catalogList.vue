@@ -8,9 +8,9 @@
         <ul>
           <li
             class="ellipsis"
-            v-for="(item, index) in catalogList"
+            v-for="item in catalogList"
             :key="item.index"
-            :class="currPageIndex === index + 1 ? 'on' : ''"
+            :class="currHref === item.href ? 'on' : ''"
           >
             <a :title="getTitle(item.title)" @click="toChapter(item.index)">
               {{ getTitle(item.title) }}</a
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { string } from "vue-types";
+
 export default {
   name: "catalogList",
   components: {},
@@ -37,19 +39,9 @@ export default {
         return [];
       },
     },
-    bookInfo: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-  },
-  computed: {
-    selfBook() {
-      return this.bookInfo;
-    },
-    currPageIndex() {
-      return this.bookInfo.readIndex;
+    currHref: {
+      type: string,
+      default: "",
     },
   },
   methods: {

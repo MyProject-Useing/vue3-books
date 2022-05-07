@@ -75,7 +75,7 @@
         <!-- 目录 -->
         <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
           <catalog
-            :bookInfo="bookInfo"
+            :currHref="selfBook.href"
             :catalogList="catalogList"
             @changeChapter="toChapter"
           />
@@ -255,34 +255,33 @@ export default {
       return unescape(this.$route.query.bookUrl || "");
     },
   },
-  activated() {
-    // 隐藏目录
-    this.catalogPopover = false;
-    // 隐藏 书架
-    this.bookShelfPopover = false;
-
-    this.init();
+  watch: {
+    $route() {
+      //重新获取数据
+      this.init();
+    },
   },
-  deactivated() {},
   methods: {
     init() {
-      if (this.bookUrl) {
-        this.bookTitle = "";
+      if (this.bookUrl && this.$route.query.readUrl) {
         this.getCatalog();
       } else {
         message.error("请重新选择书籍。");
       }
     },
+
     // 返回首页
     goHome() {
       this.$router.push({ path: "/" });
     },
+
     // 展示目录
     showCatalog() {
       this.catalogPopover = true;
       // 隐藏 书架
       this.bookShelfPopover = false;
     },
+
     // 展示书架
     showBookShelf() {
       // 隐藏目录
@@ -290,6 +289,7 @@ export default {
       // 隐藏 书架
       this.bookShelfPopover = true;
     },
+
     // 自动记住位置
     autoShowPosition(immediate) {
       const handler = () => {
@@ -319,12 +319,14 @@ export default {
         handler();
       }
     },
+
     // 上/下一章
     toNextChapter(isNext) {
       let index = this.selfBook.index || 1;
       isNext ? index++ : index--;
       this.toChapter(index);
     },
+
     // 查询指定章节内容
     toChapter(index) {
       if (!this.catalogList || this.catalogList.length === 0) {
@@ -342,9 +344,21 @@ export default {
       let selfBooks =
         this.catalogList.filter((d) => d.index === index)[0] || {};
 
-      //强制滚回顶层
-      this.getBookContent(selfBooks.href);
+      // 加入书架 缓存
+      this.$store.commit("caches/setBooksList", {
+        bookUrl: this.bookUrl,
+        readUrl: selfBooks.href,
+      });
+      // 查询指定章节内容
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          bookUrl: this.bookUrl,
+          readUrl: selfBooks.href,
+        },
+      });
     },
+
     // 加载目录
     getCatalog() {
       const sessionKey = "catalog@" + this.bookUrl;
@@ -352,12 +366,11 @@ export default {
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
         this.catalogList = sessionData.catalogList;
-        this.bookInfo = sessionData.info;
-        // 加入书源 缓存
+        this.bookInfo = { ...sessionData.info, readUrl };
+        // 加入书架 缓存
         this.$store.commit("caches/setBooksList", {
-          ...this.bookInfo,
           bookUrl: this.bookUrl,
-          readUrl: readUrl,
+          ...this.bookInfo,
         });
         this.getBookContent(readUrl);
       } else {
@@ -369,16 +382,15 @@ export default {
           .then((result) => {
             if (result.data.data) {
               this.catalogList = result.data.data.catalogList;
-              this.bookInfo = result.data.data.info;
+              this.bookInfo = { ...result.data.data.info, readUrl };
               sessionStorage.setItem(
                 sessionKey,
                 JSON.stringify(result.data.data)
               );
-              // 加入书源 缓存
+              // 加入书架 缓存
               this.$store.commit("caches/setBooksList", {
-                ...this.bookInfo,
                 bookUrl: this.bookUrl,
-                readUrl: readUrl,
+                ...this.bookInfo,
               });
               this.getBookContent(readUrl);
             } else {
@@ -413,7 +425,7 @@ export default {
       // 重置滚动条
       jump(this.$refs.top, { duration: 0 });
 
-      // 加入书源 缓存
+      // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
         bookUrl: this.bookUrl,
         readUrl: readUrl,

@@ -31,7 +31,7 @@
                 @click="toDetail(item)"
                 class="books-name"
               >
-                {{ item.name }}
+                {{ item.bookTitle }}
               </span>
             </h3>
 
@@ -70,14 +70,22 @@ export default {
     // 直接阅读缓存的书籍
     toDetail(book) {
       debugger;
-      // 当前正在阅读的书籍
-      this.$store.commit("caches/setReadingBook", book);
+      let bookUrl = escape(book.bookUrl);
+      let readUrl = escape(book.readUrl);
+
+      // 加入书架 缓存
+      this.$store.commit("caches/setBooksList", {
+        bookUrl: bookUrl,
+        readUrl: readUrl,
+      });
       // 查询指定章节内容
-      this.$emit("changeChapter", book.readIndex || 1);
-      // this.$router.push({
-      //   path: "/readBooks",
-      //   query: { search: book.readIndex || 0 },
-      // });
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          bookUrl: bookUrl,
+          readUrl: readUrl,
+        },
+      });
     },
     deleteBook(book) {
       // 删除当前书籍

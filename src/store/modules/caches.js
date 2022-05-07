@@ -12,12 +12,10 @@ const state = () => ({
   searchHistoryList:
     JSON.parse(localStorage.getItem("searchHistoryList")) || [], // 搜索记录
   readBooksList: JSON.parse(localStorage.getItem("ReadBooksList")) || {}, //阅读过的书籍
-  readingBook: JSON.parse(sessionStorage.getItem("readingBook")) || {}, //正在阅读的书籍
 });
 const getters = {
   searchHistoryList: (state) => state.searchHistoryList,
   readBooksList: (state) => state.readBooksList,
-  readingBook: (state) => state.readingBook,
 };
 const mutations = {
   setSearchHistory(state, val) {
@@ -41,10 +39,6 @@ const mutations = {
     state.readBooksList = deleteBooks(state.readBooksList, val);
     localStorage.setItem("ReadBooksList", JSON.stringify(state.readBooksList));
   },
-  setReadingBook(state, readingBook) {
-    state.readingBook = readingBook;
-    window.sessionStorage.setItem("readingBook", JSON.stringify(readingBook));
-  },
 };
 const actions = {
   setSearchHistory({ commit }, val) {
@@ -55,9 +49,6 @@ const actions = {
   },
   deleteReadBooks({ commit }, val) {
     commit("deleteReadBooks", val);
-  },
-  setReadingBook({ commit }, val) {
-    commit("setReadingBook", val);
   },
 };
 export default { state, getters, mutations, actions };

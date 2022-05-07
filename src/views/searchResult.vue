@@ -189,12 +189,12 @@ export default {
         return;
       }
       let newestUrl = unescape(book.bookUrl + book.newestUrl);
-      // 加入书源 缓存
+      // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
         ...book,
         readUrl: newestUrl,
       });
-      debugger;
+
       this.$router.push({
         path: "/readBooks",
         query: {
@@ -209,7 +209,7 @@ export default {
       if (!book.bookUrl) {
         return;
       }
-      // 加入书源 缓存
+      // 加入书架 缓存
       this.$store.commit("caches/setBooksList", book);
 
       this.$router.push({
@@ -267,7 +267,7 @@ export default {
 
     // 加入收藏
     saveBook(book) {
-      // 加入书源 缓存
+      // 加入书架 缓存
       this.$store.commit("caches/setBooksList", book);
       message.success("收藏成功。");
     },

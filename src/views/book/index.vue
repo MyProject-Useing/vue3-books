@@ -156,7 +156,7 @@ export default {
                 sessionKey,
                 JSON.stringify(result.data.data)
               );
-              // 加入书源 缓存
+              // 加入书架 缓存
               this.$store.commit("caches/setBooksList", {
                 ...this.bookInfo,
                 bookUrl: this.bookUrl,
@@ -177,7 +177,7 @@ export default {
         return;
       }
       let readUrl = href || this.catalogList[0].href;
-      // 加入书源 缓存
+      // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
         bookUrl: this.bookUrl,
         readUrl: readUrl,
