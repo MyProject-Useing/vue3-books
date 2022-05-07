@@ -1,5 +1,12 @@
 <template>
   <div class="book-index-panle book-detail-wrap">
+    <a-page-header
+      title="返回"
+      sub-title="查看上次查询结果"
+      @back="() => $router.go(-1)"
+      :breadcrumb="{ routes }"
+    />
+
     <div class="book-information">
       <div class="book-img">
         <a-image
@@ -87,6 +94,7 @@
         </a-tabs>
       </a-spin>
     </div>
+    <a-back-top />
   </div>
 </template>
 
@@ -106,6 +114,20 @@ export default {
       catalogList: [],
       bookLoading: false,
       bookInfo: {},
+      routes: [
+        {
+          path: "/",
+          breadcrumbName: "首页",
+        },
+        {
+          path: "/searchResult",
+          breadcrumbName: "搜索结果",
+        },
+        {
+          path: "second",
+          breadcrumbName: "当前小说",
+        },
+      ],
     };
   },
   computed: {

@@ -30,7 +30,8 @@
     <div class="search-content-panle">
       <div class="books-wrapper">
         <a-spin :spinning="refreshLoading">
-          <ul class="wrapper">
+          <a-empty v-if="searchResult.length === 0" />
+          <ul v-else class="wrapper">
             <li class="book-item" v-for="(book, bi) in searchResult" :key="bi">
               <div class="cover-img">
                 <a-image
@@ -102,6 +103,7 @@ import { UserOutlined } from "@ant-design/icons-vue";
 import { getCover, dateFormat } from "@/plugins/utils.js";
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
+
 import request from "@/plugins/axios";
 // 书籍详情
 export default {
