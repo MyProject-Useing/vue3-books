@@ -1,40 +1,17 @@
 function setBooks(list, item) {
-  let isUpdate = false;
   let newList = JSON.parse(JSON.stringify(list));
-  let book = { ...item, readIndex: item.readIndex ?? 0 };
-  for (let index = 0; index < newList.length; index++) {
-    const element = newList[index];
-    if (element.bookUrl === item.bookUrl) {
-      newList[index] = book;
-      isUpdate = true;
-      break;
-    }
-  }
-
-  if (!isUpdate) {
-    newList.push(book);
-  }
+  newList[item.bookUrl] = { ...newList[item.bookUrl], ...item };
   return newList;
 }
 
 function deleteBooks(list, item) {
-  let deleteIndex = -1;
-  list.forEach((d, index) => {
-    if (d.bookUrl === item.bookUrl) {
-      deleteIndex = index;
-      return false;
-    }
-  });
-  if (deleteIndex !== -1) {
-    list.splice(deleteIndex, 1);
-  }
-
+  delete list[item.bookUrl];
   return list;
 }
 const state = () => ({
   searchHistoryList:
     JSON.parse(localStorage.getItem("searchHistoryList")) ?? [], // 搜索记录
-  readBooksList: JSON.parse(localStorage.getItem("ReadBooksList")) ?? [], //阅读过的书籍
+  readBooksList: JSON.parse(localStorage.getItem("ReadBooksList")) ?? {}, //阅读过的书籍
   readingBook: JSON.parse(sessionStorage.getItem("readingBook")) ?? {}, //正在阅读的书籍
 });
 const getters = {

@@ -111,5 +111,9 @@ ul {
 .ant-spin-nested-loading {
   height: 100%;
 }
+
+.ant-image-img {
+  cursor: pointer;
+}
 /* 移动端 */
 /* .mobile {} */

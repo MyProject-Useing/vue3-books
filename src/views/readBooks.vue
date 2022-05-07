@@ -168,6 +168,8 @@ export default {
 
       // 书架弹出框
       bookShelfPopover: false,
+
+      bookInfo: {},
     };
   },
   mounted() {
@@ -228,7 +230,7 @@ export default {
     },
     // 读取当前书籍
     readingBook() {
-      return this.$store.state.caches.readingBook || {};
+      return this.bookInfo || {};
     },
     // 窗口高度
     windowSize() {
@@ -258,6 +260,9 @@ export default {
       }
       return "";
     },
+    bookUrl() {
+      return unescape(this.$route.query.bookUrl || "");
+    },
   },
   activated() {
     // 隐藏目录
@@ -279,9 +284,9 @@ export default {
   },
   methods: {
     init() {
-      if (this.readingBook) {
+      if (this.bookUrl) {
         this.bookTitle = "";
-        this.getCatalog(this.$route.query.bookUrl);
+        this.getCatalog();
       } else {
         message.error("请重新选择书籍。");
       }
@@ -368,23 +373,41 @@ export default {
       }
     },
     // 加载目录
-    getCatalog(bookUrl) {
+    getCatalog() {
       debugger;
-      let sessionData = JSON.parse(
-        sessionStorage.getItem("catalog@" + bookUrl)
-      );
+      const sessionKey = "catalog@" + this.bookUrl;
+      const readUrl = unescape(this.$route.query.readUrl);
+      let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
+
       if (sessionData) {
         this.catalogList = sessionData.catalogList;
-        this.getContent(this.$route.query.page);
+        this.bookInfo = sessionData.info;
+        // 加入书源 缓存
+        this.$store.commit("caches/setBooksList", {
+          ...this.bookInfo,
+          bookUrl: this.bookUrl,
+          readUrl: readUrl,
+        });
       } else {
         this.bookLoading = true;
         request
-          .post(this.$store.state.api + "api/common/getCatalog", { bookUrl })
+          .post(this.$store.state.api + "api/common/getCatalog", {
+            bookUrl: this.bookUrl,
+          })
           .then((result) => {
-            debugger;
             if (result.data.data) {
-              this.catalogList = result.data.data;
-              this.getContent(this.$route.query.page);
+              this.catalogList = result.data.data.catalogList;
+              this.bookInfo = result.data.data.info;
+              sessionStorage.setItem(
+                sessionKey,
+                JSON.stringify(result.data.data)
+              );
+              // 加入书源 缓存
+              this.$store.commit("caches/setBooksList", {
+                ...this.bookInfo,
+                bookUrl: this.bookUrl,
+                readUrl: readUrl,
+              });
             } else {
               this.bookTitle = "获取章节失败";
               this.bookContent = "获取章节目录失败！\n" + result.data.msg;
@@ -396,9 +419,12 @@ export default {
             message.error("获取目录失败。");
           });
       }
+      this.getContent(readUrl);
     },
+
     // 获取文章内容块
     getContent(index) {
+      debugger;
       let readingBook = this.readingBook;
       if (index > this.catalogList.length + 1) {
         message.error(`无法找到第${index}章，请刷新页面试试。`);
@@ -422,12 +448,6 @@ export default {
 
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", {
-        ...readingBook,
-        readIndex: index,
-      });
-
-      // 保存阅读进度
-      this.$store.commit("caches/setReadingBook", {
         ...readingBook,
         readIndex: index,
       });

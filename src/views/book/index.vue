@@ -28,65 +28,78 @@
           ><cite>周推荐</cite>
         </p>
         <p>
-          <a class="blue-btn" href="javascript:">免费试读</a
+          <a class="blue-btn" href="javascript:" @click="toBookIndex()"
+            >免费阅读</a
           ><a class="blue-btn add-book" href="javascript:">加入书架</a>
         </p>
       </div>
     </div>
     <div class="content-nav-wrap">
-      <a-tabs v-model:activeKey="activeKey">
-        <a-tab-pane key="1" tab="作品信息"
-          ><div class="left-wrap fl">
-            <div class="book-info-detail">
-              <div class="book-intro">
-                <p>{{ bookInfo.intro }}</p>
+      <a-spin :spinning="bookLoading">
+        <a-tabs v-model:activeKey="activeKey">
+          <a-tab-pane key="1" tab="作品信息"
+            ><div class="left-wrap fl">
+              <div class="book-info-detail">
+                <div class="book-intro">
+                  <p>{{ bookInfo.intro }}</p>
+                </div>
+                <div class="book-state">
+                  <ul>
+                    <li class="update">
+                      <b>最新章节</b>
+                      <div class="detail">
+                        <p
+                          class="cf charpter-container"
+                          v-for="item in catalogList
+                            .concat([])
+                            .reverse()
+                            .splice(0, 10)"
+                          :key="item.href"
+                          @click="toBookIndex(item.href)"
+                        >
+                          <a
+                            class="blue charpter-link"
+                            href="javascript:"
+                            :title="item.title"
+                            >{{ item.title }}</a
+                          ><i>·</i><em class="time">0小时前</em>
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div class="book-state">
-                <ul>
-                  <li class="update">
-                    <b>最新章节</b>
-                    <div class="detail">
-                      <p
-                        class="cf charpter-container"
-                        v-for="item in catalogList
-                          .concat([])
-                          .reverse()
-                          .splice(0, 10)"
-                        :key="item.href"
-                      >
-                        <a
-                          class="blue charpter-link"
-                          href="javascript:"
-                          :title="item.title"
-                          >{{ item.title }}</a
-                        ><i>·</i><em class="time">0小时前</em>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+            </div></a-tab-pane
+          >
+          <a-tab-pane key="2" force-render class="catalog-tab">
+            <template #tab>
+              <span class="catalog-tab-title">
+                目录<span>({{ catalogList.length }}章)</span>
+              </span>
+            </template>
+
+            <div class="volume">
+              <h3>
+                <a class="subscri" href="javascript:"></a>
+                正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span
+                  class="free"
+                >
+                  免费</span
+                >
+              </h3>
+              <ul>
+                <li v-for="item in catalogList" :key="item.href">
+                  <h2 class="book_name" @click="toBookIndex(item.href)">
+                    <a href="javascript:" :title="item.title">{{
+                      item.title
+                    }}</a>
+                  </h2>
+                </li>
+              </ul>
             </div>
-          </div></a-tab-pane
-        >
-        <a-tab-pane key="2" tab="目录" force-render class="catalog-tab">
-          <h3>
-            <a class="subscri" href="javascript:"></a>
-            正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span class="free">
-              免费</span
-            >
-          </h3>
-          <ul>
-            <li
-              v-for="item in catalogList.concat([]).reverse().splice(0, 10)"
-              :key="item.href"
-            >
-              <h2 class="book_name">
-                <a href="javascript:" :title="item.title">{{ item.title }}</a>
-              </h2>
-            </li>
-          </ul>
-        </a-tab-pane>
-      </a-tabs>
+          </a-tab-pane>
+        </a-tabs>
+      </a-spin>
     </div>
   </div>
 </template>
@@ -104,10 +117,9 @@ export default {
       bookInfo: {},
     };
   },
-  // components: { DeleteOutlined },
   computed: {
-    cacheBookList() {
-      return this.$store.state.caches.readBooksList;
+    bookUrl() {
+      return unescape(this.$route.query.bookUrl || "");
     },
   },
   activated() {
@@ -119,12 +131,14 @@ export default {
   },
   methods: {
     init() {
-      this.getCatalog(this.$route.query.bookUrl);
+      if (this.bookUrl) {
+        this.getCatalog(this.bookUrl);
+      }
     },
     // 加载目录
-    getCatalog(bookUrl) {
-      let newUrl = unescape(bookUrl);
-      let sessionData = JSON.parse(sessionStorage.getItem("catalog@" + newUrl));
+    getCatalog() {
+      const sessionKey = "catalog@" + this.bookUrl;
+      let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
         this.catalogList = sessionData.catalogList;
         this.bookInfo = sessionData.info;
@@ -132,16 +146,21 @@ export default {
         this.bookLoading = true;
         request
           .post(this.$store.state.api + "api/common/getCatalog", {
-            bookUrl: newUrl,
+            bookUrl: this.bookUrl,
           })
           .then((result) => {
             if (result.data.data) {
               this.catalogList = result.data.data.catalogList;
               this.bookInfo = result.data.data.info;
               sessionStorage.setItem(
-                "catalog@" + newUrl,
+                sessionKey,
                 JSON.stringify(result.data.data)
               );
+              // 加入书源 缓存
+              this.$store.commit("caches/setBooksList", {
+                ...this.bookInfo,
+                bookUrl: this.bookUrl,
+              });
             }
             this.bookLoading = false;
           })
@@ -150,6 +169,26 @@ export default {
             message.error("获取目录失败。");
           });
       }
+    },
+
+    // 书籍详情
+    toBookIndex(href) {
+      if (!this.bookUrl) {
+        return;
+      }
+      debugger;
+      let readUrl = href ?? this.catalogList[0].href;
+
+      // 加入书源 缓存
+      this.$store.commit("caches/setBooksList", {
+        bookUrl: this.bookUrl,
+        readUrl: readUrl,
+      });
+
+      // this.$router.push({
+      //   path: "/book",
+      //   query: { bookUrl: escape(book.bookUrl) },
+      // });
     },
   },
 };
@@ -259,4 +298,61 @@ export default {
   color: #3f5a93;
 }
 /*最新章节*/
+
+/*目录*/
+
+.content-nav-wrap :deep(.ant-tabs-tab) {
+  color: #a6a6a6;
+}
+.catalog-tab-title span {
+  font-size: 14px;
+}
+
+.catalog-tab h3,
+.catalog-tab .volume h3 {
+  font: 700 18px/24px PingFangSC-Regular, HelveticaNeue-Light,
+    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+  height: 35px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #666;
+}
+
+.catalog-tab .volume ul {
+  overflow: hidden;
+  width: 1050px;
+}
+
+.catalog-tab .volume li {
+  font: 14px/40px PingFangSC-Regular, "-apple-system", Simsun;
+  float: left;
+  overflow: hidden;
+  width: 350px;
+  height: 40px;
+  padding-right: 60px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.catalog-tab .book_name {
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+  color: #262626;
+}
+
+.catalog-tab .volume li a {
+  float: left;
+  overflow: hidden;
+  max-width: 240px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #262626;
+}
+
+.catalog-tab .volume li a:hover {
+  color: #ed4259;
+}
+
+/*目录*/
 </style>

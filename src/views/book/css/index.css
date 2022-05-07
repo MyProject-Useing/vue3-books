@@ -23,6 +23,7 @@ ul {
   padding-left: calc(100vw - 100%);
   text-align: left;
   color: #262626;
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .book-information {
@@ -204,14 +205,3 @@ ul {
 }
 
 /*标签分页*/
-
-/*目录*/
-.chapter-wrap .chapter h3,
-.volume h3 {
-  font: 700 18px/24px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  overflow: hidden;
-  height: 24px;
-  padding-bottom: 11px;
-  border-bottom: 1px solid #666;
-} /*目录*/

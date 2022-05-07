@@ -165,13 +165,7 @@ export default {
       return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
     },
     isCollect(book) {
-      let filData = this.cacheBookList.filter(
-        (d) =>
-          d.author === book.author &&
-          d.name === book.name &&
-          d.origin === book.origin
-      )[0];
-      return filData ? true : false;
+      return this.cacheBookList[book.bookUrl] ? true : false;
     },
 
     getCover(coverUrl, normal) {
@@ -194,21 +188,13 @@ export default {
       if (!book.bookUrl) {
         return;
       }
-
-      let newestUrl = book.bookUrl + book.newestUrl;
-
+      let newestUrl = unescape(book.bookUrl + book.newestUrl);
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", {
         ...book,
         readUrl: newestUrl,
       });
-
-      // 当前正在阅读的书籍
-      this.$store.commit("caches/setReadingBook", {
-        ...book,
-        readUrl: newestUrl,
-      });
-
+      debugger;
       this.$router.push({
         path: "/readBooks",
         query: {
@@ -225,8 +211,6 @@ export default {
       }
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", book);
-      // 当前正在阅读的书籍
-      this.$store.commit("caches/setReadingBook", book);
 
       this.$router.push({
         path: "/book",
