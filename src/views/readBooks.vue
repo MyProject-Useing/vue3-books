@@ -215,11 +215,8 @@ export default {
   computed: {
     // 是否为移动端
     isMobileClass() {
-      return isMobile();
-    },
-    // 读取当前书籍
-    readingBook() {
-      return this.bookInfo || {};
+      let isTrue = isMobile();
+      return isTrue;
     },
     // 窗口高度
     windowSize() {
@@ -233,7 +230,7 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.readingBook.readIndex == 0
+        this.selfBook.index === 1
       ) {
         return "disabled";
       }
@@ -243,7 +240,7 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.readingBook.readIndex == this.catalogList.length - 1
+        this.selfBook.index === this.catalogList.length
       ) {
         return "disabled";
       }
@@ -262,15 +259,6 @@ export default {
     this.init();
   },
   deactivated() {},
-  watch: {
-    // 监听当前阅读的书籍
-    readingBook(val, oldVal) {
-      if (val.bookUrl !== oldVal.bookUrl) {
-        this.startSavePosition = false;
-        this.autoShowPosition();
-      }
-    },
-  },
   methods: {
     init() {
       if (this.bookUrl) {
@@ -289,6 +277,7 @@ export default {
       // 隐藏 书架
       this.bookShelfPopover = false;
     },
+    // 展示书架
     showBookShelf() {
       // 隐藏目录
       this.catalogPopover = false;
@@ -329,6 +318,26 @@ export default {
       let index = this.selfBook.index || 1;
       isNext ? index++ : index--;
       this.toChapter(index);
+    },
+    // 查询指定章节内容
+    toChapter(index) {
+      if (!this.catalogList || this.catalogList.length === 0) {
+        message.error("章节错误，请返回首页。");
+        return;
+      }
+      if (index >= this.catalogList.length + 1) {
+        message.error("已是最后一章。");
+        return;
+      } else if (index < 1) {
+        message.error("已是第一章。");
+        return;
+      }
+
+      let selfBooks =
+        this.catalogList.filter((d) => d.index === index)[0] || {};
+
+      //强制滚回顶层
+      this.getBookContent(selfBooks.href);
     },
     // 加载目录
     getCatalog() {
@@ -415,27 +424,6 @@ export default {
         );
     },
 
-    // 查询指定章节内容
-    toChapter(index) {
-      if (!this.catalogList || this.catalogList.length === 0) {
-        message.error("章节错误，请返回首页。");
-        return;
-      }
-
-      if (index >= this.catalogList.length + 1) {
-        message.error("已是最后一章。");
-        return;
-      } else if (index < 1) {
-        message.error("已是第一章。");
-        return;
-      }
-
-      let selfBooks =
-        this.catalogList.filter((d) => d.index === index)[0] || {};
-
-      //强制滚回顶层
-      this.getBookContent(selfBooks.href);
-    },
     // 内容点击事件
     eventHandler(point) {
       // 根据点击位置判断操作

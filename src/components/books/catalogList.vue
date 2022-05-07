@@ -12,7 +12,7 @@
             :key="item.index"
             :class="currPageIndex === index + 1 ? 'on' : ''"
           >
-            <a :title="getTitle(item.title)" @click="toChapter(index + 1)">
+            <a :title="getTitle(item.title)" @click="toChapter(item.index)">
               {{ getTitle(item.title) }}</a
             >
           </li>
@@ -68,7 +68,6 @@ export default {
       //   return str;
       // }
     },
-
     // 查询指定章节内容
     toChapter(index) {
       this.$emit("changeChapter", index);
