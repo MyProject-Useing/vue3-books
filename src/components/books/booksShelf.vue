@@ -69,7 +69,6 @@ export default {
   methods: {
     // 直接阅读缓存的书籍
     toDetail(book) {
-      debugger;
       // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
         bookUrl: unescape(book.bookUrl || ""),

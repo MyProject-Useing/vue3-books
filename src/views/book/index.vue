@@ -77,26 +77,12 @@
                 目录<span>({{ catalogList.length }}章)</span>
               </span>
             </template>
-
-            <div class="volume">
-              <h3>
-                <a class="subscri" href="javascript:"></a>
-                正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span
-                  class="free"
-                >
-                  免费</span
-                >
-              </h3>
-              <ul>
-                <li v-for="item in catalogList" :key="item.href">
-                  <h2 class="book_name" @click="toBookIndex(item.href)">
-                    <a href="javascript:" :title="item.title">{{
-                      item.title
-                    }}</a>
-                  </h2>
-                </li>
-              </ul>
-            </div>
+            <catalog
+              :bookUrl="bookUrl"
+              :catalogList="catalogList"
+              :useHead="false"
+              class="content"
+            />
           </a-tab-pane>
         </a-tabs>
       </a-spin>
@@ -107,8 +93,13 @@
 <script>
 import request from "@/plugins/axios";
 import { message } from "ant-design-vue";
+
+// 目录
+import catalog from "@/components/books/catalogList.vue";
+
 export default {
   name: "bookIndex",
+  components: { catalog },
   data() {
     return {
       activeKey: "1",
@@ -309,21 +300,6 @@ export default {
   font-size: 14px;
 }
 
-.catalog-tab h3,
-.catalog-tab .volume h3 {
-  font: 700 18px/24px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  overflow: hidden;
-  height: 35px;
-  padding-bottom: 11px;
-  border-bottom: 1px solid #666;
-}
-
-.catalog-tab .volume ul {
-  overflow: hidden;
-  width: 1050px;
-}
-
 .catalog-tab .volume li {
   font: 14px/40px PingFangSC-Regular, "-apple-system", Simsun;
   float: left;
@@ -339,20 +315,6 @@ export default {
   display: inline-block;
   vertical-align: middle;
   color: #262626;
-}
-
-.catalog-tab .volume li a {
-  float: left;
-  overflow: hidden;
-  max-width: 240px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  color: #262626;
-}
-
-.catalog-tab .volume li a:hover {
-  color: #ed4259;
 }
 
 /*目录*/

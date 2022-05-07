@@ -75,9 +75,9 @@
         <!-- 目录 -->
         <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
           <catalog
+            :bookUrl="bookUrl"
             :currHref="selfBook.href"
             :catalogList="catalogList"
-            @changeChapter="toChapter"
           />
         </div>
         <!-- 书架 -->
@@ -315,17 +315,12 @@ export default {
       let selfBooks =
         this.catalogList.filter((d) => d.index === index)[0] || {};
 
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
-        bookUrl: this.bookUrl || "",
-        readUrl: selfBooks.href || "",
-      });
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: this.bookUrl || "",
-          readUrl: selfBooks.href || "",
+          bookUrl: escape(this.bookUrl || ""),
+          readUrl: escape(selfBooks.href || ""),
         },
       });
     },
@@ -397,12 +392,6 @@ export default {
 
       // 重置滚动条
       jump(this.$refs.top, { duration: 0 });
-
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
-        bookUrl: this.bookUrl,
-        readUrl: readUrl,
-      });
 
       // 获取正文内容
       request

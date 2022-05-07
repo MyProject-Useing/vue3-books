@@ -1,10 +1,16 @@
 <template>
-  <div class="catalog-list">
-    <div class="catalog-tab">
+  <div class="catalog-list" :class="useHead ? 'useHead' : ''">
+    <div class="catalog-tab" v-if="useHead">
       <span class="lang act">目录</span>
     </div>
     <div class="catalog-list-wrap">
       <div class="volume-list">
+        <h3>
+          <a class="subscri" href="javascript:"></a>
+          正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span class="free">
+            免费</span
+          >
+        </h3>
         <ul>
           <li
             class="ellipsis"
@@ -12,7 +18,7 @@
             :key="item.index"
             :class="currHref === item.href ? 'on' : ''"
           >
-            <a :title="getTitle(item.title)" @click="toChapter(item.index)">
+            <a :title="getTitle(item.title)" @click="toChapter(item)">
               {{ getTitle(item.title) }}</a
             >
           </li>
@@ -23,15 +29,11 @@
 </template>
 
 <script>
-import { string } from "vue-types";
-
 export default {
   name: "catalogList",
-  components: {},
   data() {
     return {};
   },
-  activated() {},
   props: {
     catalogList: {
       type: Array,
@@ -40,7 +42,15 @@ export default {
       },
     },
     currHref: {
-      type: string,
+      type: String,
+      default: "",
+    },
+    useHead: {
+      type: Boolean,
+      default: true,
+    },
+    bookUrl: {
+      type: String,
       default: "",
     },
   },
@@ -61,15 +71,22 @@ export default {
       // }
     },
     // 查询指定章节内容
-    toChapter(index) {
-      this.$emit("changeChapter", index);
+    toChapter(item) {
+      // 查询指定章节内容
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          bookUrl: escape(this.bookUrl || ""),
+          readUrl: escape(item.href || ""),
+        },
+      });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.catalog-list {
+.catalog-list.useHead {
   padding: 40px 0 40px 0px;
 }
 
@@ -92,38 +109,51 @@ export default {
   font-weight: 500;
 }
 
+.catalog-list-wrap {
+  position: relative;
+  z-index: 1;
+  min-height: 235px;
+}
+
+.useHead .catalog-list-wrap {
+  overflow-y: auto;
+  height: calc(100vh - 250px);
+  overflow-x: hidden;
+}
+
+.useHead .catalog-list-wrap .volume-list li {
+  width: 50%;
+}
+
+.useHead .catalog-list-wrap .volume-list li a {
+  font-size: 16px;
+}
+
 .catalog-list-wrap .volume-list {
   display: block;
   clear: both;
-  margin-right: -4px;
-  margin-bottom: 20px;
 }
 .catalog-list-wrap .volume-list ul {
-  overflow: hidden;
   padding-left: 24px;
 }
 .catalog-list-wrap .volume-list li {
   font: 16px/40px PingFangSC-Regular, HelveticaNeue-Light,
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
   float: left;
-  width: 378px;
+  width: 33%;
+  min-width: 120px;
   border-top: 1px solid #f2f2f2;
 }
-li,
-ol,
-ul {
-  list-style: none outside none;
-}
-.catalog-list-wrap {
-  overflow: auto;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 1;
-  min-height: 235px;
-  max-height: 450px;
-}
+
 .catalog-list-wrap .volume-list li a {
   cursor: pointer;
+  float: left;
+  overflow: hidden;
+  max-width: calc(100% - 15px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #262626;
 }
 .catalog-list-wrap .volume-list li.on a {
   color: #ed4259;
@@ -131,5 +161,17 @@ ul {
 
 .catalog-list-wrap .volume-list li a:hover {
   color: #ed4259;
+}
+
+.catalog-list-wrap .volume-list h3 {
+  font: 700 18px/40px PingFangSC-Regular, HelveticaNeue-Light,
+    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
+  display: block;
+  width: calc(100% - 24px);
+  height: 41px;
+  margin-left: 24px;
+  padding-bottom: 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e5e5;
 }
 </style>
