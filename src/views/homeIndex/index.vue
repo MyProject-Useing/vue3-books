@@ -81,13 +81,12 @@ export default {
     },
     // 直接阅读缓存的书籍
     toDetail(book) {
-      debugger;
       // 当前正在阅读的书籍
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(book.bookUrl),
-          readUrl: escape(book.readUrl),
+          bookUrl: escape(book.bookUrl || ""),
+          readUrl: escape(book.readUrl || ""),
         },
       });
     },

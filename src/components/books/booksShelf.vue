@@ -70,20 +70,17 @@ export default {
     // 直接阅读缓存的书籍
     toDetail(book) {
       debugger;
-      let bookUrl = escape(book.bookUrl);
-      let readUrl = escape(book.readUrl);
-
       // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
-        bookUrl: bookUrl,
-        readUrl: readUrl,
+        bookUrl: unescape(book.bookUrl || ""),
+        readUrl: unescape(book.readUrl || ""),
       });
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: bookUrl,
-          readUrl: readUrl,
+          bookUrl: escape(book.bookUrl || ""),
+          readUrl: escape(book.readUrl || ""),
         },
       });
     },

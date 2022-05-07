@@ -256,14 +256,15 @@ export default {
     },
   },
   watch: {
-    $route() {
-      //重新获取数据
-      this.init();
+    $route(to) {
+      if (to.name === "readBooks") {
+        this.init();
+      }
     },
   },
   methods: {
     init() {
-      if (this.bookUrl && this.$route.query.readUrl) {
+      if (this.bookUrl) {
         this.getCatalog();
       } else {
         message.error("请重新选择书籍。");
@@ -288,36 +289,6 @@ export default {
       this.catalogPopover = false;
       // 隐藏 书架
       this.bookShelfPopover = true;
-    },
-
-    // 自动记住位置
-    autoShowPosition(immediate) {
-      const handler = () => {
-        setTimeout(() => {
-          this.startSavePosition = true;
-        }, 2000);
-        if (this.error) {
-          return;
-        }
-        const lastPosition =
-          window.localStorage &&
-          window.localStorage.getItem(
-            "bookChapterProgress@" +
-              this.readingBook.name +
-              "_" +
-              this.readingBook.author
-          );
-        if (+lastPosition) {
-          this.$nextTick(() => {
-            this.showPosition(+lastPosition, () => {
-              this.startSavePosition = true;
-            });
-          });
-        }
-      };
-      if (immediate) {
-        handler();
-      }
     },
 
     // 上/下一章
@@ -346,15 +317,15 @@ export default {
 
       // 加入书架 缓存
       this.$store.commit("caches/setBooksList", {
-        bookUrl: this.bookUrl,
-        readUrl: selfBooks.href,
+        bookUrl: this.bookUrl || "",
+        readUrl: selfBooks.href || "",
       });
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: this.bookUrl,
-          readUrl: selfBooks.href,
+          bookUrl: this.bookUrl || "",
+          readUrl: selfBooks.href || "",
         },
       });
     },
@@ -362,10 +333,11 @@ export default {
     // 加载目录
     getCatalog() {
       const sessionKey = "catalog@" + this.bookUrl;
-      const readUrl = unescape(this.$route.query.readUrl);
+      let readUrl = unescape(this.$route.query.readUrl);
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
         this.catalogList = sessionData.catalogList;
+        readUrl = readUrl ? readUrl : this.catalogList[0].href;
         this.bookInfo = { ...sessionData.info, readUrl };
         // 加入书架 缓存
         this.$store.commit("caches/setBooksList", {
@@ -382,6 +354,7 @@ export default {
           .then((result) => {
             if (result.data.data) {
               this.catalogList = result.data.data.catalogList;
+              readUrl = readUrl ? readUrl : this.catalogList[0].href;
               this.bookInfo = { ...result.data.data.info, readUrl };
               sessionStorage.setItem(
                 sessionKey,
