@@ -10,9 +10,9 @@ function deleteBooks(list, item) {
 }
 const state = () => ({
   searchHistoryList:
-    JSON.parse(localStorage.getItem("searchHistoryList")) ?? [], // 搜索记录
-  readBooksList: JSON.parse(localStorage.getItem("ReadBooksList")) ?? {}, //阅读过的书籍
-  readingBook: JSON.parse(sessionStorage.getItem("readingBook")) ?? {}, //正在阅读的书籍
+    JSON.parse(localStorage.getItem("searchHistoryList")) || [], // 搜索记录
+  readBooksList: JSON.parse(localStorage.getItem("ReadBooksList")) || {}, //阅读过的书籍
+  readingBook: JSON.parse(sessionStorage.getItem("readingBook")) || {}, //正在阅读的书籍
 });
 const getters = {
   searchHistoryList: (state) => state.searchHistoryList,

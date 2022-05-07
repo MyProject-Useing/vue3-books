@@ -130,7 +130,7 @@ export default {
     if (this.keywords === this.$route.query.keywords) {
       return false;
     }
-    this.keywords = this.$route.query.keywords ?? "";
+    this.keywords = this.$route.query.keywords;
     if (this.keywords) {
       this.searchBook();
     }

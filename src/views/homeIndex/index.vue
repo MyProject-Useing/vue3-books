@@ -73,7 +73,7 @@ export default {
     },
   },
   mounted() {
-    this.keywords = this.$route.query.keywords ?? "";
+    this.keywords = this.$route.query.keywords;
   },
   methods: {
     filterOption(input, option) {

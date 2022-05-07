@@ -36,7 +36,7 @@
             </h3>
 
             <div class="img-content ellipsis">
-              阅读至第 {{ (item.readIndex ?? 0) + 1 }} 章
+              阅读至第 {{ (item.readIndex || 0) + 1 }} 章
             </div>
 
             <div class="img-bottom ellipsis">

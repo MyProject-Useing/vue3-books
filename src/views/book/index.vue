@@ -176,19 +176,20 @@ export default {
       if (!this.bookUrl) {
         return;
       }
-      debugger;
-      let readUrl = href ?? this.catalogList[0].href;
-
+      let readUrl = href || this.catalogList[0].href;
       // 加入书源 缓存
       this.$store.commit("caches/setBooksList", {
         bookUrl: this.bookUrl,
         readUrl: readUrl,
       });
 
-      // this.$router.push({
-      //   path: "/book",
-      //   query: { bookUrl: escape(book.bookUrl) },
-      // });
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          bookUrl: escape(this.bookUrl),
+          readUrl: escape(readUrl),
+        },
+      });
     },
   },
 };
