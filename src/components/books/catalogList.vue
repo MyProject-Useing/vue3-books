@@ -141,7 +141,7 @@ export default {
   float: left;
   width: 33%;
   min-width: 120px;
-  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
 }
 
 .catalog-list-wrap .volume-list li a {
@@ -167,9 +167,10 @@ export default {
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
   display: block;
   width: calc(100% - 24px);
-  height: 41px;
+  height: 47px;
   margin-left: 24px;
-  padding-bottom: 6px;
   border-bottom: 1px solid #e5e5e5;
+  margin: 0px;
+  margin-left: 24px;
 }
 </style>

@@ -470,5 +470,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/assets/css/readBooks.css");
+@import url("@/views/book/css/readBooks.css");
 </style>

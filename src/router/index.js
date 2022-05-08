@@ -14,7 +14,7 @@ const routes = [
     meta: {
       keepAlive: false,
     },
-    component: () => import("@/views/readBooks.vue"),
+    component: () => import("@/views/book/modules/readBooks.vue"),
   },
 
   {
@@ -32,7 +32,7 @@ const routes = [
     meta: {
       keepAlive: true,
     },
-    component: () => import("@/views/searchResult.vue"),
+    component: () => import("@/views/homeIndex/modules/searchResult.vue"),
   },
 ];
 

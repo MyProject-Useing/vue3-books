@@ -78,9 +78,6 @@
   right: 0;
   padding-right: 24px;
 }
-.result-content .search-filter {
-  padding-left: 154px;
-}
 
 .result-content .filter-txt {
   color: #222;
@@ -107,12 +104,15 @@
   margin-top: 1px;
 }
 
+.content-panle {
+  padding: 0px 163px;
+  height: calc(100vh - 65px);
+}
+
 .result-content .search-content-panle {
-  height: calc(100% - 114px);
+  height: calc(100vh - 114px);
   min-height: 200px;
-  overflow-y: auto;
   position: relative;
-  padding-left: 154px;
   margin-top: 18px;
 }
 
@@ -126,9 +126,10 @@
 
 .result-content .books-wrapper .book-item {
   display: flex;
-  width: 339px;
   float: left;
   margin-bottom: 37px;
+  width: 25%;
+  min-width: 200px;
 }
 
 .result-content .books-wrapper {
@@ -211,6 +212,10 @@
   height: 100%;
   width: 100%;
   border-radius: 0px;
+}
+
+.result-content .logo-bg{
+  cursor: pointer;
 }
 
 /*移动端*/
