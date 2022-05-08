@@ -146,7 +146,8 @@ export default {
   computed: {
     // 是否为移动端
     isMobileClass() {
-      return isMobile();
+      let isTrue = isMobile();
+      return isTrue;
     },
     cacheBookList() {
       return this.$store.state.caches.readBooksList;

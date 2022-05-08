@@ -1,13 +1,11 @@
 <template>
-  <div class="book-index-panle book-detail-wrap">
+  <div
+    class="book-index-panle book-detail-wrap"
+    :class="isMobileClass ? 'mobile' : ''"
+  >
     <div class="book-index-bj"></div>
     <div class="book-index-mian">
-      <a-page-header
-        title="返回"
-        sub-title="查看上次查询结果"
-        @back="() => $router.go(-1)"
-        :breadcrumb="{ routes }"
-      />
+      <a-page-header :breadcrumb="{ routes }" />
       <div class="book-index-content">
         <div class="border-shadow">
           <span></span>
@@ -23,25 +21,28 @@
             </a-image>
           </div>
           <div class="book-info">
-            <h1>
-              <em>{{ bookInfo.bookTitle }}</em>
-              <span
-                ><span>{{ bookInfo.author }}</span> 著</span
-              >
-            </h1>
-            <p class="tag">
-              <span class="blue">连载</span>
-              <span class="blue">免费</span>
-            </p>
-            <p class="intro">小说简介</p>
-            <p>
-              <em><span class="szWntGoi">0</span></em
-              ><cite>万字</cite><i>|</i> <em><span class="szWntGoi">0</span></em
-              ><cite>总推荐</cite><i>|</i
-              ><em><span class="szWntGoi">0</span></em
-              ><cite>周推荐</cite>
-            </p>
-            <p>
+            <div class="book-info-details">
+              <h1>
+                <em>{{ bookInfo.bookTitle }}</em>
+                <span
+                  ><span>{{ bookInfo.author }}</span> 著</span
+                >
+              </h1>
+              <p class="tag">
+                <span class="blue">连载</span>
+                <span class="blue">免费</span>
+              </p>
+              <p class="intro">小说简介</p>
+              <p>
+                <em><span class="szWntGoi">0</span></em
+                ><cite>万字</cite><i>|</i>
+                <em><span class="szWntGoi">0</span></em
+                ><cite>总推荐</cite><i>|</i
+                ><em><span class="szWntGoi">0</span></em
+                ><cite>周推荐</cite>
+              </p>
+            </div>
+            <p class="book-info-btn">
               <a class="blue-btn" href="javascript:" @click="toBookIndex()"
                 >免费阅读</a
               >
@@ -111,7 +112,7 @@
 <script>
 import request from "@/plugins/axios";
 import { message } from "ant-design-vue";
-
+import { isMobile } from "@/plugins/utils";
 // 目录
 import catalog from "@/components/books/catalogList.vue";
 
@@ -124,7 +125,15 @@ export default {
       catalogList: [],
       bookLoading: false,
       bookInfo: {},
-      routes: [
+    };
+  },
+  computed: {
+    bookUrl() {
+      return unescape(this.$route.query.bookUrl || "");
+    },
+    routes() {
+      let bookTitle = this.bookInfo.bookTitle;
+      return [
         {
           path: "/",
           breadcrumbName: "首页",
@@ -135,14 +144,14 @@ export default {
         },
         {
           path: "second",
-          breadcrumbName: "当前小说",
+          breadcrumbName: bookTitle,
         },
-      ],
-    };
-  },
-  computed: {
-    bookUrl() {
-      return unescape(this.$route.query.bookUrl || "");
+      ];
+    },
+    // 是否为移动端
+    isMobileClass() {
+      let isTrue = isMobile();
+      return isTrue;
     },
   },
   activated() {
@@ -215,28 +224,23 @@ export default {
 <style scoped>
 @import url("./css/index.css");
 
-.ant-page-header {
+.book-index-mian .ant-page-header {
   height: 241px;
 }
 
-.book-information .book-img img {
-  width: 100%;
+.book-information .book-img :deep(.ant-image) {
+  width: 144px;
   height: 100%;
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -moz-transition: -moz-transform 0.3s ease-out;
-  -ms-transition: -ms-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  color: #fcfcfa;
+}
+
+.book-information .book-img :deep(.ant-image) .ant-image-img {
+  height: 100%;
 }
 
 /*最新章节*/
 .content-nav-wrap :deep(.left-wrap) {
   width: 100%;
   border-bottom: 1px solid #e6e6e6;
-}
-
-.content-nav-wrap :deep(.left-wrap) .book-info-detail {
-  width: calc(100% - 30%);
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-intro p {
@@ -264,7 +268,7 @@ export default {
 }
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail {
   float: left;
-  width: 542px;
+  width: calc(100% - 118px);
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
 }
@@ -276,9 +280,11 @@ export default {
   .detail
   .charpter-container {
   display: inline-block;
-  width: 260px;
+  width: 33%;
   height: 22px;
   margin: 0px;
+  max-width: 300px;
+  min-width: 260px;
 }
 
 .content-nav-wrap
@@ -348,4 +354,11 @@ export default {
 }
 
 /*目录*/
+
+/*移动端*/
+.mobile .book-index-mian .ant-page-header {
+  height: 105px;
+}
+
+/*移动端*/
 </style>

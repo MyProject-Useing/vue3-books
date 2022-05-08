@@ -110,7 +110,8 @@ export default {
     },
     // 是否为移动端
     isMobileClass() {
-      return isMobile();
+      let isTrue = isMobile();
+      return isTrue;
     },
 
     contentList() {

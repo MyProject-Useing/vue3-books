@@ -39,14 +39,15 @@ ul {
   color: #262626;
 }
 .book-index-mian {
-  width: 990px;
   margin: 0 auto;
   margin-top: -338px;
+  width: 85%;
+  max-width: 990px;
 }
 .border-shadow {
   position: relative;
   z-index: 10;
-  width: 990px;
+  width: 100%;
   height: 98px;
   margin: 0 auto;
   border: 2px solid #e9e9e9;
@@ -56,22 +57,23 @@ ul {
 .book-information {
   position: relative;
   z-index: 2;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   background: #fff;
   height: 234px;
   margin-top: -98px;
+  padding: 20px 0px 0px 20px;
 }
 
 .book-information .book-img {
   float: left;
-  width: 144px;
-  height: 192px;
-  margin: 20px 20px 0;
+  margin-right: 20px;
+  height: 100%;
 }
 
 .book-information .book-info {
   float: left;
-  margin-top: 20px;
+  width: calc(100% - 184px);
+  height: 100%;
 }
 
 .book-information .book-img a {
@@ -106,10 +108,6 @@ ul {
   height: 24px;
   margin-bottom: 14px;
   color: #666;
-}
-
-.book-information .book-info .tag + p + p + p {
-  font-size: 0;
 }
 
 .book-information .book-info .tag a.blue,
@@ -158,6 +156,10 @@ ul {
   margin-left: 3px;
 }
 
+.book-information .book-info .book-info-details {
+  height: calc(100% - 37px);
+}
+
 .book-information .book-info .tag + p + p i {
   font: 18px/22px PingFangSC-Regular, "-apple-system", Simsun;
   margin: 0 10px;
@@ -179,7 +181,7 @@ ul {
   border-color: #3f5a93;
 }
 
-.book-information .book-info .tag + p + p + p a {
+.book-information .book-info a.blue-btn {
   font: 14px/34px PingFangSC-Regular, "-apple-system", Simsun;
   display: inline-block;
   width: 102px;
@@ -190,6 +192,7 @@ ul {
   border-width: 1px;
   border-style: solid;
 }
+
 
 /*标签分页*/
 
@@ -232,3 +235,14 @@ ul {
 }
 
 /*标签分页*/
+
+/*移动端*/
+.mobile .catalog-list-wrap .volume-list li {
+  width: 50%;
+}
+
+.mobile .book-information .book-info .tag + p + p {
+  display: none;
+}
+
+/*移动端*/
