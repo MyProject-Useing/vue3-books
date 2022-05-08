@@ -331,14 +331,7 @@ export default {
       let readUrl = unescape(this.$route.query.readUrl);
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
-        this.catalogList = sessionData.catalogList;
-        readUrl = readUrl ? readUrl : this.catalogList[0].href;
-        this.bookInfo = { ...sessionData.info, readUrl };
-        // 加入书架 缓存
-        this.$store.commit("caches/setBooksList", {
-          bookUrl: this.bookUrl,
-          ...this.bookInfo,
-        });
+        this.setBookCache(sessionData);
         this.getBookContent(readUrl);
       } else {
         this.bookLoading = true;
@@ -348,18 +341,7 @@ export default {
           })
           .then((result) => {
             if (result.data.data) {
-              this.catalogList = result.data.data.catalogList;
-              readUrl = readUrl ? readUrl : this.catalogList[0].href;
-              this.bookInfo = { ...result.data.data.info, readUrl };
-              sessionStorage.setItem(
-                sessionKey,
-                JSON.stringify(result.data.data)
-              );
-              // 加入书架 缓存
-              this.$store.commit("caches/setBooksList", {
-                bookUrl: this.bookUrl,
-                ...this.bookInfo,
-              });
+              this.setBookCache(result.data);
               this.getBookContent(readUrl);
             } else {
               this.bookTitle = "获取章节失败";
@@ -372,6 +354,28 @@ export default {
             message.error("获取目录失败。");
           });
       }
+    },
+
+    setBookCache(data) {
+      const readUrl = this.$route.query.readUrl
+        ? unescape(this.$route.query.readUrl)
+        : this.catalogList[0].href;
+
+      this.catalogList = data.catalogList;
+      let readIndex = 1;
+      this.catalogList.some((item, index) => {
+        if (item.href === readUrl) {
+          readIndex = index;
+          return true;
+        }
+      });
+      this.bookInfo = { ...data.info, readUrl: readUrl, readIndex: readIndex };
+      // 加入书架 缓存
+      this.$store.commit("caches/setBooksList", {
+        bookUrl: this.bookUrl,
+        ...this.bookInfo,
+      });
+      sessionStorage.setItem("catalog@" + this.bookUrl, JSON.stringify(data));
     },
 
     // 获取 正文

@@ -1,7 +1,10 @@
 function setBooks(list, item) {
   let newList = JSON.parse(JSON.stringify(list));
 
-  if (!newList[item.bookUrl] && Object.keys(newList).length >= 10) {
+  if (
+    !item.bookUrl ||
+    (!newList[item.bookUrl] && Object.keys(newList).length >= 10)
+  ) {
     return newList;
   }
 

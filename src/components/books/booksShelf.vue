@@ -8,8 +8,6 @@
         <li
           v-for="(item, index) in cacheBookList"
           :key="index"
-          @mouseover="item.isActive = true"
-          @mouseout="item.isActive = false"
           class="books-item"
         >
           <a-image
@@ -19,12 +17,6 @@
           >
           </a-image>
           <div class="img-info">
-            <span
-              v-show="item.isActive"
-              class="delete-books"
-              @click.stop="deleteBook(item)"
-            >
-            </span>
             <h3 class="books-name-p ellipsis">
               <span
                 :title="item.bookTitle"
@@ -36,14 +28,14 @@
             </h3>
 
             <div class="img-content ellipsis">
-              阅读至第 {{ (item.readIndex || 0) + 1 }} 章
+              阅读至第 {{ item.readIndex || 1 }} 章
             </div>
 
             <div class="img-bottom ellipsis">
               <div class="book-author ellipsis" :title="item.author">
                 <UserOutlined /> {{ item.author || "" }}
               </div>
-              <DeleteOutlined title="删除" />
+              <DeleteOutlined title="删除" @click="deleteBook(item)" />
             </div>
           </div>
         </li>
@@ -69,11 +61,6 @@ export default {
   methods: {
     // 直接阅读缓存的书籍
     toDetail(book) {
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
-        bookUrl: unescape(book.bookUrl || ""),
-        readUrl: unescape(book.readUrl || ""),
-      });
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",

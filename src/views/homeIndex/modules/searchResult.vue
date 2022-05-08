@@ -204,12 +204,6 @@ export default {
         return;
       }
       let newestUrl = unescape(book.bookUrl + book.newestUrl);
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
-        ...book,
-        readUrl: newestUrl,
-      });
-
       this.$router.push({
         path: "/readBooks",
         query: {

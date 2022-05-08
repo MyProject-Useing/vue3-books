@@ -200,12 +200,6 @@ export default {
         return;
       }
       let readUrl = href || this.catalogList[0].href;
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
-        bookUrl: unescape(this.bookUrl),
-        readUrl: unescape(readUrl || ""),
-      });
-
       this.$router.push({
         path: "/readBooks",
         query: {
