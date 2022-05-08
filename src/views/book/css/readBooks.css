@@ -114,6 +114,7 @@ a.disabled {
 /*移动端*/
 .reader-content.mobile .main-read-container {
   width: 100%;
+  max-width: 100%;
 }
 
 .reader-content.mobile .left-bar-list {

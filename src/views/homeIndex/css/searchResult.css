@@ -26,10 +26,10 @@
   height: 40px;
   min-height: 40px;
   max-width: 700px;
-  width: 88%;
   position: relative;
   margin: 15px 0px 10px 0px;
   display: flex;
+  width: calc(100% - 15px);
 }
 
 .result-content .search-btn-group .search-btn {
@@ -214,12 +214,11 @@
   border-radius: 0px;
 }
 
-.result-content .logo-bg{
+.result-content .logo-bg {
   cursor: pointer;
 }
 
 /*移动端*/
-
 .result-content.mobile .logo-bg {
   display: none;
 }
@@ -236,3 +235,13 @@
   padding-left: 18px;
   padding-right: 18px;
 }
+
+.result-content.mobile .content-panle {
+  padding: 0px;
+}
+
+.result-content.mobile .books-wrapper .book-item {
+  width: 88%;
+}
+
+/*移动端*/
