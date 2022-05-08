@@ -10,7 +10,7 @@ import "@/assets/css/base.css";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
 
-import "lib-flexible";
+// import "lib-flexible";
 // import { isMobile } from "@/plugins/utils";
 // const isTrue = isMobile();
 // if (isTrue === true) {

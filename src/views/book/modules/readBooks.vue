@@ -76,7 +76,7 @@
         <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
           <catalog
             :bookUrl="bookUrl"
-            :currHref="selfBook.href"
+            :currHref="selfCatalog.href"
             :catalogList="catalogList"
           />
         </div>
@@ -162,7 +162,7 @@ export default {
 
       bookInfo: {},
 
-      selfBook: {},
+      selfCatalog: {},
     };
   },
   mounted() {
@@ -225,15 +225,18 @@ export default {
 
     // 目录是否禁用
     catalogClass() {
-      return this.catalogList.length == 0 || this.bookLoading ? "disabled" : "";
+      return this.bookLoading ||
+        (this.catalogList && this.catalogList.length == 0)
+        ? "disabled"
+        : "";
     },
 
     // 上一章
     firstClass() {
       if (
-        this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.selfBook.index === 1
+        this.selfCatalog.index === 1 ||
+        (this.catalogList && this.catalogList.length == 0)
       ) {
         return "disabled";
       }
@@ -244,7 +247,7 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.selfBook.index === this.catalogList.length
+        this.selfCatalog.index === this.catalogList.length
       ) {
         return "disabled";
       }
@@ -293,7 +296,7 @@ export default {
 
     // 上/下一章
     toNextChapter(isNext) {
-      let index = this.selfBook.index || 1;
+      let index = this.selfCatalog.index || 1;
       isNext ? index++ : index--;
       this.toChapter(index);
     },
@@ -328,11 +331,9 @@ export default {
     // 加载目录
     getCatalog() {
       const sessionKey = "catalog@" + this.bookUrl;
-      let readUrl = unescape(this.$route.query.readUrl);
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
         this.setBookCache(sessionData);
-        this.getBookContent(readUrl);
       } else {
         this.bookLoading = true;
         request
@@ -341,8 +342,7 @@ export default {
           })
           .then((result) => {
             if (result.data.data) {
-              this.setBookCache(result.data);
-              this.getBookContent(readUrl);
+              this.setBookCache(result.data.data);
             } else {
               this.bookTitle = "获取章节失败";
               this.bookContent = "获取章节目录失败！\n" + result.data.msg;
@@ -357,34 +357,39 @@ export default {
     },
 
     setBookCache(data) {
+      this.catalogList = data.catalogList || [];
+      let readIndex = 1;
+
       const readUrl = this.$route.query.readUrl
         ? unescape(this.$route.query.readUrl)
-        : this.catalogList[0].href;
+        : unescape(this.catalogList[0].href);
 
-      this.catalogList = data.catalogList;
-      let readIndex = 1;
       this.catalogList.some((item, index) => {
         if (item.href === readUrl) {
           readIndex = index;
           return true;
         }
       });
-      this.bookInfo = { ...data.info, readUrl: readUrl, readIndex: readIndex };
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", {
+      this.bookInfo = {
+        readUrl: readUrl,
+        readIndex: readIndex,
         bookUrl: this.bookUrl,
-        ...this.bookInfo,
-      });
+        ...data.info,
+      };
+      // 加入书架 缓存
+      this.$store.commit("caches/setBooksList", this.bookInfo);
       sessionStorage.setItem("catalog@" + this.bookUrl, JSON.stringify(data));
+
+      this.getBookContent(readUrl);
     },
 
     // 获取 正文
     getBookContent(readUrl) {
       // 设置当前章节的基础信息
-      this.selfBook =
+      this.selfCatalog =
         this.catalogList.filter((d) => d.href === readUrl)[0] || {};
       // 修改章节名称
-      this.bookTitle = this.selfBook.title || "";
+      this.bookTitle = this.selfCatalog.title || "";
 
       this.bookLoading = true;
       // 重置内容

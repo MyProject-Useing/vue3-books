@@ -1,5 +1,6 @@
 <template>
   <div class="read-main-wrap" :class="isMobileClass ? 'mobile' : ''">
+    <a-page-header @back="() => $router.go(-1)" :breadcrumb="{ routes }" />
     <div class="text-wrap">
       <div class="main-text-wrap">
         <div class="text-head">
@@ -10,7 +11,7 @@
             <div class="info fl">
               <a>
                 <database-outlined title="书名" />
-                <span> {{ selfBook.name }}</span></a
+                <span> {{ selfBook.bookTitle }}</span></a
               >
               <a
                 ><solution-outlined title="作者" />
@@ -86,13 +87,32 @@ export default {
     },
   },
   computed: {
+    selfBook() {
+      return this.bookInfo;
+    },
+    routes() {
+      let bookUrl = this.selfBook.bookUrl;
+      let bookTitle = this.selfBook.bookTitle;
+      return [
+        {
+          path: "/",
+          breadcrumbName: "首页",
+        },
+        {
+          path: "/book?bookUrl=" + bookUrl,
+          breadcrumbName: bookTitle,
+        },
+        {
+          path: "second",
+          breadcrumbName: this.getTitle,
+        },
+      ];
+    },
     // 是否为移动端
     isMobileClass() {
       return isMobile();
     },
-    selfBook() {
-      return this.bookInfo;
-    },
+
     contentList() {
       return this.content.replace(/&nbsp;/g, "").split("\n");
     },
