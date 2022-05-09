@@ -24,3 +24,26 @@ export function format(date, fmt) {
   }
   return fmt;
 }
+
+export function dateFormat(t) {
+  let time = new Date().getTime();
+  let int = parseInt((time - t) / 1000);
+  let str = "";
+
+  if (int <= 30) {
+    str = "刚刚";
+  } else if (int < 60) {
+    str = int + "秒前";
+  } else if (int < 3600) {
+    str = parseInt(int / 60) + "分钟前";
+  } else if (int < 86400) {
+    str = parseInt(int / 3600) + "小时前";
+  } else if (int < 2592000) {
+    str = parseInt(int / 86400) + "天前";
+  } else if (int < 31536000) {
+    str = parseInt(int / 2592000) + "月前";
+  } else {
+    str = parseInt(int / 31536000) + "年前";
+  }
+  return str;
+}

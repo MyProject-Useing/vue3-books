@@ -83,7 +83,3 @@ function hanldError(error) {
 }
 
 export default request;
-
-// export default (app) => {
-//   app.use(axios);
-// };
