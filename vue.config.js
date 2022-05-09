@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 const CompressionPlugin = require("compression-webpack-plugin");
 
-const setting = require("public/setting");
+// const setting = require("public/setting");
 
 module.exports = defineConfig({
   publicPath: "./", // 设置打包路径
@@ -9,7 +9,7 @@ module.exports = defineConfig({
   // 修改或新增html-webpack-plugin的值，在index.html里面能读取htmlWebpackPlugin.options.title
   chainWebpack: (config) => {
     config.plugin("html").tap((args) => {
-      args[0].title = setting.title;
+      args[0].title = "蛋花-综合网站";
       return args;
     });
   },
