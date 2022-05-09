@@ -1,6 +1,6 @@
 export default {
   state: {
-    api: window.location.origin + ":3000/",
+    api: window.location.protocol + "//" + window.location.hostname + ":3000/",
     windowSize: {
       width: window.innerWidth,
       height: window.innerHeight,
