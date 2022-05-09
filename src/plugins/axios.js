@@ -75,8 +75,9 @@ request.post = async (url, data, options) => {
 };
 
 function hanldError(error) {
+  let msg = "接口连接异常。";
   if (error.name === "SyntaxError") {
-    message.error("接口连接异常。");
+    message.error(msg);
   }
 }
 
