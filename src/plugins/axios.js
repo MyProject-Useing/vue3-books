@@ -12,7 +12,6 @@ const service = Axios.create({
 service.interceptors.request.use(
   (config) => config,
   (error) => {
-    debugger;
     return Promise.reject(error);
   }
 );

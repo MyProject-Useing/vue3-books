@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
-
-import config from "./vuex.js";
+const setting = require("../../public/setting");
 
 const files = require.context("./modules", false, /\.js$/);
 const modules = {};
@@ -13,11 +12,12 @@ Object.keys(modules).forEach((key) => {
 });
 
 export default createStore({
-  // state: {},
+  state: {
+    api: setting.apiAddress + ":" + setting.apiPort + "/",
+  },
   // getters: {},
   // mutations: {},
   // actions: {},
   // modules,
   modules,
-  ...config,
 });
