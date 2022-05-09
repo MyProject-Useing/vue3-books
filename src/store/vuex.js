@@ -1,12 +1,10 @@
 export default {
   state: {
-    // api: "/reader3",
-    api: "http://localhost:3000/",
+    api: window.location.origin + ":3000/",
     windowSize: {
       width: window.innerWidth,
       height: window.innerHeight,
     },
-    token: "danhua:1f9429a21f824828694e5f138f0aad5e",
   },
   mutations: {
     // setSearchConfig(state, searchConfig) {

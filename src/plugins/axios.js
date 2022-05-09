@@ -2,7 +2,7 @@
 
 import Axios from "axios";
 import store from "@/store";
-
+import { message } from "ant-design-vue";
 const service = Axios.create({
   baseURL: store.state.api,
   // withCredentials: true,
@@ -12,6 +12,7 @@ const service = Axios.create({
 service.interceptors.request.use(
   (config) => config,
   (error) => {
+    debugger;
     return Promise.reject(error);
   }
 );
@@ -21,6 +22,8 @@ service.interceptors.response.use(
     return response;
   },
   (error) => {
+    // 统一处理错误信息
+    hanldError(error);
     return Promise.reject(error);
   }
 );
@@ -70,6 +73,12 @@ request.post = async (url, data, options) => {
     options,
   });
 };
+
+function hanldError(error) {
+  if (error.name === "SyntaxError") {
+    message.error("接口连接异常。");
+  }
+}
 
 export default request;
 
