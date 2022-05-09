@@ -74,28 +74,37 @@
                       更新时间：{{ book.lastTime }}
                     </div>
                   </div>
-                  <div class="book-author ellipsis" :title="book.author">
-                    <UserOutlined /> {{ book.author || "" }}
+                  <div class="book-author">
+                    <span
+                      :title="book.author"
+                      class="ellipsis book-author-title"
+                    >
+                      <UserOutlined /> {{ book.author || "" }}
+                    </span>
+                    <a v-if="isCollect(book)" @click="jumpRead(book)"
+                      >继续阅读</a
+                    >
                   </div>
-                  <!-- <div class="book-bottom-btn" @click.stop="() => {}">
-                <a-tag
-                  v-if="isCollect(book)"
-                  type="success"
-                  effect="light"
-                  class="setting-connect"
-                >
-                  <i class="el-icon-check"></i> 已收藏
-                </a-tag>
-                <a-tag
-                  v-else
-                  type="success"
-                  effect="light"
-                  class="setting-connect"
-                  @click.stop="saveBook(book)"
-                >
-                  <i class="el-icon-circle-plus-outline"></i> 加入收藏
-                </a-tag>
-              </div> -->
+                  <!-- 
+                  <div class="book-bottom-btn" @click.stop="() => {}">
+                    <a-tag
+                      v-if="isCollect(book)"
+                      type="success"
+                      effect="light"
+                      class="setting-connect"
+                    >
+                      <i class="el-icon-check"></i> 已收藏
+                    </a-tag>
+                    <a-tag
+                      v-else
+                      type="success"
+                      effect="light"
+                      class="setting-connect"
+                      @click.stop="saveBook(book)"
+                    >
+                      <i class="el-icon-circle-plus-outline"></i> 加入收藏
+                    </a-tag>
+                  </div> -->
                 </div>
               </li>
             </ul>
@@ -183,15 +192,12 @@ export default {
     isCollect(book) {
       return this.cacheBookList[book.bookUrl] ? true : false;
     },
-
     getCover(coverUrl, normal) {
       return getCover(coverUrl, normal);
     },
-
     dateFormat(t) {
       return dateFormat(t);
     },
-
     goHome() {
       this.$router.push({
         path: "/",
@@ -210,6 +216,25 @@ export default {
         query: {
           bookUrl: escape(book.bookUrl || ""),
           readUrl: escape(newestUrl || ""),
+        },
+      });
+    },
+
+    // 继续阅读
+    jumpRead(book) {
+      let bookUrl = unescape(book.bookUrl || "");
+      if (!bookUrl) {
+        return;
+      }
+      let readUrl = this.cacheBookList[bookUrl]
+        ? this.cacheBookList[bookUrl].readUrl
+        : "";
+      // let newestUrl = unescape(book.bookUrl + book.newestUrl);
+      this.$router.push({
+        path: "/readBooks",
+        query: {
+          bookUrl: escape(book.bookUrl || ""),
+          readUrl: escape(readUrl || ""),
         },
       });
     },

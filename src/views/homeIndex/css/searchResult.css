@@ -218,6 +218,16 @@
   cursor: pointer;
 }
 
+.result-content .book-author-title {
+  width: calc(100% - 54px);
+}
+
+.result-content .book-author a {
+  border: 1px solid #df9591;
+  color: #bf2c24;
+  padding: 0px 2px;
+}
+
 /*移动端*/
 .result-content.mobile .logo-bg {
   display: none;

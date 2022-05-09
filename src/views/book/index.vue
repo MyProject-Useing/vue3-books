@@ -43,9 +43,9 @@
               </p>
             </div>
             <p class="book-info-btn">
-              <a class="blue-btn" href="javascript:" @click="toBookIndex()"
-                >免费阅读</a
-              >
+              <a class="blue-btn" href="javascript:" @click="stillRead()">{{
+                btnTitle
+              }}</a>
               <!-- <a class="blue-btn add-book" href="javascript:">加入书架</a> -->
             </p>
           </div>
@@ -131,6 +131,7 @@ export default {
     bookUrl() {
       return unescape(this.$route.query.bookUrl || "");
     },
+
     routes() {
       let bookTitle = this.bookInfo.bookTitle;
       return [
@@ -148,10 +149,24 @@ export default {
         },
       ];
     },
+
     // 是否为移动端
     isMobileClass() {
       let isTrue = isMobile();
       return isTrue;
+    },
+
+    // 书架列表
+    cacheBookList() {
+      return this.$store.state.caches.readBooksList;
+    },
+
+    // 按钮文字
+    btnTitle() {
+      return this.cacheBookList[this.bookUrl] &&
+        this.cacheBookList[this.bookUrl].readUrl
+        ? "继续阅读"
+        : "免费阅读";
     },
   },
   activated() {
@@ -202,7 +217,6 @@ export default {
           });
       }
     },
-
     // 书籍详情
     toBookIndex(href) {
       if (!this.bookUrl) {
@@ -216,6 +230,16 @@ export default {
           readUrl: escape(readUrl || ""),
         },
       });
+    },
+    // 继续阅读
+    stillRead() {
+      let href =
+        this.cacheBookList[this.bookUrl] &&
+        this.cacheBookList[this.bookUrl].readUrl
+          ? this.cacheBookList[this.bookUrl].readUrl
+          : "";
+
+      this.toBookIndex(href);
     },
   },
 };
