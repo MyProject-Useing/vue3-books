@@ -107,7 +107,7 @@ import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
 
-import request from "@/plugins/axios";
+import request from "@/plugins/request";
 import {
   BookOutlined,
   UnorderedListOutlined,

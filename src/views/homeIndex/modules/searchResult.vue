@@ -121,7 +121,7 @@ import { UserOutlined, SearchOutlined } from "@ant-design/icons-vue";
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
-import request from "@/plugins/axios";
+import request from "@/plugins/request";
 // 书籍详情
 export default {
   name: "searchResult",

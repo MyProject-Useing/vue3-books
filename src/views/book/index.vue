@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import request from "@/plugins/axios";
+import request from "@/plugins/request";
 import { message } from "ant-design-vue";
 import { isMobile } from "@/plugins/utils";
 // 目录
