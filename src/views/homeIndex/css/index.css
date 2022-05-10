@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 20px;
+  padding-top: 56px;
   position: relative;
   z-index: 1;
 }
@@ -33,7 +33,7 @@
   margin-bottom: 16px;
   border-radius: calc(0.5 * 44px);
   font-size: 16px;
-  height: 44px;
+  height: 47px;
   display: flex;
 }
 .home-index-panle .home-search-group .search-btn {
@@ -57,17 +57,22 @@
   color: #222;
 }
 
-.home-index-panle .home-search-group .ant-select-selection-search {
-  left: 20px;
-  font-size: 17px;
-}
-
 .home-index-panle .home-search-group .ant-select-selection-placeholder {
   line-height: 2.4em;
   padding-left: 13px;
   color: rgb(117, 117, 117);
   font-size: 1.2em;
 }
+
+.home-index-panle
+  .home-search-group
+  .search-btn
+  .ant-select-selector
+  input.ant-select-selection-search-input {
+  padding-left: 13px;
+  font-size: 1.3em;
+}
+
 /*查询栏*/
 
 /*缓存列表*/

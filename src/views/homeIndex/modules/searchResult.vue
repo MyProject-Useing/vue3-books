@@ -288,10 +288,10 @@ export default {
 }
 
 .result-content .search-btn-group :deep(.ant-select-selection-placeholder) {
-  line-height: 36px;
+  line-height: 2.6em;
   padding-left: 13px;
   color: rgb(117, 117, 117);
-  font-size: 15px;
+  font-size: 1em;
 }
 
 .result-content .search-btn-group button.ant-btn {
