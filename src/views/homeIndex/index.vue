@@ -1,5 +1,5 @@
 <template>
-  <div class="home-index-panle">
+  <div class="home-index-panle" :class="isMobileClass ? 'mobile' : ''">
     <div class="home-logo">
       <div id="logo" class="logo-bg"></div>
     </div>
@@ -54,6 +54,7 @@
 <script>
 import { DeleteOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
+import { isMobile } from "@/plugins/utils";
 export default {
   name: "homeIndex",
   data() {
@@ -72,6 +73,11 @@ export default {
         newList.push({ value: d });
       });
       return newList;
+    },
+    // 是否为移动端
+    isMobileClass() {
+      let isTrue = isMobile();
+      return isTrue;
     },
   },
   mounted() {

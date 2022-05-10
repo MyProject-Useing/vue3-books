@@ -178,3 +178,10 @@
 }
 
 /*缓存列表*/
+
+/*移动端*/
+.home-index-panle.mobile .home-search-group {
+  height: 52px;
+}
+
+/*移动端*/
