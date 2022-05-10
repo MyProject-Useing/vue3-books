@@ -61,7 +61,7 @@
   line-height: 2.4em;
   padding-left: 13px;
   color: rgb(117, 117, 117);
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .home-index-panle
@@ -183,5 +183,7 @@
 .home-index-panle.mobile .home-search-group {
   height: 52px;
 }
+
+.home-index-panle.mobile  .home-search-group .ant-select-selection-placeholder {  line-height: 2.6em;}
 
 /*移动端*/

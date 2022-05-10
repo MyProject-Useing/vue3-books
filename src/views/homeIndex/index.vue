@@ -9,8 +9,6 @@
         enter-button="Search"
         placeholder="请输入小说或作者名称"
         v-model:value.trim="keywords"
-        :options="historyList"
-        :filter-option="filterOption"
         @keyup.enter.stop="searchDetails()"
       >
       </a-auto-complete>
