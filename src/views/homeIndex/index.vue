@@ -61,17 +61,18 @@ export default {
   components: { DeleteOutlined },
   computed: {
     cacheBookList() {
-      return this.$store.state.caches.readBooksList;
+      let list = this.$store.state.caches.readBooksList;
+      return list;
     },
-    historyList() {
-      let list = this.$store.state.caches.searchHistoryList;
-      let newList = [];
+    // historyList() {
+    //   let list = this.$store.state.caches.searchHistoryList;
+    //   let newList = [];
 
-      list.forEach((d) => {
-        newList.push({ value: d });
-      });
-      return newList;
-    },
+    //   list.forEach((d) => {
+    //     newList.push({ value: d });
+    //   });
+    //   return newList;
+    // },
     // 是否为移动端
     isMobileClass() {
       let isTrue = isMobile();
