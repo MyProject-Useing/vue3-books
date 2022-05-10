@@ -23,7 +23,6 @@
 .main-text-wrap .text-head h3 {
   font: 24px/32px PingFangSC-Regular, HelveticaNeue-Light,
     "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  overflow: hidden;
   height: 32px;
   margin-bottom: 30px;
 }
@@ -103,6 +102,4 @@ p {
   display: none;
 }
 
-.read-main-wrap.mobile .read-content p {
-  font-size: 1em;
-}
+

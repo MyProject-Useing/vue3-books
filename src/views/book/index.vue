@@ -7,10 +7,7 @@
     <div class="book-index-mian">
       <a-page-header :breadcrumb="{ routes }" />
       <div class="book-index-content">
-        <div class="border-shadow">
-          <span></span>
-          <span></span>
-        </div>
+        <div class="border-shadow"></div>
         <div class="book-information">
           <div class="book-img">
             <a-image
@@ -22,8 +19,8 @@
           </div>
           <div class="book-info">
             <div class="book-info-details">
-              <h1>
-                <em>{{ bookInfo.bookTitle }}</em>
+              <h1 class="ellipsis">
+                <em :title="bookInfo.bookTitle">{{ bookInfo.bookTitle }}</em>
                 <span
                   ><span>{{ bookInfo.author }}</span> 著</span
                 >
@@ -32,8 +29,8 @@
                 <span class="blue">连载</span>
                 <span class="blue">免费</span>
               </p>
-              <p class="intro">小说简介</p>
-              <p>
+              <p class="intro" v-if="!isMobileClass">小说简介</p>
+              <p v-if="!isMobileClass">
                 <em><span class="szWntGoi">0</span></em
                 ><cite>万字</cite><i>|</i>
                 <em><span class="szWntGoi">0</span></em
@@ -62,7 +59,7 @@
                     <div class="book-state">
                       <ul>
                         <li class="update">
-                          <b>最新章节</b>
+                          <b v-if="!isMobileClass">最新章节</b>
                           <div class="detail">
                             <p
                               class="cf charpter-container"
@@ -253,7 +250,8 @@ export default {
 }
 
 .book-information .book-img :deep(.ant-image) {
-  width: 144px;
+  width: 100%;
+  max-width: 144px;
   height: 100%;
 }
 
@@ -283,14 +281,10 @@ export default {
   color: #999;
 }
 
-.content-nav-wrap :deep(.left-wrap) .book-state li.update .detail {
-  border-bottom: none;
-}
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail {
   float: left;
   width: calc(100% - 118px);
   padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
 }
 
 .content-nav-wrap
@@ -341,11 +335,7 @@ export default {
   color: #3f5a93;
 }
 
-.ant-image-img {
-  height: 100%;
-}
-
-.book-img-src {
+.book-img :deep(.ant-image) .book-img-src {
   height: 100%;
 }
 

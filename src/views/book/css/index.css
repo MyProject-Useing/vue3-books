@@ -55,11 +55,11 @@ ul {
   border-bottom: none;
 }
 .book-information {
+  height: 234px;
   position: relative;
   z-index: 2;
   margin-bottom: 50px;
   background: #fff;
-  height: 234px;
   margin-top: -98px;
   padding: 20px 0px 0px 20px;
 }
@@ -68,11 +68,12 @@ ul {
   float: left;
   margin-right: 20px;
   height: 100%;
+  width: 144px;
 }
 
 .book-information .book-info {
   float: left;
-  width: calc(100% - 184px);
+  width: calc(100% - 20px - 144px);
   height: 100%;
 }
 
@@ -193,7 +194,6 @@ ul {
   border-style: solid;
 }
 
-
 /*标签分页*/
 
 .book-information .ant-tabs > .ant-tabs-nav {
@@ -243,6 +243,25 @@ ul {
 
 .mobile .book-information .book-info .tag + p + p {
   display: none;
+}
+
+.mobile .book-information {
+  height: 140px;
+  padding: 10px 0px 0px 10px;
+}
+.mobile .book-index-mian {
+  margin-top: -236px;
+}
+.mobile .book-index-bj {
+  height: 236px;
+}
+.mobile .book-information .book-img {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.mobile .book-information .book-info {
+  width: calc(100% - 20px - 80px);
 }
 
 /*移动端*/
