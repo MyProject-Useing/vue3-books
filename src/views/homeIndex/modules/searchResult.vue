@@ -8,8 +8,6 @@
           enter-button="Search"
           placeholder="请输入小说或作者名称"
           v-model:value.trim="keywords"
-          :options="historyList"
-          :filter-option="filterOption"
           @keyup.enter.stop="searchBook(true)"
         >
         </a-auto-complete>
@@ -116,13 +114,7 @@ export default {
     };
   },
   activated() {
-    if (this.keywords === this.$route.query.keywords) {
-      return false;
-    }
-    this.keywords = this.$route.query.keywords;
-    if (this.keywords) {
-      this.searchBook();
-    }
+    this.init();
   },
   computed: {
     // 是否为移动端
@@ -153,11 +145,21 @@ export default {
   watch: {
     $route(to) {
       if (to.name === "searchResult") {
-        this.searchBook();
+        this.init();
       }
     },
   },
   methods: {
+    init() {
+      if (this.keywords === this.$route.query.keywords) {
+        return false;
+      }
+      this.keywords = this.$route.query.keywords;
+      if (this.keywords) {
+        this.searchBook();
+      }
+    },
+
     filterOption(input, option) {
       return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
     },
