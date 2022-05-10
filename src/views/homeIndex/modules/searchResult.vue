@@ -90,7 +90,6 @@
 <script>
 import { UserOutlined, SearchOutlined } from "@ant-design/icons-vue";
 import { isMobile } from "@/plugins/utils";
-import { message } from "ant-design-vue";
 
 import request from "@/plugins/request";
 // 书籍详情
@@ -213,8 +212,7 @@ export default {
         return;
       }
       // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", book);
-
+      // this.$store.commit("caches/setBooksList", book);
       this.$router.push({
         path: "/book",
         query: { bookUrl: escape(book.bookUrl) },
@@ -266,13 +264,6 @@ export default {
         .catch(() => {
           this.refreshLoading = false;
         });
-    },
-
-    // 加入收藏
-    saveBook(book) {
-      // 加入书架 缓存
-      this.$store.commit("caches/setBooksList", book);
-      message.success("收藏成功。");
     },
   },
 };
