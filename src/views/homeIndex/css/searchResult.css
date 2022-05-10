@@ -6,9 +6,7 @@
 }
 
 .result-content {
-  width: 100%;
   flex-direction: column;
-  min-width: fit-content;
   position: relative;
   z-index: 1;
   height: 100%;
@@ -16,7 +14,6 @@
 .result-content .search-title {
   display: flex;
   padding-left: 18px;
-  width: 100%;
   position: relative;
 }
 .result-content .el-input {
@@ -29,13 +26,13 @@
   position: relative;
   margin: 15px 0px 10px 0px;
   display: flex;
-  width: calc(100% - 15px);
+  width: calc(100% - 300px);
 }
 
 .result-content .search-btn-group .search-btn {
   height: 100%;
   max-width: 590px;
-  width: calc(100% - 67px);
+  width: calc(100% - 115px);
   font-size: 16px;
 }
 
@@ -122,6 +119,7 @@
   padding-left: 0px;
   max-width: calc(339 * 4px);
   padding-top: 4px;
+  width: 100%;
 }
 
 .result-content .books-wrapper .book-item {
@@ -134,7 +132,6 @@
 
 .result-content .books-wrapper {
   height: 100%;
-  width: 100%;
 }
 .result-content .cover-img {
   width: 72px;
@@ -143,10 +140,15 @@
   box-shadow: 0 1px 6px rgb(0 0 0 / 35%), inset 0 0 5px #f9f2e9;
 }
 
+.result-content .cover-img .cover {
+  width: 100%;
+  height: 100%;
+}
+
 .result-content .book-info {
   position: relative;
   right: 0px;
-  width: calc(100% - 100px);
+  width: calc(100% - 72px);
   padding-left: 15px;
 }
 
@@ -163,7 +165,7 @@
 }
 .result-content .book-author {
   font-size: 12px;
-  height: 18px;
+  height: 22px;
   color: #a6a6a6;
   display: flex;
   align-items: center;
@@ -184,6 +186,7 @@
 
 .result-content .last-chapter a {
   color: #666;
+  width: calc(100% - 65px);
 }
 
 .result-content .last-chapter a:active {
@@ -201,6 +204,7 @@
 }
 .result-content .book-content-details {
   height: 44px;
+  width: 100%;
 }
 
 .result-content .el-tag {
@@ -228,6 +232,10 @@
   padding: 0px 2px;
 }
 
+.ant-image {
+  height: 100%;
+}
+
 /*移动端*/
 .result-content.mobile .logo-bg {
   display: none;
@@ -251,7 +259,10 @@
 }
 
 .result-content.mobile .books-wrapper .book-item {
-  width: 88%;
+  width: 100%;
+}
+.result-content.mobile .search-btn-group {
+  width: 100%;
 }
 
 /*移动端*/
