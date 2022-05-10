@@ -257,10 +257,6 @@ export default {
   height: 100%;
 }
 
-.book-information .book-img :deep(.ant-image) .ant-image-img {
-  height: 100%;
-}
-
 /*最新章节*/
 .content-nav-wrap :deep(.left-wrap) {
   width: 100%;
@@ -344,6 +340,15 @@ export default {
 .blue {
   color: #3f5a93;
 }
+
+.ant-image-img {
+  height: 100%;
+}
+
+.book-img-src {
+  height: 100%;
+}
+
 /*最新章节*/
 
 /*目录*/

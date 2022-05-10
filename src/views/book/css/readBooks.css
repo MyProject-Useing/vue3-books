@@ -58,10 +58,6 @@
     repeat;
 }
 
-.book-content .el-loading-mask {
-  background: none;
-}
-
 .main-read-container {
   position: relative;
   z-index: 100;
