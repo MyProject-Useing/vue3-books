@@ -1,5 +1,9 @@
 <template>
-  <div class="reader-content" :class="isMobileClass ? 'mobile' : ''">
+  <div
+    class="reader-content"
+    :class="isMobileClass ? 'mobile' : ''"
+    @touchstart="eventHandler"
+  >
     <div class="main-read-container">
       <booksContent
         class="book-content"
@@ -11,7 +15,7 @@
       >
       </booksContent>
       <leftBar
-        v-if="!isMobileClass"
+        v-if="showToolBar"
         :catalogList="catalogList"
         :selfCatalog="selfCatalog"
       ></leftBar>
@@ -52,7 +56,7 @@
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
-import jump from "@/plugins/jump";
+// import jump from "@/plugins/jump";
 import request from "@/plugins/request";
 
 // 文章
@@ -127,10 +131,10 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
-    // 窗口高度
-    windowSize() {
-      return this.$store.state.windowSize;
-    },
+    // // 窗口高度
+    // windowSize() {
+    //   return this.$store.state.windowSize;
+    // },
 
     // 目录是否禁用
     catalogClass() {
@@ -296,7 +300,7 @@ export default {
       this.bookShelfPopover = false;
 
       // 重置滚动条
-      jump(this.$refs.top, { duration: 0 });
+      // jump(this.$refs.top, { duration: 0 });
 
       // 获取正文内容
       request
@@ -320,54 +324,28 @@ export default {
         );
     },
 
-    // 内容点击事件
-    eventHandler(point) {
+    // 移动端 内容点击事件
+    eventHandler(dom) {
+      let point = dom.targetTouches[0];
+      let windowSize = {
+        width: window.document.body.clientWidth,
+        height: window.document.body.clientHeight,
+      };
+
       // 根据点击位置判断操作
-      const midX = this.windowSize.width / 3;
-      const midY = this.windowSize.height / 3;
-      if (this.isEpub) {
-        point.clientY =
-          point.clientY +
-          45 -
-          (document.documentElement.scrollTop || document.body.scrollTop);
-      }
-      if (
-        Math.abs(point.clientY - midY) <= this.windowSize.height * 0.2 &&
-        Math.abs(point.clientX - midX) <= this.windowSize.width * 0.2
-      ) {
-        // 点击中部区域显示菜单
-        if (!this.showReadBar) {
-          this.showToolBar = !this.showToolBar;
-        }
-      } else if (this.$store.state.config.clickMethod === "下一页") {
-        // 全屏点击下一页
-        this.showToolBar = false;
-        this.nextPage();
-        return;
-      } else if (this.$store.state.config.clickMethod === "不翻页") {
-        // 全屏点击不翻页
+      const tY = windowSize.height / 3;
+
+      // 点击屏幕顶部
+      if (point.clientY <= tY) {
         this.showToolBar = !this.showToolBar;
-        return;
-      } else if (this.isSlideRead) {
-        if (point.clientX > midX) {
-          // 点击右侧，下一页
-          this.showToolBar = false;
-          this.nextPage();
-        } else if (point.clientX < midX) {
-          // 点击左侧，上一页
-          this.showToolBar = false;
-          this.prevPage();
-        }
-      } else {
-        if (point.clientY > midY) {
-          // 点击下部，下一页
-          this.showToolBar = false;
-          this.nextPage();
-        } else if (point.clientY < midY) {
-          // 点击上部，上一页
-          this.showToolBar = false;
-          this.prevPage();
-        }
+      }
+      // 点击屏幕底部
+      else if (windowSize.height - point.clientY <= tY) {
+        this.showToolBar = !this.showToolBar;
+      }
+      // 点击屏幕中部
+      else {
+        this.showToolBar = !this.showToolBar;
       }
     },
   },

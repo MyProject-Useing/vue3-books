@@ -14,6 +14,10 @@ Object.keys(modules).forEach((key) => {
 export default createStore({
   state: {
     api: setting.apiAddress + ":" + setting.apiPort + "/",
+    windowSize: {
+      width: window.document.body.clientWidth,
+      height: window.document.body.clientHeight,
+    },
   },
   // getters: {},
   // mutations: {},
