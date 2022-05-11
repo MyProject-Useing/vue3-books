@@ -1,50 +1,7 @@
-.left-bar-list {
-  z-index: 102;
-  top: 0px;
-  position: fixed;
-  margin-left: -68px;
+body {
+  height: auto;
 }
 
-.left-bar-list dd {
-  position: relative;
-  z-index: 100;
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-top: none;
-  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
-  margin-bottom: 0px;
-}
-
-.left-bar-list dd a {
-  font: 12px/16px PingFangSC-Regular, "-apple-system", Simsun;
-  display: block;
-  width: 58px;
-  height: 58px;
-  text-align: center;
-  padding-top: 10px;
-}
-
-.left-bar-list dd:first-child {
-  border-top: 1px solid #0000001a;
-}
-.left-bar-list dd a i {
-  font-size: 16px;
-  display: block;
-  width: 16px;
-  height: 16px;
-  margin: 0 auto 6px;
-}
-
-.left-bar-list dd a span:first-child {
-  color: #000;
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-.left-bar-list dd a span:last-child {
-  color: rgba(0, 0, 0, 0.4);
-  display: block;
-}
 
 /* .reader-content {
   width: 100%;

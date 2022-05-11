@@ -151,5 +151,5 @@ export default {
 };
 </script>
 <style scoped>
-@import url("@/views/book/css/content.css");
+@import url("@/views/book/css/leftBar.css");
 </style>
