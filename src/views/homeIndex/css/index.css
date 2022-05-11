@@ -2,8 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding-top: 3rem;
+  padding-top: 50%;
   position: relative;
   z-index: 1;
 }
@@ -15,7 +14,6 @@
   flex-direction: column;
   flex-shrink: 0;
   justify-content: flex-end;
-  height: 11.5rem;
 }
 
 .home-index-panle .home-logo #logo {
