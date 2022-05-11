@@ -3,26 +3,24 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 56px;
+  padding-top: 3rem;
   position: relative;
   z-index: 1;
 }
 
 /*logo*/
 .home-index-panle .home-logo {
-  margin-bottom: 38px;
-  z-index: 1;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   justify-content: flex-end;
-  min-height: 200px;
+  height: 11.5rem;
 }
 
 .home-index-panle .home-logo #logo {
-  forced-color-adjust: none;
-  height: 108px;
-  width: 272px;
+  height: 6rem;
+  width: 15.5rem;
 }
 /*logo*/
 
@@ -30,9 +28,8 @@
 .home-index-panle .home-search-group {
   max-width: 561px;
   width: 88%;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   border-radius: calc(0.5 * 44px);
-  font-size: 16px;
   height: 47px;
   display: flex;
 }
@@ -45,7 +42,7 @@
   height: 100%;
   background: #4e6ef2;
   color: #fff;
-  font-size: 17px;
+  font-size: 1rem;
   border-radius: 0 10px 10px 0;
 }
 
@@ -59,9 +56,9 @@
 
 .home-index-panle .home-search-group .ant-select-selection-placeholder {
   line-height: 2.4em;
-  padding-left: 13px;
+  padding-left: 0.6rem;
   color: rgb(117, 117, 117);
-  font-size: 1.3em;
+  font-size: 1.1rem;
 }
 
 .home-index-panle
@@ -69,8 +66,8 @@
   .search-btn
   .ant-select-selector
   input.ant-select-selection-search-input {
-  padding-left: 13px;
-  font-size: 1.3em;
+  padding-left: 0.6rem;
+  font-size: 1.1rem;
 }
 
 /*查询栏*/
@@ -84,7 +81,6 @@
   justify-content: center;
   padding: 2px;
   opacity: 1;
-  transition: opacity 300ms ease-in-out;
   max-width: 581px;
   width: 88%;
   overflow-y: auto;
@@ -164,10 +160,8 @@
   right: 0px;
   top: 0px;
   opacity: 1;
-  transition-delay: 400ms;
   height: 28px;
   width: 28px;
-  transition: opacity 100ms ease-in-out;
   font-size: 16px;
   margin: 4px 2px;
   color: rgb(0 0 0 / 25%);
@@ -181,9 +175,11 @@
 
 /*移动端*/
 .home-index-panle.mobile .home-search-group {
-  height: 52px;
+  height: 3.2rem;
 }
 
-.home-index-panle.mobile  .home-search-group .ant-select-selection-placeholder {  line-height: 2.6em;}
+.home-index-panle.mobile .home-search-group .ant-select-selection-placeholder {
+  line-height: 2.6em;
+}
 
 /*移动端*/

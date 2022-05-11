@@ -19,12 +19,12 @@
           </div>
           <div class="book-info">
             <div class="book-info-details">
-              <h1 class="ellipsis">
+              <h2 class="ellipsis">
                 <em :title="bookInfo.bookTitle">{{ bookInfo.bookTitle }}</em>
                 <span
                   ><span>{{ bookInfo.author }}</span> 著</span
                 >
-              </h1>
+              </h2>
               <p class="tag">
                 <span class="blue">连载</span>
                 <span class="blue">免费</span>
@@ -376,7 +376,7 @@ export default {
 
 /*移动端*/
 .mobile .book-index-mian .ant-page-header {
-  height: 105px;
+  height: 6rem;
 }
 
 /*移动端*/

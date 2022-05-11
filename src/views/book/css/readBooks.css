@@ -20,7 +20,6 @@
   display: block;
   width: 58px;
   height: 58px;
-  transition: none;
   text-align: center;
   padding-top: 10px;
 }
@@ -34,7 +33,6 @@
   width: 16px;
   height: 16px;
   margin: 0 auto 6px;
-  transition: color 0.3s;
 }
 
 .left-bar-list dd a span:first-child {
@@ -44,7 +42,6 @@
 }
 
 .left-bar-list dd a span:last-child {
-  transition: color 0.3s;
   color: rgba(0, 0, 0, 0.4);
   display: block;
 }

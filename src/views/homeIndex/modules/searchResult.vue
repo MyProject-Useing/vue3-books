@@ -47,13 +47,13 @@
                   </a-image>
                 </div>
                 <div class="book-info">
-                  <div
+                  <h2
                     class="book-name ellipsis"
                     :title="book.bookTitle"
                     @click.stop="toBookIndex(book)"
                   >
                     {{ book.bookTitle }}
-                  </div>
+                  </h2>
                   <div class="book-content-details">
                     <div class="last-chapter ellipsis" v-if="book.newestTitle">
                       <span>最新章节：</span>

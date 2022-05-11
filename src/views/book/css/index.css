@@ -31,13 +31,6 @@ ul {
   box-shadow: 0px -29px 30px 0px #ffffff inset;
 }
 
-.book-detail-wrap {
-  position: relative;
-  z-index: 10;
-  min-height: 700px;
-  text-align: left;
-  color: #262626;
-}
 .book-index-mian {
   margin: 0 auto;
   margin-top: -338px;
@@ -48,19 +41,17 @@ ul {
   position: relative;
   z-index: 10;
   width: 100%;
-  height: 98px;
-  margin: 0 auto;
-  border: 2px solid #e9e9e9;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  height: 6rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: none;
 }
 .book-information {
   height: 234px;
   position: relative;
   z-index: 2;
-  margin-bottom: 50px;
+  margin-bottom: 1.6rem;
   background: #fff;
-  margin-top: -98px;
+  margin-top: -6rem;
   padding: 20px 0px 0px 20px;
 }
 
@@ -175,21 +166,15 @@ ul {
 }
 
 .blue-btn {
-  position: relative;
-  z-index: 1;
-  text-align: center;
   color: #3f5a93;
   border-color: #3f5a93;
 }
 
 .book-information .book-info a.blue-btn {
-  font: 14px/34px PingFangSC-Regular, "-apple-system", Simsun;
+  font: 100% PingFangSC-Regular, "-apple-system", Simsun;
   display: inline-block;
-  width: 102px;
-  height: 36px;
-  margin-right: 15px;
-  text-align: center;
-  vertical-align: middle;
+  line-height: 1.5rem;
+  padding: 0 0.8rem;
   border-width: 1px;
   border-style: solid;
 }
@@ -240,20 +225,20 @@ ul {
 .mobile .catalog-list-wrap .volume-list li {
   width: 50%;
 }
+.mobile .book-information {
+  height: 8rem;
+  padding: 0.8rem 0.8rem 0 0.8rem;
+}
 
 .mobile .book-information .book-info .tag + p + p {
   display: none;
 }
 
-.mobile .book-information {
-  height: 140px;
-  padding: 10px 0px 0px 10px;
-}
 .mobile .book-index-mian {
-  margin-top: -236px;
+  margin-top: -12rem;
 }
 .mobile .book-index-bj {
-  height: 236px;
+  height: 12rem;
 }
 .mobile .book-information .book-img {
   width: 80px;
@@ -261,7 +246,7 @@ ul {
 }
 
 .mobile .book-information .book-info {
-  width: calc(100% - 20px - 80px);
+  width: calc(100% - 90px);
 }
 
 /*移动端*/

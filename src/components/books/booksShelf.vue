@@ -109,7 +109,6 @@ export default {
   margin-right: 20px;
   padding: 0 2px 4px;
   cursor: pointer;
-  transition: color 0.3s;
   color: #ed4259;
 }
 
@@ -172,7 +171,6 @@ export default {
 <style>
 .books-item .book-img {
   color: #fcfcfa;
-  transition: transform 0.3s ease-out;
   height: 96px;
   margin-right: 12px;
   width: 72px;
