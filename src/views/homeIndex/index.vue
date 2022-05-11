@@ -61,8 +61,7 @@ export default {
   components: { DeleteOutlined },
   computed: {
     cacheBookList() {
-      let list = this.$store.state.caches.readBooksList;
-      return list;
+      return this.$store.state.caches.readBooksList;
     },
     // historyList() {
     //   let list = this.$store.state.caches.searchHistoryList;

@@ -77,7 +77,7 @@
 .home-index-panle .search-collet {
   display: flex;
   flex-wrap: wrap;
-  min-height: 124px;
+  min-height: 10rem;
   justify-content: center;
   padding: 2px;
   opacity: 1;
@@ -92,18 +92,14 @@
 .home-index-panle .search-collet a {
   align-items: center;
   border-radius: 4px;
-  opacity: 1;
-  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 112px;
-  outline: none;
+  width: 6rem;
+  height: 6rem;
   position: relative;
-  text-decoration: none;
-  width: 112px;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   overflow: hidden;
   padding: 2px;
   color: rgb(60, 64, 67);
@@ -115,10 +111,10 @@
   border-radius: 50%;
   display: flex;
   flex-shrink: 0;
-  height: 48px;
+  height: 3rem;
   justify-content: center;
-  margin-top: 16px;
-  width: 48px;
+  margin-top: 1rem;
+  width: 3rem;
 }
 
 .home-index-panle .tile-icon i {
@@ -128,12 +124,12 @@
 
 .home-index-panle .tile-title {
   align-items: center;
-  border-radius: 18px;
+  border-radius: 1rem;
   color: rgb(60, 64, 67);
   display: flex;
-  height: 32px;
-  line-height: 16px;
-  margin-top: 6px;
+  height: 2rem;
+  line-height: 1rem;
+  margin-top: 0.3rem;
   padding: 2px 8px;
   width: 100%;
 }
@@ -160,10 +156,9 @@
   right: 0px;
   top: 0px;
   opacity: 1;
-  height: 28px;
-  width: 28px;
-  font-size: 16px;
-  margin: 4px 2px;
+  height: 1rem;
+  width: 1rem;
+  font-size: 1rem;
   color: rgb(0 0 0 / 25%);
 }
 
