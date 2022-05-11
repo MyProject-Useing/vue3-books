@@ -40,7 +40,8 @@
           >下一章</a
         >
       </div>
-      <div class="left-bar-list">
+
+      <div class="left-bar-list" v-if="!isMobileClass">
         <dl>
           <dd>
             <a href="javascript:" @click="goHome">

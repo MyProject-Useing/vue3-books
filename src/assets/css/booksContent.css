@@ -7,7 +7,7 @@
 }
 
 .text-wrap {
-  min-height: calc(100vh - 158px);
+  min-height: calc(100vh - 48px);
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
 
@@ -35,7 +35,6 @@ p {
   word-wrap: break-word;
   word-break: break-all;
 }
-
 
 .main-text-wrap .text-info .info span {
   margin-right: 5px;
