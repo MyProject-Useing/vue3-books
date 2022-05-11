@@ -95,8 +95,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   position: relative;
   justify-content: center;
   margin-bottom: 0.5rem;
@@ -175,6 +175,11 @@
 
 .home-index-panle.mobile .home-search-group .ant-select-selection-placeholder {
   line-height: 2.6em;
+}
+
+.home-index-panle.mobile .search-collet a {
+  width: 6rem;
+  height: 6rem;
 }
 
 /*移动端*/

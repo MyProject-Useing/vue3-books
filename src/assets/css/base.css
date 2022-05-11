@@ -18,19 +18,6 @@ body {
   position: relative;
   z-index: 0;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-select,
-textarea {
-  font-size: 100%;
-}
-
 ::-webkit-input-placeholder {
   -webkit-text-security: none;
   color: rgb(117, 117, 117);
@@ -97,6 +84,11 @@ textarea {
 
 .ant-image-img {
   cursor: pointer;
+}
+
+.ant-page-header.has-breadcrumb {
+  padding: 0.8rem;
+  background: none;
 }
 /* 移动端 */
 /* .mobile {} */

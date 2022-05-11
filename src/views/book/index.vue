@@ -376,7 +376,7 @@ export default {
 
 /*移动端*/
 .mobile .book-index-mian .ant-page-header {
-  height: 6rem;
+  height: 4rem;
 }
 
 /*移动端*/

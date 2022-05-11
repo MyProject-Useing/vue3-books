@@ -10,7 +10,10 @@
         ref="bookContentRef"
       >
       </booksContent>
-      <div class="chapter-control dib-wrap" v-show="!bookLoading">
+      <div
+        class="chapter-control dib-wrap"
+        v-show="!bookLoading && !isMobileClass"
+      >
         <a
           @click="
             catalogList.length == 0 || bookLoading

@@ -1,30 +1,21 @@
 .read-main-wrap {
-  width: 100%;
   font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
 }
 .main-text-wrap {
-  padding: 45px 45px;
+  padding: 3rem 1rem;
 }
 
 .text-wrap {
-  width: 100%;
-  border: 1px solid #d8d8d8;
-  min-height: calc(100vh - 131px);
+  min-height: calc(100vh - 158px);
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
 
-.main-text-wrap .text-head {
-  position: relative;
-  z-index: 5;
-  margin-bottom: 12px;
-}
-
 .main-text-wrap .text-head h3 {
-  font: 24px/32px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  height: 32px;
-  margin-bottom: 30px;
+  font: 1.5rem PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
+    "Microsoft YaHei", sans-serif;
+  margin-bottom: 2rem;
+  line-height: 1.2;
 }
 .main-text-wrap .text-info {
   font: 12px/16px PingFangSC-Regular, "-apple-system", Simsun;
@@ -39,11 +30,13 @@ a {
   color: #262626;
   outline: 0;
 }
-cite,
-em,
-i {
-  font-style: normal;
+
+p {
+  word-wrap: break-word;
+  word-break: break-all;
 }
+
+
 .main-text-wrap .text-info .info span {
   margin-right: 5px;
 }
@@ -74,13 +67,9 @@ i {
 .main-text-wrap .read-content p {
   line-height: 1.8;
   overflow: hidden;
-  margin: 0.8em 0;
-  text-indent: 2em;
-  font-size: 18px;
-}
-p {
-  word-wrap: break-word;
-  word-break: break-all;
+  margin: 0.1em 0;
+  text-indent: 1em;
+  font-size: 1.1rem;
 }
 
 .setting-popover {
