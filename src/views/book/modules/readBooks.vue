@@ -56,7 +56,7 @@
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
-// import jump from "@/plugins/jump";
+import jump from "@/plugins/jump";
 import request from "@/plugins/request";
 
 // 文章
@@ -131,11 +131,6 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
-    // // 窗口高度
-    // windowSize() {
-    //   return this.$store.state.windowSize;
-    // },
-
     // 目录是否禁用
     catalogClass() {
       return this.bookLoading ||
@@ -328,20 +323,19 @@ export default {
     eventHandler(dom) {
       let point = dom.targetTouches[0];
       let windowSize = {
-        width: window.document.body.clientWidth,
-        height: window.document.body.clientHeight,
+        width: window.document.documentElement.clientWidth,
+        height: window.document.documentElement.clientHeight,
       };
 
       // 根据点击位置判断操作
       const tY = windowSize.height / 3;
-
       // 点击屏幕顶部
       if (point.clientY <= tY) {
-        this.showToolBar = !this.showToolBar;
+        jump(-(windowSize.height - point.screenY), { duration: 0 });
       }
       // 点击屏幕底部
       else if (windowSize.height - point.clientY <= tY) {
-        this.showToolBar = !this.showToolBar;
+        jump(point.clientY, { duration: 0 });
       }
       // 点击屏幕中部
       else {
