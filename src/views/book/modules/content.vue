@@ -2,7 +2,7 @@
   <div class="book-content-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="read-content">
       <p v-for="(item, index) in contentList" :key="index">
-        <span class="content-wrap" v-html="item"></span>
+        <span class="content-wrap" v-html="filterText(item)"></span>
       </p>
     </div>
   </div>
@@ -39,7 +39,12 @@ export default {
       return this.content.replace(/&nbsp;/g, "").split("\n");
     },
   },
-  methods: {},
+  methods: {
+    filterText(item) {
+      let text = item.split("亲,点击进去")[0];
+      return text;
+    },
+  },
 };
 </script>
 <style scoped>

@@ -7,7 +7,6 @@
         <Content :content="content" />
       </a-spin>
       <slot></slot>
-      <a-back-top />
     </div>
   </div>
 </template>

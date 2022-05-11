@@ -1,8 +1,3 @@
-.read-main-wrap {
-  font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
-    "Microsoft YaHei", sans-serif;
-  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
-}
 
 .main-text-wrap {
   min-height: calc(100vh - 48px);

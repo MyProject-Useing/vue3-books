@@ -42,10 +42,11 @@ body {
   white-space: nowrap;
 }
 
-.image-slot {
-  height: 100%;
-  width: 100%;
+
+.red{
+  color: #ed424b;
 }
+
 
 /*遮罩框*/
 

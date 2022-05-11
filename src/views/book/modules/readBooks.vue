@@ -7,13 +7,25 @@
     <div class="main-read-container">
       <booksContent
         class="book-content"
-        :loading="bookLoading"
         :bookInfo="bookInfo"
         :title="bookTitle"
         :content="bookContent"
         ref="bookContentRef"
       >
       </booksContent>
+
+      <div class="read-load-next">
+        <a v-if="bookLoading" href="javascript:" class="btn-normal"
+          ><a-spin class="read-load-loading" />
+        </a>
+        <a
+          v-else
+          href="javascript:"
+          class="btn-normal"
+          @click="toNextChapter(true)"
+          >加载下一章
+        </a>
+      </div>
       <leftBar
         v-if="showToolBar"
         :catalogList="catalogList"
@@ -294,9 +306,6 @@ export default {
       // 隐藏 书架
       this.bookShelfPopover = false;
 
-      // 重置滚动条
-      // jump(this.$refs.top, { duration: 0 });
-
       // 获取正文内容
       request
         .post(this.$store.state.api + "api/common/getBooksText", {
@@ -308,6 +317,8 @@ export default {
               res.data.code === 200 ? res.data.data : "获取章节内容失败！";
             this.bookContent = str;
             this.bookLoading = false;
+            // 重置滚动条
+            jump(-window.document.body.clientHeight, { duration: 0 });
           },
           (error) => {
             let errorStr = "获取章节内容失败！\n" + (error && error.toString());
@@ -348,4 +359,13 @@ export default {
 
 <style scoped>
 @import url("@/views/book/css/readBooks.css");
+
+.read-load-next .read-load-loading {
+  line-height: 1;
+}
+</style>
+<style>
+.read-load-next .read-load-loading .ant-spin-dot-item {
+  background-color: #fff;
+}
 </style>

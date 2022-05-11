@@ -2,7 +2,6 @@ body {
   height: auto;
 }
 
-
 /* .reader-content {
   width: 100%;
   height: auto;
@@ -15,6 +14,24 @@ body {
 .main-read-container {
   margin: 0 auto;
   max-width: 800px;
+  font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
+    "Microsoft YaHei", sans-serif;
+  background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
+}
+
+.main-read-container .read-load-next {
+  text-align: center;
+  height: 63px;
+}
+
+.main-read-container .read-load-next .btn-normal {
+  font-size: 0.875rem;
+  line-height: 2.25rem;
+  border-radius: 99px;
+  background-color: #ed424b;
+  display: inline-block;
+  width: 17.5rem;
+  color: #fff;
 }
 
 /*上、下一章*/
