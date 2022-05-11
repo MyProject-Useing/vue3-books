@@ -10,6 +10,11 @@
         ref="bookContentRef"
       >
       </booksContent>
+      <leftBar
+        v-if="!isMobileClass"
+        :catalogList="catalogList"
+        :selfCatalog="selfCatalog"
+      ></leftBar>
       <div
         class="chapter-control dib-wrap"
         v-show="!bookLoading && !isMobileClass"
@@ -40,96 +45,27 @@
           >下一章</a
         >
       </div>
-
-      <div class="left-bar-list" v-if="!isMobileClass">
-        <dl>
-          <dd>
-            <a href="javascript:" @click="goHome">
-              <bank-outlined />
-              <span>首页</span>
-            </a>
-          </dd>
-          <dd>
-            <a
-              id="catalog_bottom"
-              href="javascript:"
-              :class="catalogList.length > 0 ? '' : 'disabled'"
-              @click.stop="catalogList.length > 0 ? showCatalog() : false"
-            >
-              <UnorderedListOutlined />
-              <span>目录</span>
-            </a>
-          </dd>
-          <dd class="">
-            <a href="javascript:">
-              <SettingOutlined />
-              <span>设置</span></a
-            >
-          </dd>
-          <dd>
-            <a
-              id="bookshelf_btn"
-              href="javascript:"
-              @click.stop="showBookShelf"
-            >
-              <BookOutlined /><span>书架</span></a
-            >
-          </dd>
-        </dl>
-        <!-- 目录 -->
-        <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
-          <catalog
-            :bookUrl="bookUrl"
-            :currHref="selfCatalog.href"
-            :catalogList="catalogList"
-          />
-        </div>
-        <!-- 书架 -->
-        <div
-          id="bookShelf_panle"
-          class="setting-popover"
-          v-show="bookShelfPopover"
-        >
-          <booksShelf @changeChapter="toChapter" />
-        </div>
-      </div>
     </div>
   </div>
 </template>
 <script>
-// 文章
-import booksContent from "@/components/books/booksContent.vue";
-
-// 目录
-import catalog from "@/components/books/catalogList.vue";
-
-// 书架
-import booksShelf from "@/components/books/booksShelf.vue";
-
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
-
 import request from "@/plugins/request";
-import {
-  BookOutlined,
-  UnorderedListOutlined,
-  SettingOutlined,
-  BankOutlined,
-} from "@ant-design/icons-vue";
+
+// 文章
+import booksContent from "./booksContent.vue";
+// 工具栏
+import leftBar from "@/views/book/modules/leftBar.vue";
 
 // 书籍详情
 export default {
   name: "readBooks",
   components: {
     booksContent,
-    booksShelf,
-    BookOutlined,
-    catalog,
-    UnorderedListOutlined,
-    SettingOutlined,
-    BankOutlined,
+    leftBar,
   },
   data() {
     return {
@@ -171,37 +107,6 @@ export default {
   },
   mounted() {
     this.init();
-
-    window.onclick = (e) => {
-      let $catalog_bottom = document.getElementById("catalog_bottom");
-      let $catalog_curr = document.getElementById("catalog_curr");
-
-      let $catalog_panle = document.getElementById("catalog_panle");
-      let $bookShelf_panle = document.getElementById("bookShelf_panle");
-      let $bookshelf_btn = document.getElementById("bookshelf_btn");
-
-      // 点击空白 关闭 目录和书签
-      if (this.catalogPopover === true) {
-        if (
-          e.path.includes($catalog_bottom) ||
-          e.path.includes($catalog_curr) ||
-          e.path.includes($catalog_panle)
-        ) {
-          return false;
-        } else {
-          this.catalogPopover = false;
-        }
-      } else if (this.bookShelfPopover === true) {
-        if (
-          e.path.includes($bookshelf_btn) ||
-          e.path.includes($bookShelf_panle)
-        ) {
-          return false;
-        } else {
-          this.bookShelfPopover = false;
-        }
-      }
-    };
 
     window.onkeydown = (e) => {
       if (!this.bookLoading && this.catalogList.length > 0) {
@@ -277,25 +182,11 @@ export default {
         message.error("请重新选择书籍。");
       }
     },
-
-    // 返回首页
-    goHome() {
-      this.$router.push({ path: "/" });
-    },
-
     // 展示目录
     showCatalog() {
       this.catalogPopover = true;
       // 隐藏 书架
       this.bookShelfPopover = false;
-    },
-
-    // 展示书架
-    showBookShelf() {
-      // 隐藏目录
-      this.catalogPopover = false;
-      // 隐藏 书架
-      this.bookShelfPopover = true;
     },
 
     // 上/下一章
@@ -360,6 +251,7 @@ export default {
       }
     },
 
+    // 设置缓存
     setBookCache(data) {
       this.catalogList = data.catalogList || [];
       let readIndex = 1;
