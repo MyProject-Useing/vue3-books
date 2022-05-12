@@ -1,16 +1,13 @@
 <template>
-  <div
-    class="reader-content"
-    :class="isMobileClass ? 'mobile' : ''"
-    @touchend="eventEnd"
-    @touchmove="eventMove"
-  >
+  <div class="reader-content" :class="isMobileClass ? 'mobile' : ''">
     <div class="main-read-container">
       <booksContent
         class="book-content"
         :bookInfo="bookInfo"
         :title="bookTitle"
         :content="bookContent"
+        @touchend="eventEnd"
+        @touchmove="eventMove"
         ref="bookContentRef"
       >
       </booksContent>

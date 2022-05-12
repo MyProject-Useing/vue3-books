@@ -2,7 +2,7 @@
   <div class="left-bar-list" :class="isMobileClass ? 'mobile' : ''">
     <dl>
       <dd>
-        <a href="javascript:" @click="goHome">
+        <a href="javascript:" @click.stop="goHome">
           <bank-outlined />
           <span>首页</span>
         </a>
@@ -13,6 +13,7 @@
           href="javascript:"
           :class="catalogList.length > 0 ? '' : 'disabled'"
           @click.stop="catalogList.length > 0 ? showCatalog() : false"
+          @touchend.stop="catalogList.length > 0 ? showCatalog() : false"
         >
           <UnorderedListOutlined />
           <span>目录</span>
