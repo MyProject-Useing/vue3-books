@@ -30,4 +30,4 @@ http://111.229.92.181/#/
 
 ### 运行截图
 
-<img src="https://github.com/danhuaxiansheng/vue3-books/raw/main/src/assets/dome/首页.png" width="30" height="30" />
+<img src="https://github.com/danhuaxiansheng/vue3-books/raw/main/src/assets/dome/home.png" width="30" height="30" />
