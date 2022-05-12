@@ -2,7 +2,7 @@
   <div class="book-content-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="read-content">
       <p v-for="(item, index) in contentList" :key="index">
-        <span class="content-wrap" v-html="filterText(item)"></span>
+        <span class="content-wrap" v-html="item"></span>
       </p>
     </div>
   </div>
@@ -35,16 +35,20 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
+
     contentList() {
-      return this.content.replace(/&nbsp;/g, "").split("\n");
+      let content = this.content || "";
+      let filterKey = ["下载本书最新的电子书请点击", "！！！亲,点击进去"];
+      if (content.includes(filterKey[0])) {
+        content = content.substring(0, content.indexOf(filterKey[0]));
+      }
+      if (content.includes(filterKey[1])) {
+        content = content.substring(0, content.indexOf(filterKey[1]));
+      }
+      return content.replace(/&nbsp;/g, "").split("\n");
     },
   },
-  methods: {
-    filterText(item) {
-      let text = item.split("亲,点击进去")[0];
-      return text;
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped>
