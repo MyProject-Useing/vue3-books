@@ -1,66 +1,70 @@
 <template>
-  <div class="reader-content" :class="isMobileClass ? 'mobile' : ''">
-    <div class="main-read-container">
-      <booksContent
-        class="book-content"
-        :bookInfo="bookInfo"
-        :title="bookTitle"
-        :content="bookContent"
-        @touchend="eventEnd"
-        @touchmove="eventMove"
-        ref="bookContentRef"
-      >
-      </booksContent>
+  <div class="reader-content-wrap" :class="isMobileClass ? 'mobile' : ''">
+    <div class="reader-content">
+      <div class="main-read-container">
+        <booksContent
+          class="book-content"
+          :bookInfo="bookInfo"
+          :title="bookTitle"
+          :content="bookContent"
+          @touchend="eventEnd"
+          @touchmove="eventMove"
+          ref="bookContentRef"
+        >
+        </booksContent>
 
-      <div class="read-load-next">
-        <a v-if="bookLoading" href="javascript:" class="btn-normal"
-          ><a-spin class="read-load-loading" />
-        </a>
-        <a
-          v-else
-          href="javascript:"
-          class="btn-normal"
-          @click="toNextChapter(true)"
-          >加载下一章
-        </a>
-      </div>
+        <div class="read-load-next">
+          <a v-if="bookLoading" href="javascript:" class="btn-normal"
+            ><a-spin class="read-load-loading" />
+          </a>
+          <a
+            v-else
+            href="javascript:"
+            class="btn-normal"
+            @click="toNextChapter(true)"
+            >加载下一章
+          </a>
+        </div>
 
-      <div
-        class="chapter-control dib-wrap"
-        v-if="!bookLoading && !isMobileClass"
-      >
-        <a
-          @click="
-            catalogList.length == 0 || bookLoading
-              ? false
-              : toNextChapter(false)
-          "
-          :class="firstClass"
-          >上一章</a
+        <div
+          class="chapter-control dib-wrap"
+          v-if="!bookLoading && !isMobileClass"
         >
-        <span>|</span>
-        <a
-          id="catalog_curr"
-          href="javascript:"
-          :class="catalogClass"
-          @click.stop="catalogList.length > 0 ? showCatalog() : false"
-          >目录</a
-        >
-        <span>|</span>
-        <a
-          :class="nextClass"
-          @click="
-            catalogList.length == 0 || bookLoading ? false : toNextChapter(true)
-          "
-          >下一章</a
-        >
+          <a
+            @click="
+              catalogList.length == 0 || bookLoading
+                ? false
+                : toNextChapter(false)
+            "
+            :class="firstClass"
+            >上一章</a
+          >
+          <span>|</span>
+          <a
+            id="catalog_curr"
+            href="javascript:"
+            :class="catalogClass"
+            @click.stop="catalogList.length > 0 ? showCatalog() : false"
+            >目录</a
+          >
+          <span>|</span>
+          <a
+            :class="nextClass"
+            @click="
+              catalogList.length == 0 || bookLoading
+                ? false
+                : toNextChapter(true)
+            "
+            >下一章</a
+          >
+        </div>
       </div>
+      <leftBar
+        v-show="showToolBar"
+        :catalogList="catalogList"
+        :selfCatalog="selfCatalog"
+      ></leftBar>
     </div>
-    <leftBar
-      v-show="showToolBar"
-      :catalogList="catalogList"
-      :selfCatalog="selfCatalog"
-    ></leftBar>
   </div>
 </template>
 <script>
