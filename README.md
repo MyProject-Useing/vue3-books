@@ -24,8 +24,10 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
+### 在线地址
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+http://111.229.92.181/#/
 
-  <img src="src/assets/dome/首页.png" width="30" height="30" />
+### 运行截图
+
+<img src="https://github.com/danhuaxiansheng/vue3-books/raw/main/src/assets/dome/首页.png" width="30" height="30" />
