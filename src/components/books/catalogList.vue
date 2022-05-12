@@ -148,11 +148,12 @@ export default {
   cursor: pointer;
   float: left;
   overflow: hidden;
-  max-width: calc(100% - 15px);
+  max-width: calc(100% - 0.8rem);
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 14px;
   color: #262626;
+  width: 100%;
 }
 .catalog-list-wrap .volume-list li.on a {
   color: #ed4259;

@@ -7,7 +7,6 @@
     <div class="book-index-mian">
       <a-page-header :breadcrumb="{ routes }" />
       <div class="book-index-content">
-        <div class="border-shadow"></div>
         <div class="book-information">
           <div class="book-img">
             <a-image
@@ -20,8 +19,10 @@
           <div class="book-info">
             <div class="book-info-details">
               <h2 class="ellipsis">
-                <em :title="bookInfo.bookTitle">{{ bookInfo.bookTitle }}</em>
-                <span
+                <em class="book-info-title" :title="bookInfo.bookTitle">{{
+                  bookInfo.bookTitle
+                }}</em>
+                <span class="book-info-author"
                   ><span>{{ bookInfo.author }}</span> 著</span
                 >
               </h2>
@@ -246,12 +247,11 @@ export default {
 @import url("./css/index.css");
 
 .book-index-mian .ant-page-header {
-  height: 241px;
+  height: 263px;
 }
 
 .book-information .book-img :deep(.ant-image) {
   width: 100%;
-  max-width: 144px;
   height: 100%;
 }
 
@@ -376,7 +376,7 @@ export default {
 
 /*移动端*/
 .mobile .book-index-mian .ant-page-header {
-  height: 4rem;
+  height: 12rem;
 }
 
 /*移动端*/
