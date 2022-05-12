@@ -2,9 +2,14 @@
   z-index: 102;
   top: 0px;
   position: fixed;
-  margin-left: -68px;
+  margin-left: 25px;
+  width: 54px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMVEX28ef48+n69esoK7jYAAAB4UlEQVQozw2OsW4bQQxEhwLXkDrysGdEqRRgVShfQQq8wOr2jD0jSpXCLvwXbtKfADlFqgSwC/9ljqweZgYzQFnb/QGepYhA9jzmTc1WaSEtQpbFgjWATI00ZZtIckXx8q2Oe5yEByBy+RHOTcM+VVTadULsvxvRC/q8WTwgcWGD+Mnaqa0oy2gw2pKFzK+PzEsus5hP9AHojKslVynLlioVTBEN8cjDNnZoR1uMGTiZAAN47HxMtEkGUE9b8HWzkqNX5Lpk0yVziAJOs46rK1pG/xNuXLjz95fSDoJE5IqG23MAYPtWoeWPvfVtIV/Ng9oH3W0gGMPIOqd4MK4QZ55dV61gOb8Zxp7I9qayaGxp6Q91cmC0ZRdBwEQVHWzSAanlZwVWc9yljeTCeaHjBVvlPSLeyeBUT2rPdJegQI103jVS3uYkyIx1il6mslMDedZuOkwzolsagvPuQAfp7cYg7k9V1NOxfq64PNSvMdwONV4VYEmqlbpZy5OAakRKkjPnL4CBv5/OZRgoWHBmNbxB0LgB1I4vXFj93UoF2/0TPEsWwV9EhbIiTPqYoTHYoMn3enTDjmrFeDTIzaL1bUC/PBIMuF+vSSYSaxoVt90EO3Gu1zrMuMRGUk7Ffv3L+A931Gsb/yBoIgAAAABJRU5ErkJggg==)
     repeat;
+}
+
+.left-bar-list dl {
+  margin: 0;
 }
 
 .left-bar-list dd {
@@ -20,8 +25,9 @@
   font: 12px/16px PingFangSC-Regular, "-apple-system", Simsun;
   display: block;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 7px;
   height: 100%;
+  padding-bottom: 6px;
 }
 
 .left-bar-list dd:first-child {
@@ -50,7 +56,7 @@
 .left-bar-list.mobile {
   position: fixed;
   margin: 0px;
-  top: calc(100vh - 64px);
+  top: calc(100vh - 58px);
   width: 100%;
   background: #41403e;
 }
@@ -62,7 +68,7 @@
 
 .left-bar-list.mobile dd {
   width: 25%;
-  height: 4rem;
+  height: 3.6rem;
 }
 
 .left-bar-list.mobile dd:first-child {

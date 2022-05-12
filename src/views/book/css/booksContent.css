@@ -30,6 +30,6 @@ p {
   width: 800px;
 }
 
-.main-text-wrap.mobile {
+.read-main-wrap.mobile .main-text-wrap {
   padding: 1rem;
 }

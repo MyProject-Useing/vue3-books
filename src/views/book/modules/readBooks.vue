@@ -101,9 +101,6 @@ export default {
       transformX: 0,
       transforming: false,
 
-      // 是否展示菜单栏
-      showReadBar: false,
-
       // 展示工具栏
       showToolBar: false,
 
@@ -122,22 +119,6 @@ export default {
 
       // 是否移动了内容
       touchMove: false,
-    };
-  },
-  mounted() {
-    this.init();
-
-    window.onkeydown = (e) => {
-      if (!this.bookLoading && this.catalogList.length > 0) {
-        // 右键翻页
-        if (e.keyCode === 39) {
-          this.toNextChapter(true);
-        }
-        // 左键翻页
-        else if (e.keyCode === 37) {
-          this.toNextChapter(false);
-        }
-      }
     };
   },
   computed: {
@@ -180,6 +161,24 @@ export default {
     bookUrl() {
       return unescape(this.$route.query.bookUrl || "");
     },
+  },
+  mounted() {
+    this.init();
+    if (!this.isMobileClass) {
+      this.showToolBar = true;
+    }
+    window.onkeydown = (e) => {
+      if (!this.bookLoading && this.catalogList.length > 0) {
+        // 右键翻页
+        if (e.keyCode === 39) {
+          this.toNextChapter(true);
+        }
+        // 左键翻页
+        else if (e.keyCode === 37) {
+          this.toNextChapter(false);
+        }
+      }
+    };
   },
   watch: {
     $route(to) {
