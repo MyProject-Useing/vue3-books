@@ -2,7 +2,8 @@
   <div
     class="reader-content"
     :class="isMobileClass ? 'mobile' : ''"
-    @touchstart="eventHandler"
+    @touchend="eventEnd"
+    @touchmove="eventMove"
   >
     <div class="main-read-container">
       <booksContent
@@ -119,6 +120,9 @@ export default {
       bookInfo: {},
 
       selfCatalog: {},
+
+      // 是否移动了内容
+      touchMove: false,
     };
   },
   mounted() {
@@ -331,27 +335,37 @@ export default {
     },
 
     // 移动端 内容点击事件
-    eventHandler(dom) {
-      let point = dom.targetTouches[0];
+    eventEnd(dom) {
+      // 如果是手动移动
+      if (this.touchMove) {
+        this.touchMove = false;
+        return false;
+      }
+      let point = dom.changedTouches[0];
       let windowSize = {
         width: window.document.documentElement.clientWidth,
         height: window.document.documentElement.clientHeight,
       };
 
       // 根据点击位置判断操作
-      const tY = windowSize.height / 3;
+      const tY = windowSize.height / 3.6;
       // 点击屏幕顶部
       if (point.clientY <= tY) {
-        jump(-(windowSize.height - point.screenY), { duration: 0 });
+        jump(-(windowSize.height - point.screenY), { duration: 270 });
       }
       // 点击屏幕底部
       else if (windowSize.height - point.clientY <= tY) {
-        jump(point.clientY, { duration: 0 });
+        jump(point.clientY, { duration: 270 });
       }
       // 点击屏幕中部
       else {
         this.showToolBar = !this.showToolBar;
       }
+    },
+
+    // 移动端 内容点击事件
+    eventMove() {
+      this.touchMove = true;
     },
   },
 };
