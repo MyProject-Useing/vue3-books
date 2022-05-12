@@ -5,6 +5,7 @@
   padding-top: calc(100% - 231px);
   position: relative;
   z-index: 1;
+  background-color: #fff;
 }
 
 /*logo*/
