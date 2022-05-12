@@ -2,9 +2,9 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding-top: calc(100% - 231px);
+  padding-top: calc(50vh - 210px);
   position: relative;
-  z-index: 1;
+  height: 100%;
   background-color: #fff;
 }
 
