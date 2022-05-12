@@ -109,20 +109,27 @@ export default {
 
       // 点击空白 关闭 目录和书签
       if (this.catalogPopover === true) {
-        if (
+        // 点击目录弹出框
+        if (e.path.includes($catalog_panle)) {
+          if (e.target.tagName === "A") {
+            this.catalogPopover = false;
+            return false;
+          }
+        } else if (
           e.path.includes($catalog_bottom) ||
-          e.path.includes($catalog_curr) ||
-          e.path.includes($catalog_panle)
+          e.path.includes($catalog_curr)
         ) {
           return false;
         } else {
           this.catalogPopover = false;
         }
       } else if (this.bookShelfPopover === true) {
-        if (
-          e.path.includes($bookshelf_btn) ||
-          e.path.includes($bookShelf_panle)
-        ) {
+        if (e.path.includes($bookShelf_panle)) {
+          if (e.target.tagName === "A") {
+            this.bookShelfPopover = false;
+            return false;
+          }
+        } else if (e.path.includes($bookshelf_btn)) {
           return false;
         } else {
           this.bookShelfPopover = false;

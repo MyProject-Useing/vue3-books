@@ -279,7 +279,7 @@ export default {
 
       this.catalogList.some((item, index) => {
         if (item.href === readUrl) {
-          readIndex = index;
+          readIndex = index + 1;
           return true;
         }
       });

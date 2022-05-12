@@ -18,13 +18,13 @@
           </a-image>
           <div class="img-info">
             <h3 class="books-name-p ellipsis">
-              <span
+              <a
                 :title="item.bookTitle"
                 @click="toDetail(item)"
                 class="books-name"
               >
                 {{ item.bookTitle }}
-              </span>
+              </a>
             </h3>
 
             <div class="img-content ellipsis">
