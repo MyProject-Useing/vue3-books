@@ -115,8 +115,9 @@ export default {
 .bookShelf-list .books-item {
   display: flex;
   float: left;
-  width: 258px;
+  width: 33%;
   margin-bottom: 15px;
+  min-width: 255px;
 }
 
 .books-item .books-name {
