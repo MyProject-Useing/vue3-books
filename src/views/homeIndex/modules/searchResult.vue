@@ -8,10 +8,10 @@
           enter-button="Search"
           placeholder="请输入小说或作者名称"
           v-model:value.trim="keywords"
-          @keyup.enter.stop="searchBook(true)"
+          @keyup.enter.stop="searchBook(false)"
         >
         </a-auto-complete>
-        <a-button type="primary" @click="searchBook(true)">全网搜</a-button>
+        <a-button type="primary" @click="searchBook(false)">全网搜</a-button>
       </div>
       <div class="search-right">
         <span class="setting-txt" @click="goHome">系统首页</span>
