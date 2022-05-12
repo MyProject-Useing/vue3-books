@@ -3,21 +3,19 @@
     <h2 class="head-title">
       {{ chapterTitle }}
     </h2>
-    <div v-if="!isMobileClass">
-      <div class="info fl">
-        <a>
-          <database-outlined title="书名" />
-          <span> {{ book.bookTitle }}</span></a
-        >
-        <a
-          ><solution-outlined title="作者" />
-          <span> {{ book.author }}</span>
-        </a>
-        <a>
-          <ReadOutlined title="字数" />
-          <span> {{ (book.wordCount || "0").replace("字", "") }}字</span>
-        </a>
-      </div>
+    <div class="text-info" v-if="!isMobileClass">
+      <a>
+        <database-outlined title="书名" />
+        <span> {{ book.bookTitle }}</span></a
+      >
+      <a
+        ><solution-outlined title="作者" />
+        <span> {{ book.author }}</span>
+      </a>
+      <a>
+        <ReadOutlined title="字数" />
+        <span> {{ (book.wordCount || "0").replace("字", "") }}字</span>
+      </a>
     </div>
   </div>
 </template>
@@ -71,16 +69,18 @@ export default {
 };
 </script>
 <style scoped>
+.content-head-wrap {
+  margin-bottom: 2rem;
+}
 .content-head-wrap .head-title {
   font: 1.5rem PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
-  margin-bottom: 2rem;
-  line-height: 1.2;
 }
 
 .content-head-wrap .text-info {
   font: 12px/16px PingFangSC-Regular, "-apple-system", Simsun;
-  height: 34px;
+  display: flex;
+  align-items: center;
 }
 
 .content-head-wrap .text-info span {
@@ -92,8 +92,6 @@ export default {
     "Microsoft YaHei", sans-serif;
   margin-right: 16px;
   color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  float: left;
 }
 .content-head-wrap .text-info i {
   color: rgba(0, 0, 0, 0.4);
