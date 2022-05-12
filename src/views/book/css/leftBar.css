@@ -1,4 +1,3 @@
-
 .left-bar-list {
   z-index: 102;
   top: 0px;
@@ -46,3 +45,21 @@
   color: rgba(0, 0, 0, 0.4);
   display: block;
 }
+
+/*移动端*/
+.left-bar-list.mobile {
+  position: absolute;
+  margin: 0px;
+  top: calc(100vh - 60px);
+  width: 100%;
+}
+
+.left-bar-list.mobile dl {
+  display: flex;
+}
+
+.left-bar-list.mobile dd {
+  width: 25%;
+}
+
+/*移动端*/

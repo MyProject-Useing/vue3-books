@@ -27,14 +27,10 @@
           >加载下一章
         </a>
       </div>
-      <leftBar
-        v-if="showToolBar"
-        :catalogList="catalogList"
-        :selfCatalog="selfCatalog"
-      ></leftBar>
+
       <div
         class="chapter-control dib-wrap"
-        v-show="!bookLoading && !isMobileClass"
+        v-if="!bookLoading && !isMobileClass"
       >
         <a
           @click="
@@ -63,6 +59,11 @@
         >
       </div>
     </div>
+    <leftBar
+      v-show="showToolBar"
+      :catalogList="catalogList"
+      :selfCatalog="selfCatalog"
+    ></leftBar>
   </div>
 </template>
 <script>
@@ -105,8 +106,9 @@ export default {
 
       // 是否展示菜单栏
       showReadBar: false,
+
       // 展示工具栏
-      showToolBar: true,
+      showToolBar: false,
 
       // 目录弹出框
       catalogPopover: false,
@@ -359,6 +361,7 @@ export default {
       }
       // 点击屏幕中部
       else {
+        // 显示菜单
         this.showToolBar = !this.showToolBar;
       }
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="left-bar-list" v-if="!isMobileClass">
+  <div class="left-bar-list" :class="isMobileClass ? 'mobile' : ''">
     <dl>
       <dd>
         <a href="javascript:" @click="goHome">
