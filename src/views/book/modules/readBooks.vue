@@ -348,15 +348,16 @@ export default {
         width: window.document.documentElement.clientWidth,
         height: window.document.documentElement.clientHeight,
       };
-
       // 根据点击位置判断操作
       const tY = windowSize.height / 3.6;
       // 点击屏幕顶部
       if (point.clientY <= tY) {
+        this.showToolBar = false;
         jump(-(windowSize.height - point.screenY), { duration: 270 });
       }
       // 点击屏幕底部
       else if (windowSize.height - point.clientY <= tY) {
+        this.showToolBar = false;
         jump(point.clientY, { duration: 270 });
       }
       // 点击屏幕中部
