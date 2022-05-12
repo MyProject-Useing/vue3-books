@@ -38,7 +38,7 @@
                 v-for="(book, bi) in searchResult"
                 :key="bi"
               >
-                <div class="cover-img">
+                <div class="cover-img" @click.stop="toBookIndex(book)">
                   <a-image
                     class="cover"
                     :src="book.imgUrl || ''"
@@ -72,7 +72,7 @@
                     >
                       <UserOutlined /> {{ book.author || "" }}
                     </span>
-                    <a v-if="isCollect(book)" @click="jumpRead(book)"
+                    <a v-if="isCollect(book)" @click.stop="jumpRead(book)"
                       >继续阅读</a
                     >
                   </div>

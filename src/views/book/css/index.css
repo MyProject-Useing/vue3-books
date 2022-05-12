@@ -152,7 +152,7 @@ ul {
 }
 
 .book-information .book-info .book-info-details {
-  height: calc(100% - 1.7rem);
+  height: calc(100% - 1.9rem);
 }
 
 .book-information .book-info .tag + p + p i {
@@ -176,7 +176,7 @@ ul {
 .book-information .book-info a.blue-btn {
   font: 100% PingFangSC-Regular, "-apple-system", Simsun;
   display: inline-block;
-  line-height: 1.5rem;
+  line-height: 1.8rem;
   padding: 0 0.8rem;
   border-width: 1px;
   border-style: solid;
