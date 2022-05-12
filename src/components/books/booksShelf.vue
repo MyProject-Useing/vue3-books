@@ -87,12 +87,12 @@ export default {
 }
 
 .books-panle {
-  padding-left: 24px;
   min-height: 235px;
   max-height: 450px;
   overflow: auto;
   overflow-x: hidden;
   position: relative;
+  height: calc(100vh - 250px);
 }
 
 .bookShelf-title {
