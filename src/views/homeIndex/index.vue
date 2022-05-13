@@ -19,9 +19,9 @@
       <a
         v-for="(item, index) in cacheBookList"
         :key="index"
-        @mouseover="item.isActive = true"
-        @mouseout="item.isActive = false"
-        @click="toDetail(item)"
+        @mouseover.stop="item.isActive = true"
+        @mouseout.stop="item.isActive = false"
+        @click.stop="toDetail(item)"
       >
         <span
           v-show="item.isActive"
@@ -87,6 +87,7 @@ export default {
     },
     // 直接阅读缓存的书籍
     toDetail(book) {
+      book.isActive = false;
       // 当前正在阅读的书籍
       this.$router.push({
         path: "/readBooks",

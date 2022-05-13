@@ -79,13 +79,6 @@ ul {
   font: 14px/20px PingFangSC-Regular, "-apple-system", Simsun;
   margin-left: 20px;
 }
-.book-information .book-info .tag {
-  font-size: 0;
-  overflow: hidden;
-  height: 25px;
-  margin-bottom: 12px;
-}
-
 .book-information .book-info-btn {
   margin: 0;
 }
@@ -143,7 +136,7 @@ ul {
 }
 
 .book-information .book-info .book-info-details {
-  height: calc(100% - 1.9rem);
+  height: calc(100% - 2.1rem);
 }
 
 .book-information .book-info .tag + p + p i {
@@ -167,7 +160,7 @@ ul {
 .book-information .book-info a.blue-btn {
   font: 100% PingFangSC-Regular, "-apple-system", Simsun;
   display: inline-block;
-  line-height: 1.8rem;
+  line-height: 1.9rem;
   padding: 0 0.8rem;
   border-width: 1px;
   border-style: solid;
@@ -182,6 +175,8 @@ ul {
 .book-info-title {
   font-weight: bolder;
 }
+
+
 
 /*标签分页*/
 

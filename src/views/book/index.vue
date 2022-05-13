@@ -18,27 +18,29 @@
           </div>
           <div class="book-info">
             <div class="book-info-details">
-              <h2 class="ellipsis">
+              <h1 class="ellipsis">
                 <em class="book-info-title" :title="bookInfo.bookTitle">{{
                   bookInfo.bookTitle
                 }}</em>
                 <span class="book-info-author"
                   ><span>{{ bookInfo.author }}</span> 著</span
                 >
-              </h2>
-              <p class="tag">
-                <span class="blue">连载</span>
-                <span class="blue">免费</span>
-              </p>
-              <p class="intro" v-if="!isMobileClass">小说简介</p>
-              <p v-if="!isMobileClass">
-                <em><span class="szWntGoi">0</span></em
-                ><cite>万字</cite><i>|</i>
-                <em><span class="szWntGoi">0</span></em
-                ><cite>总推荐</cite><i>|</i
-                ><em><span class="szWntGoi">0</span></em
-                ><cite>周推荐</cite>
-              </p>
+              </h1>
+              <template v-if="!isMobileClass">
+                <p class="tag">
+                  <span class="blue">连载</span>
+                  <span class="blue">免费</span>
+                </p>
+                <p class="intro">小说简介</p>
+                <p>
+                  <em><span class="szWntGoi">0</span></em
+                  ><cite>万字</cite><i>|</i>
+                  <em><span class="szWntGoi">0</span></em
+                  ><cite>总推荐</cite><i>|</i
+                  ><em><span class="szWntGoi">0</span></em
+                  ><cite>周推荐</cite>
+                </p>
+              </template>
             </div>
             <p class="book-info-btn">
               <a class="blue-btn" href="javascript:" @click="stillRead()">{{
@@ -52,14 +54,14 @@
           <a-spin :spinning="bookLoading">
             <a-tabs v-model:activeKey="activeKey">
               <a-tab-pane key="1" tab="作品信息"
-                ><div class="left-wrap fl">
+                ><div class="left-wrap">
                   <div class="book-info-detail">
                     <div class="book-intro">
                       <p>{{ bookInfo.intro }}</p>
                     </div>
                     <div class="book-state">
                       <ul>
-                        <li class="update">
+                        <li>
                           <b v-if="!isMobileClass">最新章节</b>
                           <div class="detail">
                             <p
@@ -261,6 +263,11 @@ export default {
   border-bottom: 1px solid #e6e6e6;
 }
 
+.content-nav-wrap :deep(.left-wrap) .book-intro {
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 15px;
+}
+
 .content-nav-wrap :deep(.left-wrap) .book-intro p {
   font: 14px/28px PingFangSC-Regular, "-apple-system", Simsun;
   overflow: hidden;
@@ -270,7 +277,11 @@ export default {
 
 .content-nav-wrap :deep(.left-wrap) .book-state {
   position: relative;
-  z-index: 2;
+}
+
+.content-nav-wrap :deep(.left-wrap) .book-state ul {
+  margin: 0;
+  padding: 0;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state li b {
@@ -282,33 +293,19 @@ export default {
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail {
-  float: left;
-  width: calc(100% - 118px);
   padding: 20px 0;
 }
 
-.content-nav-wrap
-  :deep(.left-wrap)
-  .book-state
-  li.update
-  .detail
-  .charpter-container {
+.content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-container {
   display: inline-block;
-  width: 33%;
   height: 22px;
   margin: 0px;
-  max-width: 300px;
-  min-width: 260px;
+  width: 100%;
 }
 
-.content-nav-wrap
-  :deep(.left-wrap)
-  .book-state
-  li.update
-  .detail
-  .charpter-link {
+.content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-link {
   overflow: hidden;
-  max-width: 160px;
+  max-width: calc(100% - 80px);
   white-space: nowrap;
   text-overflow: ellipsis;
 }

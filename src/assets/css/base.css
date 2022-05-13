@@ -32,7 +32,7 @@ body {
 }
 
 .logo-bg {
-  background: url(../../../src/assets/logo.png) no-repeat;
+  background: url(@/assets/logo.png) no-repeat;
   background-size: cover;
 }
 
@@ -42,11 +42,9 @@ body {
   white-space: nowrap;
 }
 
-
-.red{
+.red {
   color: #ed424b;
 }
-
 
 /*遮罩框*/
 
