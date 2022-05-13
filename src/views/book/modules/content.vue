@@ -38,12 +38,19 @@ export default {
 
     contentList() {
       let content = this.content || "";
-      let filterKey = ["下载本书最新的电子书请点击", "！！！亲,点击进去"];
+      let filterKey = [
+        "下载本书最新的电子书请点击",
+        "！！！亲,点击进去",
+        "亲,点击进去,",
+      ];
       if (content.includes(filterKey[0])) {
         content = content.substring(0, content.indexOf(filterKey[0]));
       }
       if (content.includes(filterKey[1])) {
         content = content.substring(0, content.indexOf(filterKey[1]));
+      }
+      if (content.includes(filterKey[2])) {
+        content = content.substring(0, content.indexOf(filterKey[2]));
       }
       return content.replace(/&nbsp;/g, "").split("\n");
     },
