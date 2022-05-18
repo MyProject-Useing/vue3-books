@@ -176,22 +176,21 @@ ul {
   font-weight: bolder;
 }
 
-
-
 /*标签分页*/
 
 .book-information .ant-tabs > .ant-tabs-nav {
   height: 41px;
 }
 
-.ant-tabs-tab {
+.book-detail-wrap .ant-tabs-tab {
   padding: 1px 0;
 }
 
-.ant-tabs-top > .ant-tabs-nav {
+.book-detail-wrap .ant-tabs-top > .ant-tabs-nav {
   margin: 0 0 34px 0;
 }
-.ant-tabs-tab .ant-tabs-tab-btn {
+
+.book-detail-wrap .ant-tabs-tab .ant-tabs-tab-btn {
   font: 18px/40px FZZCYSK;
   float: left;
   overflow: hidden;
@@ -202,19 +201,19 @@ ul {
   font-family: FZZCYSK;
 }
 
-.ant-tabs-tab-btn:focus,
-.ant-tabs-tab-remove:focus,
-.ant-tabs-tab-btn:active,
-.ant-tabs-tab:hover,
-.ant-tabs-tab-remove:active {
+.book-detail-wrap .ant-tabs-tab-btn:focus,
+.book-detail-wrap .ant-tabs-tab-remove:focus,
+.book-detail-wrap .ant-tabs-tab-btn:active,
+.book-detail-wrap .ant-tabs-tab:hover,
+.book-detail-wrap .ant-tabs-tab-remove:active {
   color: #ed4259;
 }
 
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+.book-detail-wrap .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #ed4259;
 }
 
-.ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+.book-detail-wrap  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
   background: #ed4259;
 }
 
@@ -243,6 +242,5 @@ ul {
   width: 80px;
   margin-right: 10px;
 }
-
 
 /*移动端*/

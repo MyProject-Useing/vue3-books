@@ -1,0 +1,118 @@
+.book-result-wrap .search-content-panle {
+  /* height: calc(100vh - 121px); */
+  min-height: 200px;
+  position: relative;
+}
+
+.book-result-wrap .wrapper {
+  display: inline-block;
+  padding-left: 0px;
+  width: 100%;
+}
+
+.book-result-wrap .books-wrapper .book-item {
+  display: flex;
+  float: left;
+  margin-bottom: 2rem;
+  width: 33%;
+  min-width: 200px;
+  max-width: 360px;
+  padding-right: 10px;
+}
+
+.book-result-wrap .books-wrapper {
+  height: 100%;
+}
+
+.book-result-wrap .cover-img {
+  width: 4.125rem;
+  height: 5.5rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), inset 0 0 5px #f9f2e9;
+}
+
+.book-result-wrap .cover-img .ant-image {
+  width: 100%;
+}
+
+.book-result-wrap .cover-img .cover {
+  height: 100%;
+}
+
+.book-result-wrap .book-info {
+  position: relative;
+  right: 0px;
+  width: calc(100% - 4.625rem);
+  height: 5.5rem;
+}
+
+.book-result-wrap .book-name {
+  font-size: 16px;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  line-height: 1.4;
+  color: #33373d;
+  font-weight: 600;
+}
+
+.book-result-wrap .book-name:hover {
+  color: #ed4259;
+}
+
+.book-result-wrap .book-content-details {
+  width: 100%;
+  height: 2.25rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  color: #969ba3;
+}
+
+.book-result-wrap .last-chapter a {
+  color: #666;
+  width: calc(100% - 65px);
+}
+
+.book-result-wrap .last-chapter a:active {
+  color: #096dd9;
+}
+
+.book-result-wrap .last-chapter a:hover {
+  color: #40a9ff;
+}
+
+.book-result-wrap .book-author-title {
+  width: calc(100% - 63px);
+}
+
+.book-result-wrap .book-author a {
+  border: 1px solid #df9591;
+  color: #bf2c24;
+  padding: 0px 2px;
+}
+
+.book-result-wrap .book-author {
+  color: #a6a6a6;
+  display: flex;
+  align-items: center;
+  font-size: 0.8125rem;
+}
+.book-result-wrap .book-author i {
+  margin-right: 5px;
+}
+
+.book-result-wrap .ant-image {
+  height: 100%;
+}
+
+/*移动端*/
+.book-result-wrap.mobile .search-content-panle {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.book-result-wrap.mobile .books-wrapper .book-item {
+  width: 100%;
+}
+
+/*移动端*/
