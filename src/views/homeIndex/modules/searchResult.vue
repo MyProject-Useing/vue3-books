@@ -65,7 +65,7 @@ export default {
       keywords: "",
 
       // 内容类别
-      activeKey: "book",
+      activeKey: "video",
 
       // 查询遮罩框
       refreshLoading: false,

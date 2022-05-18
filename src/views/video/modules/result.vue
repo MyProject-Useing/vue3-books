@@ -1,6 +1,19 @@
 <template>
   <div class="book-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <div class="search-content-panle">
+    <video
+      id="s-video"
+      autoplay=""
+      preload="auto"
+      x-webkit-airplay="true"
+      poster="data:image/ico;base64,aWNv"
+      src="blob:https://z1.m1907.cn/b65c4842-60b2-45ed-852f-e53fc74d3b75"
+      style="object-fit: contain"
+    >
+      您的浏览器版本不支持，无法播放视频！<br />请使用chrome 火狐 opera
+      等浏览器访问本页面即可播放当前视频!!
+    </video>
+
+    <!-- <div class="search-content-panle">
       <div class="books-wrapper">
         <a-empty v-if="dataList.length === 0" description="暂无数据" />
         <ul v-else class="wrapper">
@@ -45,20 +58,19 @@
         </ul>
         <a-back-top />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { isMobile } from "@/plugins/utils";
-import { UserOutlined } from "@ant-design/icons-vue";
+// import { UserOutlined } from "@ant-design/icons-vue";
 export default {
   name: "bookResult",
-  components: { UserOutlined },
+  // components: { UserOutlined },
   data() {
     return {
       // 数据列表
-      // dataList: [],
       noCover: require("@/assets/imgs/noCover.jpeg"),
     };
   },
