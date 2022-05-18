@@ -70,13 +70,6 @@ export default {
       },
     },
   },
-  // watch: {
-  //   content(val, oldVal) {
-  //     if (val !== oldVal) {
-  //       return val;
-  //     }
-  //   },
-  // },
   computed: {
     // 是否为移动端
     isMobileClass() {
