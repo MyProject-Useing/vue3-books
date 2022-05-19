@@ -1,6 +1,13 @@
 <template>
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <video id="my-video" controls preload="auto" width="320" height="240">
+    <video
+      id="my-video"
+      class="video-wrap"
+      controls
+      preload="auto"
+      width="320"
+      height="240"
+    >
       <source
         src="https://new.iskcd.com/20211218/u4JqnSI6/1100kb/hls/index.m3u8"
         type="application/x-mpegURL"
@@ -61,6 +68,11 @@ export default {
           posterImage: true,
           errorDisplay: false,
           controlBar: true,
+
+          //  controls  //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
+          //  autoplay: "muted", // //自动播放属性,muted:静音播放
+          //  preload="auto"  //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
+          //  poster="../assets/img/E0531.jpg">   //设置视频封面
         },
         function () {
           this.play();
