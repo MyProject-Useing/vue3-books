@@ -14,7 +14,7 @@
     "compression-webpack-plugin": "^9.2.0",
     "core-js": "^3.8.3",
     "lib-flexible": "^0.3.2",
-    "video.js": "^7.18.1",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"

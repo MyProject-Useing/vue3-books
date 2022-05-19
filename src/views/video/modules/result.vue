@@ -1,24 +1,6 @@
 <template>
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <video
-      class="tvhou"
-      width="320"
-      height="240"
-      controls="controls"
-      autoplay="autoplay"
-      x-webkit-airplay="true"
-      x5-video-player-fullscreen="true"
-      preload="auto"
-      playsinline="true"
-      webkit-playsinline
-      x5-video-player-typ="h5"
-    >
-      <source
-        type="application/x-mpegURL"
-        src="https://new.iskcd.com/20211218/u4JqnSI6/1100kb/hls/index.m3u8"
-      />
-    </video>
-    <video id="my-video" controls preload="auto" width="500px">
+    <video id="my-video" controls preload="auto" width="320" height="240">
       <source
         src="https://new.iskcd.com/20211218/u4JqnSI6/1100kb/hls/index.m3u8"
         type="application/x-mpegURL"
@@ -40,8 +22,6 @@ export default {
     return {
       // 数据列表
       noCover: require("@/assets/imgs/noCover.jpeg"),
-      iSrc: "https://m3u8.okjx.cc:3389/m13.php?url=https://www.iqiyi.com/v_26cxipz70mw.html?vfrm=pcw_playpage",
-      src: "https://hey05.789zy.cc/20211218/u4JqnSI6/1100kb/hls/LmQrComs.ts",
       studyTime: {
         currentTime: 0, // 当前已学时长
         duration: 0, // 总时长
@@ -50,8 +30,6 @@ export default {
     };
   },
   mounted() {
-    // this.initVideo(this.m3u8Src);
-
     this.getVideo();
   },
   props: {
@@ -73,8 +51,8 @@ export default {
     },
   },
   methods: {
+    // 初始化视频
     getVideo() {
-      debugger;
       videojs(
         "my-video",
         {
@@ -90,24 +68,16 @@ export default {
       );
     },
 
-    initVideo(nowPlayVideoUrl) {
-      debugger;
-      // 这些options属性也可直接设置在video标签上，见 muted
-      let options = {
-        autoplay: true, // 设置自动播放
-        controls: true, // 显示播放的控件
-        sources: [
-          // 注意，如果是以option方式设置的src,是不能实现 换台的 (即使监听了nowPlayVideoUrl也没实现)
-          {
-            src: nowPlayVideoUrl,
-            type: "application/x-mpegURL", // 告诉videojs,这是一个hls流
-          },
-        ],
-      }; // videojs的第一个参数表示的是，文档中video的id
-      const myPlyer = videojs("videoPlayer", options, function onPlayerReady() {
-        console.log("onPlayerReady 中的this指的是：", this); // 这里的this是指Player,是由Videojs创建出来的实例
-        console.log(myPlyer === this); // 这里返回的是true
-      });
+    // 切换视频
+    checkVideo() {
+      var myPlayer = videojs("my-video");
+      myPlayer.src([
+        {
+          type: "application/x-mpegURL",
+          src: this.m3u8Src, //CCTV3频道
+        },
+      ]);
+      myPlayer.play();
     },
   },
 };
