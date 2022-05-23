@@ -41,6 +41,18 @@
             <template #tab>
               <span class="filter-txt filter-active">
                 <search-outlined />
+                电影
+                <span class="title-num">
+                  {{ movieList.length === 0 ? "" : movieList.length }}
+                </span></span
+              >
+            </template>
+            <videoResult :dataList="videoList" />
+          </a-tab-pane>
+          <a-tab-pane key="video">
+            <template #tab>
+              <span class="filter-txt filter-active">
+                <search-outlined />
                 视频
                 <span class="title-num">
                   {{ videoList.length === 0 ? "" : videoList.length }}
@@ -106,6 +118,9 @@ export default {
 
       // 视频结果
       videoList: [],
+
+      // 电影
+      movieList: [],
     };
   },
   activated() {
