@@ -1,2 +1,6 @@
 // 系统类型
-export const sysTypeList = ["book", "video", "movie"];
+let sysTypeList = ["book", "video", "movie"];
+
+module.exports = {
+  sysTypeList,
+};
