@@ -2,7 +2,7 @@
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
     <video
       id="my-video"
-      class="video-wrap"
+      class="video-wrap vjs-default-skin vjs-big-play-centered"
       controls
       preload="auto"
       width="320"
@@ -37,7 +37,7 @@ export default {
     };
   },
   mounted() {
-    this.getVideo();
+    // this.getVideo();
   },
   props: {
     dataList: {
@@ -60,6 +60,13 @@ export default {
   methods: {
     // 初始化视频
     getVideo() {
+      // 播放 this.play()
+      // 停止 – video没有stop方法，可以用pause 暂停获得同样的效果
+      // 暂停 this.pause()
+      // 销毁 this.dispose()
+      // 监听 this.on(‘click‘,fn)
+      // 触发事件this.trigger(‘dispose‘)
+
       videojs(
         "my-video",
         {
@@ -69,6 +76,11 @@ export default {
           errorDisplay: false,
           controlBar: true,
 
+          // loop: true, // 视频播放结束后，是否循环播放
+          // muted: false, //是否静音
+          // poster: "", // 播放前显示的视频画面，播放开始之后自动移除。通常传入一个URL
+          // preload: "auto", //预加载‘ 自动
+
           //  controls  //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
           //  autoplay: "muted", // //自动播放属性,muted:静音播放
           //  preload="auto"  //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
@@ -76,6 +88,11 @@ export default {
         },
         function () {
           this.play();
+
+          // How about an event listener?<br>  // 如何使用事件监听？
+          this.on("ended", function () {
+            videojs.log("‘播放结束了");
+          });
         }
       );
     },
