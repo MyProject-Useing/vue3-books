@@ -22,7 +22,6 @@ export default createStore({
   },
   mutations: {
     setSysEntry(state, val) {
-      debugger;
       state.entry = val;
       localStorage.setItem("sys-entry", val);
     },

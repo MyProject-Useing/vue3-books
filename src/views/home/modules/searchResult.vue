@@ -159,7 +159,7 @@ export default {
       // 重新搜索
       this.bookList = [];
       // 缓存查询记录
-      this.$store.commit("caches/setSearchHistory", this.keywords);
+      // this.$store.commit("caches/setSearchHistory", this.keywords);
       // 打开遮罩
       this.refreshLoading = true;
 
@@ -188,6 +188,7 @@ export default {
     // 菜单切换
     tabChange(activeKey) {
       this.$store.commit("setSysEntry", activeKey);
+      this.search();
     },
   },
 };

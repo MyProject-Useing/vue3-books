@@ -1,8 +1,11 @@
+// 系统类型
+const { sysTypeList } = require("./plugins/map.js");
+
 module.exports = {
   title: "蛋花-综合网站",
 
-  // 入口
-  entry: "video",
+  // 设置系统入口类型
+  entry: sysTypeList[0],
 
   // 模式
   mode: "",
