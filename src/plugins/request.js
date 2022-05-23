@@ -1,10 +1,10 @@
 "use strict";
 
 import Axios from "axios";
-import store from "@/store";
+// import store from "@/store";
 import { message } from "ant-design-vue";
 const service = Axios.create({
-  baseURL: store.state.api,
+  // baseURL: store.state.api,
   // withCredentials: true,
   timeout: 5 * 60 * 1000,
 });

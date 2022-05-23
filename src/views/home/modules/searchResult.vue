@@ -20,13 +20,20 @@
     </div>
     <div class="content-panle">
       <a-spin :spinning="refreshLoading">
-        <a-tabs v-model:activeKey="activeKey" class="search-filter">
+        <a-tabs
+          class="search-filter"
+          v-model:activeKey="activeKey"
+          @change="tabChange"
+        >
           <a-tab-pane key="book">
             <template #tab>
               <span class="filter-txt filter-active">
                 <search-outlined />
-                小说</span
-              >
+                小说
+                <span class="title-num">
+                  {{ bookList.length === 0 ? "" : bookList.length }}
+                </span>
+              </span>
             </template>
             <bookResult :dataList="bookList" />
           </a-tab-pane>
@@ -34,7 +41,10 @@
             <template #tab>
               <span class="filter-txt filter-active">
                 <search-outlined />
-                视频</span
+                视频
+                <span class="title-num">
+                  {{ videoList.length === 0 ? "" : videoList.length }}
+                </span></span
               >
             </template>
             <videoResult :dataList="videoList" />
@@ -59,13 +69,34 @@ import request from "@/plugins/request";
 export default {
   name: "searchResult",
   components: { SearchOutlined, bookResult, videoResult },
+  computed: {
+    // 是否为移动端
+    isMobileClass() {
+      let isTrue = isMobile();
+      return isTrue;
+    },
+    // 用于过滤 重复的数据
+    searchResultMap() {
+      return this.bookList.reduce((c, v) => {
+        c[v.bookUrl] = v;
+        return c;
+      }, {});
+    },
+    bookApi() {
+      return this.$store.state.book.api;
+    },
+    // 设置主查询
+    entry() {
+      return this.$store.state.entry;
+    },
+  },
   data() {
     return {
       // 查询关键字
       keywords: "",
 
       // 内容类别
-      activeKey: "video",
+      activeKey: "",
 
       // 查询遮罩框
       refreshLoading: false,
@@ -75,27 +106,13 @@ export default {
 
       // 视频结果
       videoList: [],
-
-      // 查询结果
-      searchResult: [],
     };
   },
   activated() {
+    if (!this.activeKey) {
+      this.activeKey = this.entry;
+    }
     this.init();
-  },
-  computed: {
-    // 是否为移动端
-    isMobileClass() {
-      let isTrue = isMobile();
-      return isTrue;
-    },
-    // 用于过滤 重复的数据
-    searchResultMap() {
-      return this.searchResult.reduce((c, v) => {
-        c[v.bookUrl] = v;
-        return c;
-      }, {});
-    },
   },
   watch: {
     $route(to) {
@@ -150,7 +167,7 @@ export default {
         keywords: this.keywords,
       };
       request
-        .post(this.$store.state.api + "api/common/searchBooksList", params)
+        .post(this.bookApi + "api/common/searchBooksList", params)
         .then((result) => {
           this.refreshLoading = false;
           if (result.data.data) {
@@ -167,12 +184,17 @@ export default {
           this.refreshLoading = false;
         });
     },
+
+    // 菜单切换
+    tabChange(activeKey) {
+      this.$store.commit("setSysEntry", activeKey);
+    },
   },
 };
 </script>
 
 <style scoped>
-@import url("@/views/homeIndex/css/searchResult.css");
+@import url("@/views/home/css/searchResult.css");
 
 .result-content .search-btn-group :deep(.ant-select-selector) {
   height: 100%;

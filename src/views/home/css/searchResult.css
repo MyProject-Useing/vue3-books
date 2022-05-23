@@ -104,6 +104,13 @@
   background: #4e6ef2;
 }
 
+.result-content .title-num {
+  border-radius: 50%;
+  background: #f1f2f3;
+  color: #61666d;
+  padding: 1px 6px;
+}
+
 /*移动端*/
 .result-content.mobile .logo-bg {
   display: none;

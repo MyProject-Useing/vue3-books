@@ -114,7 +114,7 @@ import request from "@/plugins/request";
 import { message } from "ant-design-vue";
 import { isMobile } from "@/plugins/utils";
 // 目录
-import catalog from "@/components/books/catalogList.vue";
+import catalog from "./modules/catalogList.vue";
 
 export default {
   name: "bookIndex",
@@ -168,6 +168,10 @@ export default {
         ? "继续阅读"
         : "免费阅读";
     },
+
+    bookApi() {
+      return this.$store.state.book.api;
+    },
   },
   activated() {
     this.init();
@@ -192,7 +196,7 @@ export default {
       } else {
         this.bookLoading = true;
         request
-          .post(this.$store.state.api + "api/common/getCatalog", {
+          .post(this.bookApi + "api/common/getCatalog", {
             bookUrl: this.bookUrl,
           })
           .then((result) => {

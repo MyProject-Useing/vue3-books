@@ -6,7 +6,7 @@ const routes = [
     meta: {
       keepAlive: false,
     },
-    component: () => import("@/views/homeIndex/index.vue"),
+    component: () => import("@/views/home/index.vue"),
   },
   {
     path: "/readBooks",
@@ -32,7 +32,7 @@ const routes = [
     meta: {
       keepAlive: true,
     },
-    component: () => import("@/views/homeIndex/modules/searchResult.vue"),
+    component: () => import("@/views/home/modules/searchResult.vue"),
   },
 ];
 

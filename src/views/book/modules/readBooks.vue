@@ -165,6 +165,10 @@ export default {
     bookUrl() {
       return unescape(this.$route.query.bookUrl || "");
     },
+
+    bookApi() {
+      return this.$store.state.book.api;
+    },
   },
   mounted() {
     this.init();
@@ -249,7 +253,7 @@ export default {
       } else {
         this.bookLoading = true;
         request
-          .post(this.$store.state.api + "api/common/getCatalog", {
+          .post(this.bookApi + "api/common/getCatalog", {
             bookUrl: this.bookUrl,
           })
           .then((result) => {
@@ -314,7 +318,7 @@ export default {
 
       // 获取正文内容
       request
-        .post(this.$store.state.api + "api/common/getBooksText", {
+        .post(this.bookApi + "api/common/getBooksText", {
           bookUrl: readUrl,
         })
         .then(

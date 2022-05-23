@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
-const setting = require("../../public/setting");
+
+const setting = require("@/setting.js");
 
 const files = require.context("./modules", false, /\.js$/);
 const modules = {};
@@ -13,15 +14,23 @@ Object.keys(modules).forEach((key) => {
 
 export default createStore({
   state: {
-    api: setting.apiAddress + ":" + setting.apiPort + "/",
-    windowSize: {
-      width: window.document.body.clientWidth,
-      height: window.document.body.clientHeight,
+    // 系统主入口 （小说、视频）
+    entry: localStorage.getItem("sys-entry") || setting.entry,
+  },
+  getters: {
+    entry: (state) => state.entry,
+  },
+  mutations: {
+    setSysEntry(state, val) {
+      debugger;
+      state.entry = val;
+      localStorage.setItem("sys-entry", val);
     },
   },
-  // getters: {},
-  // mutations: {},
-  // actions: {},
-  // modules,
+  actions: {
+    setSysEntry({ commit }, val) {
+      commit("setSysEntry", val);
+    },
+  },
   modules,
 });

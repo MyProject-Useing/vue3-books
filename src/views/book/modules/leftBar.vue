@@ -49,9 +49,9 @@
 <script>
 import { isMobile } from "@/plugins/utils";
 // 目录
-import catalog from "@/components/books/catalogList.vue";
+import catalog from "./booksShelf.vue";
 // 书架
-import booksShelf from "@/components/books/booksShelf.vue";
+import booksShelf from "@/views/book/modules/booksShelf.vue";
 
 import {
   BookOutlined,
