@@ -23,19 +23,21 @@ module.exports = defineConfig({
       );
     }
   },
-  // devServer: {
-  //   proxy: {
-  //     "/reader3": {
-  //       target: "https://reader.htmake.com/reader3",
-  //       ws: true, //代理websocked
-  //       changeOrigin: true, //虚拟的站点需要更管origin
-  //       secure: true, //是否https接口
-  //       pathRewrite: {
-  //         "^/reader3": "/reader3",
-  //       },
-  //     },
-  //   },
-  // },
+  devServer: {
+    // proxy: {
+    // "/M3u8": {
+    //   target: "https://api.nxflv.com",
+    //   ws: true, //代理websocked
+    //   changeOrigin: true, //虚拟的站点需要更管origin
+    //   secure: true, //是否https接口
+    //   pathRewrite: {
+    //     "^/M3u8": "/Cache/M3u8",
+    //   },
+    // },
+    // },
+    // 此处开启 https
+    https: true,
+  },
 });
 
 // "postcss": {

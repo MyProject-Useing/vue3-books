@@ -1,6 +1,12 @@
 <template>
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <videoPlay v-bind="options" :poster="baseImg" />
+    <videoPlay
+      v-bind="options"
+      :src="src"
+      :poster="baseImg"
+      crossOrigin="anonymous"
+      @error="error"
+    />
   </div>
 </template>
 
@@ -27,13 +33,14 @@ export default {
   data() {
     return {
       baseImg: require("@/assets/imgs/video/play_base.jpg"),
+      src: "",
       options: {
         width: "800px", //播放器高度
         height: "450px", //播放器高度
         color: "#409eff", //主题色
         title: "", //视频名称
         type: "m3u8", //视频类型
-        // src: "https://api.nxflv.com/Cache/M3u8/f293b2503ae408813cee8db557d0cc01.m3u8",
+        // src: "https://api.nxflv.com/Cache/M3u8/ffc48d6d214443917639606aceb6ac84.m3u8",
         muted: false, //静音
         webFullScreen: false,
         speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
@@ -62,9 +69,12 @@ export default {
   methods: {
     getM3u8Url() {
       getVideo({ url: encodeURI(this.palyUrl) }).then((d) => {
-        debugger;
-        this.options.src = d.data;
+        this.src = d.data.data;
       });
+    },
+    error(res) {
+      debugger;
+      console.log(res);
     },
   },
 };
