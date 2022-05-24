@@ -47,7 +47,7 @@
                 </span></span
               >
             </template>
-            <videoResult :dataList="videoList" />
+            <videoResult :dataList="movieList" />
           </a-tab-pane>
           <a-tab-pane key="video">
             <template #tab>
@@ -78,6 +78,8 @@ import videoResult from "@/views/video/modules/result.vue";
 
 import { getDataList } from "@/api/bookApi";
 
+import { getDataList as movie_GetList } from "@/api/movieApi";
+
 // 书籍详情
 export default {
   name: "searchResult",
@@ -88,16 +90,7 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
-    // 用于过滤 重复的数据
-    searchResultMap() {
-      return this.bookList.reduce((c, v) => {
-        c[v.bookUrl] = v;
-        return c;
-      }, {});
-    },
-    bookApi() {
-      return this.$store.state.book.api;
-    },
+
     // 设置主查询
     entry() {
       return this.$store.state.entry;
@@ -150,13 +143,15 @@ export default {
     // 通用查询 --分配查询 书籍还是视频
     search() {
       if (this.keywords) {
-        this.activeKey === "book" ? this.searchBook() : this.searchVideo();
+        switch (this.activeKey) {
+          case "book":
+            this.searchBook();
+            break;
+          case "movie":
+            this.searchMovie();
+            break;
+        }
       }
-    },
-
-    // 过滤重复项
-    filterOption(input, option) {
-      return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
     },
 
     // 返回首页
@@ -168,7 +163,25 @@ export default {
     },
 
     // 查询视频内容
-    searchVideo() {},
+    searchMovie() {
+      // 重新搜索
+      this.bookList = [];
+      // 打开遮罩
+      this.refreshLoading = true;
+
+      const params = {
+        keywords: this.keywords,
+      };
+
+      movie_GetList(params)
+        .then((result) => {
+          this.refreshLoading = false;
+          this.movieList = result.data.data || [];
+        })
+        .catch(() => {
+          this.refreshLoading = false;
+        });
+    },
 
     // 查询书籍信息
     searchBook() {
@@ -186,15 +199,7 @@ export default {
       getDataList(params)
         .then((result) => {
           this.refreshLoading = false;
-          if (result.data.data) {
-            var data = [];
-            result.data.data.forEach((v) => {
-              if (!this.searchResultMap[v.bookUrl]) {
-                data.push(v);
-              }
-            });
-            this.bookList = data;
-          }
+          this.bookList = result.data.data || [];
         })
         .catch(() => {
           this.refreshLoading = false;
