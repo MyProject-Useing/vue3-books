@@ -49,7 +49,7 @@
 <script>
 import { isMobile } from "@/plugins/utils";
 // 目录
-import catalog from "./booksShelf.vue";
+import catalog from "./catalogList.vue";
 // 书架
 import booksShelf from "@/views/book/modules/booksShelf.vue";
 

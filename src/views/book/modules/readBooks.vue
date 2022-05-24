@@ -72,8 +72,7 @@ import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
-import request from "@/plugins/request";
-
+import { getBooksText, getCatalog } from "@/api/bookApi";
 // 文章
 import booksContent from "./booksContent.vue";
 // 工具栏
@@ -108,14 +107,8 @@ export default {
       // 展示工具栏
       showToolBar: false,
 
-      // 目录弹出框
-      catalogPopover: false,
-
       // 目录
       catalogList: [],
-
-      // 书架弹出框
-      bookShelfPopover: false,
 
       bookInfo: {},
 
@@ -205,9 +198,7 @@ export default {
     },
     // 展示目录
     showCatalog() {
-      this.catalogPopover = true;
       // 隐藏 书架
-      this.bookShelfPopover = false;
     },
 
     // 上/下一章
@@ -252,10 +243,10 @@ export default {
         this.setBookCache(sessionData);
       } else {
         this.bookLoading = true;
-        request
-          .post(this.bookApi + "api/common/getCatalog", {
-            bookUrl: this.bookUrl,
-          })
+
+        getCatalog({
+          bookUrl: this.bookUrl,
+        })
           .then((result) => {
             if (result.data.data) {
               this.setBookCache(result.data.data);
@@ -311,33 +302,27 @@ export default {
       this.bookLoading = true;
       // 重置内容
       // this.bookContent = "";
-      // 隐藏目录
-      this.catalogPopover = false;
-      // 隐藏 书架
-      this.bookShelfPopover = false;
 
       // 获取正文内容
-      request
-        .post(this.bookApi + "api/common/getBooksText", {
-          bookUrl: readUrl,
-        })
-        .then(
-          (res) => {
-            let str =
-              res.data.code === 200 ? res.data.data : "获取章节内容失败！";
-            this.bookContent = str;
-            this.bookLoading = false;
-            // 重置滚动条
-            jump(-window.document.body.clientHeight, { duration: 0 });
-          },
-          (error) => {
-            let errorStr = "获取章节内容失败！\n" + (error && error.toString());
-            this.bookLoading = false;
-            this.bookContent = errorStr;
-            message.error(errorStr);
-            throw error;
-          }
-        );
+      getBooksText({
+        bookUrl: readUrl,
+      }).then(
+        (res) => {
+          let str =
+            res.data.code === 200 ? res.data.data : "获取章节内容失败！";
+          this.bookContent = str;
+          this.bookLoading = false;
+          // 重置滚动条
+          jump(-window.document.body.clientHeight, { duration: 0 });
+        },
+        (error) => {
+          let errorStr = "获取章节内容失败！\n" + (error && error.toString());
+          this.bookLoading = false;
+          this.bookContent = errorStr;
+          message.error(errorStr);
+          throw error;
+        }
+      );
     },
 
     // 移动端 内容点击事件

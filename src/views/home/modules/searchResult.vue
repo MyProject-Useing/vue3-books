@@ -37,7 +37,7 @@
             </template>
             <bookResult :dataList="bookList" />
           </a-tab-pane>
-          <a-tab-pane key="video">
+          <a-tab-pane key="movie">
             <template #tab>
               <span class="filter-txt filter-active">
                 <search-outlined />
@@ -76,7 +76,8 @@ import bookResult from "@/views/book/modules/result.vue";
 // 视频内容
 import videoResult from "@/views/video/modules/result.vue";
 
-import request from "@/plugins/request";
+import { getDataList } from "@/api/bookApi";
+
 // 书籍详情
 export default {
   name: "searchResult",
@@ -181,8 +182,8 @@ export default {
       const params = {
         keywords: this.keywords,
       };
-      request
-        .post(this.bookApi + "api/common/searchBooksList", params)
+
+      getDataList(params)
         .then((result) => {
           this.refreshLoading = false;
           if (result.data.data) {
