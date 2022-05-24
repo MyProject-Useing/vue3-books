@@ -4,3 +4,6 @@ const api = store.state.movie.api;
 
 export const getDataList = (params) =>
   request.post(api + "api/common/getDataList", params);
+
+export const getVideo = (params) =>
+  request.post(api + "api/common/getVideo?url=", params);

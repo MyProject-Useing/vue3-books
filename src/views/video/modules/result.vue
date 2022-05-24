@@ -90,6 +90,7 @@
 <script>
 import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
+
 export default {
   name: "videoResult",
   components: {},

@@ -37,9 +37,8 @@
 <script>
 import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
-
 import { isMobile } from "@/plugins/utils";
-
+import { getVideo } from "@/api/movieApi";
 export default {
   name: "bookResult",
   components: {
@@ -64,7 +63,7 @@ export default {
         color: "#409eff", //主题色
         title: "", //视频名称
         type: "m3u8", //视频类型
-        src: "https://new.iskcd.com/20211218/u4JqnSI6/1100kb/hls/index.m3u8", //视频源
+        // src: "https://api.nxflv.com/Cache/M3u8/f293b2503ae408813cee8db557d0cc01.m3u8",
         muted: false, //静音
         webFullScreen: false,
         speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
@@ -87,8 +86,17 @@ export default {
       },
     };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getM3u8Url();
+  },
+  methods: {
+    getM3u8Url() {
+      getVideo({ url: encodeURI(this.palyUrl) }).then((d) => {
+        debugger;
+        this.options.src = d.data;
+      });
+    },
+  },
 };
 </script>
 <style scoped>
