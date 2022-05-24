@@ -59,7 +59,7 @@
                 </span></span
               >
             </template>
-            <videoResult :dataList="videoList" />
+            <!-- <videoResult :dataList="videoList" /> -->
           </a-tab-pane>
         </a-tabs>
       </a-spin>

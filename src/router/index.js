@@ -34,6 +34,14 @@ const routes = [
     },
     component: () => import("@/views/home/modules/searchResult.vue"),
   },
+  {
+    path: "/playing",
+    name: "playing",
+    meta: {
+      keepAlive: true,
+    },
+    component: () => import("@/views/video/modules/playing.vue"),
+  },
 ];
 
 const router = createRouter({

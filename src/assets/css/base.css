@@ -46,6 +46,10 @@ body {
   color: #ed424b;
 }
 
+.orange {
+  color: #ff6000;
+}
+
 /*遮罩框*/
 
 .ant-select-single .ant-select-selector .ant-select-selection-search-input {

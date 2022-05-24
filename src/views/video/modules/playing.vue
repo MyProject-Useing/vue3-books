@@ -9,7 +9,7 @@
       height="240"
     >
       <source
-        src="https://new.iskcd.com/20211218/u4JqnSI6/1100kb/hls/index.m3u8"
+        src="https://json.nbjx.vip:4399/Cache/d458809227be860cda8a4ca4a7be65eb/00eah6mspqaDab8XZAviZAIddJeorZZ8d6y7dgYvKFca3GtfHPYGe37ajpfsvzoMwa2X4Md42vq_0gAHrDqnqNuWsEp7Fu04w8IjfQqC.m3u8"
         type="application/x-mpegURL"
       />
     </video>
@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       // 数据列表
-      noCover: require("@/assets/imgs/noCover.jpeg"),
       studyTime: {
         currentTime: 0, // 当前已学时长
         duration: 0, // 总时长
@@ -37,15 +36,7 @@ export default {
     };
   },
   mounted() {
-    // this.getVideo();
-  },
-  props: {
-    dataList: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
+    this.getVideo();
   },
   computed: {
     // 是否为移动端
@@ -53,8 +44,8 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
-    cacheBookList() {
-      return this.$store.state.caches.readBooksList;
+    palyUrl() {
+      return unescape(this.$route.query.url || "");
     },
   },
   methods: {
@@ -66,7 +57,7 @@ export default {
       // 销毁 this.dispose()
       // 监听 this.on(‘click‘,fn)
       // 触发事件this.trigger(‘dispose‘)
-
+      debugger;
       videojs(
         "my-video",
         {
@@ -75,7 +66,6 @@ export default {
           posterImage: true,
           errorDisplay: false,
           controlBar: true,
-
           // loop: true, // 视频播放结束后，是否循环播放
           // muted: false, //是否静音
           // poster: "", // 播放前显示的视频画面，播放开始之后自动移除。通常传入一个URL
