@@ -1,35 +1,5 @@
 <template>
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <!-- <video
-      id="my-video"
-      class="video-wrap vjs-default-skin vjs-big-play-centered"
-      controls
-      preload="auto"
-      width="320"
-      height="240"
-    >
-      <source :src="m3u8Src" type="application/x-mpegURL" />
-    </video> -->
-
-    <!-- <video
-      ref="videoPlayer"
-      controls
-      :src="fileUrl"
-      :poster="posterUrl"
-      controlslist="nodownload"
-      @play="toPlays"
-      @timeupdate="updateTime"
-      @pause="toPause"
-      :class="[porel, fullwidth, mal, fla, mat, 'movie-show-video']"
-      style="width: 100%; height: 100%; object-fit: fill"
-    ></video>
-
-    <li @click="toPlay">播放/暂停</li>
-    <li @click="toForward">前进</li>
-    <li @click="toBack">倒退</li>
-    <li @click="addVoice">增加⾳量</li>
-    <li @click="decrease">减⼩⾳量</li> -->
-
     <videoPlay v-bind="options" :poster="baseImg" />
   </div>
 </template>
