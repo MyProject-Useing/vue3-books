@@ -44,6 +44,7 @@ export default {
         muted: false, //静音
         webFullScreen: false,
         speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
+        notSupportedMessage: "此视频暂无法播放，请稍后再试",
         autoPlay: false, //自动播放
         loop: false, //循环播放
         mirror: false, //镜像画面
