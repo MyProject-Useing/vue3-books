@@ -165,7 +165,7 @@ export default {
     // 查询视频内容
     searchMovie() {
       // 重新搜索
-      this.bookList = [];
+      this.movieList = [];
       // 打开遮罩
       this.refreshLoading = true;
 
