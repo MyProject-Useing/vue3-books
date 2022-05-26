@@ -1,12 +1,36 @@
 <template>
-  <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <videoPlay
-      v-bind="options"
-      :src="src"
-      :poster="baseImg"
-      crossOrigin="anonymous"
-      @error="error"
-    />
+  <div class="playing-result-wrap" :class="isMobileClass ? 'mobile' : ''">
+    <div class="plp-l">
+      <videoPlay
+        class="video-use"
+        v-bind="options"
+        :src="src"
+        :poster="baseImg"
+        crossOrigin="anonymous"
+        @error="error"
+      />
+    </div>
+
+    <div class="plp-r">
+      <div class="ep-list-wrapper report-wrap-module">
+        <div class="list-title clearfix">
+          <h4 title="资源列表">资源列表</h4>
+          <span class="mode-change" style="position: relative"
+            ><i
+              report-id="click_ep_switch"
+              class="iconfont icon-ep-list-simple"
+            ></i>
+          </span>
+          <span class="ep-list-order"></span>
+          <span class="ep-list-progress">53/53</span>
+        </div>
+        <div class="list-wrapper simple longlist">
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,9 +38,7 @@
 import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
-// import { getVideo } from "@/api/movieApi";
-import { getVideoList } from "@/api/movieApi";
-
+import { getVideoAnalysis } from "@/api/movieApi";
 export default {
   name: "bookResult",
   components: {
@@ -35,6 +57,7 @@ export default {
   data() {
     return {
       baseImg: require("@/assets/imgs/video/play_base.jpg"),
+      sourceList: [],
       src: "",
       options: {
         width: "800px", //播放器高度
@@ -70,23 +93,19 @@ export default {
   },
   methods: {
     getM3u8Url() {
-      debugger;
-      getVideoList(encodeURI(this.palyUrl)).then((d) => {
-        debugger;
-        this.src = d.data.data;
-      });
-
-      // getVideo({ url: encodeURI(this.palyUrl) }).then((d) => {
-      //   this.src = d.data.data;
-      // });
+      getVideoAnalysis({ url: encodeURI(this.palyUrl) })
+        .then((d) => {
+          this.sourceList = d.data.data;
+          this.src = d.data.data[0].source.eps[0].url;
+        })
+        .catch((d) => {
+          console.log(d);
+        });
     },
-    error(res) {
-      debugger;
-      console.log(res);
-    },
+    error() {},
   },
 };
 </script>
 <style scoped>
-@import url("@/views/video/css/videoResult.css");
+@import url("@/views/video/css/playing.css");
 </style>

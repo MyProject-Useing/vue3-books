@@ -1,0 +1,46 @@
+.playing-result-wrap {
+  position: relative;
+  width: 988px;
+  margin: 20px auto;
+  max-width: 1660px;
+  min-width: 988px;
+  padding-left: 0px;
+  padding-right: 350px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.playing-result-wrap .plp-l {
+  width: 100%;
+}
+
+.playing-result-wrap .plp-l .d-player-wrap,
+.playing-result-wrap .plp-l .video-use {
+  width: 100%;
+}
+
+.playing-result-wrap .plp-r {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+}
+
+.playing-result-wrap .ep-list-wrapper .list-title h4 {
+  float: left;
+  height: 42px;
+  line-height: 42px;
+  font-size: 16px;
+  color: #212121;
+  font-weight: 400;
+  max-width: 220px;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playing-result-wrap .ep-list-wrapper .list-title {
+  height: 42px;
+  padding: 0 16px;
+}

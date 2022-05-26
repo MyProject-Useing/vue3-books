@@ -75,6 +75,22 @@ request.post = async (url, data, options) => {
 
 function hanldError(error) {
   let msg = "接口连接异常。";
+  // if (
+  //   error.message === "Network Error" &&
+  //   error.request.status === 0 &&
+  //   error.request.readyState === 4
+  // ) {
+  //   msg = `接口未授信，请信任<a href="${error.config.url}" style="text-decoration:underline;" target="_blank" >此链接</a> `;
+  // }
+
+  if (
+    error.message === "Network Error" &&
+    error.request.status === 0 &&
+    error.request.readyState === 4
+  ) {
+    msg = `无法连接跨域资源，请联系管理员。 `;
+  }
+
   if (error.name === "SyntaxError") {
     msg = "接口连接中断";
   }

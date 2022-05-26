@@ -23,19 +23,19 @@ module.exports = defineConfig({
       );
     }
   },
-  devServer: {
-    proxy: {
-      "/jx_api": {
-        target: "https://a1.m1907.cn/api/v",
-        ws: true, //代理websocked
-        changeOrigin: true, //虚拟的站点需要更管origin
-        secure: true, //是否https接口
-        pathRewrite: {
-          "^/jx_api": "",
-        },
-      },
-    },
-    //此处开启 https
-    // https: true,
-  },
+  // devServer: {
+  //   proxy: {
+  //     "/jx_api": {
+  //       target: "https://a1.m1907.cn/api/v",
+  //       ws: true, //代理websocked
+  //       changeOrigin: true, //虚拟的站点需要更管origin
+  //       secure: true, //是否https接口
+  //       pathRewrite: {
+  //         "^/jx_api": "",
+  //       },
+  //     },
+  //   },
+  //   //此处开启 https
+  //   // https: true,
+  // },
 });
