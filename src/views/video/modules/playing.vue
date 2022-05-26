@@ -1,38 +1,45 @@
 <template>
-  <div class="playing-result-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <div class="plp-l">
-      <videoPlay
-        class="video-use"
-        v-bind="options"
-        :src="src"
-        :poster="baseImg"
-        crossOrigin="anonymous"
-        @error="error"
-      />
-    </div>
-
-    <div class="plp-r">
-      <div class="list-title">
-        <h4 title="资源列表" class="ellipsis">资源列表</h4>
-        <span class="mode-change" style="position: relative"
-          ><menu-unfold-outlined />
-        </span>
-        <!-- <span class="ep-list-progress">53/53</span> -->
+  <div class="playing-wrap" :class="isMobileClass ? 'mobile' : ''">
+    <div class="playing-main">
+      <a-page-header :breadcrumb="{ routes }" />
+      <div class="plp-l">
+        <videoPlay
+          class="video-use"
+          v-bind="options"
+          :src="src"
+          :poster="baseImg"
+          crossOrigin="anonymous"
+          @error="error"
+        />
       </div>
-      <div class="list-wrapper">
-        <div class="list-wrapper-item recommend-tip">
-          <span class="tip-left">电影</span>
-          <span class="tip-right">放映时间</span>
+
+      <div class="plp-r">
+        <div class="list-title">
+          <h4 title="资源列表" class="ellipsis">资源列表</h4>
+          <span class="mode-change" style="position: relative"
+            ><menu-unfold-outlined />
+          </span>
+          <!-- <span class="ep-list-progress">53/53</span> -->
         </div>
-        <div
-          class="list-wrapper-item"
-          v-for="(item, index) in sourceList"
-          :key="index"
-        >
-          <a class="tip-left" :class="isActive(item)">
-            {{ item.name }} <i class="playing-icon"></i>
-          </a>
-          <span class="tip-right">{{ item.year }}</span>
+        <div class="list-wrapper">
+          <div class="list-wrapper-item recommend-tip">
+            <span class="tip-left">电影</span>
+            <span class="tip-right">放映时间</span>
+          </div>
+          <div
+            class="list-wrapper-item"
+            v-for="(item, index) in sourceList"
+            :key="index"
+          >
+            <a
+              class="tip-left"
+              :class="isActive(item)"
+              @click="changeSrc(item)"
+            >
+              {{ item.name }} <i class="playing-icon"></i>
+            </a>
+            <span class="tip-right">{{ item.year }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +67,23 @@ export default {
     },
     palyUrl() {
       return unescape(this.$route.query.url || "");
+    },
+    routes() {
+      // let bookTitle = this.bookInfo.bookTitle;
+      return [
+        {
+          path: "/",
+          breadcrumbName: "首页",
+        },
+        {
+          path: "/searchResult",
+          breadcrumbName: "搜索结果",
+        },
+        {
+          path: "second",
+          breadcrumbName: "当前播放",
+        },
+      ];
     },
   },
   data() {
@@ -124,6 +148,9 @@ export default {
           .catch((d) => {
             console.log(d);
           });
+    },
+    changeSrc(item) {
+      this.src = decodeURI(item.source.eps[0].url);
     },
     error() {},
   },
