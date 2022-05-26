@@ -120,7 +120,7 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getM3u8Url();
   },
   methods: {
