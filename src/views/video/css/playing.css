@@ -26,21 +26,69 @@
   width: 320px;
 }
 
-.playing-result-wrap .ep-list-wrapper .list-title h4 {
-  float: left;
+.playing-result-wrap .list-title {
+  height: 47px;
+  padding: 0 16px;
+  display: flex;
+}
+.playing-result-wrap .list-title h4 {
   height: 42px;
   line-height: 42px;
-  font-size: 16px;
+  font-size: 18px;
   color: #212121;
   font-weight: 400;
   max-width: 220px;
+}
+
+.playing-result-wrap .list-title .mode-change {
+  display: block;
+  width: 30px;
+  height: 42px;
+  line-height: 42px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  color: #757575;
+  position: relative;
+}
+
+.plp-r .list-wrapper {
+  max-height: 320px;
+  padding: 0 16px;
+}
+
+.plp-r .list-wrapper-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.plp-r .list-wrapper-item a {
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  color: #222;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.playing-result-wrap .ep-list-wrapper .list-title {
-  height: 42px;
-  padding: 0 16px;
+.plp-r .list-wrapper-item a:hover {
+  color: #00be06;
+}
+
+.plp-r .list-wrapper-item.recommend-tip {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.tip-left.active {
+  color: #00cc4c;
+}
+.tip-left.active .playing-icon {
+  display: inline-block;
+}
+
+.tip-left .playing-icon {
+  display: none;
 }

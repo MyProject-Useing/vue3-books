@@ -50,6 +50,13 @@ body {
   color: #ff6000;
 }
 
+.playing-icon {
+  display: inline-block;
+  width: 10px;
+  height: 8px;
+  background: url("@/assets/imgs/video/playon-green.gif") no-repeat;
+}
+
 /*遮罩框*/
 
 .ant-select-single .ant-select-selector .ant-select-selection-search-input {

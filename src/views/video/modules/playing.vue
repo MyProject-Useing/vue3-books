@@ -12,22 +12,27 @@
     </div>
 
     <div class="plp-r">
-      <div class="ep-list-wrapper report-wrap-module">
-        <div class="list-title clearfix">
-          <h4 title="资源列表">资源列表</h4>
-          <span class="mode-change" style="position: relative"
-            ><i
-              report-id="click_ep_switch"
-              class="iconfont icon-ep-list-simple"
-            ></i>
-          </span>
-          <span class="ep-list-order"></span>
-          <span class="ep-list-progress">53/53</span>
+      <div class="list-title">
+        <h4 title="资源列表" class="ellipsis">资源列表</h4>
+        <span class="mode-change" style="position: relative"
+          ><menu-unfold-outlined />
+        </span>
+        <!-- <span class="ep-list-progress">53/53</span> -->
+      </div>
+      <div class="list-wrapper">
+        <div class="list-wrapper-item recommend-tip">
+          <span class="tip-left">电影</span>
+          <span class="tip-right">放映时间</span>
         </div>
-        <div class="list-wrapper simple longlist">
-          <ul>
-            <li></li>
-          </ul>
+        <div
+          class="list-wrapper-item"
+          v-for="(item, index) in sourceList"
+          :key="index"
+        >
+          <a class="tip-left" :class="isActive(item)">
+            {{ item.name }} <i class="playing-icon"></i>
+          </a>
+          <span class="tip-right">{{ item.year }}</span>
         </div>
       </div>
     </div>
@@ -39,10 +44,13 @@ import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
 import { getVideoAnalysis } from "@/api/movieApi";
+import { MenuUnfoldOutlined } from "@ant-design/icons-vue";
+
 export default {
   name: "bookResult",
   components: {
     videoPlay,
+    MenuUnfoldOutlined,
   },
   computed: {
     // 是否为移动端
@@ -92,15 +100,30 @@ export default {
     this.getM3u8Url();
   },
   methods: {
+    isActive(item) {
+      return decodeURI(item.source.eps[0].url) === decodeURI(this.src)
+        ? "active"
+        : "";
+    },
     getM3u8Url() {
-      getVideoAnalysis({ url: encodeURI(this.palyUrl) })
-        .then((d) => {
-          this.sourceList = d.data.data;
-          this.src = d.data.data[0].source.eps[0].url;
-        })
-        .catch((d) => {
-          console.log(d);
-        });
+      let url = encodeURI(this.palyUrl);
+      let resData = sessionStorage.getItem("video_paly_session@" + url);
+      if (resData) {
+        this.sourceList = JSON.parse(resData);
+        this.src = this.sourceList[0].source.eps[0].url;
+      } else
+        getVideoAnalysis({ url: url })
+          .then((d) => {
+            sessionStorage.setItem(
+              "video_paly_session@" + url,
+              JSON.stringify(d.data.data)
+            );
+            this.sourceList = d.data.data;
+            this.src = d.data.data[0].source.eps[0].url;
+          })
+          .catch((d) => {
+            console.log(d);
+          });
     },
     error() {},
   },
