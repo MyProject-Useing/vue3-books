@@ -88,7 +88,7 @@ function hanldError(error) {
     error.request.status === 0 &&
     error.request.readyState === 4
   ) {
-    msg = `无法连接跨域资源，请联系管理员。 `;
+    msg = `无法连接资源，请联系管理员。 `;
   }
 
   if (error.name === "SyntaxError") {
