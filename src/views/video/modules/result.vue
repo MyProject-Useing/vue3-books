@@ -33,7 +33,10 @@
               <label class="info-lbl">别名:</label>
               <span :title="item.alias" class="info-des">{{ item.alias }}</span>
             </div>
-            <div class="result-info half ellipsis">
+            <div
+              class="result-info half ellipsis"
+              v-if="item.director && item.director.length != 0"
+            >
               <label class="info-lbl">导演:</label>
               <span
                 :title="item.director ? item.director.join('/') : ''"
@@ -41,7 +44,7 @@
                 >{{ item.director ? item.director.join("/") : "" }}</span
               >
             </div>
-            <div class="result-info half ellipsis">
+            <div class="result-info half ellipsis" v-if="item.actor">
               <label class="info-lbl">主演:</label>
               <span
                 :title="item.actor ? item.actor.join('/') : ''"
