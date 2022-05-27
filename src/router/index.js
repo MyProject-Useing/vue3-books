@@ -30,7 +30,7 @@ const routes = [
     path: "/searchResult",
     name: "searchResult",
     meta: {
-      keepAlive: true,
+      keepAlive: false,
     },
     component: () => import("@/views/home/modules/searchResult.vue"),
   },
@@ -38,7 +38,7 @@ const routes = [
     path: "/playing",
     name: "playing",
     meta: {
-      keepAlive: true,
+      keepAlive: false,
     },
     component: () => import("@/views/video/modules/playing.vue"),
   },

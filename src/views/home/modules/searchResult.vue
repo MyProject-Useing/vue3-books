@@ -117,7 +117,8 @@ export default {
       movieList: [],
     };
   },
-  activated() {
+  // activated() {},
+  mounted() {
     if (!this.activeKey) {
       this.activeKey = this.entry;
     }
