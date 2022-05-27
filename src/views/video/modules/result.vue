@@ -16,17 +16,24 @@
             </div>
           </div>
           <div class="result-right">
-            <h3 class="info-title" @click.stop="toPaly(item)">
+            <h3 class="info-title">
               <span class="item-type">{{ item.tag }}</span>
               <a
                 class="item-title orange ellipsis"
                 target="_blank"
                 :title="item.title"
+                @click.stop="toPaly(item)"
               >
                 {{ item.title }}
               </a>
               <em class="year">{{ item.year }}</em>
-              <em class="score">{{ item.score }}</em>
+              <span class="title-right">
+                <a :href="item.palySrc" target="_blank">
+                  <em class="player-name">{{ item.siteName }}</em></a
+                >
+
+                <em class="score"> {{ item.score }}</em>
+              </span>
             </h3>
 
             <div class="result-info half ellipsis" v-if="item.alias">
@@ -99,14 +106,12 @@
               </div>
             </div>
 
-            <div class="result-bottom-pos">
+            <!-- <div class="result-bottom-top">
               <div class="search-player-source">
-                <a href="javascript:void(0);" class="play-source"
-                  ><i class="search-player-icon"></i>
-                  <em class="player-name">{{ item.siteName }}</em></a
-                >
+                <i class="search-player-icon"></i>
+                <em class="player-name">{{ item.siteName }}</em>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

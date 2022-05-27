@@ -78,12 +78,16 @@
   font-style: normal;
 }
 
-.video-wrap .info-title .score {
+.title-right {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.video-wrap .info-title .score {
   font-size: 16px;
   color: #ff6000;
+  margin-left: 5px;
   font-style: normal;
 }
 
@@ -119,6 +123,14 @@
   bottom: 0;
   width: 100%;
 }
+
+.video-wrap .result-bottom-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
 .video-wrap .search-result-btn {
   display: inline-block;
   height: 34px;
@@ -143,7 +155,7 @@
   line-height: 18px;
   font-size: 0;
 }
-.video-wrap .search-player-source .player-name {
+.video-wrap .player-name {
   font-size: 12px;
   color: #222;
   font-style: normal;

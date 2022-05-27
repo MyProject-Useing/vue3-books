@@ -138,12 +138,14 @@ export default {
       } else
         getVideoAnalysis({ url: url })
           .then((d) => {
-            sessionStorage.setItem(
-              "video_paly_session@" + url,
-              JSON.stringify(d.data.data)
-            );
-            this.sourceList = d.data.data;
-            this.src = d.data.data[0].source.eps[0].url;
+            if (d.data.data) {
+              this.sourceList = d.data.data || [];
+              this.src = d.data.data[0].source.eps[0].url;
+              sessionStorage.setItem(
+                "video_paly_session@" + url,
+                JSON.stringify(d.data.data)
+              );
+            }
           })
           .catch((d) => {
             console.log(d);
