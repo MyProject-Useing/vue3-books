@@ -50,7 +50,8 @@
 import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
-import { getVideoAnalysis } from "@/api/movieApi";
+// import { getVideoAnalysis, getVideo } from "@/api/movieApi";
+import { getVideo } from "@/api/movieApi";
 import { MenuUnfoldOutlined } from "@ant-design/icons-vue";
 
 export default {
@@ -135,21 +136,37 @@ export default {
       if (resData) {
         this.sourceList = JSON.parse(resData);
         this.src = this.sourceList[0].source.eps[0].url;
-      } else
-        getVideoAnalysis({ url: url })
+      } else {
+        // getVideoAnalysis({ url: url })
+        //   .then((d) => {
+        //     if (d.data.data) {
+        //       this.sourceList = d.data.data || [];
+        //       this.src = d.data.data[0].source.eps[0].url;
+        //       sessionStorage.setItem(
+        //         "video_paly_session@" + url,
+        //         JSON.stringify(d.data.data)
+        //       );
+        //     }
+        //   })
+        //   .catch((d) => {
+        //     console.log(d);
+        //   });
+        getVideo({ url: url })
           .then((d) => {
+            debugger;
             if (d.data.data) {
-              this.sourceList = d.data.data || [];
-              this.src = d.data.data[0].source.eps[0].url;
-              sessionStorage.setItem(
-                "video_paly_session@" + url,
-                JSON.stringify(d.data.data)
-              );
+              // this.sourceList = d.data.data || [];
+              this.src = d.data.data;
+              // sessionStorage.setItem(
+              //   "video_paly_session@" + url,
+              //   JSON.stringify(d.data.data)
+              // );
             }
           })
           .catch((d) => {
             console.log(d);
           });
+      }
     },
     changeSrc(item) {
       this.src = decodeURI(item.source.eps[0].url);
