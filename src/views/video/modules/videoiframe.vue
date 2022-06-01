@@ -5,7 +5,7 @@
         id="iframe"
         :src="palyUrl"
         class="my-iframe"
-        style="min-height: 600px; width: 100%"
+        style="height: 100%; width: 100%"
         width="100%"
         frameborder="0"
         @load="setIframe"
@@ -17,7 +17,6 @@
 <script>
 import "vue3-video-play/dist/style.css";
 import { isMobile } from "@/plugins/utils";
-
 export default {
   name: "bookResult",
   components: {},
@@ -33,24 +32,28 @@ export default {
   },
   data() {
     return {
-      iframeSrc: "",
+      // iframeSrc: "",
     };
-  },
-  mounted() {
-    // this.iframeSrc = this.palyUrl;
   },
   methods: {
     setIframe() {
       // var _iframe = document.getElementById("iframe");
+      // let bb = $(".skippable-after");
       // var _obj = _iframe.contentWindow || _iframe.contentDocument;
-      debugger;
-      let aa = window.document.getElementById("flashbox");
-      aa;
+      // bb;
+      //
+      // <!-- $(".skippable-after").click() -->
+      // bb;
     },
   },
 };
 </script>
 <style scoped>
+.playing-wrap,
+.playing-main {
+  height: 100%;
+  width: 100%;
+}
 .my-iframe html {
   height: 300px;
 }

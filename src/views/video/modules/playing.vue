@@ -12,7 +12,6 @@
           @error="error"
         />
       </div>
-
       <div class="plp-r">
         <div class="list-title">
           <h4 title="资源列表" class="ellipsis">资源列表</h4>
@@ -42,15 +41,6 @@
           </div>
         </div>
       </div>
-      <!-- $(".skippable-after").click() -->
-
-      <iframe
-        id="iframe"
-        :src="iframeSrc"
-        style="height: calc(100% - 50px)"
-        width="100%"
-        frameborder="0"
-      ></iframe>
     </div>
   </div>
 </template>
@@ -100,7 +90,6 @@ export default {
     return {
       baseImg: require("@/assets/imgs/video/play_base.jpg"),
       sourceList: [],
-      iframeSrc: "",
       src: "",
       options: {
         width: "800px", //播放器高度
@@ -132,7 +121,7 @@ export default {
     };
   },
   mounted() {
-    // this.getM3u8Url();
+    this.getM3u8Url();
   },
   methods: {
     isActive(item) {
