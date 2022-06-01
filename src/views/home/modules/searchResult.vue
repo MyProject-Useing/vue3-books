@@ -3,14 +3,24 @@
     <div class="search-title">
       <div class="logo-bg" @click="goHome" title="首页"></div>
       <div class="search-btn-group">
-        <a-auto-complete
+        <a-input
           class="search-btn"
           enter-button="Search"
           placeholder="请输入小说或作者名称"
+          maxlength="50"
           v-model:value.trim="keywords"
           @keyup.enter.stop="search"
         >
-        </a-auto-complete>
+        </a-input>
+        <!-- <a-auto-complete
+          class="search-btn"
+          enter-button="Search"
+          placeholder="请输入小说或作者名称"
+          maxlength="50"
+          v-model:value.trim="keywords"
+          @keyup.enter.stop="search"
+        >
+        </a-auto-complete> -->
         <a-button type="primary" @click="search">全网搜</a-button>
       </div>
       <div class="search-right">
@@ -167,21 +177,28 @@ export default {
     searchMovie() {
       // 重新搜索
       this.movieList = [];
-      // 打开遮罩
-      this.refreshLoading = true;
-
-      const params = {
-        keywords: this.keywords,
-      };
-
-      movie_GetList(params)
-        .then((result) => {
-          this.refreshLoading = false;
-          this.movieList = result.data.data || [];
-        })
-        .catch(() => {
-          this.refreshLoading = false;
-        });
+      const key = "vodeiResult@key" + this.keywords;
+      const cacheResult = sessionStorage.getItem(key);
+      if (cacheResult) {
+        this.movieList = JSON.parse(cacheResult);
+      } else {
+        const params = {
+          keywords: this.keywords,
+        };
+        // 打开遮罩
+        this.refreshLoading = true;
+        movie_GetList(params)
+          .then((result) => {
+            this.refreshLoading = false;
+            this.movieList = result.data.data || [];
+            this.movieList &&
+              this.movieList.length > 0 &&
+              sessionStorage.setItem(key, JSON.stringify(this.movieList));
+          })
+          .catch(() => {
+            this.refreshLoading = false;
+          });
+      }
     },
 
     // 查询书籍信息
@@ -190,21 +207,30 @@ export default {
       this.bookList = [];
       // 缓存查询记录
       // this.$store.commit("caches/setSearchHistory", this.keywords);
-      // 打开遮罩
-      this.refreshLoading = true;
 
-      const params = {
-        keywords: this.keywords,
-      };
+      const key = "bookResult@key" + this.keywords;
+      const cacheResult = sessionStorage.getItem(key);
+      if (cacheResult) {
+        this.bookList = JSON.parse(cacheResult);
+      } else {
+        const params = {
+          keywords: this.keywords,
+        };
+        // 打开遮罩
+        this.refreshLoading = true;
+        getDataList(params)
+          .then((result) => {
+            this.refreshLoading = false;
+            this.bookList = result.data.data || [];
 
-      getDataList(params)
-        .then((result) => {
-          this.refreshLoading = false;
-          this.bookList = result.data.data || [];
-        })
-        .catch(() => {
-          this.refreshLoading = false;
-        });
+            this.bookList &&
+              this.bookList.length > 0 &&
+              sessionStorage.setItem(key, JSON.stringify(result.data.data));
+          })
+          .catch(() => {
+            this.refreshLoading = false;
+          });
+      }
     },
 
     // 菜单切换
@@ -219,7 +245,7 @@ export default {
 <style scoped>
 @import url("@/views/home/css/searchResult.css");
 
-.result-content .search-btn-group :deep(.ant-select-selector) {
+.result-content .search-btn-group .search-btn {
   height: 100%;
   border: 2px solid #4569ff;
   border-radius: 10px 0 0 10px;

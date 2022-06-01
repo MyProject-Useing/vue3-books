@@ -153,7 +153,6 @@ export default {
         //   });
         getVideo({ url: url })
           .then((d) => {
-            debugger;
             if (d.data.data) {
               // this.sourceList = d.data.data || [];
               this.src = d.data.data;
