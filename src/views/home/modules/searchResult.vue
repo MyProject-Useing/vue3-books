@@ -7,7 +7,7 @@
           class="search-btn"
           enter-button="Search"
           placeholder="请输入小说或作者名称"
-          maxlength="50"
+          :maxLength="50"
           v-model:value.trim="keywords"
           @keyup.enter.stop="search"
         >

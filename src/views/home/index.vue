@@ -3,15 +3,25 @@
     <div class="home-logo">
       <div id="logo" class="logo-bg"></div>
     </div>
+
     <div class="home-search-group">
-      <a-auto-complete
+      <a-input
+        class="search-btn"
+        enter-button="Search"
+        placeholder="请输入小说或作者名称"
+        v-model:value.trim="keywords"
+        @keyup.enter.stop="searchDetails()"
+        :maxLength="50"
+      >
+      </a-input>
+      <!-- <a-auto-complete
         class="search-btn"
         enter-button="Search"
         placeholder="请输入小说或作者名称"
         v-model:value.trim="keywords"
         @keyup.enter.stop="searchDetails()"
       >
-      </a-auto-complete>
+      </a-auto-complete> -->
       <a-button type="primary" @click="searchDetails()">全网查询</a-button>
     </div>
 

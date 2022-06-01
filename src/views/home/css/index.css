@@ -34,6 +34,11 @@
 }
 .home-index-panle .home-search-group .search-btn {
   width: calc(100% - 101px);
+  height: 100%;
+  border: 2px solid #4569ff;
+  border-radius: 10px 0 0 10px;
+  border-right: 0;
+  color: #222;
 }
 
 .home-index-panle .home-search-group .ant-btn {
@@ -43,14 +48,6 @@
   color: #fff;
   font-size: 1rem;
   border-radius: 0 10px 10px 0;
-}
-
-.home-index-panle .home-search-group .ant-select-selector {
-  height: 100%;
-  border: 2px solid #4569ff;
-  border-radius: 10px 0 0 10px;
-  border-right: 0;
-  color: #222;
 }
 
 .home-index-panle .home-search-group .ant-select-selection-placeholder {
