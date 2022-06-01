@@ -24,7 +24,7 @@ export default {
       return isTrue;
     },
     bookUrl() {
-      return unescape(this.$route.query.bookUrl || "");
+      return decodeURI(this.$route.query.bookUrl || "");
     },
   },
   activated() {

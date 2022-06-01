@@ -66,7 +66,7 @@ export default {
       return isTrue;
     },
     palyUrl() {
-      return unescape(this.$route.query.url || "");
+      return decodeURI(this.$route.query.url || "");
     },
     routes() {
       // let bookTitle = this.bookInfo.bookTitle;

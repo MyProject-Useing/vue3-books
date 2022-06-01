@@ -129,7 +129,7 @@ export default {
   },
   computed: {
     bookUrl() {
-      return unescape(this.$route.query.bookUrl || "");
+      return decodeURI(this.$route.query.bookUrl || "");
     },
 
     routes() {
@@ -230,8 +230,8 @@ export default {
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(this.bookUrl),
-          readUrl: escape(readUrl || ""),
+          bookUrl: encodeURI(this.bookUrl),
+          readUrl: encodeURI(readUrl || ""),
         },
       });
     },

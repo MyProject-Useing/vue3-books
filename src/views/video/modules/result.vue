@@ -169,7 +169,7 @@ export default {
 
       this.$router.push({
         path: item.hasVip ? "/playing" : "/videoiframe",
-        query: { url: escape(item.palySrc) },
+        query: { url: encodeURI(item.palySrc) },
       });
     },
 

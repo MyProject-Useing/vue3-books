@@ -100,7 +100,7 @@ export default {
       // this.$store.commit("caches/setBooksList", book);
       this.$router.push({
         path: "/book",
-        query: { bookUrl: escape(book.bookUrl) },
+        query: { bookUrl: encodeURI(book.bookUrl) },
       });
     },
     // 查看最新章节
@@ -108,31 +108,31 @@ export default {
       if (!book.bookUrl) {
         return;
       }
-      let newestUrl = unescape(book.bookUrl + book.newestUrl);
+      let newestUrl = decodeURI(book.bookUrl + book.newestUrl);
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(book.bookUrl || ""),
-          readUrl: escape(newestUrl || ""),
+          bookUrl: encodeURI(book.bookUrl || ""),
+          readUrl: encodeURI(newestUrl || ""),
         },
       });
     },
 
     // 继续阅读
     jumpRead(book) {
-      let bookUrl = unescape(book.bookUrl || "");
+      let bookUrl = decodeURI(book.bookUrl || "");
       if (!bookUrl) {
         return;
       }
       let readUrl = this.cacheBookList[bookUrl]
         ? this.cacheBookList[bookUrl].readUrl
         : "";
-      // let newestUrl = unescape(book.bookUrl + book.newestUrl);
+      // let newestUrl = decodeURI(book.bookUrl + book.newestUrl);
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(book.bookUrl || ""),
-          readUrl: escape(readUrl || ""),
+          bookUrl: encodeURI(book.bookUrl || ""),
+          readUrl: encodeURI(readUrl || ""),
         },
       });
     },

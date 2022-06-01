@@ -17,6 +17,7 @@
 <script>
 import "vue3-video-play/dist/style.css";
 import { isMobile } from "@/plugins/utils";
+import { getVideoHtmlbyAQY } from "@/api/movieApi";
 export default {
   name: "bookResult",
   components: {},
@@ -27,13 +28,19 @@ export default {
       return isTrue;
     },
     palyUrl() {
-      return unescape(this.$route.query.url || "");
+      return decodeURI(this.$route.query.url || "");
     },
   },
   data() {
     return {
       // iframeSrc: "",
     };
+  },
+  mounted() {
+    debugger;
+    getVideoHtmlbyAQY(encodeURI(this.palyUrl)).then((d) => {
+      d;
+    });
   },
   methods: {
     setIframe() {

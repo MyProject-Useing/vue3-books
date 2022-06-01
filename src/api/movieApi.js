@@ -10,3 +10,6 @@ export const getVideo = (params) =>
 
 export const getVideoAnalysis = (params) =>
   request.post(api + "api/common/getVideoAnalysis", params);
+
+export const getVideoHtmlbyAQY = (params) =>
+  request.post(api + "api/common/getVideoHtmlbyAQY", params);

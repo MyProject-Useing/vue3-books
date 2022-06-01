@@ -76,8 +76,8 @@ export default {
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(this.bookUrl || ""),
-          readUrl: escape(item.href || ""),
+          bookUrl: encodeURI(this.bookUrl || ""),
+          readUrl: encodeURI(item.href || ""),
         },
       });
     },

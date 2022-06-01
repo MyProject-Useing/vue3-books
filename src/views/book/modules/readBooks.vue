@@ -156,7 +156,7 @@ export default {
     },
     // 书籍地址
     bookUrl() {
-      return unescape(this.$route.query.bookUrl || "");
+      return decodeURI(this.$route.query.bookUrl || "");
     },
 
     bookApi() {
@@ -229,8 +229,8 @@ export default {
       this.$router.push({
         path: "/readBooks",
         query: {
-          bookUrl: escape(this.bookUrl || ""),
-          readUrl: escape(selfBooks.href || ""),
+          bookUrl: encodeURI(this.bookUrl || ""),
+          readUrl: encodeURI(selfBooks.href || ""),
         },
       });
     },
@@ -269,8 +269,8 @@ export default {
       let readIndex = 1;
 
       const readUrl = this.$route.query.readUrl
-        ? unescape(this.$route.query.readUrl)
-        : unescape(this.catalogList[0].href);
+        ? decodeURI(this.$route.query.readUrl)
+        : decodeURI(this.catalogList[0].href);
 
       this.catalogList.some((item, index) => {
         if (item.href === readUrl) {
