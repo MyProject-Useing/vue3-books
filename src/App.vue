@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// document.domain = "http://www.iqiyi.com";
 export default {
   name: "App",
   methods: {

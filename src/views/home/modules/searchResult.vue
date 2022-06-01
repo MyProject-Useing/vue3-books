@@ -35,6 +35,18 @@
           v-model:activeKey="activeKey"
           @change="tabChange"
         >
+          <a-tab-pane key="video">
+            <template #tab>
+              <span class="filter-txt filter-active">
+                <search-outlined />
+                综合
+                <span class="title-num">
+                  {{ movieList.length === 0 ? "" : movieList.length }}
+                </span></span
+              >
+            </template>
+            <videoResult :dataList="movieList" />
+          </a-tab-pane>
           <a-tab-pane key="book">
             <template #tab>
               <span class="filter-txt filter-active">
@@ -46,30 +58,6 @@
               </span>
             </template>
             <bookResult :dataList="bookList" />
-          </a-tab-pane>
-          <a-tab-pane key="movie">
-            <template #tab>
-              <span class="filter-txt filter-active">
-                <search-outlined />
-                电影
-                <span class="title-num">
-                  {{ movieList.length === 0 ? "" : movieList.length }}
-                </span></span
-              >
-            </template>
-            <videoResult :dataList="movieList" />
-          </a-tab-pane>
-          <a-tab-pane key="video">
-            <template #tab>
-              <span class="filter-txt filter-active">
-                <search-outlined />
-                视频
-                <span class="title-num">
-                  {{ videoList.length === 0 ? "" : videoList.length }}
-                </span></span
-              >
-            </template>
-            <!-- <videoResult :dataList="videoList" /> -->
           </a-tab-pane>
         </a-tabs>
       </a-spin>
@@ -158,8 +146,8 @@ export default {
           case "book":
             this.searchBook();
             break;
-          case "movie":
-            this.searchMovie();
+          case "video":
+            this.searchVideo();
             break;
         }
       }
@@ -174,7 +162,7 @@ export default {
     },
 
     // 查询视频内容
-    searchMovie() {
+    searchVideo() {
       // 重新搜索
       this.movieList = [];
       const key = "vodeiResult@key" + this.keywords;

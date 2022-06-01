@@ -1,5 +1,5 @@
 // 系统类型
-let sysTypeList = ["book", "video", "movie"];
+let sysTypeList = ["video", "book"];
 
 module.exports = {
   sysTypeList,

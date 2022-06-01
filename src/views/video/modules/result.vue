@@ -31,11 +31,9 @@
                 <a :href="item.palySrc" target="_blank">
                   <em class="player-name">{{ item.siteName }}</em></a
                 >
-
                 <em class="score"> {{ item.score }}</em>
               </span>
             </h3>
-
             <div class="result-info half ellipsis" v-if="item.alias">
               <label class="info-lbl">别名:</label>
               <span :title="item.alias" class="info-des">{{ item.alias }}</span>
@@ -94,6 +92,7 @@
                   :key="info.url"
                 >
                   <a
+                    @click="jumpIndex(item, info)"
                     href="javascript:void(0);"
                     :title="`第${info.order}集`"
                     class="album-link"
@@ -167,10 +166,23 @@ export default {
       if (!item.palySrc) {
         return message.warning("未找到资源路径，无法正常播放。");
       }
-      // 加入书架 缓存
+
       this.$router.push({
-        path: "/playing",
+        path: item.hasVip ? "/playing" : "/videoiframe",
         query: { url: escape(item.palySrc) },
+      });
+    },
+
+    jumpIndex(item, info) {
+      if (!item.palySrc) {
+        return message.warning("未找到资源路径，无法正常播放。");
+      }
+      if (!info.url) {
+        return message.warning("未找到资源路径，无法正常播放。");
+      }
+      this.toPaly({
+        palySrc: info.url,
+        hasVip: item.hasVip,
       });
     },
   },

@@ -42,6 +42,14 @@ const routes = [
     },
     component: () => import("@/views/video/modules/playing.vue"),
   },
+  {
+    path: "/videoiframe",
+    name: "videoiframe",
+    meta: {
+      keepAlive: false,
+    },
+    component: () => import("@/views/video/modules/videoiframe.vue"),
+  },
 ];
 
 const router = createRouter({
