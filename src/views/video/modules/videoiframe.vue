@@ -37,8 +37,8 @@ export default {
     };
   },
   mounted() {
-    debugger;
-    getVideoHtmlbyAQY(encodeURI(this.palyUrl)).then((d) => {
+    getVideoHtmlbyAQY({ url: encodeURI(this.palyUrl) }).then((d) => {
+      debugger;
       d;
     });
   },
