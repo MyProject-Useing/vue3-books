@@ -3,7 +3,7 @@
     <div class="playing-main">
       <iframe
         id="iframe"
-        :src="palyUrl"
+        :src="iframeSrc"
         class="my-iframe"
         style="height: 100%; width: 100%"
         width="100%"
@@ -33,10 +33,11 @@ export default {
   },
   data() {
     return {
-      // iframeSrc: "",
+      iframeSrc: "",
     };
   },
   mounted() {
+    this.iframeSrc = this.palyUrl;
     getVideoHtmlbyAQY({ url: encodeURI(this.palyUrl) }).then((d) => {
       debugger;
       d;
