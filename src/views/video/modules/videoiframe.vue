@@ -1,7 +1,7 @@
 <template>
   <div class="playing-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="playing-main">
-      <iframe
+      <!-- <iframe
         id="iframe"
         :src="iframeSrc"
         class="my-iframe"
@@ -9,7 +9,10 @@
         width="100%"
         frameborder="0"
         @load="setIframe"
-      ></iframe>
+      ></iframe> -->
+
+      <!-- 凡人修仙传54 -->
+      <!-- https://ukzy.ukubf3.com/20220612/8UPWmDQY/2000kb/hls/index.m3u8 -->
     </div>
   </div>
 </template>

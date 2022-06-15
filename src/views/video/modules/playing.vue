@@ -50,7 +50,7 @@ import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
 // import { getVideoAnalysis, getVideo } from "@/api/movieApi";
-import { getVideo } from "@/api/movieApi";
+// import { getVideo } from "@/api/movieApi";
 import { MenuUnfoldOutlined } from "@ant-design/icons-vue";
 
 export default {
@@ -150,20 +150,24 @@ export default {
         //   .catch((d) => {
         //     console.log(d);
         //   });
-        getVideo({ url: url })
-          .then((d) => {
-            if (d.data.data) {
-              // this.sourceList = d.data.data || [];
-              this.src = d.data.data;
-              // sessionStorage.setItem(
-              //   "video_paly_session@" + url,
-              //   JSON.stringify(d.data.data)
-              // );
-            }
-          })
-          .catch((d) => {
-            console.log(d);
-          });
+
+        this.src =
+          "https://ukzy.ukubf3.com/20220612/8UPWmDQY/2000kb/hls/index.m3u8";
+
+        // getVideo({ url: url })
+        //   .then((d) => {
+        //     if (d.data.data) {
+        //       // this.sourceList = d.data.data || [];
+        //       this.src = d.data.data;
+        //       // sessionStorage.setItem(
+        //       //   "video_paly_session@" + url,
+        //       //   JSON.stringify(d.data.data)
+        //       // );
+        //     }
+        //   })
+        //   .catch((d) => {
+        //     console.log(d);
+        //   });
       }
     },
     changeSrc(item) {
