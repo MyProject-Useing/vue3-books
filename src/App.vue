@@ -1,7 +1,4 @@
 <template>
-  <!-- <keep-alive>
-    <router-view :key="routerKey"></router-view>
-  </keep-alive> -->
   <router-view v-slot="{ Component }">
     <keep-alive>
       <component
@@ -19,7 +16,6 @@
 </template>
 
 <script>
-// document.domain = "http://www.iqiyi.com";
 export default {
   name: "App",
   methods: {

@@ -1,14 +1,13 @@
 .playing-wrap {
   box-sizing: border-box;
   height: 100vh;
+  padding: 80px;
 }
 
 .playing-main {
   margin: auto;
   position: relative;
   height: 100%;
-  width: 988px;
-  max-width: 1660px;
   min-width: 988px;
   padding-left: 0px;
   padding-right: 350px;
@@ -18,11 +17,15 @@
   width: 100%;
 }
 
-.playing-wrap .plp-l .video-use {
-  width: 100%;
-  height: 100%;
-  max-height: 550px;
+.playing-wrap .video-title {
+  height: 42px;
+  line-height: 42px;
+  color: #0f0f1e;
+  padding-right: 32px;
+  font-size: 30px;
+  margin-bottom: 15px;
 }
+
 .playing-wrap .plp-l .d-player-wrap {
   width: 100%;
 }
@@ -66,11 +69,17 @@
 }
 
 .plp-r .list-wrapper-item {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 18px;
 }
-.plp-r .list-wrapper-item a {
+
+.plp-r .list-wrapper-item .item-head-wrap {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+.plp-r .list-wrapper-item .item-head-wrap a {
   width: 100%;
   font-size: 14px;
   line-height: 24px;
@@ -80,7 +89,39 @@
   white-space: nowrap;
 }
 
-.plp-r .list-wrapper-item a:hover {
+.plp-r .list-wrapper-item .album-item {
+  list-style: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.plp-r .list-wrapper-item .album-item .album-link {
+  display: block;
+  background: #f8f8f8;
+  border-radius: 2px;
+  line-height: 35px;
+  font-size: 13px;
+  color: #222;
+  overflow: hidden;
+  padding-left: 15px;
+}
+
+.plp-r .list-wrapper-item .album-list {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 12px;
+}
+
+.plp-r .list-wrapper-item .album-item .album-link span {
+  overflow: hidden;
+  margin: auto;
+}
+.plp-r .list-wrapper-item .album-item .album-link:hover {
+  background: #e8fcea;
+  color: #00be06;
+}
+
+.plp-r .list-wrapper-item .item-head-wrap a:hover {
   color: #00be06;
 }
 
@@ -88,15 +129,28 @@
   font-size: 12px;
   color: #999;
   margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .plp-r .list-wrapper-item .tip-left.active {
   color: #00cc4c;
 }
-.tip-left.active .playing-icon {
+.album-item.active .playing-icon {
   display: inline-block;
 }
 
-.tip-left .playing-icon {
+.plp-r .list-wrapper-item .album-item.active .album-link {
+  background: #e8fcea;
+  color: #00be06;
+}
+
+.album-item .playing-icon {
   display: none;
+  margin-left: 10px;
+}
+
+.list-wrapper-item .item-body-wrap {
+  max-height: 400px;
+  overflow-y: auto;
 }

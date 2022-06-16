@@ -1,7 +1,7 @@
 <template>
   <div class="playing-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="playing-main">
-      <a-page-header :breadcrumb="{ routes }" />
+      <div class="video-title">{{ souresName }} {{ palyName }}</div>
       <div class="plp-l">
         <videoPlay
           class="video-use"
@@ -30,14 +30,40 @@
             v-for="(item, index) in sourceList"
             :key="index"
           >
-            <a
-              class="tip-left"
-              :class="isActive(item)"
-              @click="changeSrc(item)"
-            >
-              {{ item.name }} <i class="playing-icon"></i>
-            </a>
-            <span class="tip-right">{{ item.year }}</span>
+            <div class="item-head-wrap">
+              <a
+                class="tip-left"
+                :class="index === selectSoureIndex ? 'active' : ''"
+                @click="changeSrc(item)"
+              >
+                {{ item.name }}
+              </a>
+              <span class="tip-right">{{ item.year }}</span>
+            </div>
+
+            <div class="item-body-wrap">
+              <ul class="album-list">
+                <li
+                  class="album-item"
+                  v-for="(info, inx) in item.source"
+                  :key="inx"
+                  :class="
+                    index === selectSoureIndex && inx === selectIndex
+                      ? 'active'
+                      : ''
+                  "
+                >
+                  <a
+                    @click="jumpIndex(info, inx, index)"
+                    href="javascript:void(0);"
+                    :title="info.name"
+                    class="album-link"
+                    ><span class="ellipsis"
+                      >{{ info.name }}<i class="playing-icon"></i></span
+                  ></a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -67,22 +93,29 @@ export default {
     palyUrl() {
       return decodeURI(this.$route.query.url || "");
     },
-    routes() {
-      // let bookTitle = this.bookInfo.bookTitle;
-      return [
-        {
-          path: "/",
-          breadcrumbName: "首页",
-        },
-        {
-          path: "/searchResult",
-          breadcrumbName: "搜索结果",
-        },
-        {
-          path: "second",
-          breadcrumbName: "当前播放",
-        },
-      ];
+
+    // 播放的视频名称
+    playSourse() {
+      return this.sourceList[this.selectSoureIndex] || {};
+    },
+
+    // 播放的视频集数
+    playSourseIndex() {
+      let source = this.playSourse?.source ?? [];
+      return source[this.selectIndex] || {};
+    },
+
+    // 当前播放的 视频名称
+    souresName() {
+      let name = this.playSourse?.name ?? "";
+      if (name) {
+        return `《${name}》`;
+      }
+      return name;
+    },
+    // 当前播放的集数
+    palyName() {
+      return this.playSourseIndex?.name ?? "";
     },
   },
   data() {
@@ -117,16 +150,18 @@ export default {
           "fullScreen",
         ], //显示所有按钮,
       },
+
+      selectSoureIndex: -1,
+      selectIndex: -1,
     };
   },
   mounted() {
     this.getM3u8Url();
   },
   methods: {
-    isActive(item) {
-      return decodeURI(item.source[0].url) === decodeURI(this.src)
-        ? "active"
-        : "";
+    jumpIndex(item, index, pIndex) {
+      this.src = item.url;
+      this.setIndex(index, pIndex);
     },
     getM3u8Url() {
       let url = encodeURI(this.palyUrl);
@@ -134,11 +169,14 @@ export default {
       if (resData) {
         this.sourceList = JSON.parse(resData);
         this.src = this.sourceList[0].source[0].url;
+        this.setIndex(0, 0);
       } else {
         getUrlSourse({ url: url })
           .then((d) => {
             if (d.data.data) {
               this.sourceList = d.data.data || [];
+
+              this.setIndex(0, 0);
               this.src = this.sourceList[0]?.source[0].url;
               sessionStorage.setItem(
                 "video_paly_session@" + url,
@@ -151,7 +189,13 @@ export default {
           });
       }
     },
+    setIndex(index, pIndex) {
+      this.selectSoureIndex = pIndex;
+      this.selectIndex = index;
+    },
+
     changeSrc(item) {
+      debugger;
       this.src = decodeURI(item.source.eps[0].url);
     },
     error() {},
