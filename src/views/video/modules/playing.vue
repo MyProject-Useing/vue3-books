@@ -150,7 +150,6 @@ export default {
           "fullScreen",
         ], //显示所有按钮,
       },
-
       selectSoureIndex: -1,
       selectIndex: -1,
     };
