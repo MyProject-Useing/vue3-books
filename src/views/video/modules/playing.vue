@@ -133,7 +133,7 @@ export default {
       let resData = sessionStorage.getItem("video_paly_session@" + url);
       if (resData) {
         this.sourceList = JSON.parse(resData);
-        this.src = this.sourceList[0].source.eps[0].url;
+        this.src = this.sourceList[0].source[0].url;
       } else {
         getUrlSourse({ url: url })
           .then((d) => {
