@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     isActive(item) {
-      return decodeURI(item.source.eps[0].url) === decodeURI(this.src)
+      return decodeURI(item.source[0].url) === decodeURI(this.src)
         ? "active"
         : "";
     },
@@ -138,13 +138,12 @@ export default {
         getUrlSourse({ url: url })
           .then((d) => {
             if (d.data.data) {
-              debugger;
-              // this.sourceList = d.data.data || [];
-              this.src = d.data.data;
-              // sessionStorage.setItem(
-              //   "video_paly_session@" + url,
-              //   JSON.stringify(d.data.data)
-              // );
+              this.sourceList = d.data.data || [];
+              this.src = this.sourceList[0]?.source[0].url;
+              sessionStorage.setItem(
+                "video_paly_session@" + url,
+                JSON.stringify(this.sourceList)
+              );
             }
           })
           .catch((d) => {
