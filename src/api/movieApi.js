@@ -8,5 +8,9 @@ export const getDataList = (params) =>
 export const getVideoHtmlbyAQY = (params) =>
   request.get(api + "api/common/getVideoHtmlbyAQY", { params });
 
+// 首页热门
+export const getMovieIndex = () =>
+  request.get(api + "api/common/getMovieIndex");
+
 export const getUrlSourse = (params) =>
   request.get(api + "api/common/getUrlSourse", { params });

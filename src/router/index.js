@@ -7,7 +7,16 @@ const routes = [
     path: "/",
     name: "home",
     component: layout,
+    redirect: "/videoIndex",
     children: [
+      {
+        path: "/videoIndex",
+        name: "videoIndex",
+        meta: {
+          keepAlive: false,
+        },
+        component: () => import("@/views/video/index.vue"),
+      },
       {
         path: "/readBooks",
         name: "readBooks",

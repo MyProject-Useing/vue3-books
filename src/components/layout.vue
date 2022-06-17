@@ -8,7 +8,7 @@
         theme="dark"
         mode="horizontal"
       >
-        <a-menu-item key="/searchResult" @click="toPath('/searchResult')">
+        <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
           <template #icon>
             <video-camera-outlined />
           </template>

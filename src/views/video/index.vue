@@ -1,12 +1,17 @@
 <template>
   <div>
-    <video></video>
+    <div class="qy-mod-header">
+      <h2 class="qy-mod-title">
+        <span class="qy-mod-text">电视剧</span>
+      </h2>
+    </div>
   </div>
 </template>
 
 <script>
 // import { message } from "ant-design-vue";
 import { isMobile } from "@/plugins/utils";
+import { getMovieIndex } from "@/api/movieApi";
 // 目录
 
 export default {
@@ -15,6 +20,12 @@ export default {
   data() {
     return {
       bookLoading: false,
+
+      movieList: {
+        tv: [],
+        movie: [],
+        variety: [],
+      },
     };
   },
   computed: {
@@ -23,21 +34,36 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
-    bookUrl() {
-      return decodeURI(this.$route.query.bookUrl || "");
+    tv() {
+      return this.movieList.tv ?? [];
     },
   },
-  activated() {
-    this.init();
-  },
-  deactivated() {},
   mounted() {
     this.init();
   },
   methods: {
     init() {
-      // if (this.bookUrl) {
-      // }
+      // 重新搜索
+      this.movieList = [];
+      const key = "videoIndex@key";
+      const cacheResult = sessionStorage.getItem(key);
+      if (cacheResult) {
+        this.movieList = JSON.parse(cacheResult);
+      } else {
+        // 打开遮罩
+        this.refreshLoading = true;
+        getMovieIndex()
+          .then((result) => {
+            this.refreshLoading = false;
+            this.movieList = result.data.data || [];
+            this.movieList &&
+              this.movieList.length > 0 &&
+              sessionStorage.setItem(key, JSON.stringify(this.movieList));
+          })
+          .catch(() => {
+            this.refreshLoading = false;
+          });
+      }
     },
   },
 };
@@ -45,4 +71,10 @@ export default {
 
 <style scoped>
 @import url("./css/index.css");
+
+.qy-mod-header .qy-mod-title .qy-mod-text {
+  display: inline-block;
+  font-size: 26px;
+  line-height: 26px;
+}
 </style>

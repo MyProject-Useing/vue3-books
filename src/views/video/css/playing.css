@@ -1,7 +1,5 @@
 .playing-wrap {
   box-sizing: border-box;
-  height: 100vh;
-  padding: 80px;
 }
 
 .playing-main {
@@ -93,6 +91,7 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
 
 .plp-r .list-wrapper-item .album-item .album-link {
   display: block;
