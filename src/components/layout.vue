@@ -41,7 +41,7 @@ export default defineComponent({
     };
     return {
       toPath,
-      selectedKey: ref(["/searchResult"]),
+      selectedKey: ref([router.currentRoute.value.path]),
     };
   },
 });
