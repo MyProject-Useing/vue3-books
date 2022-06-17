@@ -24,7 +24,7 @@
         <a-input
           class="head-search-btn"
           enter-button="Search"
-          placeholder="请输入小说或作者名称"
+          placeholder="请输入关键字"
           v-model:value.trim="keywords"
           @keyup.enter.stop="searchDetails()"
           :maxLength="200"
