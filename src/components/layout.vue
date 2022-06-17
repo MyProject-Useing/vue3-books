@@ -36,6 +36,10 @@
             </span>
           </template>
         </a-input>
+        <!-- <div>
+          <search-outlined />
+          <search-outlined />
+        </div> -->
       </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 50px">
@@ -97,18 +101,18 @@ export default defineComponent({
 }
 .layout .header-side {
   float: right;
+  width: 50%;
 }
 
 .layout .head-search-btn {
   box-sizing: border-box;
-  background-color: transparent;
   border: 0;
   outline: 0;
   font-size: 14px;
   background-color: hsla(0, 0%, 100%, 0.18);
   border-radius: 4px;
-  height: 36px;
-  line-height: 36px;
+  line-height: 28px;
+  width: 230px;
 }
 .layout .head-search-btn .ant-input {
   background-color: rgb(0 0 0 / 8%);
@@ -119,7 +123,6 @@ export default defineComponent({
   cursor: pointer;
   display: block;
   position: relative;
-  width: 72px;
   text-align: center;
   color: #00cc4c;
 }
