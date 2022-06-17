@@ -1,18 +1,42 @@
 <template>
-  <a-layout>
+  <a-layout class="layout">
     <a-layout-header class="header">
       <div class="logo" />
       <a-menu
+        class="head-menu"
         v-model:selectedKeys="selectedKey"
         theme="dark"
         mode="horizontal"
-        :style="{ lineHeight: '64px' }"
       >
-        <a-menu-item key="/searchResult" @click="toPath('/searchResult')"
-          >视频</a-menu-item
+        <a-menu-item key="/searchResult" @click="toPath('/searchResult')">
+          <template #icon>
+            <video-camera-outlined />
+          </template>
+
+          视频</a-menu-item
         >
-        <a-menu-item key="/book" @click="toPath('/book')">小说</a-menu-item>
+        <a-menu-item key="/book" @click="toPath('/book')">
+          <template #icon> <read-outlined /> </template>
+          小说
+        </a-menu-item>
       </a-menu>
+      <div class="header-side">
+        <a-input
+          class="head-search-btn"
+          enter-button="Search"
+          placeholder="请输入小说或作者名称"
+          v-model:value.trim="keywords"
+          @keyup.enter.stop="searchDetails()"
+          :maxLength="200"
+        >
+          <template #suffix>
+            <span class="header-btn-group">
+              <search-outlined />
+              <span> 搜索 </span>
+            </span>
+          </template>
+        </a-input>
+      </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 50px">
       <a-layout style="padding: 24px 0; background: #fff">
@@ -29,8 +53,14 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
+
+import {
+  VideoCameraOutlined,
+  ReadOutlined,
+  SearchOutlined,
+} from "@ant-design/icons-vue";
 export default defineComponent({
-  components: {},
+  components: { VideoCameraOutlined, ReadOutlined, SearchOutlined },
   name: "lay_out",
   setup() {
     const router = useRouter();
@@ -40,14 +70,18 @@ export default defineComponent({
       });
     };
     return {
-      toPath,
+      keywords: ref(""),
       selectedKey: ref([router.currentRoute.value.path]),
+      toPath,
     };
+  },
+  methods: {
+    searchDetails() {},
   },
 });
 </script>
 <style>
-#components-layout-demo-top-side .logo {
+.layout .logo {
   float: left;
   width: 120px;
   height: 31px;
@@ -55,12 +89,38 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.3);
 }
 
-.ant-row-rtl #components-layout-demo-top-side .logo {
+.layout .head-menu {
+  line-height: 64px;
+  max-width: 400px;
+  font-size: 14px;
+  display: inline-block;
+}
+.layout .header-side {
   float: right;
-  margin: 16px 0 16px 24px;
 }
 
-.site-layout-background {
-  background: #fff;
+.layout .head-search-btn {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 14px;
+  background-color: hsla(0, 0%, 100%, 0.18);
+  border-radius: 4px;
+  height: 36px;
+  line-height: 36px;
+}
+.layout .head-search-btn .ant-input {
+  background-color: rgb(0 0 0 / 8%);
+  color: hsla(0, 0%, 100%, 0.9);
+}
+
+.layout .header-btn-group {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  width: 72px;
+  text-align: center;
+  color: #00cc4c;
 }
 </style>
