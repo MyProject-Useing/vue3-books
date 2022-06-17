@@ -85,7 +85,10 @@
               </a>
             </div>
             <div v-else class="search-result-album">
-              <ul class="album-list">
+              <ul
+                class="album-list"
+                :class="item.tag === '综艺' ? 'variety-list' : ''"
+              >
                 <li
                   class="album-item"
                   v-for="info in item.videoinfos"
@@ -94,9 +97,11 @@
                   <a
                     @click="jumpIndex(item, info)"
                     href="javascript:void(0);"
-                    :title="`第${info.order}集`"
+                    :title="info.name"
                     class="album-link"
-                    ><span>{{ info.order }}</span></a
+                    ><span>{{
+                      item.tag === "综艺" ? info.name : info.order
+                    }}</span></a
                   >
                 </li>
               </ul>
@@ -104,13 +109,6 @@
                 <a href="javascript:void(0);" class="link-packup">收起</a>
               </div>
             </div>
-
-            <!-- <div class="result-bottom-top">
-              <div class="search-player-source">
-                <i class="search-player-icon"></i>
-                <em class="player-name">{{ item.siteName }}</em>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>

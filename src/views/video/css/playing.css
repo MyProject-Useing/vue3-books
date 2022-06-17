@@ -75,8 +75,6 @@
 .plp-r .list-wrapper-item .item-head-wrap {
   display: flex;
   justify-content: space-between;
-  height: 35px;
-  margin-bottom: 10px;
 }
 
 .plp-r .list-wrapper-item .item-head-wrap a {
@@ -87,6 +85,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: auto;
 }
 
 .plp-r .list-wrapper-item .album-item {

@@ -34,13 +34,11 @@
               <a
                 class="tip-left"
                 :class="index === selectSoureIndex ? 'active' : ''"
-                @click="changeSrc(item)"
               >
                 {{ item.name }}
               </a>
               <span class="tip-right">{{ item.year }}</span>
             </div>
-
             <div class="item-body-wrap">
               <ul class="album-list">
                 <li
@@ -191,11 +189,6 @@ export default {
     setIndex(index, pIndex) {
       this.selectSoureIndex = pIndex;
       this.selectIndex = index;
-    },
-
-    changeSrc(item) {
-      debugger;
-      this.src = decodeURI(item.source.eps[0].url);
     },
     error() {},
   },
