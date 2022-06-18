@@ -88,14 +88,12 @@
 </template>
 
 <script>
-// import { message } from "ant-design-vue";
 import { isMobile } from "@/plugins/utils";
 import { getMovieIndex } from "@/api/movieApi";
 // 目录
 
 export default {
   name: "bookIndex",
-  // components: { catalog },
   data() {
     return {
       bookLoading: false,
@@ -153,19 +151,20 @@ export default {
     getImgUrl(item) {
       return this.getImages(item.imgSrc) || this.noCover;
     },
-
     getImages(_url) {
       if (_url !== undefined) {
-        let _u = _url.substring(7);
-        return "https://images.weserv.nl/?url=" + _u;
+        return "https://images.weserv.nl/?url=" + _url;
       }
     },
     // 返回首页
     goDetails(item) {
-      debugger;
       this.$router.push({
         path: "/playing",
-        query: { url: item.url },
+        query: {
+          url: encodeURI(item.url),
+          name: encodeURI(item.name),
+          tag: encodeURI(item.tag),
+        },
       });
     },
   },
