@@ -85,6 +85,9 @@ export default defineComponent({
 });
 </script>
 <style>
+.layout.ant-layout {
+  background-color: #fff;
+}
 .layout .logo {
   float: left;
   width: 120px;
