@@ -12,10 +12,13 @@ const routes = [
       {
         path: "/videoIndex",
         name: "videoIndex",
-        meta: {
-          keepAlive: false,
-        },
         component: () => import("@/views/video/index.vue"),
+      },
+
+      {
+        path: "/videoResult",
+        name: "videoResult",
+        component: () => import("@/views/video/modules/videoResult.vue"),
       },
       {
         path: "/readBooks",

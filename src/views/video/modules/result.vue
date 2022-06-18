@@ -122,7 +122,7 @@ import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
 export default {
-  name: "videoResult",
+  name: "videoList",
   components: {},
   data() {
     return {

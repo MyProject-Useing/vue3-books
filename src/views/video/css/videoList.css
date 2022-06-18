@@ -1,36 +1,35 @@
-.logo-bg {
-  height: 40px;
-  width: 103px;
-  margin-right: 18px;
-  margin-top: 19px;
+.video-content {
+  padding: 20px 40px;
 }
 
-.result-content .search-title {
+.video-content .search-title {
   display: flex;
-  padding: 0 1rem;
   position: relative;
 }
 
-.result-content .search-btn-group {
+.video-content .search-btn-group {
   height: 2.88rem;
   max-width: 700px;
   position: relative;
   display: flex;
   width: calc(100% - 300px);
-  margin: 1rem 0px 0.5rem 0px;
 }
 
-.result-content .search-btn-group .search-btn {
+.video-content .search-btn-group button {
+  height: 100%;
+}
+
+.video-content .search-btn-group .search-btn {
   max-width: 590px;
   width: calc(100% - 98px);
   font-size: 1rem;
 }
 
-.result-content .search-btn-group .ant-select-selector {
+.video-content .search-btn-group .ant-select-selector {
   height: 100%;
 }
 
-.result-content .search-text-btn {
+.video-content .search-text-btn {
   width: 120px;
   cursor: pointer;
   background-color: #4e6ef2;
@@ -44,12 +43,12 @@
   letter-spacing: normal;
 }
 
-.result-content .search-text-btn:hover {
+.video-content .search-text-btn:hover {
   background: #4662d9;
   color: #fff;
 }
 
-.result-content .setting-txt {
+.video-content .setting-txt {
   text-decoration: none;
   line-height: 24px;
   font-size: 13px;
@@ -60,13 +59,13 @@
   color: #222;
 }
 
-.result-content .search-right {
+.video-content .search-right {
   position: absolute;
   right: 0;
   padding-right: 24px;
 }
 
-.result-content .filter-txt {
+.video-content .filter-txt {
   color: #222;
   font-weight: 400;
   text-decoration: none;
@@ -80,27 +79,27 @@
   display: inline-block;
 }
 
-.result-content .logo-bg {
+.video-content .logo-bg {
   cursor: pointer;
 }
 
-.result-content .ant-tabs-nav {
+.video-content .ant-tabs-nav {
   margin-bottom: 24px;
 }
 
-.result-content .ant-tabs-tab {
+.video-content .ant-tabs-tab {
   padding: 0;
 }
 
-.result-content .ant-tabs-tab .anticon {
+.video-content .ant-tabs-tab .anticon {
   margin: 0;
 }
 
-.result-content .ant-tabs-ink-bar {
+.video-content .ant-tabs-ink-bar {
   background: #4e6ef2;
 }
 
-.result-content .title-num {
+.video-content .title-num {
   border-radius: 50%;
   background: #f1f2f3;
   color: #61666d;
@@ -108,19 +107,19 @@
 }
 
 /*移动端*/
-.result-content.mobile .logo-bg {
+.video-content.mobile .logo-bg {
   display: none;
 }
 
-.result-content.mobile .search-right {
+.video-content.mobile .search-right {
   display: none;
 }
 
-.result-content.mobile .search-filter {
+.video-content.mobile .search-filter {
   padding-left: 18px;
 }
 
-.result-content.mobile .search-btn-group {
+.video-content.mobile .search-btn-group {
   width: 100%;
 }
 

@@ -181,9 +181,6 @@ ul {
   list-style: none;
 }
 
-.ant-layout {
-  background-color: #fff;
-}
 .qy-mod-header .qy-mod-title .qy-mod-text {
   display: inline-block;
   font-size: 26px;

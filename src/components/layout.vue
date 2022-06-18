@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout">
     <a-layout-header class="header">
-      <div class="logo" />
+      <div class="logo logo-bg" />
       <a-menu
         class="head-menu"
         v-model:selectedKeys="selectedKey"
@@ -84,8 +84,8 @@ export default defineComponent({
       if (!this.keywords) {
         return;
       }
-      if (this.selectedKey.includes("videoIndex")) {
-        this.toPath("/searchResult", params);
+      if (this.selectedKey.includes("/videoIndex")) {
+        this.toPath("/videoResult", params);
       } else {
         this.toPath("/searchResult", params);
       }
@@ -99,7 +99,6 @@ export default defineComponent({
   width: 120px;
   height: 31px;
   margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
 }
 
 .layout .head-menu {
@@ -161,5 +160,9 @@ export default defineComponent({
 
 .layout .ant-layout-header {
   background-color: #14161a;
+}
+
+.layout .ant-layout {
+  background-color: #fff;
 }
 </style>
