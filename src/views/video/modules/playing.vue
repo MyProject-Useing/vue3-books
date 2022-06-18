@@ -74,13 +74,11 @@ import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
 import { getUrlSourse } from "@/api/movieApi";
-// import { MenuUnfoldOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "bookResult",
   components: {
     videoPlay,
-    // MenuUnfoldOutlined,
   },
   computed: {
     // 是否为移动端
