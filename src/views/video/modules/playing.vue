@@ -169,7 +169,7 @@ export default {
         getUrlSourse({ url: url })
           .then((d) => {
             if (d.data.data) {
-              this.sourceList = d.data.data || [];
+              this.sourceList = d.data.data || null;
 
               this.setIndex(0, 0);
               this.src = this.sourceList[0]?.source[0].url;

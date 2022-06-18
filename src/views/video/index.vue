@@ -172,11 +172,9 @@ export default {
 </script>
 
 <style scoped>
-.ant-layout {
-  background: #14161a;
-}
 .video-index-wrap {
   background: #14161a;
+  padding: 24px;
 }
 ol,
 ul {

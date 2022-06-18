@@ -9,14 +9,14 @@
         mode="horizontal"
       >
         <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
-          <template #icon>
+          <!-- <template #icon>
             <video-camera-outlined />
-          </template>
+          </template> -->
 
           视频</a-menu-item
         >
         <a-menu-item key="/book" @click="toPath('/book')">
-          <template #icon> <read-outlined /> </template>
+          <!-- <template #icon> <read-outlined /> </template> -->
           小说
         </a-menu-item>
       </a-menu>
@@ -26,11 +26,11 @@
           enter-button="Search"
           placeholder="请输入关键字"
           v-model:value.trim="keywords"
-          @keyup.enter.stop="searchDetails()"
+          @keyup.enter.stop="searchDetails"
           :maxLength="200"
         >
           <template #suffix>
-            <span class="header-btn-group">
+            <span class="header-btn-group" @click="searchDetails">
               <search-outlined />
               <span> 搜索 </span>
             </span>
@@ -42,16 +42,14 @@
         </div> -->
       </div>
     </a-layout-header>
-    <a-layout-content style="padding: 0 50px">
-      <a-layout style="padding: 24px 0; background: #fff">
-        <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+    <a-layout-content>
+      <a-layout>
+        <a-layout-content>
           <router-view />
         </a-layout-content>
       </a-layout>
     </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      ©2022 Created by Z
-    </a-layout-footer>
+    <a-layout-footer> ©2022 Created by Z </a-layout-footer>
   </a-layout>
 </template>
 <script>
@@ -59,18 +57,19 @@ import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import {
-  VideoCameraOutlined,
-  ReadOutlined,
+  // VideoCameraOutlined,
+  // ReadOutlined,
   SearchOutlined,
 } from "@ant-design/icons-vue";
 export default defineComponent({
-  components: { VideoCameraOutlined, ReadOutlined, SearchOutlined },
+  components: { SearchOutlined },
   name: "lay_out",
   setup() {
     const router = useRouter();
-    const toPath = (path) => {
+    const toPath = (path, query) => {
       router.push({
         path: path,
+        query,
       });
     };
     return {
@@ -80,14 +79,21 @@ export default defineComponent({
     };
   },
   methods: {
-    searchDetails() {},
+    searchDetails() {
+      const params = { keywords: this.keywords };
+      if (!this.keywords) {
+        return;
+      }
+      if (this.selectedKey.includes("videoIndex")) {
+        this.toPath("/searchResult", params);
+      } else {
+        this.toPath("/searchResult", params);
+      }
+    },
   },
 });
 </script>
 <style>
-.layout.ant-layout {
-  background-color: #fff;
-}
 .layout .logo {
   float: left;
   width: 120px;
@@ -128,5 +134,32 @@ export default defineComponent({
   position: relative;
   text-align: center;
   color: #00cc4c;
+}
+
+.layout .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+  background: none;
+  color: #00cc4c;
+}
+
+.layout .ant-menu.ant-menu-dark .ant-menu-item {
+  background: none;
+  font-size: 18px;
+  color: hsla(0, 0%, 93.3%, 0.88);
+  font-weight: 700;
+}
+
+.layout .ant-menu.ant-menu-dark .ant-menu-item-selected,
+.layout .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  color: #00cc4c;
+}
+
+.layout .ant-menu.ant-menu-dark,
+.layout .ant-menu-dark .ant-menu-sub,
+.layout .ant-menu.ant-menu-dark .ant-menu-sub {
+  background: none;
+}
+
+.layout .ant-layout-header {
+  background-color: #14161a;
 }
 </style>
