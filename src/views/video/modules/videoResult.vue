@@ -11,7 +11,7 @@
           @keyup.enter.stop="search"
         >
         </a-input>
-        <a-button type="primary" @click="search">全网搜</a-button>
+        <a-button type="primary" @click="search">搜索</a-button>
       </div>
     </div>
     <div class="content-panle">
