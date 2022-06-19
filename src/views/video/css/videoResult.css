@@ -1,10 +1,12 @@
 .video-content {
-  padding: 20px 40px;
+  padding: 64px 20px 40px;
+  background-color: #fff;
 }
 
 .video-content .search-title {
   display: flex;
   position: relative;
+  margin-top: 26px;
 }
 
 .video-panle {

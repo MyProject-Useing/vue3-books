@@ -1,7 +1,11 @@
 <template>
   <a-layout class="layout">
     <a-layout-header class="header">
-      <div class="logo logo-bg" />
+      <div class="logo-goroup">
+        <div class="logo-bg"></div>
+        <span>自由鸟</span>
+      </div>
+
       <a-menu
         class="head-menu"
         v-model:selectedKeys="selectedKey"
@@ -36,10 +40,6 @@
             </span>
           </template>
         </a-input>
-        <!-- <div>
-          <search-outlined />
-          <search-outlined />
-        </div> -->
       </div>
     </a-layout-header>
     <a-layout-content>
@@ -94,11 +94,28 @@ export default defineComponent({
 });
 </script>
 <style>
-.layout .logo {
+.layout .logo-goroup {
   float: left;
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
+  display: flex;
+}
+.layout .ant-layout {
+  background: #fff;
+}
+.layout .ant-layout-footer {
+  background: #fff;
+}
+
+.layout .logo-goroup span {
+  color: #d9363e;
+  margin-left: 7px;
+  font-size: 18px;
+  font-weight: 700;
+  width: 70px;
+}
+.layout .logo-goroup .logo-bg {
+  width: 41px;
+  height: 40px;
+  margin-top: 11px;
 }
 
 .layout .head-menu {
@@ -120,19 +137,24 @@ export default defineComponent({
   background-color: hsla(0, 0%, 100%, 0.18);
   border-radius: 4px;
   line-height: 28px;
-  width: 230px;
+  width: 330px;
 }
 .layout .head-search-btn .ant-input {
-  background-color: rgb(0 0 0 / 8%);
   color: hsla(0, 0%, 100%, 0.9);
+  background-color: transparent;
 }
 
 .layout .header-btn-group {
   cursor: pointer;
-  display: block;
   position: relative;
   text-align: center;
   color: #00cc4c;
+  display: contents;
+}
+
+.header-btn-group .anticon-search {
+  font-size: 19px;
+  margin-right: 5px;
 }
 
 .layout .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
@@ -159,10 +181,13 @@ export default defineComponent({
 }
 
 .layout .ant-layout-header {
-  background-color: #14161a;
-}
-
-.layout .ant-layout {
-  background-color: #fff;
+  background-color: rgba(25, 26, 32, 0.8);
+  position: fixed;
+  transform: translateZ(0);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 1000;
 }
 </style>

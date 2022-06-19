@@ -174,13 +174,15 @@ export default {
 <style scoped>
 .video-index-wrap {
   background: #14161a;
-  padding: 24px;
+  padding: 64px 24px 24px 24px;
 }
-ol,
-ul {
-  list-style: none;
+.ant-layout-footer {
+  background: #14161a;
 }
 
+.video-index-wrap .qy-mod-header {
+  padding: 10px 40px;
+}
 .qy-mod-header .qy-mod-title .qy-mod-text {
   display: inline-block;
   font-size: 26px;
@@ -207,6 +209,7 @@ ul {
 
 .qy-mod-list .qy-mod-ul {
   transition: all 0.5s;
+  min-height: 314px;
 }
 
 .qy-mod-link {
