@@ -187,5 +187,5 @@ export default {
 };
 </script>
 <style scoped>
-@import url("@/views/video/css/videoResult.css");
+@import url("@/views/video/css/videoList.css");
 </style>

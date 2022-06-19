@@ -45,7 +45,6 @@
                 </span></span
               >
             </template>
-            <videoResult :dataList="movieList" />
           </a-tab-pane>
           <a-tab-pane key="book">
             <template #tab>
@@ -71,8 +70,6 @@ import { isMobile } from "@/plugins/utils";
 
 // 小说查询内容块
 import bookResult from "@/views/book/modules/result.vue";
-// 视频内容
-import videoResult from "@/views/video/modules/result.vue";
 
 import { getDataList } from "@/api/bookApi";
 
@@ -81,7 +78,7 @@ import { getDataList as movie_GetList } from "@/api/movieApi";
 // 书籍详情
 export default {
   name: "searchResult",
-  components: { SearchOutlined, bookResult, videoResult },
+  components: { SearchOutlined, bookResult },
   computed: {
     // 是否为移动端
     isMobileClass() {

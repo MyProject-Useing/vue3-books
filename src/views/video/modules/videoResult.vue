@@ -26,7 +26,7 @@
 import { isMobile } from "@/plugins/utils";
 // 小说查询内容块
 // 视频内容
-import videoList from "@/views/video/modules/result.vue";
+import videoList from "@/views/video/modules/videoList.vue";
 
 import { getDataList as movie_GetList } from "@/api/movieApi";
 
@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/views/video/css/videoList.css");
+@import url("@/views/video/css/videoResult.css");
 
 .result-content .search-btn-group .search-btn {
   height: 100%;
