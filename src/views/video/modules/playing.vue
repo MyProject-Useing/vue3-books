@@ -15,10 +15,6 @@
       <div class="plp-r">
         <div class="list-title">
           <h4 title="资源列表" class="ellipsis">资源列表</h4>
-          <!-- <span class="mode-change" style="position: relative"
-            ><menu-unfold-outlined />
-          </span> -->
-          <!-- <span class="ep-list-progress">53/53</span> -->
         </div>
         <div class="list-wrapper">
           <div class="list-wrapper-item recommend-tip">
@@ -83,24 +79,20 @@ export default {
   computed: {
     // 是否为移动端
     isMobileClass() {
-      let isTrue = isMobile();
-      return isTrue;
+      return isMobile();
     },
     palyUrl() {
       return decodeURI(this.$route.query.url || "");
     },
-
     // 播放的视频名称
     playSourse() {
       return this.sourceList[this.selectSoureIndex] || {};
     },
-
     // 播放的视频集数
     playSourseIndex() {
       let source = this.playSourse?.source ?? [];
       return source[this.selectIndex] || {};
     },
-
     // 当前播放的 视频名称
     souresName() {
       let name = this.playSourse?.name ?? "";
