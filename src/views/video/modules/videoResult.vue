@@ -1,24 +1,8 @@
 <template>
   <div class="video-content" :class="isMobileClass ? 'mobile' : ''">
-    <div class="search-title">
-      <div class="search-btn-group">
-        <a-input
-          class="search-btn"
-          enter-button="Search"
-          placeholder="请输入小说或作者名称"
-          :maxLength="50"
-          v-model:value.trim="keywords"
-          @keyup.enter.stop="search"
-        >
-        </a-input>
-        <a-button type="primary" @click="search">搜索</a-button>
-      </div>
-    </div>
-    <div class="content-panle">
-      <a-spin :spinning="refreshLoading">
-        <videoList :dataList="movieList" />
-      </a-spin>
-    </div>
+    <a-spin :spinning="refreshLoading">
+      <videoList :dataList="movieList" />
+    </a-spin>
   </div>
 </template>
 
@@ -43,6 +27,8 @@ export default {
   },
   data() {
     return {
+      currPath: "/videoResult",
+
       // 查询关键字
       keywords: "",
 
@@ -56,9 +42,15 @@ export default {
       movieList: [],
     };
   },
-  // activated() {},
-  mounted() {
+  created() {
     this.init();
+  },
+  watch: {
+    $route(to) {
+      if (this.currPath === to.path) {
+        this.init();
+      }
+    },
   },
   methods: {
     init() {
@@ -70,14 +62,12 @@ export default {
     },
     // 通用查询 --分配查询 书籍还是视频
     search() {
+      debugger;
       this.keywords && this.searchVideo();
     },
     // 返回首页
     goHome() {
-      this.$router.push({
-        path: "/",
-        query: { keywords: this.keywords },
-      });
+      this.$router.push({ path: "/", query: { keywords: this.keywords } });
     },
     // 查询视频内容
     searchVideo() {
@@ -88,9 +78,7 @@ export default {
       if (cacheResult) {
         this.movieList = JSON.parse(cacheResult);
       } else {
-        const params = {
-          keywords: this.keywords,
-        };
+        const params = { keywords: this.keywords };
         // 打开遮罩
         this.refreshLoading = true;
         movie_GetList(params)

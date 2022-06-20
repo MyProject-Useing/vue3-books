@@ -73,7 +73,7 @@ export default defineComponent({
       });
     };
     return {
-      keywords: ref(""),
+      keywords: ref(router.currentRoute.value.query.keywords || ""),
       selectedKey: ref([router.currentRoute.value.path]),
       toPath,
     };
@@ -84,7 +84,10 @@ export default defineComponent({
       if (!this.keywords) {
         return;
       }
-      if (this.selectedKey.includes("/videoIndex")) {
+      if (
+        this.selectedKey.includes("/videoIndex") ||
+        this.selectedKey.includes("/videoResult")
+      ) {
         this.toPath("/videoResult", params);
       } else {
         this.toPath("/searchResult", params);

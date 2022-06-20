@@ -1,15 +1,13 @@
 <template>
   <div class="playing-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="playing-main">
-      <!-- <iframe
+      <iframe
         id="iframe"
         :src="iframeSrc"
         class="my-iframe"
-        style="height: 100%; width: 100%"
-        width="100%"
         frameborder="0"
         @load="setIframe"
-      ></iframe> -->
+      ></iframe>
 
       <!-- 凡人修仙传54 -->
       <!-- https://ukzy.ukubf3.com/20220612/8UPWmDQY/2000kb/hls/index.m3u8 -->
@@ -40,10 +38,8 @@ export default {
     };
   },
   mounted() {
-    this.iframeSrc = this.palyUrl;
     getVideoHtmlbyAQY({ url: encodeURI(this.palyUrl) }).then((d) => {
-      debugger;
-      d;
+      this.iframeSrc = d.data.data;
     });
   },
   methods: {
@@ -65,7 +61,9 @@ export default {
   height: 100%;
   width: 100%;
 }
-.my-iframe html {
-  height: 300px;
+.my-iframe {
+  height: 100%;
+  width: 100%;
+  min-height: 800px;
 }
 </style>
