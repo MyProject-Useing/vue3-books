@@ -16,7 +16,6 @@
           <!-- <template #icon>
             <video-camera-outlined />
           </template> -->
-
           视频</a-menu-item
         >
         <a-menu-item key="/book" @click="toPath('/book')">
@@ -49,7 +48,13 @@
         </a-layout-content>
       </a-layout>
     </a-layout-content>
-    <a-layout-footer> ©2022 Created by Z </a-layout-footer>
+    <a-layout-footer>
+      <span> ©2022 Created by Z </span>
+      <div>1、本站提供的所有内容仅供学习、交流与参考。</div>
+      <div>
+        2、本站所有资源均已标明来源，如未经许可进行转载使用，请务必标明或保留文章原始出处和作者的信息。
+      </div>
+    </a-layout-footer>
   </a-layout>
 </template>
 <script>
@@ -185,7 +190,6 @@ export default defineComponent({
 
 .layout .ant-layout-header {
   background-color: rgba(25, 26, 32, 0.8);
-  position: fixed;
   transform: translateZ(0);
   top: 0;
   left: 0;

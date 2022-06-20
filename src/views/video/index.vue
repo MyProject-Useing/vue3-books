@@ -17,6 +17,7 @@
             >
             </a-image>
             <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+            <span class="icon-tr">爱奇艺</span>
           </a>
           <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
         </li>
@@ -39,6 +40,7 @@
             >
             </a-image>
             <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+            <span class="icon-tr">爱奇艺</span>
           </a>
           <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
         </li>
@@ -61,6 +63,7 @@
             >
             </a-image>
             <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+            <span class="icon-tr">爱奇艺</span>
           </a>
           <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
         </li>
@@ -156,7 +159,9 @@ export default {
 <style scoped>
 .video-index-wrap {
   background: #14161a;
-  padding: 85px 24px 24px 24px;
+  margin: 0 auto;
+  width: 994px;
+  min-width: 994px;
 }
 .ant-layout-footer {
   background: #14161a;
@@ -193,12 +198,29 @@ export default {
 .qy-mod-list .qy-mod-ul {
   transition: all 0.5s;
   min-height: 314px;
+  padding: 0px;
 }
 
 .qy-mod-link {
-  width: 186px;
+  width: 182px;
   height: 290px;
   display: grid;
+  position: relative;
+}
+
+.qy-mod-link .ant-image img {
+  border-radius: 3px;
+}
+
+.qy-mod-link .icon-tr {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  background-color: #00cc4c;
+  color: #fff;
+  border-radius: 3px 0px 0px 3px;
+  padding: 0px 4px;
+  font-size: 13px;
 }
 
 .qy-mod-link :deep(.ant-image) {

@@ -17,6 +17,6 @@ module.exports = {
 
   // 视频配置
   video: {
-    api: "http://localhost:3003/",
+    api: "http://111.229.92.181:3003/",
   },
 };

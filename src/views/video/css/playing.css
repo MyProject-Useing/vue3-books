@@ -1,11 +1,11 @@
 .playing-wrap {
   box-sizing: border-box;
+  padding: 64px 26px 26px;
 }
 
 .playing-main {
-  margin: auto;
+  margin-top: 25px;
   position: relative;
-  height: 100%;
   min-width: 988px;
   padding-left: 0px;
   padding-right: 350px;
@@ -91,7 +91,6 @@
   width: 100%;
   margin-bottom: 10px;
 }
-
 
 .plp-r .list-wrapper-item .album-item .album-link {
   display: block;
