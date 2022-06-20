@@ -1,5 +1,7 @@
 .video-content {
-  padding: 64px 24px 24px;
+  width: calc(100% - 300px);
+  margin: 0 auto;
+  min-width: 990px;
 }
 
 .video-content .video-panle {
