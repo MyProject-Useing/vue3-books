@@ -22,7 +22,6 @@
                 class="item-title orange ellipsis"
                 target="_blank"
                 :title="item.title"
-                @click.stop="toPaly(item)"
               >
                 {{ item.title }}
               </a>
@@ -191,25 +190,29 @@ export default {
     getImgUrl(item) {
       return this.getImages(item.imgSrc) || this.noCover;
     },
-
+    // 处理图片
     getImages(_url) {
       if (_url !== undefined) {
         let _u = _url.substring(7);
         return "https://images.weserv.nl/?url=" + _u;
       }
     },
-
-    // 书籍详情
+    // 播放视频
     toPaly(item) {
       if (!item.palySrc) {
         return message.warning("未找到资源路径，无法正常播放。");
       }
       this.$router.push({
         path: item.hasVip ? "/playing" : "/videoiframe",
-        query: { url: encodeURI(item.palySrc) },
+        query: {
+          url: encodeURI(item.palySrc),
+          tag: encodeURI(item.tag),
+          title: encodeURI(item.title),
+          order: item.order ?? null,
+        },
       });
     },
-
+    // 查看具体某一集
     jumpIndex(item, info) {
       if (!item.palySrc) {
         return message.warning("未找到资源路径，无法正常播放。");
@@ -220,6 +223,9 @@ export default {
       this.toPaly({
         palySrc: info.url,
         hasVip: item.hasVip,
+        tag: item.tag,
+        title: item.title,
+        order: info.order,
       });
     },
   },
