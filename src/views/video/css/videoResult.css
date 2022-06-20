@@ -7,6 +7,7 @@
 .video-content .video-panle {
   margin-top: 26px;
   padding: 20px;
+  min-height: calc(100vh - 64px - 140px);
 }
 
 .video-content .video-item {
@@ -175,6 +176,7 @@
 .video-content .movie-img {
   width: 180px;
   height: 236px;
+  cursor: default;
   transition: all 0.25s ease-in-out;
   backface-visibility: hidden;
 }
