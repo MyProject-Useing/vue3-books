@@ -145,8 +145,6 @@ h3.wrap-title {
   }
 }
 .rank-list-row {
-  height: 423px;
   overflow: hidden;
-  *position: relative;
   width: 101%;
 }
