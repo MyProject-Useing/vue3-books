@@ -1,12 +1,17 @@
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  background: #fff;
-  color: #262626;
-  font-family: PingFangSC-Regular, HelveticaNeue-Light, Helvetica Neue Light,
-    Microsoft YaHei, "sans-serif";
-  text-align: left;
+.book-index-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  margin-top: 25px;
 }
+
+@media (max-width: 1280px) {
+  .book-index-wrap {
+    margin: 0 auto;
+    width: 990px;
+  }
+}
+
 .lang {
   font-family: FZZCYSK;
   font-weight: 400;
@@ -15,18 +20,16 @@ body {
   float: left;
   margin-right: 30px;
   position: relative;
-  width: 216px;
+  width: 212px;
   z-index: 1;
 }
 h3.wrap-title {
   color: #1a1a1a;
   font-size: 18px;
-  font-weight: 400;
-  height: 24px;
-  line-height: 25px;
-  *line-height: 1;
+  font-weight: 600;
+  height: 34px;
+  line-height: 32px;
   overflow: hidden;
-  padding-bottom: 4px;
 }
 .loaded a {
   transition: color 0.3s, background-color 0.3s;
@@ -90,10 +93,7 @@ ul {
   height: 30px;
   position: relative;
 }
-.rank-list .book-list li .num-box span.num2 {
-  background: #e67225;
-  color: #fff;
-}
+
 .rank-list .book-list li .name-box a h2,
 .rank-list .book-list li .name-box a.name {
   color: #1a1a1a;
@@ -105,7 +105,7 @@ ul {
 .rank-list .book-list li .name-box a {
   float: left;
   font: 14px/31px PingFangSC-Regular, -apple-system, Simsun;
-  width: 116px;
+  width: 112px;
 }
 .rank-list .book-list li .name-box i.total {
   color: #b3b3b3;
@@ -117,7 +117,22 @@ ul {
   white-space: normal;
   width: 72px;
 }
-
+.rank-list .book-list li .num-box span {
+  background: #ededed;
+  color: #666;
+  display: block;
+  font: 700 14px/16px Arial;
+  height: 16px;
+  letter-spacing: -1px;
+  margin-top: 8px;
+  overflow: hidden;
+  text-align: center;
+  width: 16px;
+}
+.update-wrap .update-list-wrap .update-tab,
+h3.wrap-title {
+  border-bottom: 1px solid #666;
+}
 @media (max-width: 1280px) {
   .rank-list .book-list li .name-box i.total {
     width: 81px;

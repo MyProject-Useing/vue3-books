@@ -2,138 +2,21 @@
   <div class="book-index-wrap">
     <a-spin :spinning="refreshLoading">
       <div id="rank-list-row" class="rank-list-row cf mb20">
-        <div class="rank-list">
+        <div class="rank-list" v-for="item in top" :key="item.title">
           <h3 class="wrap-title lang">
-            <a href="https://www.qidian.com/rank/yuepiao/" target="_blank"
-              >月票榜<i>·</i>VIP新作</a
-            >
+            <a :href="item.href" target="_blank">{{ item.title }}</a>
           </h3>
           <div class="book-list">
             <ul>
-              <li>
-                <div class="num-box"><span class="num2">2</span></div>
-                <div class="name-box">
-                  <a
-                    class="name"
-                    href="//book.qidian.com/info/1033523308/"
-                    target="_blank"
-                    >捕星之执宰星河</a
-                  ><i class="total">20974</i>
+              <li v-for="(d, inx) in item.list" :key="d.title">
+                <div class="num-box">
+                  <span>{{ inx + 1 }}</span>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="rank-list sort-list">
-          <h3 class="wrap-title lang">
-            <a href="https://www.qidian.com/rank/hotsales/" target="_blank"
-              >畅销榜</a
-            ><a
-              class="more"
-              href="//www.qidian.com/rank/hotsales/"
-              data-eid="qd_A118"
-              rel="nofollow"
-              target="_blank"
-              >更多<em class="iconfont"></em></a
-            >
-          </h3>
-          <div class="book-list">
-            <ul>
-              <li data-rid="2">
-                <div class="num-box"><span class="num2">2</span></div>
                 <div class="name-box">
-                  <a
-                    class="name"
-                    href="//book.qidian.com/info/1021617576/"
-                    target="_blank"
-                    data-eid="qd_A117"
-                    data-bid="1021617576"
-                    >夜的命名术</a
-                  ><span class="iconfont"></span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="rank-list sort-list">
-          <h3 class="wrap-title lang">
-            <a href="https://www.qidian.com/rank/newfans/" target="_blank"
-              >粉丝榜</a
-            ><a
-              class="more"
-              href="//www.qidian.com/rank/newfans/"
-              rel="nofollow"
-              target="_blank"
-              data-eid="qd_A118"
-              >更多<em class="iconfont"></em></a
-            >
-          </h3>
-          <div class="book-list">
-            <ul>
-              <li data-rid="2">
-                <div class="num-box"><span class="num2">2</span></div>
-                <div class="name-box">
-                  <a
-                    class="name"
-                    href="//book.qidian.com/info/1021617576/"
-                    target="_blank"
-                    data-eid="qd_A117"
-                    data-bid="1021617576"
-                    >夜的命名术</a
-                  ><span class="iconfont"></span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="rank-list sort-list">
-          <h3 class="wrap-title lang">
-            <a href="https://www.qidian.com/rank/readindex/" target="_blank"
-              >阅读指数榜</a
-            >
-          </h3>
-          <div class="book-list">
-            <ul>
-              <li data-rid="2">
-                <div class="num-box"><span class="num2">2</span></div>
-                <div class="name-box">
-                  <a
-                    class="name"
-                    href="//book.qidian.com/info/1021617576/"
-                    target="_blank"
-                    data-eid="qd_A117"
-                    data-bid="1021617576"
-                    >夜的命名术</a
-                  ><span class="iconfont"></span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="rank-list sort-list mr0">
-          <h3 class="wrap-title lang">
-            <a href="https://www.qidian.com/rank/signnewbook/" target="_blank"
-              >签约作者新书榜</a
-            ><a
-              class="more"
-              href="//www.qidian.com/rank/signnewbook/"
-              rel="nofollow"
-              target="_blank"
-              data-eid="qd_A118"
-              >更多<em class="iconfont"></em></a
-            >
-          </h3>
-          <div class="book-list">
-            <ul>
-              <li>
-                <div class="num-box"><span class="num2">2</span></div>
-                <div class="name-box">
-                  <a
-                    class="name"
-                    href="//book.qidian.com/info/1033914374/"
-                    target="_blank"
-                    >唐人的餐桌</a
-                  ><span class="iconfont"></span>
+                  <a class="name" :href="d.href" target="_blank">{{
+                    d.title
+                  }}</a
+                  ><i class="total">-</i>
                 </div>
               </li>
             </ul>
