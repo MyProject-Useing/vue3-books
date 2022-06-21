@@ -1,0 +1,137 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  background: #fff;
+  color: #262626;
+  font-family: PingFangSC-Regular, HelveticaNeue-Light, Helvetica Neue Light,
+    Microsoft YaHei, "sans-serif";
+  text-align: left;
+}
+.lang {
+  font-family: FZZCYSK;
+  font-weight: 400;
+}
+.rank-list {
+  float: left;
+  margin-right: 30px;
+  position: relative;
+  width: 216px;
+  z-index: 1;
+}
+h3.wrap-title {
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 400;
+  height: 24px;
+  line-height: 25px;
+  *line-height: 1;
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+.loaded a {
+  transition: color 0.3s, background-color 0.3s;
+}
+a {
+  color: #262626;
+  outline: none;
+  text-decoration: none;
+}
+cite,
+em,
+i {
+  font-style: normal;
+}
+li,
+ol,
+ul {
+  list-style: none outside none;
+}
+a,
+blockquote,
+body,
+dd,
+div,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.rank-list .book-list li {
+  clear: both;
+  height: 31px;
+  *vertical-align: bottom;
+}
+.rank-list .book-list li .num-box {
+  float: left;
+  height: 32px;
+  width: 28px;
+}
+.rank-list .book-list li .name-box {
+  border-top: 1px solid #e6e6e6;
+  float: left;
+  height: 30px;
+  position: relative;
+}
+.rank-list .book-list li .num-box span.num2 {
+  background: #e67225;
+  color: #fff;
+}
+.rank-list .book-list li .name-box a h2,
+.rank-list .book-list li .name-box a.name {
+  color: #1a1a1a;
+  height: 31px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-list .book-list li .name-box a {
+  float: left;
+  font: 14px/31px PingFangSC-Regular, -apple-system, Simsun;
+  width: 116px;
+}
+.rank-list .book-list li .name-box i.total {
+  color: #b3b3b3;
+  float: right;
+  font: 12px/32px PingFangSC-Regular, -apple-system, Simsun;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 72px;
+}
+
+@media (max-width: 1280px) {
+  .rank-list .book-list li .name-box i.total {
+    width: 81px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .rank-list-row {
+    width: auto;
+  }
+}
+.rank-list-row {
+  height: 423px;
+  overflow: hidden;
+  *position: relative;
+  width: 101%;
+}

@@ -230,6 +230,5 @@ export default {
 </script>
 
 <style scoped>
-.book-index-wrap {
-}
+@import url("./css/indexResult.css");
 </style>
