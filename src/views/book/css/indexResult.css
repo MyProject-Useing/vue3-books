@@ -158,12 +158,58 @@ h3.wrap-title {
   margin-right: 5px;
   overflow: hidden;
 }
-
+.center-book-list ul {
+  overflow: hidden;
+  padding: 20px 0 0 0px;
+  position: relative;
+  width: 100%;
+}
+.book-img {
+  height: 96px;
+  margin-right: 12px;
+  width: 72px;
+}
+.center-book-list ul li {
+  float: left;
+  height: 96px;
+  margin: 0 30px 43px 0;
+  width: 370px;
+}
+.center-book-list ul li .book-info {
+  width: 255px;
+}
+.center-book-list ul li .book-info h3 a {
+  color: #1a1a1a;
+}
+.center-book-list ul li .book-info p {
+  color: #666;
+  font: 12px/20px PingFangSC-Regular, -apple-system, Simsun;
+  height: 40px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.state-box {
+  display: flex;
+  align-items: center;
+  color: #a6a6a6;
+}
+.state-box .author {
+  overflow: hidden;
+  padding-right: 10px;
+  margin-left: 5px;
+}
+.center-book-list ul li .book-img,
+.center-book-list ul li .book-info {
+  float: left;
+}
+.hot-classify-wrap ul {
+  height: 444px;
+}
 .hot-classify-wrap li {
   float: left;
   margin: 0 30px 45px 0;
   position: relative;
-  width: 270px;
+  width: 370px;
   z-index: 1;
 }
 @media (max-width: 1280px) {
