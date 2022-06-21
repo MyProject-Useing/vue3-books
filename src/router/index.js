@@ -20,6 +20,18 @@ const routes = [
         name: "videoResult",
         component: () => import("@/views/video/modules/videoResult.vue"),
       },
+
+      {
+        path: "/bookIndex",
+        name: "bookIndex",
+        component: () => import("@/views/book/indexResult.vue"),
+      },
+      {
+        path: "/bookResult",
+        name: "bookResult",
+        component: () => import("@/views/video/modules/videoResult.vue"),
+      },
+
       {
         path: "/readBooks",
         name: "readBooks",

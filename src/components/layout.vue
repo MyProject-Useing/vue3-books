@@ -18,7 +18,7 @@
           </template> -->
           视频</a-menu-item
         >
-        <a-menu-item key="/book" @click="toPath('/book')">
+        <a-menu-item key="/bookIndex" @click="toPath('/bookIndex')">
           <!-- <template #icon> <read-outlined /> </template> -->
           小说
         </a-menu-item>
@@ -95,7 +95,7 @@ export default defineComponent({
       ) {
         this.toPath("/videoResult", params);
       } else {
-        this.toPath("/searchResult", params);
+        this.toPath("/bookResult", params);
       }
     },
   },
