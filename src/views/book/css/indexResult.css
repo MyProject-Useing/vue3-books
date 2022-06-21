@@ -133,6 +133,39 @@ ul {
 h3.wrap-title {
   border-bottom: 1px solid #666;
 }
+.hot-classify-wrap {
+  margin-top: 20px;
+}
+
+.hot-classify-wrap .hot-book-list dd {
+  max-height: 32px;
+  display: flex;
+  align-items: center;
+}
+.hot-classify-wrap .hot-book-list dd a {
+  color: #1a1a1a;
+  float: left;
+  font: 14px/32px PingFangSC-Regular, -apple-system, Simsun;
+  margin-left: -8px;
+}
+.hot-classify-wrap .hot-book-list dd a.name {
+  height: 32px;
+  max-width: 168px;
+  overflow: hidden;
+}
+.hot-classify-wrap .hot-book-list dd .classify {
+  color: gray;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.hot-classify-wrap li {
+  float: left;
+  margin: 0 30px 45px 0;
+  position: relative;
+  width: 270px;
+  z-index: 1;
+}
 @media (max-width: 1280px) {
   .rank-list .book-list li .name-box i.total {
     width: 81px;

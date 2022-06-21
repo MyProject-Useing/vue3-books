@@ -1,7 +1,7 @@
 <template>
   <div class="book-index-wrap">
     <a-spin :spinning="refreshLoading">
-      <div id="rank-list-row" class="rank-list-row cf mb20">
+      <div class="rank-list-row">
         <div class="rank-list" v-for="item in top" :key="item.title">
           <h3 class="wrap-title lang">
             <a :href="item.href" target="_blank">{{ item.title }}</a>
@@ -22,6 +22,28 @@
             </ul>
           </div>
         </div>
+      </div>
+
+      <div class="hot-classify-wrap">
+        <ul>
+          <li v-for="item in hot" :key="item.title">
+            <h3 class="wrap-title lang">
+              {{ item.title }}
+            </h3>
+            <dl class="hot-book-list">
+              <dd v-for="d in item.list" :key="d.title">
+                <span class="classify">{{ d.tag }}</span
+                ><a
+                  class="name"
+                  href="//book.qidian.com/info/1033928754/"
+                  target="_blank"
+                  :title="d.title"
+                  >{{ d.title }}</a
+                >
+              </dd>
+            </dl>
+          </li>
+        </ul>
       </div>
     </a-spin>
   </div>
