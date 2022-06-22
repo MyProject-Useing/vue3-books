@@ -17,11 +17,11 @@
   font-weight: 400;
 }
 .rank-list {
-  float: left;
   margin-right: 30px;
   position: relative;
-  width: 212px;
+  width: calc(20% - 30px);
   z-index: 1;
+  display: inline-block;
 }
 h3.wrap-title {
   color: #1a1a1a;
@@ -80,18 +80,17 @@ ul {
 .rank-list .book-list li {
   clear: both;
   height: 31px;
-  *vertical-align: bottom;
+  display: flex;
 }
 .rank-list .book-list li .num-box {
-  float: left;
   height: 32px;
   width: 28px;
 }
 .rank-list .book-list li .name-box {
   border-top: 1px solid #e6e6e6;
-  float: left;
   height: 30px;
   position: relative;
+  width: calc(100% - 18px);
 }
 
 .rank-list .book-list li .name-box a h2,
@@ -133,9 +132,6 @@ ul {
 h3.wrap-title {
   border-bottom: 1px solid #666;
 }
-.hot-classify-wrap {
-  margin-top: 20px;
-}
 
 .hot-classify-wrap .hot-book-list dd {
   max-height: 32px;
@@ -146,7 +142,6 @@ h3.wrap-title {
   color: #1a1a1a;
   float: left;
   font: 14px/32px PingFangSC-Regular, -apple-system, Simsun;
-  margin-left: -8px;
 }
 .hot-classify-wrap .hot-book-list dd a.name {
   height: 32px;
@@ -155,14 +150,17 @@ h3.wrap-title {
 }
 .hot-classify-wrap .hot-book-list dd .classify {
   color: gray;
-  margin-right: 5px;
-  overflow: hidden;
+  margin-left: -8px;
+}
+
+.hot-book-list {
+  margin-top: 8px;
 }
 .center-book-list ul {
   overflow: hidden;
-  padding: 20px 0 0 0px;
   position: relative;
   width: 100%;
+  margin-top: 20px;
 }
 .book-img {
   height: 96px;
@@ -202,16 +200,16 @@ h3.wrap-title {
 .center-book-list ul li .book-info {
   float: left;
 }
-.hot-classify-wrap ul {
-  height: 444px;
-}
+
 .hot-classify-wrap li {
-  float: left;
-  margin: 0 30px 45px 0;
   position: relative;
-  width: 370px;
-  z-index: 1;
+  width: 33%;
+  display: inline-block;
+  padding-right: 31px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
+
 @media (max-width: 1280px) {
   .rank-list .book-list li .name-box i.total {
     width: 81px;
@@ -225,5 +223,6 @@ h3.wrap-title {
 }
 .rank-list-row {
   overflow: hidden;
-  width: 101%;
+  width: 100%;
+  margin-top: 20px;
 }
