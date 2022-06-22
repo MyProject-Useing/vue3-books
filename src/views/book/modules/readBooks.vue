@@ -72,7 +72,7 @@ import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
-import { getBooksText, getCatalog } from "@/api/bookApi";
+import { getBooksText, getBookInfo } from "@/api/bookApi";
 // 文章
 import booksContent from "./booksContent.vue";
 // 工具栏
@@ -190,8 +190,9 @@ export default {
   },
   methods: {
     init() {
+      debugger;
       if (this.bookUrl) {
-        this.getCatalog();
+        this.getBookInfo();
       } else {
         message.error("请重新选择书籍。");
       }
@@ -236,19 +237,29 @@ export default {
     },
 
     // 加载目录
-    getCatalog() {
-      const sessionKey = "catalog@" + this.bookUrl;
+    getBookInfo() {
+      debugger;
+      const sessionKey = "bookInfo@" + this.bookUrl;
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
+        this.bookInfoData = sessionData;
         this.setBookCache(sessionData);
       } else {
         this.bookLoading = true;
-
-        getCatalog({
-          bookUrl: this.bookUrl,
-        })
+        getBookInfo({ url: this.bookUrl })
           .then((result) => {
+            debugger;
             if (result.data.data) {
+              this.bookInfoData = result.data.data;
+              sessionStorage.setItem(
+                sessionKey,
+                JSON.stringify(result.data.data)
+              );
+              // 加入书架 缓存
+              this.$store.commit("caches/setBooksList", {
+                ...this.bookInfoData,
+                bookUrl: this.bookUrl,
+              });
               this.setBookCache(result.data.data);
             } else {
               this.bookTitle = "获取章节失败";
@@ -262,6 +273,34 @@ export default {
           });
       }
     },
+
+    // 加载目录
+    // getBookInfo() {
+    //   const sessionKey = "catalog@" + this.bookUrl;
+    //   let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
+    //   if (sessionData) {
+    //     this.setBookCache(sessionData);
+    //   } else {
+    //     this.bookLoading = true;
+
+    //     getBookInfo({
+    //       bookUrl: this.bookUrl,
+    //     })
+    //       .then((result) => {
+    //         if (result.data.data) {
+    //           this.setBookCache(result.data.data);
+    //         } else {
+    //           this.bookTitle = "获取章节失败";
+    //           this.bookContent = "获取章节目录失败！\n" + result.data.msg;
+    //           this.bookLoading = false;
+    //         }
+    //       })
+    //       .catch(() => {
+    //         this.bookLoading = false;
+    //         message.error("获取目录失败。");
+    //       });
+    //   }
+    // },
 
     // 设置缓存
     setBookCache(data) {

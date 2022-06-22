@@ -67,7 +67,7 @@
                               class="cf charpter-container"
                               v-for="item in infoDetail.list"
                               :key="item.index"
-                              @click="toBookIndex(item.href)"
+                              @click="toBookIndex(item)"
                             >
                               <a
                                 class="blue charpter-link"
@@ -196,21 +196,23 @@ export default {
       }
     },
     // 书籍详情
-    toBookIndex(href) {
+    toBookIndex(item) {
+      debugger;
       if (!this.bookUrl) {
         return;
       }
-      let readUrl = href || this.catalogList[0].href;
+      let readUrl = item.href || this.catalogList[0].href;
       this.$router.push({
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl),
-          readUrl: encodeURI(readUrl || ""),
+          index: encodeURI(readUrl || ""),
         },
       });
     },
     // 继续阅读
     stillRead() {
+      debugger;
       let href =
         this.cacheBookList[this.bookUrl] &&
         this.cacheBookList[this.bookUrl].readUrl
