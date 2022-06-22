@@ -1,246 +1,229 @@
+.book-index-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  margin-top: 25px;
+}
+
+@media (max-width: 1280px) {
+  .book-index-wrap {
+    margin: 0 auto;
+    width: 990px;
+  }
+}
+
+.lang {
+  font-family: FZZCYSK;
+  font-weight: 400;
+}
+.rank-list {
+  float: left;
+  margin-right: 30px;
+  position: relative;
+  width: 212px;
+  z-index: 1;
+}
+h3.wrap-title {
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 600;
+  height: 34px;
+  line-height: 32px;
+  overflow: hidden;
+}
+.loaded a {
+  transition: color 0.3s, background-color 0.3s;
+}
+a {
+  color: #262626;
+  outline: none;
+  text-decoration: none;
+}
 cite,
 em,
 i {
   font-style: normal;
-}
-
-p {
-  word-wrap: break-word;
-  word-break: break-all;
 }
 li,
 ol,
 ul {
   list-style: none outside none;
 }
-
-.book-index-bj {
-  background: url("@/assets/imgs/book-index-bj.jpg") no-repeat;
-  height: 338px;
-  background-size: cover;
-  position: relative;
-}
-
-.book-index-bj::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  box-shadow: 0px -29px 30px 0px #ffffff inset;
-}
-
-.book-index-mian {
-  margin: 0 auto;
-  margin-top: -338px;
-  width: 85%;
-  max-width: 990px;
-}
-
-.book-information {
-  height: 210px;
-  position: relative;
-  margin-bottom: 1.6rem;
-  background: #fff;
-  margin-top: -6rem;
-  padding: 1rem 1rem 0 1rem;
-}
-
-.book-information .book-img {
-  float: left;
-  margin-right: 1rem;
-  height: 100%;
-  width: 155px;
-  display: flex;
-}
-
-.book-information .book-info {
-  height: 100%;
-}
-
-.book-information .book-img a {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 1px 6px rgb(0 0 0 / 35%), 0 0 5px #f9f2e9 inset;
-}
-
-.book-information .book-info h1 {
-  font: 700 28px/38px PingFangSC-Regular, HelveticaNeue-Light,
-    "Helvetica Neue Light", "Microsoft YaHei", sans-serif;
-  overflow: hidden;
-  height: 38px;
-  margin-bottom: 12px;
-}
-.book-information .book-info h1 span {
-  font: 14px/20px PingFangSC-Regular, "-apple-system", Simsun;
-  margin-left: 20px;
-}
-.book-information .book-info-btn {
+a,
+blockquote,
+body,
+dd,
+div,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
   margin: 0;
+  padding: 0;
 }
-.book-information .book-info .tag + p + p {
+
+.rank-list .book-list li {
+  clear: both;
+  height: 31px;
+  *vertical-align: bottom;
+}
+.rank-list .book-list li .num-box {
+  float: left;
+  height: 32px;
+  width: 28px;
+}
+.rank-list .book-list li .name-box {
+  border-top: 1px solid #e6e6e6;
+  float: left;
+  height: 30px;
+  position: relative;
+}
+
+.rank-list .book-list li .name-box a h2,
+.rank-list .book-list li .name-box a.name {
+  color: #1a1a1a;
+  height: 31px;
   overflow: hidden;
-  height: 24px;
-  margin-bottom: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-list .book-list li .name-box a {
+  float: left;
+  font: 14px/31px PingFangSC-Regular, -apple-system, Simsun;
+  width: 164px;
+}
+.rank-list .book-list li .name-box i.total {
+  color: #b3b3b3;
+  float: right;
+  font: 12px/32px PingFangSC-Regular, -apple-system, Simsun;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 18px;
+}
+.rank-list .book-list li .num-box span {
+  background: #ededed;
   color: #666;
-}
-
-.book-information .book-info .tag a.blue,
-.book-information .book-info .tag span.blue {
-  color: #3f5a93;
-  border-color: #9fadc9;
-}
-
-.book-information .book-info .tag a,
-.book-information .book-info .tag span {
-  font: 12px/22px PingFangSC-Regular, "-apple-system", Simsun;
-  display: inline-block;
+  display: block;
+  font: 700 14px/16px Arial;
+  height: 16px;
+  letter-spacing: -1px;
+  margin-top: 8px;
   overflow: hidden;
-  height: 24px;
+  text-align: center;
+  width: 16px;
+}
+.update-wrap .update-list-wrap .update-tab,
+h3.wrap-title {
+  border-bottom: 1px solid #666;
+}
+.hot-classify-wrap {
+  margin-top: 20px;
+}
+
+.hot-classify-wrap .hot-book-list dd {
+  max-height: 32px;
+  display: flex;
+  align-items: center;
+}
+.hot-classify-wrap .hot-book-list dd a {
+  color: #1a1a1a;
+  float: left;
+  font: 14px/32px PingFangSC-Regular, -apple-system, Simsun;
+  margin-left: -8px;
+}
+.hot-classify-wrap .hot-book-list dd a.name {
+  height: 32px;
+  max-width: 168px;
+  overflow: hidden;
+}
+.hot-classify-wrap .hot-book-list dd .classify {
+  color: gray;
+  margin-right: 5px;
+  overflow: hidden;
+}
+.center-book-list ul {
+  overflow: hidden;
+  padding: 20px 0 0 0px;
+  position: relative;
+  width: 100%;
+}
+.book-img {
+  height: 96px;
   margin-right: 12px;
-  padding: 0 10px;
-  text-align: center;
-  vertical-align: middle;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 15px;
+  width: 72px;
 }
-
-.book-information .book-info .tag + .intro {
-  font: 14px/20px PingFangSC-Regular, "-apple-system", Simsun;
-  overflow: hidden;
-  height: 20px;
-  margin-bottom: 11px;
-}
-
-.book-information .book-info .tag + p + p em {
-  font: 20px/22px Arial;
-  letter-spacing: 0.5px;
-  color: #262626;
-}
-
-.book-information .book-info .tag + p + p cite,
-.book-information .book-info .tag + p + p em,
-.book-information .book-info .tag + p + p i {
+.center-book-list ul li {
   float: left;
+  height: 96px;
+  margin: 0 30px 43px 0;
+  width: 370px;
 }
-
-.book-information .book-info .tag + p + p cite {
-  font: 12px/20px PingFangSC-Regular, "-apple-system", Simsun;
-  margin-top: 2px;
-  margin-left: 3px;
+.center-book-list ul li .book-info {
+  width: 255px;
 }
-
-.book-information .book-info .book-info-details {
-  height: calc(100% - 2.1rem);
+.center-book-list ul li .book-info h3 a {
+  color: #1a1a1a;
 }
-
-.book-information .book-info .tag + p + p i {
-  font: 18px/22px PingFangSC-Regular, "-apple-system", Simsun;
-  margin: 0 10px;
-  color: #e6e6e6;
-}
-
-.szWntGoi {
-  font-family: "szWntGoi" !important;
-  display: initial !important;
-  color: inherit !important;
-  vertical-align: initial !important;
-}
-
-.blue-btn {
-  color: #3f5a93;
-  border-color: #3f5a93;
-}
-
-.book-information .book-info a.blue-btn {
-  font: 100% PingFangSC-Regular, "-apple-system", Simsun;
-  display: inline-block;
-  line-height: 1.9rem;
-  padding: 0 0.8rem;
-  border-width: 1px;
-  border-style: solid;
-}
-
-.book-info-author {
-  font-size: 14px;
-  color: #262626;
-  margin-left: 1rem;
-}
-
-.book-info-title {
-  font-weight: bolder;
-}
-
-/*标签分页*/
-
-.book-information .ant-tabs > .ant-tabs-nav {
-  height: 41px;
-}
-
-.book-detail-wrap .ant-tabs-tab {
-  padding: 1px 0;
-}
-
-.book-detail-wrap .ant-tabs-top > .ant-tabs-nav {
-  margin: 0 0 34px 0;
-}
-
-.book-detail-wrap .ant-tabs-tab .ant-tabs-tab-btn {
-  font: 18px/40px FZZCYSK;
-  float: left;
-  overflow: hidden;
+.center-book-list ul li .book-info p {
+  color: #666;
+  font: 12px/20px PingFangSC-Regular, -apple-system, Simsun;
   height: 40px;
-  padding: 0 21px;
-  text-align: center;
-  font-weight: 500;
-  font-family: FZZCYSK;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.state-box {
+  display: flex;
+  align-items: center;
+  color: #a6a6a6;
+}
+.state-box .author {
+  overflow: hidden;
+  padding-right: 10px;
+  margin-left: 5px;
+}
+.center-book-list ul li .book-img,
+.center-book-list ul li .book-info {
+  float: left;
+}
+.hot-classify-wrap ul {
+  height: 444px;
+}
+.hot-classify-wrap li {
+  float: left;
+  margin: 0 30px 45px 0;
+  position: relative;
+  width: 370px;
+  z-index: 1;
+}
+@media (max-width: 1280px) {
+  .rank-list .book-list li .name-box i.total {
+    width: 81px;
+  }
 }
 
-.book-detail-wrap .ant-tabs-tab-btn:focus,
-.book-detail-wrap .ant-tabs-tab-remove:focus,
-.book-detail-wrap .ant-tabs-tab-btn:active,
-.book-detail-wrap .ant-tabs-tab:hover,
-.book-detail-wrap .ant-tabs-tab-remove:active {
-  color: #ed4259;
+@media (max-width: 1250px) {
+  .rank-list-row {
+    width: auto;
+  }
 }
-
-.book-detail-wrap .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #ed4259;
+.rank-list-row {
+  overflow: hidden;
+  width: 101%;
 }
-
-.book-detail-wrap  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
-  background: #ed4259;
-}
-
-/*标签分页*/
-
-/*移动端*/
-.mobile .catalog-list-wrap .volume-list li {
-  width: 50%;
-}
-.mobile .book-information {
-  height: 8rem;
-  padding: 0.8rem 0.8rem 0 0.8rem;
-}
-
-.mobile .book-information .book-info .tag + p + p {
-  display: none;
-}
-
-.mobile .book-index-mian {
-  margin-top: -12rem;
-}
-.mobile .book-index-bj {
-  height: 12rem;
-}
-.mobile .book-information .book-img {
-  width: 80px;
-  margin-right: 10px;
-}
-
-/*移动端*/

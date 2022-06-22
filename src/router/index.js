@@ -24,12 +24,12 @@ const routes = [
       {
         path: "/bookIndex",
         name: "bookIndex",
-        component: () => import("@/views/book/indexResult.vue"),
+        component: () => import("@/views/book/index.vue"),
       },
       {
-        path: "/bookResult",
-        name: "bookResult",
-        component: () => import("@/views/video/modules/videoResult.vue"),
+        path: "/bookInfo",
+        name: "bookInfo",
+        component: () => import("@/views/book/modules/bookInfo.vue"),
       },
 
       {
@@ -39,22 +39,6 @@ const routes = [
           keepAlive: false,
         },
         component: () => import("@/views/book/modules/readBooks.vue"),
-      },
-      {
-        path: "/book",
-        name: "book",
-        meta: {
-          keepAlive: false,
-        },
-        component: () => import("@/views/book/index.vue"),
-      },
-      {
-        path: "/searchResult",
-        name: "searchResult",
-        meta: {
-          keepAlive: false,
-        },
-        component: () => import("@/views/home/modules/searchResult.vue"),
       },
       {
         path: "/playing",

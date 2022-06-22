@@ -11,5 +11,9 @@ export const getBooksText = (params) =>
 export const getCatalog = (params) =>
   request.get(api + "api/book/getCatalog", { params });
 
+// 获取书籍信息/目录
+export const getBookInfo = (params) =>
+  request.get(api + "api/book/getBookInfo", { params });
+
 // 首页热门
 export const getBookIndex = () => request.get(api + "api/book/getBookIndex");
