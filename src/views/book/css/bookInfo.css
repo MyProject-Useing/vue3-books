@@ -115,6 +115,7 @@ ul {
   overflow: hidden;
   height: 20px;
   margin-bottom: 11px;
+  margin-top: 8px;
 }
 
 .book-information .book-info .tag + p + p em {

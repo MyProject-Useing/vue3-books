@@ -298,7 +298,6 @@ export default {
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail .time,
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail a.blue,
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail i {
-  float: left;
   display: inline-block;
   vertical-align: middle;
 }
