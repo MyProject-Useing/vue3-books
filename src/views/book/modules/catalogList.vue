@@ -57,6 +57,7 @@ export default {
   methods: {
     // 查询指定章节内容
     toChapter(item) {
+      debugger;
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",

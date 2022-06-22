@@ -155,7 +155,6 @@ export default {
         path: "/bookInfo",
         query: {
           url: encodeURI(item.href),
-          title: encodeURI(item.title),
         },
       });
     },
