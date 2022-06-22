@@ -201,25 +201,21 @@ export default {
       if (!this.bookUrl) {
         return;
       }
-      let readUrl = item.href || this.catalogList[0].href;
       this.$router.push({
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl),
-          index: encodeURI(readUrl || ""),
+          hasVip: item.hasVip,
+          href: item.href,
+          index: item.index,
         },
       });
     },
     // 继续阅读
     stillRead() {
-      debugger;
-      let href =
-        this.cacheBookList[this.bookUrl] &&
-        this.cacheBookList[this.bookUrl].readUrl
-          ? this.cacheBookList[this.bookUrl].readUrl
-          : "";
-
-      this.toBookIndex(href);
+      let ca = this.cacheBookList[this.bookUrl] || this.bookInfoData;
+      let index = ca.readIndex || 1;
+      this.toBookIndex(ca.catalogList[index - 1]);
     },
   },
 };
