@@ -7,7 +7,7 @@
       <div class="volume-list">
         <h3>
           <a class="subscri" href="javascript:"></a>
-          正文卷<i>·</i>共{{ catalogList.length + 1 }}章<span class="free">
+          正文卷<i>·</i>共{{ catalogList.length }}章<span class="free">
             免费</span
           >
         </h3>
@@ -18,8 +18,8 @@
             :key="item.index"
             :class="currHref === item.href ? 'on' : ''"
           >
-            <a :title="getTitle(item.title)" @click="toChapter(item)">
-              {{ getTitle(item.title) }}</a
+            <a :title="item.title" @click="toChapter(item)">
+              {{ item.index + " " + item.title }}</a
             >
           </li>
         </ul>
@@ -55,21 +55,6 @@ export default {
     },
   },
   methods: {
-    getTitle(title) {
-      let str = title || "";
-      return str;
-      // if (str.includes(" ")) {
-      //   let valueList = str.split(" ");
-      //   let first = "第" + valueList[0] + "章";
-      //   return first + " " + valueList[1];
-      // } else if (str.includes(".")) {
-      //   let valueList = str.split(".");
-      //   let first = "第" + valueList[0] + "章";
-      //   return first + " " + valueList[1];
-      // } else {
-      //   return str;
-      // }
-    },
     // 查询指定章节内容
     toChapter(item) {
       // 查询指定章节内容

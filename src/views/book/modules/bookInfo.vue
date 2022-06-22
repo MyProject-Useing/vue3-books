@@ -5,7 +5,6 @@
   >
     <div class="book-index-bj"></div>
     <div class="book-index-mian">
-      <a-page-header :breadcrumb="{ routes }" />
       <div class="book-index-content">
         <div class="book-information">
           <div class="book-img">
@@ -19,8 +18,8 @@
           <div class="book-info">
             <div class="book-info-details">
               <h1 class="ellipsis">
-                <em class="book-info-title" :title="bookInfo.bookTitle">{{
-                  bookInfo.bookTitle
+                <em class="book-info-title" :title="bookInfo.title">{{
+                  bookInfo.title
                 }}</em>
                 <span class="book-info-author"
                   ><span>{{ bookInfo.author }}</span> 著</span
@@ -31,7 +30,7 @@
                   <span class="blue">连载</span>
                   <span class="blue">免费</span>
                 </p>
-                <p class="intro">小说简介</p>
+                <p class="intro">{{ bookInfo.intro }}</p>
                 <p>
                   <em><span class="szWntGoi">0</span></em
                   ><cite>万字</cite><i>|</i>
@@ -57,7 +56,7 @@
                 ><div class="left-wrap">
                   <div class="book-info-detail">
                     <div class="book-intro">
-                      <p>{{ bookInfo.intro }}</p>
+                      <p>{{ infoDetail.intro }}</p>
                     </div>
                     <div class="book-state">
                       <ul>
@@ -66,11 +65,8 @@
                           <div class="detail">
                             <p
                               class="cf charpter-container"
-                              v-for="item in catalogList
-                                .concat([])
-                                .reverse()
-                                .splice(0, 10)"
-                              :key="item.href"
+                              v-for="item in infoDetail.list"
+                              :key="item.index"
                               @click="toBookIndex(item.href)"
                             >
                               <a
@@ -78,7 +74,7 @@
                                 href="javascript:"
                                 :title="item.title"
                                 >{{ item.title }}</a
-                              ><i>·</i><em class="time">0小时前</em>
+                              ><i>·</i><em class="time">{{ item.time }}</em>
                             </p>
                           </div>
                         </li>
@@ -115,7 +111,7 @@ import { isMobile } from "@/plugins/utils";
 // 目录
 import catalog from "./catalogList.vue";
 
-import { getBookInfo } from "@/api/bookApi";
+import { getBookInfo } from "@/api/bookApi.js";
 
 export default {
   name: "bookIndex",
@@ -123,32 +119,13 @@ export default {
   data() {
     return {
       activeKey: "1",
-      catalogList: [],
       bookLoading: false,
-      bookInfo: {},
+      bookInfoData: {},
     };
   },
   computed: {
     bookUrl() {
       return decodeURI(this.$route.query.url || "");
-    },
-
-    routes() {
-      let bookTitle = this.bookInfo.bookTitle;
-      return [
-        {
-          path: "/",
-          breadcrumbName: "首页",
-        },
-        {
-          path: "/searchResult",
-          breadcrumbName: "搜索结果",
-        },
-        {
-          path: "second",
-          breadcrumbName: bookTitle,
-        },
-      ];
     },
 
     // 是否为移动端
@@ -169,9 +146,14 @@ export default {
         ? "继续阅读"
         : "免费阅读";
     },
-
-    bookApi() {
-      return this.$store.state.book.api;
+    catalogList() {
+      return this.bookInfoData?.catalogList || [];
+    },
+    bookInfo() {
+      return this.bookInfoData?.info || [];
+    },
+    infoDetail() {
+      return this.bookInfoData?.infoDetail || [];
     },
   },
   mounted() {
@@ -185,27 +167,23 @@ export default {
     },
     // 加载目录
     getInfo() {
-      debugger;
-      const sessionKey = "catalog@" + this.bookUrl;
+      const sessionKey = "bookInfo@" + this.bookUrl;
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
-        this.catalogList = sessionData.catalogList;
-        this.bookInfo = sessionData.info;
+        this.bookInfoData = sessionData;
       } else {
         this.bookLoading = true;
         getBookInfo({ url: this.bookUrl })
           .then((result) => {
             if (result.data.data) {
-              debugger;
-              this.catalogList = result.data.data.catalogList;
-              this.bookInfo = result.data.data.info;
+              this.bookInfoData = result.data.data;
               sessionStorage.setItem(
                 sessionKey,
                 JSON.stringify(result.data.data)
               );
               // 加入书架 缓存
               this.$store.commit("caches/setBooksList", {
-                ...this.bookInfo,
+                ...this.bookInfoData,
                 bookUrl: this.bookUrl,
               });
             }
@@ -260,12 +238,11 @@ export default {
 /*最新章节*/
 .content-nav-wrap :deep(.left-wrap) {
   width: 100%;
-  border-bottom: 1px solid #e6e6e6;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-intro {
   border-bottom: 1px solid #e6e6e6;
-  padding-bottom: 15px;
+  padding-bottom: 25px;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-intro p {
@@ -283,24 +260,26 @@ export default {
   margin: 0;
   padding: 0;
 }
-
+.content-nav-wrap :deep(.left-wrap) .book-state ul li {
+  margin-top: 25px;
+}
 .content-nav-wrap :deep(.left-wrap) .book-state li b {
   font: 14px/24px PingFangSC-Regular, "-apple-system", Simsun;
   float: left;
   width: 98px;
-  margin: 19px 20px 0 0;
   color: #999;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail {
-  padding: 20px 0;
+  float: left;
+  width: calc(100% - 98px);
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-container {
   display: inline-block;
   height: 22px;
   margin: 0px;
-  width: 100%;
+  width: 50%;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-link {

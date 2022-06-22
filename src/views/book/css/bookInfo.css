@@ -33,7 +33,7 @@ ul {
 
 .book-index-mian {
   margin: 0 auto;
-  margin-top: -338px;
+  margin-top: -214px;
   width: 85%;
   max-width: 990px;
 }
@@ -213,7 +213,7 @@ ul {
   color: #ed4259;
 }
 
-.book-detail-wrap  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+.book-detail-wrap .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
   background: #ed4259;
 }
 
