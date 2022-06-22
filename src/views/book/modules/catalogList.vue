@@ -19,7 +19,7 @@
             :class="currHref === item.href ? 'on' : ''"
           >
             <a :title="item.title" @click="toChapter(item)">
-              {{ item.index + " " + item.title }}</a
+              {{ item.index }}</a
             >
           </li>
         </ul>

@@ -72,8 +72,8 @@
                               <a
                                 class="blue charpter-link"
                                 href="javascript:"
-                                :title="item.title"
-                                >{{ item.title }}</a
+                                :title="item.index"
+                                >{{ item.index }}</a
                               ><i>·</i><em class="time">{{ item.time }}</em>
                             </p>
                           </div>
@@ -284,7 +284,7 @@ export default {
 
 .content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-link {
   overflow: hidden;
-  max-width: calc(100% - 80px);
+  max-width: calc(100% - 133px);
   white-space: nowrap;
   text-overflow: ellipsis;
 }
