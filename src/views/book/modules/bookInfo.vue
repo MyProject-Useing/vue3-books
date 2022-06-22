@@ -315,44 +315,4 @@ export default {
 }
 
 /*最新章节*/
-
-/*目录*/
-
-.content-nav-wrap :deep(.ant-tabs-tab) {
-  color: #a6a6a6;
-}
-
-.content-nav-wrap :deep(.ant-tabs-nav)::before {
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.catalog-tab-title span {
-  font-size: 14px;
-}
-
-.catalog-tab .volume li {
-  font: 14px/40px PingFangSC-Regular, "-apple-system", Simsun;
-  float: left;
-  overflow: hidden;
-  width: 350px;
-  height: 40px;
-  padding-right: 60px;
-  border-bottom: 1px solid #ebebeb;
-}
-
-.catalog-tab .book_name {
-  font-weight: 400;
-  display: inline-block;
-  vertical-align: middle;
-  color: #262626;
-}
-
-/*目录*/
-
-/*移动端*/
-.mobile .book-index-mian .ant-page-header {
-  height: 12rem;
-}
-
-/*移动端*/
 </style>
