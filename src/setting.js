@@ -13,7 +13,7 @@ module.exports = {
   // 书籍配置
   book: {
     api: "http://localhost:3003/",
-    // api: "http://111.229.92.181:3000/",
+    // api: "http://111.229.92.181:3003/",
   },
 
   // 视频配置

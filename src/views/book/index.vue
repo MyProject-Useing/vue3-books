@@ -164,5 +164,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("./css/index.css");
+@import url("./css/indexResult.css");
 </style>
