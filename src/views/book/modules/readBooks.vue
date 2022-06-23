@@ -4,7 +4,6 @@
       <div class="main-read-container">
         <booksContent
           class="book-content"
-          :bookInfo="bookInfo"
           :title="bookTitle"
           :content="bookContent"
           @touchend="eventEnd"
@@ -72,7 +71,7 @@ import { isMobile } from "@/plugins/utils";
 import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
-import { getBooksText, getBookInfo } from "@/api/bookApi";
+import { getVipContent, getBookInfo, getFreeContent } from "@/api/bookApi";
 // 文章
 import booksContent from "./booksContent.vue";
 // 工具栏
@@ -109,8 +108,6 @@ export default {
 
       // 目录
       catalogList: [],
-
-      bookInfo: {},
 
       selfCatalog: {},
 
@@ -162,6 +159,8 @@ export default {
     bookApi() {
       return this.$store.state.book.api;
     },
+
+    bookInfoData: {},
   },
   mounted() {
     this.init();
@@ -190,7 +189,6 @@ export default {
   },
   methods: {
     init() {
-      debugger;
       if (this.bookUrl) {
         this.getBookInfo();
       } else {
@@ -238,7 +236,6 @@ export default {
 
     // 加载目录
     getBookInfo() {
-      debugger;
       const sessionKey = "bookInfo@" + this.bookUrl;
       let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
       if (sessionData) {
@@ -248,7 +245,6 @@ export default {
         this.bookLoading = true;
         getBookInfo({ url: this.bookUrl })
           .then((result) => {
-            debugger;
             if (result.data.data) {
               this.bookInfoData = result.data.data;
               sessionStorage.setItem(
@@ -274,76 +270,47 @@ export default {
       }
     },
 
-    // 加载目录
-    // getBookInfo() {
-    //   const sessionKey = "catalog@" + this.bookUrl;
-    //   let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
-    //   if (sessionData) {
-    //     this.setBookCache(sessionData);
-    //   } else {
-    //     this.bookLoading = true;
-
-    //     getBookInfo({
-    //       bookUrl: this.bookUrl,
-    //     })
-    //       .then((result) => {
-    //         if (result.data.data) {
-    //           this.setBookCache(result.data.data);
-    //         } else {
-    //           this.bookTitle = "获取章节失败";
-    //           this.bookContent = "获取章节目录失败！\n" + result.data.msg;
-    //           this.bookLoading = false;
-    //         }
-    //       })
-    //       .catch(() => {
-    //         this.bookLoading = false;
-    //         message.error("获取目录失败。");
-    //       });
-    //   }
-    // },
-
     // 设置缓存
     setBookCache(data) {
       this.catalogList = data.catalogList || [];
-      let readIndex = 1;
+      let readIndex =
+        this.$route.query.index && decodeURI(this.$route.query.index);
 
-      const readUrl = this.$route.query.readUrl
-        ? decodeURI(this.$route.query.readUrl)
-        : decodeURI(this.catalogList[0].href);
-
-      this.catalogList.some((item, index) => {
-        if (item.href === readUrl) {
-          readIndex = index + 1;
-          return true;
-        }
-      });
+      let bookObj = this.catalogList[0];
+      if (readIndex) {
+        let fData = this.catalogList.filter(
+          (item) => item.index === readIndex
+        )[0];
+        fData && (bookObj = fData);
+      } else {
+        readIndex = bookObj.index;
+      }
       this.bookInfo = {
-        readUrl: readUrl,
         readIndex: readIndex,
         bookUrl: this.bookUrl,
-        ...data.info,
       };
       // 加入书架 缓存
       this.$store.commit("caches/setBooksList", this.bookInfo);
-      sessionStorage.setItem("catalog@" + this.bookUrl, JSON.stringify(data));
-
-      this.getBookContent(readUrl);
+      this.getBookContent(bookObj);
     },
 
     // 获取 正文
-    getBookContent(readUrl) {
-      // 设置当前章节的基础信息
-      this.selfCatalog =
-        this.catalogList.filter((d) => d.href === readUrl)[0] || {};
-      // 修改章节名称
-      this.bookTitle = this.selfCatalog.title || "";
-
+    getBookContent(bookObj) {
+      // 打开遮罩框
       this.bookLoading = true;
-      // 重置内容
-      // this.bookContent = "";
+      // 修改章节名称
+      this.bookTitle = bookObj.index + " " + bookObj.title;
+
+      bookObj.hasVip
+        ? this.getVipContent(bookObj)
+        : this.getFreeContent(bookObj);
+    },
+    getVipContent(bookObj) {
+      debugger;
+      let readUrl = bookObj.href;
 
       // 获取正文内容
-      getBooksText({
+      getVipContent({
         bookUrl: readUrl,
       }).then(
         (res) => {
@@ -362,6 +329,36 @@ export default {
           throw error;
         }
       );
+    },
+    // 免费章节获取
+    getFreeContent(bookObj) {
+      let contentUrl = bookObj.href;
+      const sessionKey = "bookContent@" + contentUrl;
+
+      let sessionData = localStorage.getItem(sessionKey);
+      if (sessionData) {
+        this.bookContent = sessionData;
+      } else {
+        getFreeContent({
+          contentUrl: contentUrl,
+        }).then(
+          (res) => {
+            let str =
+              res.data.code === 200 ? res.data.data : "获取章节内容失败！";
+            this.bookContent = str;
+            str && localStorage.setItem(sessionKey, str);
+            this.bookLoading = false;
+            // 重置滚动条
+            jump(-window.document.body.clientHeight, { duration: 0 });
+          },
+          (error) => {
+            let errorStr = "获取章节内容失败！\n" + (error && error.toString());
+            this.bookLoading = false;
+            this.bookContent = errorStr;
+            message.error(errorStr);
+          }
+        );
+      }
     },
 
     // 移动端 内容点击事件

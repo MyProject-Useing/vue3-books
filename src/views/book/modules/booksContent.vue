@@ -1,6 +1,5 @@
 <template>
   <div class="read-main-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <a-page-header @back="() => $router.go(-1)" :breadcrumb="{ routes }" />
     <div class="main-text-wrap">
       <ContentHead :book="selfBook" />
       <a-spin :spinning="loading">
@@ -25,12 +24,6 @@ export default {
     return {};
   },
   props: {
-    bookInfo: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
     content: {
       type: String,
       default: "",
@@ -52,44 +45,24 @@ export default {
     },
   },
   computed: {
-    selfBook() {
-      return { ...this.bookInfo, chapterTitle: this.title };
+    bookUrl() {
+      return decodeURI(this.$route.query.url || "");
+    },
+    // 当前书籍所有内容
+    bookInfo() {
+      const sessionKey = "bookInfo@" + this.bookUrl;
+      let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
+      return sessionData;
     },
 
-    routes() {
-      let bookUrl = this.selfBook.bookUrl;
-      let bookTitle = this.selfBook.bookTitle;
-      return [
-        {
-          path: "/",
-          breadcrumbName: "首页",
-        },
-        {
-          path: "/book?bookUrl=" + bookUrl,
-          breadcrumbName: bookTitle,
-        },
-        {
-          path: "second",
-          breadcrumbName: this.getTitle,
-        },
-      ];
+    selfBook() {
+      return { ...this.bookInfo, chapterTitle: this.title };
     },
 
     // 是否为移动端
     isMobileClass() {
       let isTrue = isMobile();
       return isTrue;
-    },
-
-    getTitle() {
-      let str = this.selfBook.chapterTitle || "";
-      if (str.includes(".")) {
-        let valueList = str.split(".");
-        let first = "第" + valueList[0] + "章";
-        return first + " " + valueList[1];
-      } else {
-        return str;
-      }
     },
   },
   methods: {},

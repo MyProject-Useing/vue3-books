@@ -197,7 +197,6 @@ export default {
     },
     // 书籍详情
     toBookIndex(item) {
-      debugger;
       if (!this.bookUrl) {
         return;
       }
@@ -206,8 +205,8 @@ export default {
         query: {
           bookUrl: encodeURI(this.bookUrl),
           hasVip: item.hasVip,
-          href: item.href,
-          index: item.index,
+          href: encodeURI(item.href),
+          index: encodeURI(item.index),
         },
       });
     },
