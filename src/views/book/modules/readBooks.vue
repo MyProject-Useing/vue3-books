@@ -107,8 +107,6 @@ export default {
       // 目录
       catalogList: [],
 
-      selfCatalog: {},
-
       // 是否移动了内容
       touchMove: false,
     };
@@ -126,12 +124,12 @@ export default {
         ? "disabled"
         : "";
     },
-
     // 上一章
     firstClass() {
       if (
         this.bookLoading ||
-        this.selfCatalog.index === 1 ||
+        (this.catalogList &&
+          this.selfCatalog.index === this.catalogList[0].index) ||
         (this.catalogList && this.catalogList.length == 0)
       ) {
         return "disabled";
@@ -143,7 +141,8 @@ export default {
       if (
         this.catalogList.length == 0 ||
         this.bookLoading ||
-        this.selfCatalog.index === this.catalogList.length
+        this.selfCatalog.index ===
+          this.catalogList[this.catalogList.length - 1].index
       ) {
         return "disabled";
       }
@@ -158,7 +157,15 @@ export default {
       return this.$store.state.book.api;
     },
 
-    bookInfoData: {},
+    selfCatalog() {
+      let catalogList = this.catalogList;
+      let fData =
+        catalogList.filter(
+          (d) => d.index === decodeURI(this.$route.query.index || "")
+        )[0] || {};
+
+      return fData;
+    },
   },
   mounted() {
     this.init();
@@ -200,9 +207,19 @@ export default {
 
     // 上/下一章
     toNextChapter(isNext) {
-      let index = this.selfCatalog.index || 1;
-      isNext ? index++ : index--;
-      this.toChapter(index);
+      debugger;
+      let index = this.selfCatalog.index;
+      let selfIndex = -1;
+      this.catalogList.some((d, inx) => {
+        if (d.index === index) {
+          selfIndex = inx;
+          return true;
+        }
+        return false;
+      });
+
+      isNext ? selfIndex++ : selfIndex--;
+      this.toChapter(selfIndex);
     },
 
     // 查询指定章节内容
@@ -218,16 +235,15 @@ export default {
         message.error("已是第一章。");
         return;
       }
-
-      let selfBooks =
-        this.catalogList.filter((d) => d.index === index)[0] || {};
-
+      let selfBooks = this.catalogList[index] || {};
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl || ""),
-          readUrl: encodeURI(selfBooks.href || ""),
+          hasVip: selfBooks.hasVip,
+          href: encodeURI(selfBooks.href),
+          index: encodeURI(selfBooks.index),
         },
       });
     },
@@ -303,6 +319,7 @@ export default {
         ? this.getVipContent(bookObj)
         : this.getFreeContent(bookObj);
     },
+
     getVipContent(bookObj) {
       debugger;
       let readUrl = bookObj.href;
