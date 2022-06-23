@@ -14,11 +14,11 @@ body {
 .reader-content {
   margin: 0 auto;
   max-width: 800px;
+  position: relative;
   font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
     "Microsoft YaHei", sans-serif;
   background: url("@/assets/imgs/booksContent/basic_bg.png") repeat;
 }
-
 
 .main-read-container .read-load-next {
   text-align: center;
