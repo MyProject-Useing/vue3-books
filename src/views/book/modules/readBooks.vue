@@ -11,7 +11,6 @@
           ref="bookContentRef"
         >
         </booksContent>
-
         <div class="read-load-next">
           <a v-if="bookLoading" href="javascript:" class="btn-normal"
             ><a-spin class="read-load-loading" />
@@ -24,7 +23,6 @@
             >加载下一章
           </a>
         </div>
-
         <div
           class="chapter-control dib-wrap"
           v-if="!bookLoading && !isMobileClass"
@@ -338,6 +336,7 @@ export default {
       let sessionData = localStorage.getItem(sessionKey);
       if (sessionData) {
         this.bookContent = sessionData;
+        this.bookLoading = false;
       } else {
         getFreeContent({
           contentUrl: contentUrl,

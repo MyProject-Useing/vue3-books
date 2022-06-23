@@ -1,7 +1,7 @@
 <template>
   <div class="read-main-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="main-text-wrap">
-      <ContentHead :book="selfBook" />
+      <ContentHead />
       <a-spin :spinning="loading">
         <Content :content="content" />
       </a-spin>
@@ -45,20 +45,6 @@ export default {
     },
   },
   computed: {
-    bookUrl() {
-      return decodeURI(this.$route.query.url || "");
-    },
-    // 当前书籍所有内容
-    bookInfo() {
-      const sessionKey = "bookInfo@" + this.bookUrl;
-      let sessionData = JSON.parse(sessionStorage.getItem(sessionKey));
-      return sessionData;
-    },
-
-    selfBook() {
-      return { ...this.bookInfo, chapterTitle: this.title };
-    },
-
     // 是否为移动端
     isMobileClass() {
       let isTrue = isMobile();

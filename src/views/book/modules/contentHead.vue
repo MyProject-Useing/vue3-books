@@ -6,15 +6,15 @@
     <div class="text-info" v-if="!isMobileClass">
       <a>
         <database-outlined title="书名" />
-        <span> {{ book.bookTitle }}</span></a
+        <span> {{ selfBook.info.title }}</span></a
       >
       <a
         ><solution-outlined title="作者" />
-        <span> {{ book.author }}</span>
+        <span> {{ selfBook.info.author }}</span>
       </a>
       <a>
         <ReadOutlined title="字数" />
-        <span> {{ (book.wordCount || "0").replace("字", "") }}字</span>
+        <span>0字</span>
       </a>
     </div>
   </div>
@@ -39,30 +39,29 @@ export default {
   data() {
     return {};
   },
-  props: {
-    book: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
-  },
   computed: {
     // 是否为移动端
     isMobileClass() {
       let isTrue = isMobile();
       return isTrue;
     },
-
+    bookUrl() {
+      return decodeURI(this.$route.query.bookUrl || "");
+    },
+    // 书架列表
+    cacheBookList() {
+      return this.$store.state.caches.readBooksList;
+    },
+    selfBook() {
+      return this.cacheBookList[this.bookUrl] || {};
+    },
     chapterTitle() {
-      let str = this.book.chapterTitle || "";
-      if (str.includes(".")) {
-        let valueList = str.split(".");
-        let first = "第" + valueList[0] + "章";
-        return first + " " + valueList[1];
-      } else {
-        return str;
-      }
+      let setbook = this.selfBook;
+      let catalogList = setbook.catalogList;
+      let fData =
+        catalogList.filter((d) => d.index === setbook.readIndex)[0] || {};
+
+      return setbook.readIndex + " " + (fData.title || "");
     },
   },
   methods: {},

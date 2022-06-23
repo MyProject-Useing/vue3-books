@@ -19,7 +19,7 @@
             :class="currHref === item.href ? 'on' : ''"
           >
             <a :title="item.title" @click="toChapter(item)">
-              {{ item.index }}</a
+              {{ item.index || "" + " " + item.title || "" }}</a
             >
           </li>
         </ul>
@@ -41,10 +41,6 @@ export default {
         return [];
       },
     },
-    currHref: {
-      type: String,
-      default: "",
-    },
     useHead: {
       type: Boolean,
       default: true,
@@ -52,6 +48,11 @@ export default {
     bookUrl: {
       type: String,
       default: "",
+    },
+  },
+  computed: {
+    currHref() {
+      return decodeURI(this.$route.query.href || "");
     },
   },
   methods: {

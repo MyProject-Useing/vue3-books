@@ -33,11 +33,7 @@
     </dl>
     <!-- 目录 -->
     <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
-      <catalog
-        :bookUrl="bookUrl"
-        :currHref="selfCatalog.href"
-        :catalogList="catalogList"
-      />
+      <catalog :bookUrl="bookUrl" :catalogList="catalogList" />
     </div>
     <!-- 书架 -->
     <div id="bookShelf_panle" class="setting-popover" v-show="bookShelfPopover">
