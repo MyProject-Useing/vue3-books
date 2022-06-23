@@ -207,7 +207,6 @@ export default {
 
     // 上/下一章
     toNextChapter(isNext) {
-      debugger;
       let index = this.selfCatalog.index;
       let selfIndex = -1;
       this.catalogList.some((d, inx) => {
@@ -321,7 +320,6 @@ export default {
     },
 
     getVipContent(bookObj) {
-      debugger;
       let readUrl = bookObj.href;
 
       // 获取正文内容
