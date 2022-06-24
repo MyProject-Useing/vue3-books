@@ -2,15 +2,10 @@
   <div class="reader-content-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="reader-content">
       <div class="main-read-container">
-        <booksContent
-          class="book-content"
-          :title="bookTitle"
-          :content="bookContent"
-          @touchend="eventEnd"
-          @touchmove="eventMove"
-          ref="bookContentRef"
-        >
-        </booksContent>
+        <ContentHead />
+        <a-spin :spinning="bookLoading">
+          <Content :content="bookContent" />
+        </a-spin>
         <div class="read-load-next">
           <a v-if="bookLoading" href="javascript:" class="btn-normal"
             ><a-spin class="read-load-loading" />
@@ -70,8 +65,10 @@ import { message } from "ant-design-vue";
 
 import jump from "@/plugins/jump";
 import { getVipContent, getBookInfo, getFreeContent } from "@/api/bookApi";
+
 // 文章
-import booksContent from "./booksContent.vue";
+import Content from "./content.vue";
+import ContentHead from "./contentHead.vue";
 // 工具栏
 import leftBar from "@/views/book/modules/leftBar.vue";
 
@@ -79,7 +76,8 @@ import leftBar from "@/views/book/modules/leftBar.vue";
 export default {
   name: "readBooks",
   components: {
-    booksContent,
+    Content,
+    ContentHead,
     leftBar,
   },
   data() {
