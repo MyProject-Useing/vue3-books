@@ -1,13 +1,11 @@
 function setBooks(list, item) {
   let newList = JSON.parse(JSON.stringify(list));
-
   if (
     !item.bookUrl ||
     (!newList[item.bookUrl] && Object.keys(newList).length >= 10)
   ) {
     return newList;
   }
-
   newList[item.bookUrl] = { ...newList[item.bookUrl], ...item };
   return newList;
 }

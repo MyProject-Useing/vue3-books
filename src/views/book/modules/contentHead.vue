@@ -1,16 +1,16 @@
 <template>
   <div class="content-head-wrap">
     <h2 class="head-title">
-      {{ chapterTitle }}
+      {{ bookTitle }}
     </h2>
     <div class="text-info" v-if="!isMobileClass">
       <a>
         <database-outlined title="书名" />
-        <span> {{ selfBook.info.title }}</span></a
+        <span> {{ title }}</span></a
       >
       <a
         ><solution-outlined title="作者" />
-        <span> {{ selfBook.info.author }}</span>
+        <span> {{ author }}</span>
       </a>
       <a>
         <ReadOutlined title="字数" />
@@ -55,13 +55,11 @@ export default {
     selfBook() {
       return this.cacheBookList[this.bookUrl] || {};
     },
-    chapterTitle() {
-      let setbook = this.selfBook;
-      let catalogList = setbook.catalogList;
-      let fData =
-        catalogList.filter((d) => d.index === setbook.readIndex)[0] || {};
-
-      return setbook.readIndex + " " + (fData.title || "");
+    title() {
+      return this.selfBook?.info?.title ?? "";
+    },
+    author() {
+      return this.selfBook?.info?.author ?? "";
     },
   },
   methods: {},

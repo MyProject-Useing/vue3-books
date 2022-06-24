@@ -144,7 +144,7 @@ export default {
       return this.cacheBookList[this.bookUrl] &&
         this.cacheBookList[this.bookUrl].readIndex
         ? "继续阅读"
-        : "免费阅读";
+        : "开始阅读";
     },
     catalogList() {
       return this.bookInfoData?.catalogList || [];
@@ -181,11 +181,6 @@ export default {
                 sessionKey,
                 JSON.stringify(result.data.data)
               );
-              // 加入书架 缓存
-              this.$store.commit("caches/setBooksList", {
-                ...this.bookInfoData,
-                bookUrl: this.bookUrl,
-              });
             }
             this.bookLoading = false;
           })

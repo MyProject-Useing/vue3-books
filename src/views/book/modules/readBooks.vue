@@ -2,11 +2,11 @@
   <div class="reader-content-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="reader-content">
       <div class="main-read-container">
-        <ContentHead />
+        <ContentHead :bookTitle="bookTitle" />
         <a-spin :spinning="bookLoading">
           <Content :content="bookContent" />
         </a-spin>
-        <div class="read-load-next">
+        <div class="read-load-next" v-if="isMobileClass">
           <a v-if="bookLoading" href="javascript:" class="btn-normal"
             ><a-spin class="read-load-loading" />
           </a>
@@ -256,11 +256,6 @@ export default {
                 sessionKey,
                 JSON.stringify(result.data.data)
               );
-              // 加入书架 缓存
-              this.$store.commit("caches/setBooksList", {
-                ...this.bookInfoData,
-                bookUrl: this.bookUrl,
-              });
               this.setBookCache(result.data.data);
             } else {
               this.bookTitle = "获取章节失败";
@@ -290,10 +285,13 @@ export default {
       } else {
         readIndex = bookObj.index;
       }
+
       this.bookInfo = {
         readIndex: readIndex,
         bookUrl: this.bookUrl,
+        info: data.info,
       };
+
       // 加入书架 缓存
       this.$store.commit("caches/setBooksList", this.bookInfo);
       this.getBookContent(bookObj);
@@ -339,7 +337,6 @@ export default {
     getFreeContent(bookObj) {
       let contentUrl = bookObj.href;
       const sessionKey = "bookContent@" + contentUrl;
-
       let sessionData = localStorage.getItem(sessionKey);
       if (sessionData) {
         this.bookContent = sessionData;
@@ -366,7 +363,6 @@ export default {
         );
       }
     },
-
     // 移动端 内容点击事件
     eventEnd(dom) {
       // 如果是手动移动
@@ -397,7 +393,6 @@ export default {
         this.showToolBar = !this.showToolBar;
       }
     },
-
     // 移动端 内容点击事件
     eventMove() {
       this.touchMove = true;

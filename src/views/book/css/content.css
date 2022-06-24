@@ -8,3 +8,9 @@
 .mobile .book-content-wrap .read-content p {
   font-size: 1.3rem;
 }
+
+
+.book-content-wrap{
+  min-height: 300px;
+  margin-bottom: 25px;
+}
