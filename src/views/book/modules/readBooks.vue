@@ -223,10 +223,10 @@ export default {
         message.error("章节错误，请返回首页。");
         return;
       }
-      if (index >= this.catalogList.length + 1) {
+      if (index >= this.catalogList.length) {
         message.error("已是最后一章。");
         return;
-      } else if (index < 1) {
+      } else if (index < 0) {
         message.error("已是第一章。");
         return;
       }

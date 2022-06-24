@@ -142,7 +142,7 @@ export default {
     // 按钮文字
     btnTitle() {
       return this.cacheBookList[this.bookUrl] &&
-        this.cacheBookList[this.bookUrl].readUrl
+        this.cacheBookList[this.bookUrl].readIndex
         ? "继续阅读"
         : "免费阅读";
     },
