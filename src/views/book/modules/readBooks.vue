@@ -150,7 +150,7 @@ export default {
     },
     // 书籍地址
     bookUrl() {
-      return decodeURI(this.$route.query.bookUrl || "");
+      return decodeURIComponent(this.$route.query.bookUrl || "");
     },
 
     bookApi() {
@@ -161,7 +161,7 @@ export default {
       let catalogList = this.catalogList;
       let fData =
         catalogList.filter(
-          (d) => d.index === decodeURI(this.$route.query.index || "")
+          (d) => d.index === decodeURIComponent(this.$route.query.index || "")
         )[0] || {};
 
       return fData;
@@ -287,7 +287,7 @@ export default {
     setBookCache(data) {
       this.catalogList = data.catalogList || [];
       let readIndex =
-        this.$route.query.index && decodeURI(this.$route.query.index);
+        this.$route.query.index && decodeURIComponent(this.$route.query.index);
 
       let bookObj = this.catalogList[0];
       if (readIndex) {

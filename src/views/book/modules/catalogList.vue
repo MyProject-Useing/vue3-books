@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     currHref() {
-      return decodeURI(this.$route.query.href || "");
+      return decodeURIComponent(this.$route.query.href || "");
     },
   },
   methods: {

@@ -125,7 +125,7 @@ export default {
   },
   computed: {
     bookUrl() {
-      return decodeURI(this.$route.query.url || "");
+      return decodeURIComponent(this.$route.query.url || "");
     },
 
     // 是否为移动端
@@ -173,6 +173,7 @@ export default {
         this.bookInfoData = sessionData;
       } else {
         this.bookLoading = true;
+        debugger;
         getBookInfo({ url: this.bookUrl })
           .then((result) => {
             if (result.data.data) {

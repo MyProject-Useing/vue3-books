@@ -29,7 +29,7 @@ export default {
       return isTrue;
     },
     palyUrl() {
-      return decodeURI(this.$route.query.url || "");
+      return decodeURIComponent(this.$route.query.url || "");
     },
   },
   data() {

@@ -46,7 +46,7 @@ export default {
       return isTrue;
     },
     bookUrl() {
-      return decodeURI(this.$route.query.bookUrl || "");
+      return decodeURIComponent(this.$route.query.bookUrl || "");
     },
     // 书架列表
     cacheBookList() {

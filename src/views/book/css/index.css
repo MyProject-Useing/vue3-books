@@ -137,6 +137,10 @@ h3.wrap-title {
   border-bottom: 1px solid #666;
 }
 
+.hot-classify-wrap{
+  min-height: 300px;
+}
+
 .hot-classify-wrap .hot-book-list dd {
   max-height: 32px;
   display: flex;

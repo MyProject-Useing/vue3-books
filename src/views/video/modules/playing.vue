@@ -82,7 +82,7 @@ export default {
       return isMobile();
     },
     palyUrl() {
-      return decodeURI(this.$route.query.url || "");
+      return decodeURIComponent(this.$route.query.url || "");
     },
     // 播放的视频名称
     playSourse() {

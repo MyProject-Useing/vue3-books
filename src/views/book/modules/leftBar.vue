@@ -91,7 +91,7 @@ export default {
     },
     // 书籍地址
     bookUrl() {
-      return decodeURI(this.$route.query.bookUrl || "");
+      return decodeURIComponent(this.$route.query.bookUrl || "");
     },
   },
   mounted() {
