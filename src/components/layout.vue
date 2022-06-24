@@ -190,12 +190,7 @@ export default defineComponent({
 
 .layout .ant-layout-header {
   background-color: rgba(25, 26, 32, 0.8);
-  transform: translateZ(0);
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 64px;
-  z-index: 1000;
   position: relative;
 }
 </style>

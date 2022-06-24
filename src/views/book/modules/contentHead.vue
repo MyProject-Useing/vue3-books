@@ -39,6 +39,12 @@ export default {
   data() {
     return {};
   },
+  props: {
+    bookTitle: {
+      type: String,
+      default: "",
+    },
+  },
   computed: {
     // 是否为移动端
     isMobileClass() {

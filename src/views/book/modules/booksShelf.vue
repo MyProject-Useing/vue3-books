@@ -46,10 +46,6 @@ import { DeleteOutlined, UserOutlined } from "@ant-design/icons-vue";
 export default {
   name: "bookShelf",
   components: { DeleteOutlined, UserOutlined },
-  data() {
-    return {};
-  },
-  activated() {},
   computed: {
     cacheBookList() {
       return this.$store.state.caches.readBooksList;
