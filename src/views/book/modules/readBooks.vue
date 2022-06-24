@@ -52,6 +52,7 @@
         </div>
       </div>
       <leftBar
+        ref="leftBar"
         v-show="showToolBar"
         :catalogList="catalogList"
         :selfCatalog="selfCatalog"
@@ -196,6 +197,7 @@ export default {
     },
     // 展示目录
     showCatalog() {
+      this.$refs["leftBar"].showCatalog();
       // 隐藏 书架
     },
 

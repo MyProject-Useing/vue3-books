@@ -30,7 +30,6 @@
           <BookOutlined /><span>书架</span></a
         >
       </dd>
-
       <dd>
         <a id="bookshelf_btn" href="javascript:" @click.stop="goRouter()">
           <BookOutlined /><span>书页</span></a
@@ -38,11 +37,21 @@
       </dd>
     </dl>
     <!-- 目录 -->
-    <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
+    <div
+      id="catalog_panle"
+      class="setting-popover"
+      :style="{ top: ctop }"
+      v-show="catalogPopover"
+    >
       <catalog :bookUrl="bookUrl" :catalogList="catalogList" />
     </div>
     <!-- 书架 -->
-    <div id="bookShelf_panle" class="setting-popover" v-show="bookShelfPopover">
+    <div
+      id="bookShelf_panle"
+      class="setting-popover"
+      :style="{ top: ctop }"
+      v-show="bookShelfPopover"
+    >
       <booksShelf />
     </div>
   </div>
@@ -80,6 +89,7 @@ export default {
 
       // 书架弹出框
       bookShelfPopover: false,
+      ctop: "79px",
     };
   },
   props: {
