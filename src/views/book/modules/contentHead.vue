@@ -80,10 +80,18 @@ export default {
   font: 12px/16px PingFangSC-Regular, "-apple-system", Simsun;
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
 .content-head-wrap .text-info span {
   margin-right: 5px;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: default;
+}
+
+.content-head-wrap .text-info span.anticon {
+  font-size: 15px;
+  color: rgb(0 0 0 / 45%);
 }
 
 .content-head-wrap .text-info a {

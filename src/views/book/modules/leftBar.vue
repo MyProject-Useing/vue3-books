@@ -30,6 +30,12 @@
           <BookOutlined /><span>书架</span></a
         >
       </dd>
+
+      <dd>
+        <a id="bookshelf_btn" href="javascript:" @click.stop="goRouter()">
+          <BookOutlined /><span>书页</span></a
+        >
+      </dd>
     </dl>
     <!-- 目录 -->
     <div id="catalog_panle" class="setting-popover" v-show="catalogPopover">
@@ -136,13 +142,22 @@ export default {
   methods: {
     // 返回首页
     goHome() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/bookIndex" });
     },
     // 展示目录
     showCatalog() {
       this.catalogPopover = true;
       // 隐藏 书架
       this.bookShelfPopover = false;
+    },
+    // 返回书页
+    goRouter() {
+      this.$router.push({
+        path: "/bookInfo",
+        query: {
+          url: this.bookUrl,
+        },
+      });
     },
     // 展示书架
     showBookShelf() {

@@ -19,17 +19,13 @@
           </a-image>
           <div class="img-info">
             <h3 class="books-name-p ellipsis">
-              <a
-                :title="item.bookTitle"
-                @click="toDetail(item)"
-                class="books-name"
-              >
-                {{ item.bookTitle }}
+              <a :title="item.title" @click="toDetail(item)" class="books-name">
+                {{ item.title }}
               </a>
             </h3>
 
             <div class="img-content ellipsis">
-              阅读至第 {{ item.readIndex || 1 }} 章
+              阅读至第 {{ item.readIndex || "一" }} 章
             </div>
 
             <div class="img-bottom ellipsis">
@@ -62,12 +58,26 @@ export default {
   methods: {
     // 直接阅读缓存的书籍
     toDetail(book) {
+      debugger;
+
+      // let index = this.selfCatalog.index;
+      // let selfIndex = -1;
+      // this.catalogList.some((d, inx) => {
+      //   if (d.index === index) {
+      //     selfIndex = inx;
+      //     return true;
+      //   }
+      //   return false;
+      // });
+
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(book.bookUrl || ""),
-          readUrl: encodeURI(book.readUrl || ""),
+          hasVip: book.hasVip,
+          href: encodeURI(book.href),
+          index: encodeURI(book.index),
         },
       });
     },

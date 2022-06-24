@@ -196,5 +196,6 @@ export default defineComponent({
   width: 100%;
   height: 64px;
   z-index: 1000;
+  position: relative;
 }
 </style>
