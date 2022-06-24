@@ -25,7 +25,7 @@
             </h3>
 
             <div class="img-content ellipsis">
-              阅读至第 {{ item.readIndex || "一" }} 章
+              阅读至 {{ item.readIndex || "第一章" }}
             </div>
 
             <div class="img-bottom ellipsis">
@@ -58,26 +58,12 @@ export default {
   methods: {
     // 直接阅读缓存的书籍
     toDetail(book) {
-      debugger;
-
-      // let index = this.selfCatalog.index;
-      // let selfIndex = -1;
-      // this.catalogList.some((d, inx) => {
-      //   if (d.index === index) {
-      //     selfIndex = inx;
-      //     return true;
-      //   }
-      //   return false;
-      // });
-
       // 查询指定章节内容
       this.$router.push({
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(book.bookUrl || ""),
-          hasVip: book.hasVip,
-          href: encodeURI(book.href),
-          index: encodeURI(book.index),
+          index: encodeURI(book.readIndex),
         },
       });
     },
@@ -124,11 +110,10 @@ export default {
 }
 
 .bookShelf-list .books-item {
-  display: flex;
-  float: left;
+  display: inline-flex;
   width: 33%;
   margin-bottom: 15px;
-  min-width: 255px;
+  min-width: 247px;
 }
 
 .books-item .books-name {

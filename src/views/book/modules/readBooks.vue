@@ -152,11 +152,7 @@ export default {
     bookUrl() {
       return decodeURIComponent(this.$route.query.bookUrl || "");
     },
-
-    bookApi() {
-      return this.$store.state.book.api;
-    },
-
+    // 当前分页
     selfCatalog() {
       let catalogList = this.catalogList;
       let fData =
@@ -240,8 +236,6 @@ export default {
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl || ""),
-          hasVip: selfBooks.hasVip,
-          href: encodeURI(selfBooks.href),
           index: encodeURI(selfBooks.index),
         },
       });

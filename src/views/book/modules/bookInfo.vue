@@ -173,7 +173,6 @@ export default {
         this.bookInfoData = sessionData;
       } else {
         this.bookLoading = true;
-        debugger;
         getBookInfo({ url: this.bookUrl })
           .then((result) => {
             if (result.data.data) {
@@ -205,17 +204,23 @@ export default {
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl),
-          hasVip: item.hasVip,
-          href: encodeURI(item.href),
           index: encodeURI(item.index),
         },
       });
     },
     // 继续阅读
     stillRead() {
-      let ca = this.cacheBookList[this.bookUrl] || this.bookInfoData;
-      let index = ca.readIndex || 1;
-      this.toBookIndex(ca.catalogList[index - 1]);
+      let book = {};
+      let caData = this.cacheBookList[this.bookUrl];
+      if (caData && caData.readIndex) {
+        let fData = this.catalogList.filter(
+          (d) => d.index === caData.readIndex
+        )[0];
+        book = fData ? fData : book;
+      } else {
+        book = this.catalogList[0];
+      }
+      this.toBookIndex(book);
     },
   },
 };

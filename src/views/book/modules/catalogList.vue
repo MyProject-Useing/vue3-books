@@ -16,7 +16,7 @@
             class="ellipsis"
             v-for="item in catalogList"
             :key="item.index"
-            :class="currHref === item.href ? 'on' : ''"
+            :class="currIndex === item.index ? 'on' : ''"
           >
             <a :title="item.title" @click="toChapter(item)">
               {{ item.index || "" + " " + item.title || "" }}</a
@@ -51,8 +51,8 @@ export default {
     },
   },
   computed: {
-    currHref() {
-      return decodeURIComponent(this.$route.query.href || "");
+    currIndex() {
+      return decodeURIComponent(this.$route.query.index || "");
     },
   },
   methods: {
@@ -63,8 +63,6 @@ export default {
         path: "/readBooks",
         query: {
           bookUrl: encodeURI(this.bookUrl),
-          hasVip: item.hasVip,
-          href: encodeURI(item.href),
           index: encodeURI(item.index),
         },
       });
