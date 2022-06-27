@@ -70,6 +70,7 @@ import "vue3-video-play/dist/style.css";
 import { videoPlay } from "vue3-video-play";
 import { isMobile } from "@/plugins/utils";
 import { getUrlSourse } from "@/api/movieApi";
+import { message } from "ant-design-vue";
 
 export default {
   name: "bookResult",
@@ -162,13 +163,30 @@ export default {
           .then((d) => {
             if (d.data.data) {
               this.sourceList = d.data.data || null;
-
               this.setIndex(0, 0);
               this.src = this.sourceList[0]?.source[0].url;
-              sessionStorage.setItem(
-                "video_paly_session@" + url,
-                JSON.stringify(this.sourceList)
-              );
+
+              if (!this.src) {
+                return message.error({
+                  content: `未能找到此资源，即将为你跳转到源路径。`,
+                  duration: 2,
+                  onClose: () => {
+                    // this.$router.push({
+                    //   path: "/videoiframe",
+                    //   query: {
+                    //     url: url,
+                    //   },
+                    // });
+                  },
+                });
+              }
+
+              this.sourceList &&
+                this.sourceList.length > 0 &&
+                sessionStorage.setItem(
+                  "video_paly_session@" + url,
+                  JSON.stringify(this.sourceList)
+                );
             }
           })
           .catch((d) => {
@@ -180,7 +198,12 @@ export default {
       this.selectSoureIndex = pIndex;
       this.selectIndex = index;
     },
-    error() {},
+    error() {
+      message.error({
+        content: `资源错误，请重新选择集数。`,
+        duration: 2,
+      });
+    },
   },
 };
 </script>
