@@ -162,10 +162,13 @@ ul {
 }
 
 .book-information .book-info a.blue-btn {
-  font: 100% PingFangSC-Regular, "-apple-system", Simsun;
+  font: 14px/34px PingFangSC-Regular,'-apple-system',Simsun;
   display: inline-block;
-  line-height: 1.9rem;
-  padding: 0 0.8rem;
+  width: 102px;
+  height: 34px;
+  margin-right: 15px;
+  text-align: center;
+  vertical-align: middle;
   border-width: 1px;
   border-style: solid;
 }

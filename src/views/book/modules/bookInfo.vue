@@ -56,7 +56,7 @@
                 ><div class="left-wrap">
                   <div class="book-info-detail">
                     <div class="book-intro">
-                      <p>{{ infoDetail.intro }}</p>
+                      <p v-html="infoDetail.intro"></p>
                     </div>
                     <div class="book-state">
                       <ul>
@@ -243,7 +243,7 @@ export default {
 
 .content-nav-wrap :deep(.left-wrap) .book-intro {
   border-bottom: 1px solid #e6e6e6;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-intro p {
@@ -262,7 +262,7 @@ export default {
   padding: 0;
 }
 .content-nav-wrap :deep(.left-wrap) .book-state ul li {
-  margin-top: 25px;
+  margin-top: 20px;
 }
 .content-nav-wrap :deep(.left-wrap) .book-state li b {
   font: 14px/24px PingFangSC-Regular, "-apple-system", Simsun;
