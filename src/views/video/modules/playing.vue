@@ -10,6 +10,7 @@
           :poster="baseImg"
           crossOrigin="anonymous"
           @error="error"
+          @waiting="waiting"
         />
       </div>
       <div class="plp-r">
@@ -107,6 +108,7 @@ export default {
       return this.playSourseIndex?.name ?? "";
     },
   },
+  // setup() {},
   data() {
     return {
       baseImg: require("@/assets/imgs/video/play_base.jpg"),
@@ -180,7 +182,8 @@ export default {
                   },
                 });
               }
-
+              // 设置视频title
+              this.options.title = this.souresName + " " + this.palyName;
               this.sourceList &&
                 this.sourceList.length > 0 &&
                 sessionStorage.setItem(
@@ -203,6 +206,9 @@ export default {
         content: `资源错误，请重新选择集数。`,
         duration: 2,
       });
+    },
+    waiting() {
+      debugger;
     },
   },
 };
