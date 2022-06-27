@@ -14,6 +14,9 @@ ul {
   list-style: none outside none;
 }
 
+.content-nav-wrap {
+  padding: 0px 4px;
+}
 .book-index-bj {
   background: url("@/assets/imgs/book-index-bj.jpg") no-repeat;
   height: 338px;

@@ -73,7 +73,9 @@
                                 class="blue charpter-link"
                                 href="javascript:"
                                 :title="item.index"
-                                >{{ item.index }}</a
+                                >{{
+                                  (item.index || "") + " " + (item.title || "")
+                                }}</a
                               ><i>·</i><em class="time">{{ item.time }}</em>
                             </p>
                           </div>
@@ -276,8 +278,8 @@ export default {
 
 .content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-container {
   display: inline-block;
-  height: 22px;
-  margin: 0px;
+  height: 24px;
+  margin: 0px 0px 5px 0px;
   width: 50%;
 }
 
@@ -299,6 +301,7 @@ export default {
 .content-nav-wrap :deep(.left-wrap) .book-state li .detail i {
   display: inline-block;
   vertical-align: middle;
+  font: 14px/22px PingFangSC-Regular, "-apple-system", Simsun;
 }
 
 .content-nav-wrap :deep(.left-wrap) .book-state li em.null,
