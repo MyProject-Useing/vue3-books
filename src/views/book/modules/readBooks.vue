@@ -343,6 +343,7 @@ export default {
       if (sessionData) {
         this.bookContent = sessionData;
         this.bookLoading = false;
+        this.setHeight();
       } else {
         getFreeContent({
           contentUrl: contentUrl,
@@ -353,8 +354,7 @@ export default {
             this.bookContent = str;
             str && localStorage.setItem(sessionKey, str);
             this.bookLoading = false;
-            // 重置滚动条
-            jump(-window.document.body.clientHeight, { duration: 0 });
+            this.setHeight();
           },
           (error) => {
             let errorStr = "获取章节内容失败！\n" + (error && error.toString());
@@ -364,6 +364,11 @@ export default {
           }
         );
       }
+    },
+
+    setHeight() {
+      // 重置滚动条
+      jump(-window.document.body.scrollHeight, { duration: 0 });
     },
     // 移动端 内容点击事件
     eventEnd(dom) {
