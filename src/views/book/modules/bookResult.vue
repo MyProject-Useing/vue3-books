@@ -20,7 +20,7 @@
                   class="item-title orange ellipsis"
                   target="_blank"
                   :title="item.title"
-                  @click="toPaly(item)"
+                  @click="toInfo(item)"
                 >
                   {{ item.title }}
                 </a>
@@ -129,17 +129,14 @@ export default {
     },
 
     // 播放视频
-    toPaly(item) {
-      if (!item.palySrc) {
+    toInfo(item) {
+      if (!item.href) {
         return message.warning("未找到资源路径，无法正常播放。");
       }
       this.$router.push({
-        path: item.hasVip ? "/playing" : "/videoiframe",
+        path: "/bookInfo",
         query: {
-          url: encodeURI(item.palySrc),
-          tag: encodeURI(item.tag),
-          title: encodeURI(item.title),
-          order: item.order ?? null,
+          url: encodeURI(item.href),
         },
       });
     },
@@ -151,7 +148,7 @@ export default {
       if (!info.url) {
         return message.warning("未找到资源路径，无法正常播放。");
       }
-      this.toPaly({
+      this.toInfo({
         palySrc: info.url,
         hasVip: item.hasVip,
         tag: item.tag,

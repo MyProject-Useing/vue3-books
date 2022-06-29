@@ -145,7 +145,7 @@ export default {
     getImgUrl(item) {
       return getCacheImages(item.imgSrc);
     },
-    // 返回首页
+    // 查看书籍详情
     jumpInfo(item) {
       this.$router.push({
         path: "/bookInfo",
