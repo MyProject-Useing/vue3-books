@@ -92,7 +92,7 @@
 import { isMobile } from "@/plugins/utils";
 import { getMovieIndex } from "@/api/movieApi";
 // 目录
-
+import { getCacheImages } from "@/plugins/utils.js";
 export default {
   name: "videoIndex",
   data() {
@@ -150,12 +150,7 @@ export default {
     },
     // 获取书籍封面
     getImgUrl(item) {
-      return this.getImages(item.imgSrc) || this.noCover;
-    },
-    getImages(_url) {
-      if (_url !== undefined) {
-        return "https://images.weserv.nl/?url=" + _url;
-      }
+      return getCacheImages(item.imgSrc);
     },
     // 返回首页
     goDetails(item) {

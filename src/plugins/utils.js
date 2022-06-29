@@ -1,3 +1,5 @@
+const noCover = require("@/assets/imgs/noCover.jpeg");
+
 export function isMobileDevice() {
   //判断当前设备是否为移动端
   const ua = navigator.userAgent.toLowerCase();
@@ -27,4 +29,12 @@ export function isIOS() {
 export function isMobile() {
   let isTrue = isMobileDevice() || isMobilePhone();
   return isTrue;
+}
+
+// 对图片进行处理
+export function getCacheImages(url) {
+  if (url) {
+    return "https://images.weserv.nl/?url=" + url;
+  }
+  return noCover;
 }

@@ -49,6 +49,8 @@ import { isMobile } from "@/plugins/utils";
 // 视频内容
 import { getDataList } from "@/api/bookApi.js";
 
+import { getCacheImages } from "@/plugins/utils.js";
+
 import { message } from "ant-design-vue";
 // 书籍详情
 export default {
@@ -123,15 +125,9 @@ export default {
     },
     // 获取书籍封面
     getImgUrl(item) {
-      return this.getImages(item.imgSrc) || this.noCover;
+      return getCacheImages(item.imgSrc);
     },
-    // 处理图片
-    getImages(_url) {
-      // if (_url !== undefined) {
-      // let _u = _url.substring(7);
-      return "https://images.weserv.nl/?url=" + _url;
-      // }
-    },
+
     // 播放视频
     toPaly(item) {
       if (!item.palySrc) {

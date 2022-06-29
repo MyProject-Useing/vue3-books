@@ -84,6 +84,7 @@ import { getBookIndex } from "@/api/bookApi";
 // 目录
 import { UserOutlined } from "@ant-design/icons-vue";
 
+import { getCacheImages } from "@/plugins/utils.js";
 export default {
   name: "bookIndex",
   components: { UserOutlined },
@@ -142,12 +143,7 @@ export default {
     },
     // 获取书籍封面
     getImgUrl(item) {
-      return this.getImages(item.imgSrc) || this.noCover;
-    },
-    getImages(_url) {
-      if (_url !== undefined) {
-        return "https://images.weserv.nl/?url=" + _url;
-      }
+      return getCacheImages(item.imgSrc);
     },
     // 返回首页
     jumpInfo(item) {

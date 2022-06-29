@@ -122,6 +122,8 @@ import { isMobile } from "@/plugins/utils";
 import { getDataList as movie_GetList } from "@/api/movieApi";
 
 import { message } from "ant-design-vue";
+
+import { getCacheImages } from "@/plugins/utils.js";
 // 书籍详情
 export default {
   name: "videoResult",
@@ -194,14 +196,7 @@ export default {
     },
     // 获取书籍封面
     getImgUrl(item) {
-      return this.getImages(item.imgSrc) || this.noCover;
-    },
-    // 处理图片
-    getImages(_url) {
-      if (_url !== undefined) {
-        let _u = _url.substring(7);
-        return "https://images.weserv.nl/?url=" + _u;
-      }
+      return getCacheImages(item.imgSrc);
     },
     // 播放视频
     toPaly(item) {
