@@ -74,7 +74,7 @@ import { getUrlSourse } from "@/api/movieApi";
 import { message } from "ant-design-vue";
 
 export default {
-  name: "videoPlay",
+  name: "videoPlaying",
   components: {
     videoPlay,
   },
