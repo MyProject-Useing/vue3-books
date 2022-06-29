@@ -27,11 +27,15 @@ const routes = [
         component: () => import("@/views/book/index.vue"),
       },
       {
+        path: "/bookResult",
+        name: "bookResult",
+        component: () => import("@/views/book/modules/bookResult.vue"),
+      },
+      {
         path: "/bookInfo",
         name: "bookInfo",
         component: () => import("@/views/book/modules/bookInfo.vue"),
       },
-
       {
         path: "/readBooks",
         name: "readBooks",
