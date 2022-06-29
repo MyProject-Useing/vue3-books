@@ -1,10 +1,10 @@
 <template>
-  <div class="video-content" :class="isMobileClass ? 'mobile' : ''">
+  <div class="book-content" :class="isMobileClass ? 'mobile' : ''">
     <a-spin :spinning="refreshLoading">
-      <div class="video-panle">
+      <div class="book-panle">
         <a-empty v-if="bookList.length === 0" description="暂无数据" />
-        <div v-else class="video-item-wrap">
-          <div class="video-item" v-for="(item, bi) in bookList" :key="bi">
+        <div v-else class="book-item-wrap">
+          <div class="book-item" v-for="(item, bi) in bookList" :key="bi">
             <div class="result-figure">
               <a-image
                 class="movie-img"
@@ -16,7 +16,6 @@
             </div>
             <div class="result-right">
               <h3 class="info-title">
-                <span class="item-type">{{ item.tag }}</span>
                 <a
                   class="item-title orange ellipsis"
                   target="_blank"
@@ -25,84 +24,16 @@
                 >
                   {{ item.title }}
                 </a>
-                <em class="year">{{ item.year }}</em>
-                <div class="title-right">
-                  <a :href="item.palySrc" target="_blank">
-                    <em class="player-name">{{ item.siteName }}</em></a
-                  >
-                  <em class="score"> {{ item.score }}</em>
-                </div>
               </h3>
-              <div class="result-info half ellipsis" v-if="item.alias">
-                <label class="info-lbl">别名:</label>
-                <span :title="item.alias" class="info-des">{{
-                  item.alias
-                }}</span>
-              </div>
-              <div
-                class="result-info half ellipsis"
-                v-if="item.director && item.director.length != 0"
-              >
-                <label class="info-lbl">导演:</label>
-                <span
-                  :title="item.director ? item.director.join('/') : ''"
-                  class="info-des"
-                  >{{ item.director ? item.director.join("/") : "" }}</span
-                >
-              </div>
-              <div class="result-info half ellipsis" v-if="item.actor">
-                <label class="info-lbl">主演:</label>
-                <span
-                  :title="item.actor ? item.actor.join('/') : ''"
-                  class="info-des"
-                  >{{ item.actor ? item.actor.join("/") : "" }}</span
-                >
-              </div>
-              <div class="result-info half ellipsis" v-if="item.region">
-                <label class="info-lbl">地区:</label>
-                <span :title="item.region" class="info-des">{{
-                  item.region
+              <div class="result-info half ellipsis" v-if="item.author">
+                <label class="info-lbl">作者:</label>
+                <span :title="item.author" class="info-des">{{
+                  item.author
                 }}</span>
               </div>
               <div class="result-info ellipsis">
                 <label class="info-lbl">简介:</label>
                 <span :title="item.desc" class="info-des">{{ item.desc }}</span>
-              </div>
-              <div
-                class="result-bottom-pos"
-                v-if="!item.videoinfos || item.videoinfos.length === 0"
-              >
-                <a
-                  href="javascript:void(0);"
-                  class="search-result-btn"
-                  @click.stop="toPaly(item)"
-                  ><i class="btn-icon icon-arrow"></i>立即播放
-                </a>
-              </div>
-              <div v-else class="search-result-album">
-                <ul
-                  class="album-list"
-                  :class="item.tag === '综艺' ? 'variety-list' : ''"
-                >
-                  <li
-                    class="album-item"
-                    v-for="info in item.videoinfos"
-                    :key="info.url"
-                  >
-                    <a
-                      @click="jumpIndex(item, info)"
-                      href="javascript:void(0);"
-                      :title="info.name"
-                      class="album-link"
-                      ><span>{{
-                        item.tag === "综艺" ? info.name : info.order
-                      }}</span></a
-                    >
-                  </li>
-                </ul>
-                <div style="display: none">
-                  <a href="javascript:void(0);" class="link-packup">收起</a>
-                </div>
               </div>
             </div>
           </div>
@@ -179,7 +110,6 @@ export default {
 
         getDataList(params)
           .then((result) => {
-            debugger;
             this.refreshLoading = false;
             this.bookList = result.data.data || [];
             this.bookList &&
@@ -197,10 +127,10 @@ export default {
     },
     // 处理图片
     getImages(_url) {
-      if (_url !== undefined) {
-        let _u = _url.substring(7);
-        return "https://images.weserv.nl/?url=" + _u;
-      }
+      // if (_url !== undefined) {
+      // let _u = _url.substring(7);
+      return "https://images.weserv.nl/?url=" + _url;
+      // }
     },
     // 播放视频
     toPaly(item) {
@@ -238,7 +168,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("@/views/video/css/videoResult.css");
+@import url("@/views/book/css/bookResult.css");
 
 .result-content .search-btn-group .search-btn {
   height: 100%;

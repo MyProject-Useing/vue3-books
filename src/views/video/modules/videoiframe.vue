@@ -20,7 +20,7 @@ import "vue3-video-play/dist/style.css";
 import { isMobile } from "@/plugins/utils";
 import { getVideoHtmlbyAQY } from "@/api/movieApi";
 export default {
-  name: "bookResult",
+  name: "videoIframe",
   components: {},
   computed: {
     // 是否为移动端
