@@ -180,10 +180,12 @@ export default {
           .then((result) => {
             if (result.data.data) {
               this.bookInfoData = result.data.data;
-              sessionStorage.setItem(
-                sessionKey,
-                JSON.stringify(result.data.data)
-              );
+              this.bookInfoData &&
+                this.bookInfoData.catalogList.length > 0 &&
+                sessionStorage.setItem(
+                  sessionKey,
+                  JSON.stringify(result.data.data)
+                );
             }
             this.bookLoading = false;
           })
