@@ -1,44 +1,45 @@
 <template>
   <a-layout class="layout">
     <a-layout-header class="header">
-      <div class="logo-goroup">
-        <div class="logo-bg"></div>
-        <span>自由鸟</span>
-      </div>
-
-      <a-menu
-        class="head-menu"
-        v-model:selectedKeys="selectedKey"
-        theme="dark"
-        mode="horizontal"
-      >
-        <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
-          <!-- <template #icon>
+      <div class="layout-head">
+        <div class="logo-goroup">
+          <div class="logo-bg"></div>
+          <span>自由鸟</span>
+        </div>
+        <a-menu
+          class="head-menu"
+          v-model:selectedKeys="selectedKey"
+          theme="dark"
+          mode="horizontal"
+        >
+          <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
+            <!-- <template #icon>
             <video-camera-outlined />
           </template> -->
-          视频</a-menu-item
-        >
-        <a-menu-item key="/bookIndex" @click="toPath('/bookIndex')">
-          <!-- <template #icon> <read-outlined /> </template> -->
-          小说
-        </a-menu-item>
-      </a-menu>
-      <div class="header-side">
-        <a-input
-          class="head-search-btn"
-          enter-button="Search"
-          placeholder="请输入关键字"
-          v-model:value.trim="keywords"
-          @keyup.enter.stop="searchDetails"
-          :maxLength="200"
-        >
-          <template #suffix>
-            <span class="header-btn-group" @click="searchDetails">
-              <search-outlined />
-              <span> 搜索 </span>
-            </span>
-          </template>
-        </a-input>
+            视频</a-menu-item
+          >
+          <a-menu-item key="/bookIndex" @click="toPath('/bookIndex')">
+            <!-- <template #icon> <read-outlined /> </template> -->
+            小说
+          </a-menu-item>
+        </a-menu>
+        <div class="header-side">
+          <a-input
+            class="head-search-btn"
+            enter-button="Search"
+            placeholder="请输入关键字"
+            v-model:value.trim="keywords"
+            @keyup.enter.stop="searchDetails"
+            :maxLength="200"
+          >
+            <template #suffix>
+              <span class="header-btn-group" @click="searchDetails">
+                <search-outlined />
+                <span> 搜索 </span>
+              </span>
+            </template>
+          </a-input>
+        </div>
       </div>
     </a-layout-header>
     <a-layout-content>
@@ -127,7 +128,7 @@ export default defineComponent({
 }
 
 .layout .head-menu {
-  line-height: 64px;
+  line-height: 68px;
   max-width: 400px;
   font-size: 14px;
   display: inline-block;
@@ -189,8 +190,21 @@ export default defineComponent({
 }
 
 .layout .ant-layout-header {
-  background-color: rgba(25, 26, 32, 0.8);
-  height: 64px;
-  position: relative;
+  backdrop-filter: blur(1px);
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1000px;
+  height: 68px;
+  color: #666;
+  font-size: 12px;
+}
+
+.layout-head {
+  height: 68px;
+  margin: 0 auto;
 }
 </style>

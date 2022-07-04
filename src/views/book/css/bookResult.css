@@ -7,7 +7,7 @@
 .book-content .book-panle {
   margin-top: 26px;
   padding: 20px;
-  min-height: calc(100vh - 64px - 140px);
+  min-height: calc(100vh - 68px - 140px);
 }
 
 .book-content .book-item {
