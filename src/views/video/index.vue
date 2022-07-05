@@ -169,7 +169,7 @@ export default {
 
 <style scoped>
 .video-index-wrap {
-  background: #14161a;
+  padding-top: 68px;
 }
 
 .video-index-panle {
@@ -191,7 +191,7 @@ export default {
   display: inline-block;
   font-size: 26px;
   line-height: 26px;
-  color: hsla(0, 0%, 100%, 0.9);
+  color: #111;
 }
 
 .link-txt {
@@ -247,13 +247,13 @@ export default {
   line-height: 35px;
   height: 30px;
   font-size: 16px;
-  color: hsla(0, 0%, 100%, 0.9);
+  color: #18191e;
 }
 
 .qy-mod-link-desc {
   height: 20px;
   line-height: 24px;
   font-size: 14px;
-  color: hsla(0, 0%, 100%, 0.5);
+  color: #18191e;
 }
 </style>
