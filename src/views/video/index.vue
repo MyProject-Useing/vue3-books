@@ -177,6 +177,7 @@ export default {
   width: calc(100% - 200px);
   min-width: 994px;
 }
+
 .ant-layout-footer {
   background: #14161a;
 }
@@ -185,6 +186,7 @@ export default {
   padding: 25px 0px 8px 0px;
   margin-bottom: 10px;
 }
+
 .qy-mod-header .qy-mod-title .qy-mod-text {
   display: inline-block;
   font-size: 26px;
