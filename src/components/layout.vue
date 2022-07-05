@@ -107,9 +107,11 @@ export default defineComponent({
   float: left;
   display: flex;
 }
+
 .layout .ant-layout {
   background: #fff;
 }
+
 .layout .ant-layout-footer {
   background: #fff;
 }
@@ -121,6 +123,7 @@ export default defineComponent({
   font-weight: 700;
   width: 70px;
 }
+
 .layout .logo-goroup .logo-bg {
   width: 41px;
   height: 40px;
@@ -133,6 +136,7 @@ export default defineComponent({
   font-size: 14px;
   display: inline-block;
 }
+
 .layout .header-side {
   float: right;
   width: 50%;
@@ -148,6 +152,7 @@ export default defineComponent({
   line-height: 28px;
   width: 330px;
 }
+
 .layout .head-search-btn .ant-input {
   color: hsla(0, 0%, 100%, 0.9);
   background-color: transparent;
