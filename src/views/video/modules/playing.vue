@@ -173,12 +173,10 @@ export default {
                   content: `未能找到此资源，即将为你跳转到源路径。`,
                   duration: 2,
                   onClose: () => {
-                    // this.$router.push({
-                    //   path: "/videoiframe",
-                    //   query: {
-                    //     url: url,
-                    //   },
-                    // });
+                    this.$router.push({
+                      path: "/videoiframe",
+                      query: { url: url },
+                    });
                   },
                 });
               }
