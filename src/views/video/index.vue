@@ -109,8 +109,7 @@ export default {
   computed: {
     // 是否为移动端
     isMobileClass() {
-      let isTrue = isMobile();
-      return isTrue;
+      return isMobile();
     },
     // 视频
     tv() {
