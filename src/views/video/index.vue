@@ -112,9 +112,11 @@ export default {
       let isTrue = isMobile();
       return isTrue;
     },
+    // 视频
     tv() {
       return this.movieList.tv ?? [];
     },
+    // 电影
     movie() {
       return this.movieList.movie ?? [];
     },
