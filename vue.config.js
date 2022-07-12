@@ -25,7 +25,7 @@ module.exports = defineConfig({
   },
   devServer: {
     // proxy: {},
-    //   //此处开启 https
-    //   // https: true,
+    // 此处开启 https
+    // https: true,
   },
 });
