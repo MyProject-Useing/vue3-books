@@ -163,7 +163,6 @@ export default {
       } else {
         getUrlSourse({ url: url })
           .then((d) => {
-            debugger;
             if (d.data.code === 200) {
               if (d.data.data) {
                 this.sourceList = d.data.data || null;
