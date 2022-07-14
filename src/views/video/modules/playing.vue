@@ -163,35 +163,48 @@ export default {
       } else {
         getUrlSourse({ url: url })
           .then((d) => {
-            if (d.data.data) {
-              this.sourceList = d.data.data || null;
-              this.setIndex(0, 0);
-              this.src = this.sourceList[0]?.source[0].url;
+            debugger;
+            if (d.data.code === 200) {
+              if (d.data.data) {
+                this.sourceList = d.data.data || null;
+                this.setIndex(0, 0);
+                this.src = this.sourceList[0]?.source[0].url;
 
-              if (!this.src) {
-                return message.error({
-                  content: `未能找到此资源，即将为你跳转到源路径。`,
-                  duration: 2,
-                  onClose: () => {
-                    this.$router.push({
-                      path: "/videoiframe",
-                      query: { url: url },
-                    });
-                  },
-                });
+                if (!this.src) {
+                  return message.error({
+                    content: `未能找到此资源，即将为你跳转到源路径。`,
+                    duration: 2,
+                    onClose: () => {
+                      this.$router.push({
+                        path: "/videoiframe",
+                        query: { url: url },
+                      });
+                    },
+                  });
+                }
+                // 设置视频title
+                this.options.title = this.souresName + " " + this.palyName;
+                this.sourceList &&
+                  this.sourceList.length > 0 &&
+                  sessionStorage.setItem(
+                    "video_paly_session@" + url,
+                    JSON.stringify(this.sourceList)
+                  );
               }
-              // 设置视频title
-              this.options.title = this.souresName + " " + this.palyName;
-              this.sourceList &&
-                this.sourceList.length > 0 &&
-                sessionStorage.setItem(
-                  "video_paly_session@" + url,
-                  JSON.stringify(this.sourceList)
-                );
+            } else {
+              this.src = "";
+              message.error({
+                content: `资源请求失败！`,
+                duration: 2,
+              });
             }
           })
-          .catch((d) => {
-            console.log(d);
+          .catch(() => {
+            this.src = "";
+            message.error({
+              content: `资源请求失败！`,
+              duration: 2,
+            });
           });
       }
     },
