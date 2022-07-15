@@ -131,8 +131,6 @@ export default defineComponent({
 }
 
 .layout-head-panle {
-  background: url("@/assets/bg-color.jpg") no-repeat;
-  background-size: cover;
 }
 
 .layout .head-menu {
@@ -203,6 +201,9 @@ export default defineComponent({
   height: 68px;
   color: #666;
   font-size: 12px;
+  background: url("@/assets/back_1.jpg") no-repeat;
+  background-size: cover;
+  background-position-y: -168px;
 }
 
 .layout-head {

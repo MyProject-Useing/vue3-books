@@ -169,10 +169,6 @@ export default {
 </script>
 
 <style scoped>
-.video-index-wrap {
-  padding-top: 68px;
-}
-
 .video-index-panle {
   margin: 0 auto;
   width: calc(100% - 200px);
@@ -209,7 +205,7 @@ export default {
   vertical-align: top;
   display: inline-block;
   margin-right: 16px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 .qy-mod-list .qy-mod-ul {
@@ -220,13 +216,9 @@ export default {
 
 .qy-mod-link {
   width: 182px;
-  height: 290px;
+  height: 296px;
   display: grid;
   position: relative;
-}
-
-.qy-mod-link .ant-image img {
-  border-radius: 3px;
 }
 
 .qy-mod-link .icon-tr {
@@ -245,16 +237,25 @@ export default {
 }
 
 .qy-mod-link-name {
-  line-height: 35px;
-  height: 30px;
-  font-size: 16px;
-  color: #18191e;
+  line-height: 37px;
+  height: 28px;
+  font-size: 15px;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.qy-mod-link-name:hover {
+  color: #ff5c38;
+}
+.qy-mod-link :deep(.ant-image) .movie-img {
+  height: 100%;
+  border-radius: 3px;
 }
 
 .qy-mod-link-desc {
   height: 20px;
   line-height: 24px;
   font-size: 14px;
-  color: #18191e;
+  color: #999;
 }
 </style>
