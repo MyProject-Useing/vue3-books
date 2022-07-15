@@ -125,9 +125,9 @@ export default defineComponent({
 }
 
 .layout .logo-goroup .logo-bg {
-  width: 41px;
+  width: 38px;
   height: 40px;
-  margin-top: 11px;
+  margin-top: 14px;
 }
 
 .layout-head-panle {
