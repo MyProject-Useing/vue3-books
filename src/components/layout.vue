@@ -113,7 +113,10 @@ export default defineComponent({
 }
 
 .layout .ant-layout-footer {
-  background: #fff;
+  background: url("@/assets/back.jpg") no-repeat;
+  background-size: cover;
+  background-position-y: -168px;
+  color: #fff;
 }
 
 .layout .logo-goroup span {
@@ -128,9 +131,6 @@ export default defineComponent({
   width: 38px;
   height: 40px;
   margin-top: 14px;
-}
-
-.layout-head-panle {
 }
 
 .layout .head-menu {
@@ -201,7 +201,7 @@ export default defineComponent({
   height: 68px;
   color: #666;
   font-size: 12px;
-  background: url("@/assets/back_1.jpg") no-repeat;
+  background: url("@/assets/back.jpg") no-repeat;
   background-size: cover;
   background-position-y: -168px;
 }

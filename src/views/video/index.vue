@@ -23,6 +23,9 @@
                 >
                 </a-image>
                 <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+                <div class="figure_caption" :title="item.number">
+                  {{ item.number }}
+                </div>
                 <span class="icon-tr">爱奇艺</span>
               </a>
               <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
@@ -50,6 +53,9 @@
                 >
                 </a-image>
                 <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+                <div class="figure_caption" :title="'评分:' + item.score">
+                  {{ item.score }}
+                </div>
                 <span class="icon-tr">爱奇艺</span>
               </a>
               <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
@@ -171,8 +177,8 @@ export default {
 <style scoped>
 .video-index-panle {
   margin: 0 auto;
-  width: calc(100% - 200px);
-  min-width: 994px;
+  width: calc(100% - 234px);
+  min-width: 1200px;
 }
 
 .ant-layout-footer {
@@ -201,6 +207,23 @@ export default {
   overflow: hidden;
 }
 
+.figure_caption {
+  position: absolute;
+  bottom: 38px;
+  width: 100%;
+  padding: 10px 10px 4px;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: normal;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0.5)
+  );
+  border-radius: 0 0 4px 4px;
+  text-align: right;
+}
 .qy-mod-li {
   vertical-align: top;
   display: inline-block;
@@ -249,7 +272,9 @@ export default {
 }
 .qy-mod-link :deep(.ant-image) .movie-img {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 4px;
+  object-fit: cover;
+  background-color: rgba(236, 236, 236, 0.1);
 }
 
 .qy-mod-link-desc {
