@@ -176,6 +176,7 @@ export default defineComponent({
   float: right;
   width: 50%;
   text-align: right;
+  height: 100%;
 }
 
 .layout .head-search-btn {
@@ -188,6 +189,7 @@ export default defineComponent({
   box-shadow: 0 4px 18px rgb(17 18 38 / 7%);
   transition: max-width 0.2s ease;
   border-radius: 20px;
+  height: 38px;
 }
 
 .layout .head-search-btn .ant-input {
