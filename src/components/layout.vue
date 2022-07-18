@@ -147,25 +147,30 @@ export default defineComponent({
 
 .layout .head-search-btn {
   box-sizing: border-box;
-  border: 0;
   outline: 0;
   font-size: 14px;
   background-color: hsla(0, 0%, 100%, 0.18);
   border-radius: 4px;
   line-height: 28px;
-  width: 330px;
+  width: 246px;
+  border-color: #ff5c38;
+  box-shadow: 0 4px 18px rgb(17 18 38 / 7%);
+  transition: max-width 0.2s ease;
+  border-radius: 20px;
 }
 
 .layout .head-search-btn .ant-input {
-  color: hsla(0, 0%, 100%, 0.9);
   background-color: transparent;
+  padding-left: 9px;
+  color: #999;
+  text-shadow: none;
 }
 
 .layout .header-btn-group {
   cursor: pointer;
   position: relative;
   text-align: center;
-  color: #00cc4c;
+  color: #ff5c38;
   display: contents;
 }
 
@@ -176,13 +181,13 @@ export default defineComponent({
 
 .layout .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
   background: none;
-  color: #00cc4c;
+  color: #ff5c38;
 }
 
 .layout .ant-menu.ant-menu-dark .ant-menu-item {
   background: none;
   font-size: 18px;
-  color: #fff;
+  color: #111;
   font-weight: 500;
   font-style: oblique;
   padding: 0px;
@@ -201,9 +206,11 @@ export default defineComponent({
   height: 68px;
   color: #666;
   font-size: 12px;
-  background: url("@/assets/back.jpg") no-repeat;
+  /* background: url(http://localhost:8080/img/back.b25b53c8.jpg) no-repeat; */
   background-size: cover;
   background-position-y: -168px;
+  /* box-shadow: 0 28px 50px rgb(25 24 40 / 35%); */
+  background-color: #fff;
 }
 
 .layout-head {
