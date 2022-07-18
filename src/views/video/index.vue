@@ -232,6 +232,7 @@ export default {
 .video-index-wrap .qy-mod-header {
   margin-top: 30px;
   position: relative;
+  margin-bottom: -20px;
 }
 
 .qy-mod-header .qy-mod-title {
@@ -319,10 +320,12 @@ export default {
 /*修改分页*/
 
 .swiper-panle {
-  padding-top: 24px;
+  padding-top: 40px;
   position: relative;
 }
-
+.swiper-panle:last-child {
+  margin-bottom: 80px;
+}
 /*  上一页 */
 .swiper :deep .swiper-button-prev {
   right: 95px;
@@ -332,6 +335,10 @@ export default {
   top: 0px;
   margin: 0px;
   font-size: 12px;
+  border-radius: 100%;
+  color: #666;
+  text-align: center;
+  vertical-align: top;
 }
 /*  下一页 */
 .swiper :deep .swiper-button-next {
@@ -342,7 +349,18 @@ export default {
   top: 0px;
   margin: 0px;
   font-size: 12px;
+  border-radius: 100%;
+  color: #666;
+  text-align: center;
+  vertical-align: top;
 }
+
+.swiper :deep .swiper-button-next:hover,
+.swiper :deep .swiper-button-prev:hover {
+  background-color: #f8f8f8;
+  color: #ff5c38;
+}
+
 /*  页数 */
 .swiper :deep .swiper-pagination {
   width: 50px;
@@ -351,6 +369,14 @@ export default {
   height: 20px;
   left: auto;
   line-height: 17px;
+  color: #666;
+  font-size: 14px;
+  letter-spacing: 2px;
+  vertical-align: top;
+}
+.swiper-button-disabled {
+  color: #ccc;
+  pointer-events: none;
 }
 
 .swiper :deep .swiper-button-next:after,
