@@ -81,7 +81,7 @@
 <script>
 import { isMobile } from "@/plugins/utils";
 import { getBookIndex } from "@/api/bookApi";
-// 目录
+// 图标
 import { UserOutlined } from "@ant-design/icons-vue";
 
 import { getCacheImages } from "@/plugins/utils.js";

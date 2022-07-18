@@ -32,12 +32,18 @@
               :maxLength="200"
             >
               <template #suffix>
-                <span class="header-btn-group" @click="searchDetails">
+                <span class="search-btn-group" @click="searchDetails">
                   <search-outlined />
                   <span> 搜索 </span>
                 </span>
               </template>
             </a-input>
+            <div class="header-btn-group">
+              <clock-circle-outlined title="播放记录" @click="openGit()" />
+              <sync-outlined title="刷新界面" @click="openGit()" />
+              <github-outlined title="查看源码" @click="openGit()" />
+              <comment-outlined title="反馈" @click="openGit()" />
+            </div>
           </div>
         </div>
       </div>
@@ -61,14 +67,22 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-
+// 图标
 import {
-  // VideoCameraOutlined,
-  // ReadOutlined,
+  GithubOutlined,
   SearchOutlined,
+  SyncOutlined,
+  CommentOutlined,
+  ClockCircleOutlined,
 } from "@ant-design/icons-vue";
 export default defineComponent({
-  components: { SearchOutlined },
+  components: {
+    SearchOutlined,
+    GithubOutlined,
+    SyncOutlined,
+    CommentOutlined,
+    ClockCircleOutlined,
+  },
   name: "lay_out",
   setup() {
     const router = useRouter();
@@ -99,6 +113,10 @@ export default defineComponent({
         this.toPath("/bookResult", params);
       }
     },
+    // 查看git源码
+    openGit() {
+      window.open("https://github.com/danhuaxiansheng/vue3-books");
+    },
   },
 });
 </script>
@@ -110,6 +128,20 @@ export default defineComponent({
 
 .layout .ant-layout {
   background: #fff;
+}
+
+.header-btn-group {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.header-btn-group .anticon {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.header-btn-group .anticon + .anticon {
+  margin-left: 20px;
 }
 
 .layout .ant-layout-footer {
@@ -143,14 +175,13 @@ export default defineComponent({
 .layout .header-side {
   float: right;
   width: 50%;
+  text-align: right;
 }
 
 .layout .head-search-btn {
-  box-sizing: border-box;
   outline: 0;
   font-size: 14px;
   background-color: hsla(0, 0%, 100%, 0.18);
-  border-radius: 4px;
   line-height: 28px;
   width: 246px;
   border-color: #ff5c38;
@@ -166,7 +197,7 @@ export default defineComponent({
   text-shadow: none;
 }
 
-.layout .header-btn-group {
+.layout .search-btn-group {
   cursor: pointer;
   position: relative;
   text-align: center;
@@ -174,7 +205,7 @@ export default defineComponent({
   display: contents;
 }
 
-.header-btn-group .anticon-search {
+.search-btn-group .anticon-search {
   font-size: 19px;
   margin-right: 5px;
 }

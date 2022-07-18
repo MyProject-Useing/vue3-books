@@ -117,13 +117,11 @@
 </template>
 
 <script>
-import { isMobile } from "@/plugins/utils";
+import { isMobile, getCacheImages } from "@/plugins/utils.js";
 // 视频内容
 import { getDataList as movie_GetList } from "@/api/movieApi";
 
 import { message } from "ant-design-vue";
-
-import { getCacheImages } from "@/plugins/utils.js";
 // 书籍详情
 export default {
   name: "videoResult",
