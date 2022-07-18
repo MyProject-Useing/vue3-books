@@ -5,23 +5,18 @@
         <div class="layout-head">
           <div class="logo-goroup">
             <div class="logo-bg"></div>
+            酷我视频
           </div>
-          <a-menu
+          <!-- <a-menu
             class="head-menu"
             v-model:selectedKeys="selectedKey"
             theme="dark"
             mode="horizontal"
           >
             <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
-              <!-- <template #icon>
-            <video-camera-outlined />
-          </template> -->
               酷我视频</a-menu-item
             >
-            <!-- <a-menu-item key="/bookIndex" @click="toPath('/bookIndex')">
-              小说
-            </a-menu-item> -->
-          </a-menu>
+          </a-menu> -->
           <div class="header-side">
             <a-input
               class="head-search-btn"
@@ -49,11 +44,7 @@
       </div>
     </a-layout-header>
     <a-layout-content>
-      <a-layout>
-        <a-layout-content>
-          <router-view />
-        </a-layout-content>
-      </a-layout>
+      <router-view />
     </a-layout-content>
     <a-layout-footer>
       <div>1、本站提供的所有内容仅供学习、交流与参考。</div>
@@ -120,7 +111,43 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style lang="less" scoped>
+@media (max-width: 1549px) {
+  .layout {
+    width: 1200px;
+  }
+}
+@media (max-width: 1789px) {
+  .layout {
+    width: 1500px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .layout {
+    width: 990px;
+  }
+}
+
+.layout {
+  margin: auto;
+}
+
+.layout .ant-layout-header {
+  z-index: 10;
+  width: 100%;
+  height: 68px;
+  color: #666;
+  font-size: 12px;
+  background-size: cover;
+  background-position-y: -168px;
+  background-color: #fff;
+  padding: 0px;
+}
+.layout .ant-layout-content {
+  background-color: #fff;
+}
+
 .layout .logo-goroup {
   float: left;
   display: flex;
@@ -174,8 +201,6 @@ export default defineComponent({
 
 .layout .header-side {
   float: right;
-  width: 50%;
-  text-align: right;
   height: 100%;
 }
 
@@ -230,20 +255,6 @@ export default defineComponent({
 .layout .ant-menu-dark .ant-menu-sub,
 .layout .ant-menu.ant-menu-dark .ant-menu-sub {
   background: none;
-}
-
-.layout .ant-layout-header {
-  z-index: 10;
-  width: 100%;
-  min-width: 1000px;
-  height: 68px;
-  color: #666;
-  font-size: 12px;
-  /* background: url(http://localhost:8080/img/back.b25b53c8.jpg) no-repeat; */
-  background-size: cover;
-  background-position-y: -168px;
-  /* box-shadow: 0 28px 50px rgb(25 24 40 / 35%); */
-  background-color: #fff;
 }
 
 .layout-head {

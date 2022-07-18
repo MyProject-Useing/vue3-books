@@ -124,11 +124,14 @@ import "swiper/css/pagination";
 export default {
   name: "videoIndex",
   setup() {
+    const lngth = Math.floor(
+      (window.document.getElementsByTagName("body")[0].clientWidth - 18) / 200
+    );
     return {
       swiperOptions: {
         modules: [Autoplay, Navigation, Pagination],
-        "slides-per-view": 6,
-        "slides-per-group": 6,
+        "slides-per-view": lngth,
+        "slides-per-group": lngth,
         scrollbar: true,
         keyboard: { enabled: true },
         navigation: true,
@@ -221,8 +224,7 @@ export default {
 <style scoped>
 .video-index-panle {
   margin: 0 auto;
-  width: calc(100% - 234px);
-  min-width: 1200px;
+  /* width: calc(100% - 234px); */
 }
 
 .ant-layout-footer {
@@ -275,6 +277,7 @@ export default {
   height: 296px;
   display: grid;
   position: relative;
+  min-width: 182px;
 }
 
 .qy-mod-link .icon-tr {

@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .catalog-list.useHead {
   padding: 40px 0 40px 0px;
 }
