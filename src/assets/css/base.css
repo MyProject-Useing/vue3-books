@@ -35,7 +35,7 @@ ul {
 }
 
 .logo-bg {
-  background: url(@/assets/logo2.png) no-repeat;
+  background: url(@/assets/logo.png) no-repeat;
   background-size: cover;
 }
 
