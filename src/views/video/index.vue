@@ -23,12 +23,14 @@
                 >
                 </a-image>
                 <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
-                <div class="figure_caption" :title="item.number">
-                  {{ item.number }}
+                <div class="figure_caption" :title="item.meta">
+                  {{ item.meta }}
                 </div>
                 <span class="icon-tr">爱奇艺</span>
               </a>
-              <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
+              <span class="qy-mod-link-desc ellipsis">
+                {{ item.description }}</span
+              >
             </li>
           </ul>
         </div>
@@ -58,7 +60,9 @@
                 </div>
                 <span class="icon-tr">爱奇艺</span>
               </a>
-              <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
+              <span class="qy-mod-link-desc ellipsis">
+                {{ item.description }}</span
+              >
             </li>
           </ul>
         </div>
@@ -83,9 +87,17 @@
                 >
                 </a-image>
                 <span class="qy-mod-link-name ellipsis"> {{ item.name }}</span>
+                <div class="figure_caption" :title="item.meta">
+                  {{ item.meta }}
+                </div>
+                <div class="figure_caption" :title="'评分:' + item.score">
+                  {{ item.score }}
+                </div>
                 <span class="icon-tr">爱奇艺</span>
               </a>
-              <span class="qy-mod-link-desc ellipsis"> {{ item.desc }}</span>
+              <span class="qy-mod-link-desc ellipsis">
+                {{ item.description }}</span
+              >
             </li>
           </ul>
         </div>
@@ -105,7 +117,7 @@ export default {
     return {
       noCover: require("@/assets/imgs/noCover.jpeg"),
       refreshLoading: false,
-      movieList: {
+      sourceData: {
         tv: [],
         movie: [],
         variety: [],
@@ -119,14 +131,15 @@ export default {
     },
     // 视频
     tv() {
-      return this.movieList.tv ?? [];
+      return this.sourceData.dianshiju?.list ?? [];
     },
     // 电影
     movie() {
-      return this.movieList.movie ?? [];
+      return this.sourceData.dianying?.list ?? [];
     },
+    // 综艺
     variety() {
-      return this.movieList.variety ?? [];
+      return this.sourceData.zongyi?.list ?? [];
     },
   },
   mounted() {
@@ -135,20 +148,20 @@ export default {
   methods: {
     init() {
       // 重新搜索
-      this.movieList = [];
+      this.sourceData = {};
       const key = "videoIndex@key";
       const cacheResult = sessionStorage.getItem(key);
       if (cacheResult) {
-        this.movieList = JSON.parse(cacheResult);
+        this.sourceData = JSON.parse(cacheResult);
       } else {
         // 打开遮罩
         this.refreshLoading = true;
         getMovieIndex()
           .then((result) => {
             this.refreshLoading = false;
-            this.movieList = result.data.data || [];
-            this.movieList &&
-              sessionStorage.setItem(key, JSON.stringify(this.movieList));
+            this.sourceData = result.data.data || {};
+            this.sourceData &&
+              sessionStorage.setItem(key, JSON.stringify(this.sourceData));
           })
           .catch(() => {
             this.refreshLoading = false;
@@ -157,16 +170,16 @@ export default {
     },
     // 获取书籍封面
     getImgUrl(item) {
-      return getCacheImages(item.imgSrc);
+      return getCacheImages(item.imageUrl);
     },
     // 返回首页
     goDetails(item) {
       this.$router.push({
         path: "/playing",
         query: {
-          url: encodeURI(item.url),
+          url: encodeURI(item.pageUrl),
           name: encodeURI(item.name),
-          tag: encodeURI(item.tag),
+          // tag: encodeURI(item.tag),
         },
       });
     },
