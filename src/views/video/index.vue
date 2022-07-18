@@ -227,10 +227,6 @@ export default {
   /* width: calc(100% - 234px); */
 }
 
-.ant-layout-footer {
-  background: #14161a;
-}
-
 .video-index-wrap .qy-mod-header {
   margin-top: 30px;
   position: relative;

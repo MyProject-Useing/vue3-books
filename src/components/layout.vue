@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout">
+  <a-layout class="layout" theme="dark">
     <a-layout-header class="header">
       <div class="layout-head-panle">
         <div class="layout-head">
@@ -131,110 +131,98 @@ export default defineComponent({
 
 .layout {
   margin: auto;
-}
+  .ant-layout {
+    background: #fff;
+  }
 
-.layout .ant-layout-header {
-  z-index: 10;
-  width: 100%;
-  height: 68px;
-  color: #666;
-  font-size: 12px;
-  background-size: cover;
-  background-position-y: -168px;
-  background-color: #fff;
-  padding: 0px;
-}
-.layout .ant-layout-content {
-  background-color: #fff;
-}
+  .ant-layout-header {
+    z-index: 10;
+    width: 100%;
+    height: 68px;
+    color: #666;
+    font-size: 12px;
+    background-size: cover;
+    background-position-y: -168px;
+    background-color: #fff;
+    padding: 0px;
 
-.layout .logo-goroup {
-  float: left;
-  display: flex;
-}
+    .layout-head {
+      height: 68px;
+      margin: 0 auto;
+    }
 
-.layout .ant-layout {
-  background: #fff;
-}
+    .logo-goroup {
+      float: left;
+      display: flex;
+      span {
+        color: #d9363e;
+        margin-left: 7px;
+        font-size: 18px;
+        font-weight: 700;
+        width: 70px;
+      }
+      .logo-bg {
+        width: 38px;
+        height: 40px;
+        margin-top: 14px;
+      }
+    }
 
-.header-btn-group {
-  display: inline-block;
-  margin-left: 20px;
-}
+    .header-side {
+      float: right;
+      height: 100%;
+      .header-btn-group {
+        display: inline-block;
+        margin-left: 20px;
+        .anticon {
+          font-size: 26px;
+          cursor: pointer;
+        }
+        .anticon + .anticon {
+          margin-left: 20px;
+        }
+      }
 
-.header-btn-group .anticon {
-  font-size: 26px;
-  cursor: pointer;
-}
+      .head-search-btn {
+        outline: 0;
+        font-size: 14px;
+        background-color: hsla(0, 0%, 100%, 0.18);
+        line-height: 28px;
+        width: 246px;
+        border-color: #ff5c38;
+        box-shadow: 0 4px 18px rgb(17 18 38 / 7%);
+        transition: max-width 0.2s ease;
+        border-radius: 20px;
+        height: 38px;
+        .ant-input {
+          background-color: transparent;
+          padding-left: 9px;
+          color: #999;
+          text-shadow: none;
+        }
 
-.header-btn-group .anticon + .anticon {
-  margin-left: 20px;
-}
+        .search-btn-group {
+          cursor: pointer;
+          position: relative;
+          text-align: center;
+          color: #ff5c38;
+          display: contents;
+        }
 
-.layout .ant-layout-footer {
-  background: url("@/assets/back.jpg") no-repeat;
-  background-size: cover;
-  background-position-y: -168px;
-  color: #fff;
-}
+        .search-btn-group .anticon-search {
+          font-size: 19px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .ant-layout-content {
+    background-color: #fff;
+  }
 
-.layout .logo-goroup span {
-  color: #d9363e;
-  margin-left: 7px;
-  font-size: 18px;
-  font-weight: 700;
-  width: 70px;
-}
-
-.layout .logo-goroup .logo-bg {
-  width: 38px;
-  height: 40px;
-  margin-top: 14px;
-}
-
-.layout .head-menu {
-  line-height: 68px;
-  max-width: 400px;
-  font-size: 14px;
-  display: inline-block;
-}
-
-.layout .header-side {
-  float: right;
-  height: 100%;
-}
-
-.layout .head-search-btn {
-  outline: 0;
-  font-size: 14px;
-  background-color: hsla(0, 0%, 100%, 0.18);
-  line-height: 28px;
-  width: 246px;
-  border-color: #ff5c38;
-  box-shadow: 0 4px 18px rgb(17 18 38 / 7%);
-  transition: max-width 0.2s ease;
-  border-radius: 20px;
-  height: 38px;
-}
-
-.layout .head-search-btn .ant-input {
-  background-color: transparent;
-  padding-left: 9px;
-  color: #999;
-  text-shadow: none;
-}
-
-.layout .search-btn-group {
-  cursor: pointer;
-  position: relative;
-  text-align: center;
-  color: #ff5c38;
-  display: contents;
-}
-
-.search-btn-group .anticon-search {
-  font-size: 19px;
-  margin-right: 5px;
+  .ant-layout-footer {
+    background-color: #fff;
+  }
 }
 
 .layout .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
@@ -255,10 +243,5 @@ export default defineComponent({
 .layout .ant-menu-dark .ant-menu-sub,
 .layout .ant-menu.ant-menu-dark .ant-menu-sub {
   background: none;
-}
-
-.layout-head {
-  height: 68px;
-  margin: 0 auto;
 }
 </style>
