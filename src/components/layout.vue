@@ -50,11 +50,11 @@
       </a-layout>
     </a-layout-content>
     <a-layout-footer>
-      <span> ©2022 Created by Z </span>
       <div>1、本站提供的所有内容仅供学习、交流与参考。</div>
       <div>
         2、本站所有资源均已标明来源，如未经许可进行转载使用，请务必标明或保留文章原始出处和作者的信息。
       </div>
+      <span> Copyright © 2022 zyy All Rights Reserved </span>
     </a-layout-footer>
   </a-layout>
 </template>
