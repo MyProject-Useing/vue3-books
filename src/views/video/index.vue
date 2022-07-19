@@ -165,8 +165,8 @@ export default {
     },
     width() {
       let width =
-        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1200;
-      return width;
+        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
+      return width - 200;
     },
     swiperOptions() {
       return {
