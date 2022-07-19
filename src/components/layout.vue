@@ -112,14 +112,15 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@media (max-width: 1549px) {
-  .layout {
-    width: 1200px;
-  }
-}
 @media (max-width: 1789px) {
   .layout {
     width: 1500px;
+  }
+}
+
+@media (max-width: 1549px) {
+  .layout {
+    width: 1200px;
   }
 }
 

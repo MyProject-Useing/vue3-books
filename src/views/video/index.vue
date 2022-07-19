@@ -123,26 +123,26 @@ import "swiper/css/pagination";
 
 export default {
   name: "videoIndex",
-  setup() {
-    const lngth = Math.floor(
-      (window.document.getElementsByTagName("body")[0].clientWidth - 18) / 200
-    );
-    return {
-      swiperOptions: {
-        modules: [Autoplay, Navigation, Pagination],
-        "slides-per-view": lngth,
-        "slides-per-group": lngth,
-        scrollbar: true,
-        keyboard: { enabled: true },
-        navigation: true,
-        pagination: { type: "fraction" },
-        autoplay: {
-          delay: 10000,
-          disableOnInteraction: false,
-        },
-      },
-    };
-  },
+  // setup() {
+  //   const lngth = Math.floor(
+  //     window.document.getElementsByTagName("body")[0].clientWidth / 200
+  //   );
+  //   return {
+  //     swiperOptions: {
+  //       modules: [Autoplay, Navigation, Pagination],
+  //       "slides-per-view": lngth,
+  //       "slides-per-group": lngth,
+  //       scrollbar: true,
+  //       keyboard: { enabled: true },
+  //       navigation: true,
+  //       pagination: { type: "fraction" },
+  //       autoplay: {
+  //         delay: 10000,
+  //         disableOnInteraction: false,
+  //       },
+  //     },
+  //   };
+  // },
   data() {
     return {
       noCover: require("@/assets/imgs/noCover.jpeg"),
@@ -162,6 +162,26 @@ export default {
     // 是否为移动端
     isMobileClass() {
       return isMobile();
+    },
+    width() {
+      let width =
+        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1200;
+      return width;
+    },
+    swiperOptions() {
+      return {
+        modules: [Autoplay, Navigation, Pagination],
+        "slides-per-view": Math.floor(this.width / 200),
+        "slides-per-group": Math.floor(this.width / 200),
+        scrollbar: true,
+        keyboard: { enabled: true },
+        navigation: true,
+        pagination: { type: "fraction" },
+        autoplay: {
+          delay: 10000,
+          disableOnInteraction: false,
+        },
+      };
     },
     // 视频
     tv() {
@@ -224,7 +244,6 @@ export default {
 <style scoped>
 .video-index-panle {
   margin: 0 auto;
-  /* width: calc(100% - 234px); */
 }
 
 .video-index-wrap .qy-mod-header {
@@ -327,7 +346,7 @@ export default {
 }
 /*  上一页 */
 .swiper :deep .swiper-button-prev {
-  right: 95px;
+  right: 85px;
   left: auto;
   height: 20px;
   width: 20px;
@@ -341,7 +360,7 @@ export default {
 }
 /*  下一页 */
 .swiper :deep .swiper-button-next {
-  right: 10px;
+  right: 0px;
   left: auto;
   height: 20px;
   width: 20px;
@@ -362,9 +381,9 @@ export default {
 
 /*  页数 */
 .swiper :deep .swiper-pagination {
-  width: 50px;
+  width: 40px;
   top: 0px;
-  right: 38px;
+  right: 31px;
   height: 20px;
   left: auto;
   line-height: 17px;
