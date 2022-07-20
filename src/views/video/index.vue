@@ -123,26 +123,26 @@ import "swiper/css/pagination";
 
 export default {
   name: "videoIndex",
-  // setup() {
-  //   const lngth = Math.floor(
-  //     window.document.getElementsByTagName("body")[0].clientWidth / 200
-  //   );
-  //   return {
-  //     swiperOptions: {
-  //       modules: [Autoplay, Navigation, Pagination],
-  //       "slides-per-view": lngth,
-  //       "slides-per-group": lngth,
-  //       scrollbar: true,
-  //       keyboard: { enabled: true },
-  //       navigation: true,
-  //       pagination: { type: "fraction" },
-  //       autoplay: {
-  //         delay: 10000,
-  //         disableOnInteraction: false,
-  //       },
-  //     },
-  //   };
-  // },
+  setup() {
+    let width =
+      window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
+    let lngth = Math.floor((width - 200) / 200);
+    return {
+      swiperOptions: {
+        modules: [Autoplay, Navigation, Pagination],
+        "slides-per-view": lngth,
+        "slides-per-group": lngth,
+        scrollbar: true,
+        keyboard: { enabled: true },
+        navigation: true,
+        pagination: { type: "fraction" },
+        autoplay: {
+          delay: 10000,
+          disableOnInteraction: false,
+        },
+      },
+    };
+  },
   data() {
     return {
       noCover: require("@/assets/imgs/noCover.jpeg"),
@@ -162,26 +162,6 @@ export default {
     // 是否为移动端
     isMobileClass() {
       return isMobile();
-    },
-    width() {
-      let width =
-        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
-      return width - 200;
-    },
-    swiperOptions() {
-      return {
-        modules: [Autoplay, Navigation, Pagination],
-        "slides-per-view": Math.floor(this.width / 200),
-        "slides-per-group": Math.floor(this.width / 200),
-        scrollbar: true,
-        keyboard: { enabled: true },
-        navigation: true,
-        pagination: { type: "fraction" },
-        autoplay: {
-          delay: 10000,
-          disableOnInteraction: false,
-        },
-      };
     },
     // 视频
     tv() {

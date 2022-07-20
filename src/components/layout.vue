@@ -155,6 +155,7 @@ export default defineComponent({
     .logo-goroup {
       float: left;
       display: flex;
+      cursor: pointer;
       span {
         color: #d9363e;
         margin-left: 7px;
