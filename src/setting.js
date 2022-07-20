@@ -2,7 +2,7 @@
 const { sysTypeList } = require("./plugins/map.js");
 
 // 是否为发布环境
-const isPro = process.env.NODE_ENV === "production";
+// const isPro = process.env.NODE_ENV === "production";
 
 module.exports = {
   title: "蛋花-综合网站",
@@ -15,14 +15,14 @@ module.exports = {
 
   // 书籍配置
   book: {
-    api: isPro ? "http://111.229.92.181:3003/" : "http://localhost:3003/",
-    // api: "http://111.229.92.181:3003/",
+    // api: isPro ? "http://111.229.92.181:3003/" : "http://localhost:3003/",
+    api: "http://111.229.92.181:3003/",
   },
 
   // 视频配置
   video: {
-    api: isPro ? "http://111.229.92.181:3003/" : "http://localhost:3003/",
-    // api: "http://111.229.92.181:3003/",
+    // api: isPro ? "http://111.229.92.181:3003/" : "http://localhost:3003/",
+    api: "http://111.229.92.181:3003/",
   },
 };
 

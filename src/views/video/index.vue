@@ -338,6 +338,7 @@ export default {
 /*修改分页*/
 
 .swiper-panle {
+  height: 362px;
   padding-top: 40px;
   position: relative;
 }
