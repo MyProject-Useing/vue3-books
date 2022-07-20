@@ -44,7 +44,7 @@
 .video-content .result-right {
   position: relative;
   display: inline-block;
-  width: 560px;
+  width: calc(100% - 200px);
   min-height: 236px;
   font-size: 0;
   vertical-align: top;

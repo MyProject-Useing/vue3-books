@@ -195,7 +195,7 @@ export default defineComponent({
         transition: max-width 0.2s ease;
         border-radius: 20px;
         height: 38px;
-        .ant-input {
+        :deep .ant-input {
           background-color: transparent;
           padding-left: 9px;
           color: #999;
