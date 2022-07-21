@@ -202,7 +202,7 @@ export default {
         return message.warning("未找到资源路径，无法正常播放。");
       }
       this.$router.push({
-        path: item.hasVip ? "/playing" : "/videoiframe",
+        path: item.hasVip ? "/videoPlaying" : "/videoiframe",
         query: {
           url: encodeURI(item.palySrc),
           tag: encodeURI(item.tag),

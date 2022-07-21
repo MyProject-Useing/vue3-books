@@ -209,7 +209,7 @@ export default {
     // 返回首页
     goDetails(item) {
       this.$router.push({
-        path: "/playing",
+        path: "/videoPlaying",
         query: {
           url: encodeURI(item.pageUrl),
           name: encodeURI(item.name),

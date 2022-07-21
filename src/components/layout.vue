@@ -95,10 +95,7 @@ export default defineComponent({
       if (!this.keywords) {
         return;
       }
-      if (
-        this.selectedKey.includes("/videoIndex") ||
-        this.selectedKey.includes("/videoResult")
-      ) {
+      if (this.selectedKey.join("").includes("video")) {
         this.toPath("/videoResult", params);
       } else {
         this.toPath("/bookResult", params);

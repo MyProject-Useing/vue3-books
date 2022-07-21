@@ -45,8 +45,8 @@ const routes = [
         component: () => import("@/views/book/modules/readBooks.vue"),
       },
       {
-        path: "/playing",
-        name: "playing",
+        path: "/videoPlaying",
+        name: "videoPlaying",
         meta: {
           keepAlive: false,
         },
