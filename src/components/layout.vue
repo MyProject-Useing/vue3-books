@@ -3,9 +3,9 @@
     <a-layout-header class="header">
       <div class="layout-head-panle">
         <div class="layout-head">
-          <div class="logo-goroup">
+          <div class="logo-goroup" @click="toPath('/videoIndex')">
             <div class="logo-bg"></div>
-            酷我视频
+            <span class="logo-label"> 酷我视频</span>
           </div>
           <!-- <a-menu
             class="head-menu"
@@ -156,16 +156,15 @@ export default defineComponent({
       float: left;
       display: flex;
       cursor: pointer;
-      span {
-        color: #d9363e;
+      .logo-label {
+        color: #ff5c38;
         margin-left: 7px;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 700;
-        width: 70px;
+        width: 86px;
+        font-style: italic;
       }
       .logo-bg {
-        width: 38px;
-        height: 40px;
         margin-top: 14px;
       }
     }
@@ -218,6 +217,7 @@ export default defineComponent({
       }
     }
   }
+
   .ant-layout-content {
     background-color: #fff;
   }
