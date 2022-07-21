@@ -1,8 +1,8 @@
 <template>
   <div class="playing-wrap" :class="isMobileClass ? 'mobile' : ''">
-    <div class="playing-main">
-      <div class="video-title">{{ souresName }} {{ palyName }}</div>
-      <div class="plp-l">
+    <div class="playing-panle">
+      <div class="playing-title">{{ souresName }} {{ palyName }}</div>
+      <div class="playing-left">
         <videoPlay
           class="video-use"
           v-bind="options"
@@ -13,33 +13,30 @@
           @waiting="waiting"
         />
       </div>
-      <div class="plp-r">
+      <div class="playing-right">
         <div class="list-title">
           <h4 title="资源列表" class="ellipsis">资源列表</h4>
         </div>
         <div class="list-wrapper">
-          <div class="list-wrapper-item recommend-tip">
-            <span class="tip-left">电影</span>
-            <span class="tip-right">放映时间</span>
+          <div class="list-tip">
+            <span>电影</span>
+            <span>放映时间</span>
           </div>
           <div
-            class="list-wrapper-item"
+            class="list-item"
             v-for="(item, index) in sourceList"
             :key="index"
           >
-            <div class="item-head-wrap">
-              <a
-                class="tip-left"
-                :class="index === selectSoureIndex ? 'active' : ''"
-              >
+            <div class="item-head">
+              <a :class="index === selectSoureIndex ? 'active' : ''">
                 {{ item.name }}
               </a>
-              <span class="tip-right">{{ item.year }}</span>
+              <span>{{ item.year }}</span>
             </div>
-            <div class="item-body-wrap">
-              <ul class="album-list">
+            <div class="item-body">
+              <ul class="item-body-list">
                 <li
-                  class="album-item"
+                  class="item-body-list-item"
                   v-for="(info, inx) in item.source"
                   :key="inx"
                   :class="
@@ -52,9 +49,9 @@
                     @click="jumpIndex(info, inx, index)"
                     href="javascript:void(0);"
                     :title="info.name"
-                    class="album-link"
+                    class="link"
                     ><span class="ellipsis"
-                      >{{ info.name }}<i class="playing-icon"></i></span
+                      >{{ info.name }}<i class="icon-playing"></i></span
                   ></a>
                 </li>
               </ul>
@@ -85,6 +82,10 @@ export default {
     },
     palyUrl() {
       return decodeURIComponent(this.$route.query.url || "");
+    },
+    // 当前的视频名称
+    palyVideoName() {
+      return decodeURIComponent(this.$route.query.name || "");
     },
     // 播放的视频名称
     playSourse() {
@@ -165,10 +166,12 @@ export default {
           .then((d) => {
             if (d.data.code === 200) {
               if (d.data.data) {
-                this.sourceList = d.data.data || null;
+                let data = d.data.data.filter((d) =>
+                  d.name.includes(this.palyName)
+                );
+                this.sourceList = data || [];
                 this.setIndex(0, 0);
                 this.src = this.sourceList[0]?.source[0].url;
-
                 if (!this.src) {
                   return message.error({
                     content: `未能找到此资源，即将为你跳转到源路径。`,
@@ -223,6 +226,7 @@ export default {
   },
 };
 </script>
-<style scoped>
-@import url("@/views/video/css/playing.css");
+
+<style lang="less" scoped>
+@import url("@/views/video/css/playing.less");
 </style>
