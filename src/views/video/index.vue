@@ -286,7 +286,7 @@ export default {
   font-size: 13px;
 }
 
-.qy-mod-link :v-deep(.ant-image) {
+.qy-mod-link :deep(.ant-image) {
   height: 258px;
 }
 
@@ -301,7 +301,7 @@ export default {
 .qy-mod-link-name:hover {
   color: #ff5c38;
 }
-.qy-mod-link :v-deep(.ant-image) .movie-img {
+.qy-mod-link :deep(.ant-image) .movie-img {
   height: 100%;
   border-radius: 4px;
   object-fit: cover;
@@ -326,7 +326,7 @@ export default {
   margin-bottom: 80px;
 }
 /*  上一页 */
-.swiper :v-deep .swiper-button-prev {
+.swiper :deep .swiper-button-prev {
   right: 85px;
   left: auto;
   height: 20px;
@@ -340,7 +340,7 @@ export default {
   vertical-align: top;
 }
 /*  下一页 */
-.swiper :v-deep .swiper-button-next {
+.swiper :deep .swiper-button-next {
   right: 0px;
   left: auto;
   height: 20px;
@@ -354,14 +354,14 @@ export default {
   vertical-align: top;
 }
 
-.swiper :v-deep .swiper-button-next:hover,
-.swiper :v-deep .swiper-button-prev:hover {
+.swiper :deep .swiper-button-next:hover,
+.swiper :deep .swiper-button-prev:hover {
   background-color: #f8f8f8;
   color: #ff5c38;
 }
 
 /*  页数 */
-.swiper :v-deep .swiper-pagination {
+.swiper :deep .swiper-pagination {
   width: 40px;
   top: 0px;
   right: 31px;
@@ -378,8 +378,8 @@ export default {
   pointer-events: none;
 }
 
-.swiper :v-deep .swiper-button-next:after,
-.swiper :v-deep .swiper-button-prev:after {
+.swiper :deep .swiper-button-next:after,
+.swiper :deep .swiper-button-prev:after {
   font-size: 14px;
 }
 </style>

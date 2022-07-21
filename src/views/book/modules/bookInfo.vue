@@ -234,88 +234,88 @@ export default {
   height: 263px;
 }
 
-.book-information .book-img :v-deep(.ant-image) {
+.book-information .book-img :deep(.ant-image) {
   width: 100%;
   height: 100%;
 }
 
 /*最新章节*/
-.content-nav-wrap :v-deep(.left-wrap) {
+.content-nav-wrap :deep(.left-wrap) {
   width: 100%;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-intro {
+.content-nav-wrap :deep(.left-wrap) .book-intro {
   border-bottom: 1px solid #e6e6e6;
   padding-bottom: 20px;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-intro p {
+.content-nav-wrap :deep(.left-wrap) .book-intro p {
   font: 14px/28px PingFangSC-Regular, "-apple-system", Simsun;
   overflow: hidden;
   margin: 0px;
   text-indent: 22px;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state {
+.content-nav-wrap :deep(.left-wrap) .book-state {
   position: relative;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state ul {
+.content-nav-wrap :deep(.left-wrap) .book-state ul {
   margin: 0;
   padding: 0;
 }
-.content-nav-wrap :v-deep(.left-wrap) .book-state ul li {
+.content-nav-wrap :deep(.left-wrap) .book-state ul li {
   margin-top: 20px;
 }
-.content-nav-wrap :v-deep(.left-wrap) .book-state li b {
+.content-nav-wrap :deep(.left-wrap) .book-state li b {
   font: 14px/24px PingFangSC-Regular, "-apple-system", Simsun;
   float: left;
   width: 98px;
   color: #999;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state li .detail {
+.content-nav-wrap :deep(.left-wrap) .book-state li .detail {
   float: left;
   width: calc(100% - 98px);
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state .detail .charpter-container {
+.content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-container {
   display: inline-block;
   height: 24px;
   margin: 0px 0px 5px 0px;
   width: 50%;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state .detail .charpter-link {
+.content-nav-wrap :deep(.left-wrap) .book-state .detail .charpter-link {
   overflow: hidden;
   max-width: calc(100% - 133px);
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state li .detail p i {
+.content-nav-wrap :deep(.left-wrap) .book-state li .detail p i {
   font-family: Arial;
   margin: 2px 10px 0;
   color: #a6a6a6;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state li .detail .time,
-.content-nav-wrap :v-deep(.left-wrap) .book-state li .detail a.blue,
-.content-nav-wrap :v-deep(.left-wrap) .book-state li .detail i {
+.content-nav-wrap :deep(.left-wrap) .book-state li .detail .time,
+.content-nav-wrap :deep(.left-wrap) .book-state li .detail a.blue,
+.content-nav-wrap :deep(.left-wrap) .book-state li .detail i {
   display: inline-block;
   vertical-align: middle;
   font: 14px/22px PingFangSC-Regular, "-apple-system", Simsun;
 }
 
-.content-nav-wrap :v-deep(.left-wrap) .book-state li em.null,
-.content-nav-wrap :v-deep(.left-wrap) .book-state li em.time {
+.content-nav-wrap :deep(.left-wrap) .book-state li em.null,
+.content-nav-wrap :deep(.left-wrap) .book-state li em.time {
   color: #999;
 }
 .blue {
   color: #3f5a93;
 }
 
-.book-img :v-deep(.ant-image) .book-img-src {
+.book-img :deep(.ant-image) .book-img-src {
   height: 100%;
 }
 

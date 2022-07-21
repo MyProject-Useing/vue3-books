@@ -242,7 +242,7 @@ export default {
   color: #404246;
 }
 
-.result-content .search-btn-group :v-deep(.ant-select-selection-placeholder) {
+.result-content .search-btn-group :deep(.ant-select-selection-placeholder) {
   line-height: 2.6em;
   padding-left: 13px;
   color: rgb(117, 117, 117);
