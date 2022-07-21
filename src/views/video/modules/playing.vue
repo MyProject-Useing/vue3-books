@@ -51,8 +51,10 @@
                     :title="info.name"
                     class="link"
                     ><span class="ellipsis"
-                      >{{ info.name }}<i class="icon-playing"></i></span
-                  ></a>
+                      >{{ formatName(info.name) }}
+                      <!-- <i class="icon-playing"></i> -->
+                    </span></a
+                  >
                 </li>
               </ul>
             </div>
@@ -219,6 +221,9 @@ export default {
         content: `资源错误，请重新选择集数。`,
         duration: 2,
       });
+    },
+    formatName(name) {
+      return name.replace("第0", "").replace("第", "").replace("集", "");
     },
     waiting() {
       debugger;
