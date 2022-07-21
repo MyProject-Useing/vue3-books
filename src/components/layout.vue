@@ -194,10 +194,10 @@ export default defineComponent({
         box-shadow: 0 4px 18px rgb(17 18 38 / 7%);
         transition: max-width 0.2s ease;
         border-radius: 20px;
+        padding-left: 16px;
         height: 38px;
-        :v-deep .ant-input {
+        :deep(.ant-input) {
           background-color: transparent;
-          padding-left: 9px;
           color: #999;
           text-shadow: none;
         }
