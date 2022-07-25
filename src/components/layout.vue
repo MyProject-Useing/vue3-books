@@ -1,6 +1,6 @@
 <template>
-  <a-layout class="layout" theme="dark">
-    <a-layout-header class="header">
+  <Layout class="layout" theme="dark">
+    <LayoutHeader class="header">
       <div class="layout-head-panle">
         <div class="layout-head">
           <div class="logo-goroup" @click="toPath('/videoIndex')">
@@ -18,7 +18,7 @@
             >
           </a-menu> -->
           <div class="header-side">
-            <a-input
+            <Input
               class="head-search-btn"
               enter-button="Search"
               placeholder="请输入关键字"
@@ -32,7 +32,7 @@
                   <span> 搜索 </span>
                 </span>
               </template>
-            </a-input>
+            </Input>
             <div class="header-btn-group">
               <clock-circle-outlined title="播放记录" @click="openGit()" />
               <sync-outlined title="刷新界面" @click="openGit()" />
@@ -42,22 +42,31 @@
           </div>
         </div>
       </div>
-    </a-layout-header>
-    <a-layout-content>
+    </LayoutHeader>
+    <LayoutContent>
       <router-view />
-    </a-layout-content>
-    <a-layout-footer>
+    </LayoutContent>
+    <LayoutFooter>
       <div>1、本站提供的所有内容仅供学习、交流与参考。</div>
       <div>
         2、本站所有资源均已标明来源，如未经许可进行转载使用，请务必标明或保留文章原始出处和作者的信息。
       </div>
       <span> Copyright © 2022 zyy All Rights Reserved </span>
-    </a-layout-footer>
-  </a-layout>
+    </LayoutFooter>
+  </Layout>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
+
+import {
+  Layout,
+  LayoutHeader,
+  LayoutContent,
+  LayoutFooter,
+  Input,
+} from "ant-design-vue";
+
 // 图标
 import {
   GithubOutlined,
@@ -66,8 +75,14 @@ import {
   CommentOutlined,
   ClockCircleOutlined,
 } from "@ant-design/icons-vue";
+
 export default defineComponent({
   components: {
+    Layout,
+    LayoutHeader,
+    LayoutContent,
+    LayoutFooter,
+    Input,
     SearchOutlined,
     GithubOutlined,
     SyncOutlined,

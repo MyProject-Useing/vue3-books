@@ -1,12 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-
-import layout from "@/components/layout.vue";
-
 const routes = [
   {
     path: "/",
     name: "home",
-    component: layout,
+    component: () => import("@/components/layout.vue"),
     redirect: "/videoIndex",
     children: [
       {
@@ -14,13 +11,11 @@ const routes = [
         name: "videoIndex",
         component: () => import("@/views/video/index.vue"),
       },
-
       {
         path: "/videoResult",
         name: "videoResult",
         component: () => import("@/views/video/modules/videoResult.vue"),
       },
-
       {
         path: "/bookIndex",
         name: "bookIndex",

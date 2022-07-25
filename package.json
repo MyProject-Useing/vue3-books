@@ -5,15 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "report": "vue-cli-service build --report",
     "lint": "vue-cli-service lint",
     "lintFix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.1.1",
-    "compression-webpack-plugin": "^9.2.0",
-    "core-js": "^3.8.3",
-    "lib-flexible": "^0.3.2",
     "swiper": "^8.3.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
@@ -28,6 +26,8 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "core-js": "^3.8.3",
+    "compression-webpack-plugin": "^9.2.0",
     "axios": "^0.18.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
