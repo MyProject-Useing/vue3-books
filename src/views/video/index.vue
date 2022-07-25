@@ -109,7 +109,6 @@
 </template>
 
 <script>
-// import { ref } from "vue";
 import { isMobile } from "@/plugins/utils";
 import { getMovieIndex } from "@/api/movieApi";
 // 目录
@@ -127,23 +126,24 @@ import "swiper/css/pagination";
 export default {
   name: "videoIndex",
   setup() {
-    // let width =
-    //   window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
-    // let lngth = Math.floor((width - 200) / 200);
+    let width =
+      window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
+    let length = Math.floor((width - 200) / 200);
     return {
-      swiperOptions: {
-        modules: [Autoplay, Navigation, Pagination],
-        "slides-per-view": 6,
-        "slides-per-group": 6,
-        scrollbar: true,
-        keyboard: { enabled: true },
-        navigation: true,
-        pagination: { type: "fraction" },
-        autoplay: {
-          delay: 10000,
-          disableOnInteraction: false,
-        },
-      },
+      length,
+      // swiperOptions: {
+      //   modules: [Autoplay, Navigation, Pagination],
+      //   "slides-per-view": length,
+      //   "slides-per-group": length,
+      //   scrollbar: true,
+      //   keyboard: { enabled: true },
+      //   navigation: true,
+      //   pagination: { type: "fraction" },
+      //   autoplay: {
+      //     delay: 10000,
+      //     disableOnInteraction: false,
+      //   },
+      // },
     };
   },
   data() {
@@ -180,6 +180,31 @@ export default {
     variety() {
       return this.sourceData.zongyi?.list ?? [];
     },
+
+    swiperOptions() {
+      debugger;
+      return {
+        modules: [Autoplay, Navigation, Pagination],
+        "slides-per-view": this.length,
+        "slides-per-group": this.length,
+        scrollbar: true,
+        keyboard: { enabled: true },
+        navigation: true,
+        pagination: { type: "fraction" },
+        autoplay: {
+          delay: 10000,
+          disableOnInteraction: false,
+        },
+      };
+    },
+  },
+  created() {
+    window.onresize = () => {
+      let width =
+        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
+      this.length = Math.floor((width - 200) / 200);
+      this.$forceUpdate();
+    };
   },
   mounted() {
     this.init();

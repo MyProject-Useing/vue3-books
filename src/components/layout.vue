@@ -144,6 +144,8 @@ export default defineComponent({
 
 .layout {
   margin: auto;
+  padding: 0 3rem 3rem 3rem;
+  background-color: #fff;
   .ant-layout {
     background: #fff;
   }
