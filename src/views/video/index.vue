@@ -7,7 +7,7 @@
             <span class="qy-mod-text">电视剧</span>
           </h2>
         </div>
-        <swiper class="swiper-panle" v-bind="swiperOptions">
+        <swiper v-if="length != 0" class="swiper-panle" v-bind="swiperOptions">
           <swiper-slide class="qy-mod-li" v-for="item in tv" :key="item.name">
             <a
               class="qy-mod-link"
@@ -37,7 +37,7 @@
             <span class="qy-mod-text">电影</span>
           </h2>
         </div>
-        <swiper class="swiper-panle" v-bind="swiperOptions">
+        <swiper v-if="length != 0" class="swiper-panle" v-bind="swiperOptions">
           <swiper-slide
             class="qy-mod-li"
             v-for="item in movie"
@@ -71,7 +71,7 @@
             <span class="qy-mod-text">综艺</span>
           </h2>
         </div>
-        <swiper class="swiper-panle" v-bind="swiperOptions">
+        <swiper v-if="length != 0" class="swiper-panle" v-bind="swiperOptions">
           <swiper-slide
             class="qy-mod-li"
             v-for="item in variety"
@@ -125,27 +125,6 @@ import "swiper/css/pagination";
 
 export default {
   name: "videoIndex",
-  setup() {
-    let width =
-      window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
-    let length = Math.floor((width - 200) / 200);
-    return {
-      length,
-      // swiperOptions: {
-      //   modules: [Autoplay, Navigation, Pagination],
-      //   "slides-per-view": length,
-      //   "slides-per-group": length,
-      //   scrollbar: true,
-      //   keyboard: { enabled: true },
-      //   navigation: true,
-      //   pagination: { type: "fraction" },
-      //   autoplay: {
-      //     delay: 10000,
-      //     disableOnInteraction: false,
-      //   },
-      // },
-    };
-  },
   data() {
     return {
       noCover: require("@/assets/imgs/noCover.jpeg"),
@@ -155,6 +134,7 @@ export default {
         movie: [],
         variety: [],
       },
+      length: 0,
     };
   },
   components: {
@@ -182,7 +162,6 @@ export default {
     },
 
     swiperOptions() {
-      debugger;
       return {
         modules: [Autoplay, Navigation, Pagination],
         "slides-per-view": this.length,
@@ -192,24 +171,29 @@ export default {
         navigation: true,
         pagination: { type: "fraction" },
         autoplay: {
-          delay: 10000,
+          delay: 30000,
           disableOnInteraction: false,
         },
       };
     },
   },
-  created() {
-    window.onresize = () => {
-      let width =
-        window.document.getElementsByTagName("body")[0]?.clientWidth ?? 1400;
-      this.length = Math.floor((width - 200) / 200);
-      this.$forceUpdate();
-    };
-  },
   mounted() {
     this.init();
+    this.setWidth();
+    window.onresize = () => {
+      this.setWidth();
+      // this.$forceUpdate();
+    };
   },
   methods: {
+    setWidth() {
+      let width =
+        window.document.getElementsByClassName("video-index-panle")[0]
+          ?.offsetWidth ?? 1200;
+
+      this.length = Math.floor(width / 200);
+    },
+
     init() {
       // 重新搜索
       this.sourceData = {};
