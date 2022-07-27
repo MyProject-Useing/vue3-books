@@ -1,9 +1,18 @@
 <template>
-  <div class="video-content" :class="isMobileClass ? 'mobile' : ''">
+  <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
+    <div class="filter-header">
+      <a href="javascript:;" class="item current">全部频道</a>
+      <a href="javascript:;" class="item">电视剧</a>
+      <a href="javascript:;" class="item">电影</a>
+      <a href="javascript:;" class="item">综艺</a>
+      <a href="javascript:;" class="item">动漫</a>
+      <a href="javascript:;" class="item">纪录片</a>
+    </div>
+
     <Spin :spinning="refreshLoading">
-      <div class="video-panle">
+      <div class="result-wrap">
         <Empty v-if="videoList.length === 0" description="暂无数据" />
-        <div v-else class="video-item-wrap">
+        <div v-else class="result-wrap">
           <div class="video-item" v-for="(item, bi) in videoList" :key="bi">
             <div class="result-figure">
               <Image
@@ -236,38 +245,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("@/views/video/css/videoResult.css");
-
-.result-content .search-btn-group .search-btn {
-  height: 100%;
-  border: 2px solid #4569ff;
-  border-radius: 10px 0 0 10px;
-  border-right: 0;
-  color: #404246;
-}
-
-.result-content .search-btn-group :deep(.ant-select-selection-placeholder) {
-  line-height: 2.6em;
-  padding-left: 13px;
-  color: rgb(117, 117, 117);
-  font-size: 1em;
-}
-
-.result-content .search-btn-group button.ant-btn {
-  border-radius: 0 10px 10px 0;
-  height: 100%;
-  background: #4e6ef2;
-  color: #fff;
-  width: 98px;
-}
-</style>
-<style>
-.result-content
-  .ant-select.ant-select-auto-complete
-  .ant-select-selector
-  .ant-select-selection-search
-  .ant-select-selection-search-input {
-  padding-left: 8px;
-}
+<style lang="less" scoped>
+@import url("@/views/video/css/videoResult.less");
 </style>
