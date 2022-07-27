@@ -14,7 +14,7 @@
         <Empty v-if="videoList.length === 0" description="暂无数据" />
         <div v-else class="result-wrap">
           <div class="video-item" v-for="(item, bi) in videoList" :key="bi">
-            <div class="result-figure">
+            <div class="result-left">
               <Image
                 class="movie-img"
                 :src="getImgUrl(item)"

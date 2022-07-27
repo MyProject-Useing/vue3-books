@@ -11,11 +11,19 @@
       position: relative;
       font-size: 0;
       margin-bottom: 20px;
-      .result-figure {
+      .result-left {
         display: inline-block;
         padding-right: 20px;
         vertical-align: top;
         position: relative;
+        :deep(.movie-img) {
+          width: 180px;
+          height: 236px;
+          cursor: default;
+          transition: all 0.25s ease-in-out;
+          backface-visibility: hidden;
+        }
+
         .icon-br {
           position: absolute;
           bottom: 5px;
@@ -31,13 +39,6 @@
           word-spacing: 0;
           letter-spacing: 0;
           background: rgba(0, 0, 0, 0.6);
-        }
-        .movie-img {
-          width: 180px;
-          height: 236px;
-          cursor: default;
-          transition: all 0.25s ease-in-out;
-          backface-visibility: hidden;
         }
       }
       .result-right {
@@ -136,57 +137,56 @@
             outline: none;
           }
         }
+
+        .search-result-album {
+          position: relative;
+          height: 167px;
+
+          .album-list {
+            margin: 0px;
+            padding: 0px;
+            margin-top: 12px;
+            height: 100%;
+            overflow-y: auto;
+            .album-item {
+              position: relative;
+              float: left;
+              margin-left: 10px;
+              .album-link {
+                display: block;
+                width: 42px;
+                height: 40px;
+                background: #f8f8f8;
+                border-radius: 2px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 12px;
+                color: #222;
+                outline: none;
+                overflow: hidden;
+                span {
+                  display: block;
+                  overflow: hidden;
+                }
+              }
+              .album-link:hover {
+                background: #e8fcea;
+                color: #00be06;
+              }
+            }
+          }
+
+          .variety-list {
+            .album-item {
+              width: calc(50% - 10px);
+              .album-link {
+                width: 100%;
+                text-align: left;
+              }
+            }
+          }
+        }
       }
     }
   }
-}
-
-.search-result-album {
-  position: relative;
-  height: 167px;
-
-  .album-list {
-    margin: 0px;
-    padding: 0px;
-    margin-top: 12px;
-    height: 100%;
-    overflow-y: auto;
-    .album-item {
-      position: relative;
-      float: left;
-      margin-left: 10px;
-      .album-link {
-        display: block;
-        width: 42px;
-        height: 40px;
-        background: #f8f8f8;
-        border-radius: 2px;
-        line-height: 40px;
-        text-align: center;
-        font-size: 12px;
-        color: #222;
-        outline: none;
-        overflow: hidden;
-      }
-    }
-  }
-
-  .variety-list {
-    .album-item {
-      width: calc(50% - 10px);
-      .album-link {
-        width: 100%;
-        text-align: left;
-      }
-    }
-  }
-}
-
-.search-result-album .album-item .album-link span {
-  display: block;
-  overflow: hidden;
-}
-.search-result-album .album-item .album-link:hover {
-  background: #e8fcea;
-  color: #00be06;
 }
