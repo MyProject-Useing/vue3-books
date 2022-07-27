@@ -40,7 +40,7 @@
                   v-for="(info, inx) in item.source"
                   :key="inx"
                   :class="
-                    index === selectSoureIndex && inx === selectIndex
+                    index === selectSoureIndex && inx == selectIndex
                       ? 'active'
                       : ''
                   "
@@ -85,6 +85,9 @@ export default {
     palyUrl() {
       return decodeURIComponent(this.$route.query.url || "");
     },
+    palyOrder() {
+      return parseInt(this.$route.query.order || 1) - 1;
+    },
     // 当前的视频名称
     palyVideoName() {
       return decodeURIComponent(this.$route.query.name || "");
@@ -96,7 +99,7 @@ export default {
     // 播放的视频集数
     playSourseIndex() {
       let source = this.playSourse?.source ?? [];
-      return source[this.selectIndex] || {};
+      return source[this.selectIndex] ?? source[0] ?? {};
     },
     // 当前播放的 视频名称
     souresName() {
@@ -161,8 +164,8 @@ export default {
       let resData = sessionStorage.getItem("video_paly_session@" + url);
       if (resData) {
         this.sourceList = JSON.parse(resData);
-        this.src = this.sourceList[0].source[0].url;
-        this.setIndex(0, 0);
+        this.src = this.sourceList[0].source[this.palyOrder].url;
+        this.setIndex(this.palyOrder || 0, 0);
       } else {
         getUrlSourse({ url: url })
           .then((d) => {
@@ -172,8 +175,8 @@ export default {
                   d.name.includes(this.palyName)
                 );
                 this.sourceList = data || [];
-                this.setIndex(0, 0);
-                this.src = this.sourceList[0]?.source[0].url;
+                this.setIndex(this.palyOrder, 0);
+                this.src = this.sourceList[0]?.source[this.palyOrder].url;
                 if (!this.src) {
                   return message.error({
                     content: `未能找到此资源，即将为你跳转到源路径。`,
@@ -225,9 +228,7 @@ export default {
     formatName(name) {
       return name.replace("第0", "").replace("第", "").replace("集", "");
     },
-    waiting() {
-      debugger;
-    },
+    waiting() {},
   },
 };
 </script>

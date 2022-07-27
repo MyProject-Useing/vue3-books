@@ -220,7 +220,7 @@ export default {
     getImgUrl(item) {
       return getCacheImages(item.imageUrl);
     },
-    // 返回首页
+    // 查看视频详情
     goDetails(item) {
       this.$router.push({
         path: "/videoPlaying",

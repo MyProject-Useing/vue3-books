@@ -30,10 +30,10 @@
                 </a>
                 <em class="year">{{ item.year }}</em>
                 <div class="title-right">
-                  <a :href="item.palySrc" target="_blank">
+                  <a :href="item.palySrc" target="_blank" title="视频源地址">
                     <em class="player-name">{{ item.siteName }}</em></a
                   >
-                  <em class="score"> {{ item.score }}</em>
+                  <em class="score" title="评分"> {{ item.score }}</em>
                 </div>
               </h3>
               <div class="result-info half ellipsis" v-if="item.alias">
@@ -103,9 +103,6 @@
                     >
                   </li>
                 </ul>
-                <div style="display: none">
-                  <a href="javascript:void(0);" class="link-packup">收起</a>
-                </div>
               </div>
             </div>
           </div>
@@ -213,8 +210,8 @@ export default {
         path: item.hasVip ? "/videoPlaying" : "/videoiframe",
         query: {
           url: encodeURI(item.palySrc),
-          tag: encodeURI(item.tag),
-          title: encodeURI(item.title),
+          // tag: encodeURI(item.tag),
+          name: encodeURI(item.title),
           order: item.order ?? null,
         },
       });
