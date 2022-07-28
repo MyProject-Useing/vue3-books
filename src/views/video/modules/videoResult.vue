@@ -1,12 +1,12 @@
 <template>
   <div class="video-result-wrap" :class="isMobileClass ? 'mobile' : ''">
     <div class="filter-header">
-      <a href="javascript:;" class="item current">全部频道</a>
-      <a href="javascript:;" class="item">电视剧</a>
-      <a href="javascript:;" class="item">电影</a>
-      <a href="javascript:;" class="item">综艺</a>
-      <a href="javascript:;" class="item">动漫</a>
-      <a href="javascript:;" class="item">纪录片</a>
+      <a href="javascript:;" class="header-item current">全部频道</a>
+      <a href="javascript:;" class="header-item">电视剧</a>
+      <a href="javascript:;" class="header-item">电影</a>
+      <a href="javascript:;" class="header-item">综艺</a>
+      <a href="javascript:;" class="header-item">动漫</a>
+      <a href="javascript:;" class="header-item">纪录片</a>
     </div>
 
     <Spin :spinning="refreshLoading">
