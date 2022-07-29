@@ -68,7 +68,6 @@
                 </template>
                 <clock-circle-outlined title="播放记录" />
               </Popover>
-              <sync-outlined title="刷新界面" @click="openGit()" />
               <github-outlined title="查看源码" @click="openGit()" />
               <comment-outlined title="反馈" @click="openGit()" />
             </div>
@@ -105,7 +104,6 @@ import {
 import {
   GithubOutlined,
   SearchOutlined,
-  SyncOutlined,
   CommentOutlined,
   ClockCircleOutlined,
 } from "@ant-design/icons-vue";
@@ -120,7 +118,6 @@ export default defineComponent({
     Popover,
     SearchOutlined,
     GithubOutlined,
-    SyncOutlined,
     CommentOutlined,
     ClockCircleOutlined,
   },
