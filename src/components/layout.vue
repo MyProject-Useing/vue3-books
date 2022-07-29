@@ -239,6 +239,7 @@ export default defineComponent({
   .ant-layout-footer {
     background-color: #fff;
     padding: 0px;
+    margin-top: 25px;
   }
 }
 
