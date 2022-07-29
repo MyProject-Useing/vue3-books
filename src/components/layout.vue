@@ -34,7 +34,40 @@
               </template>
             </Input>
             <div class="header-btn-group">
-              <clock-circle-outlined title="播放记录" @click="openGit()" />
+              <Popover>
+                <template #content>
+                  <div class="play-history">
+                    <div class="play-history-title">播放记录</div>
+                    <div class="play-history-content">
+                      <template
+                        v-for="item in playHistoryList"
+                        :key="item.title"
+                      >
+                        <div class="history-item">
+                          <div class="img-info">
+                            <Image
+                              class="img-panle"
+                              :src="getImgUrl(item.imgSrc)"
+                              :preview="false"
+                              fallback="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAAKJFjYGASSSwoyGFhYGDIzSspCnJ3UoiIjFJgf8LAwSDCIMogwMCcmFxc4BgQ4ANUwgCjUcG3awyMIPqyLsis7PPOq3QdDFcvjV3jOD1boQVTPQrgSkktTgbSf4A4LbmgqISBgTEFyFYuLykAsTuAbJEioKOA7DkgdjqEvQHEToKwj4DVhAQ5A9k3gGyB5IxEoBmML4BsnSQk8XQkNtReEOBxcfXxUQg1Mjc0dyHgXNJBSWpFCYh2zi+oLMpMzyhRcASGUqqCZ16yno6CkYGRAQMDKMwhqj/fAIcloxgHQqxAjIHBEugw5sUIsSQpBobtQPdLciLEVJYzMPBHMDBsayhILEqEO4DxG0txmrERhM29nYGBddr//5/DGRjYNRkY/l7////39v///y4Dmn+LgeHANwDrkl1AuO+pmgAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAwqADAAQAAAABAAAAwwAAAAD9b/HnAAAHlklEQVR4Ae3dP3PTWBSGcbGzM6GCKqlIBRV0dHRJFarQ0eUT8LH4BnRU0NHR0UEFVdIlFRV7TzRksomPY8uykTk/zewQfKw/9znv4yvJynLv4uLiV2dBoDiBf4qP3/ARuCRABEFAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghggQAQZQKAnYEaQBAQaASKIAQJEkAEEegJmBElAoBEgghgg0Aj8i0JO4OzsrPv69Wv+hi2qPHr0qNvf39+iI97soRIh4f3z58/u7du3SXX7Xt7Z2enevHmzfQe+oSN2apSAPj09TSrb+XKI/f379+08+A0cNRE2ANkupk+ACNPvkSPcAAEibACyXUyfABGm3yNHuAECRNgAZLuYPgEirKlHu7u7XdyytGwHAd8jjNyng4OD7vnz51dbPT8/7z58+NB9+/bt6jU/TI+AGWHEnrx48eJ/EsSmHzx40L18+fLyzxF3ZVMjEyDCiEDjMYZZS5wiPXnyZFbJaxMhQIQRGzHvWR7XCyOCXsOmiDAi1HmPMMQjDpbpEiDCiL358eNHurW/5SnWdIBbXiDCiA38/Pnzrce2YyZ4//59F3ePLNMl4PbpiL2J0L979+7yDtHDhw8vtzzvdGnEXdvUigSIsCLAWavHp/+qM0BcXMd/q25n1vF57TYBp0a3mUzilePj4+7k5KSLb6gt6ydAhPUzXnoPR0dHl79WGTNCfBnn1uvSCJdegQhLI1vvCk+fPu2ePXt2tZOYEV6/fn31dz+shwAR1sP1cqvLntbEN9MxA9xcYjsxS1jWR4AIa2Ibzx0tc44fYX/16lV6NDFLXH+YL32jwiACRBiEbf5KcXoTIsQSpzXx4N28Ja4BQoK7rgXiydbHjx/P25TaQAJEGAguWy0+2Q8PD6/Ki4R8EVl+bzBOnZY95fq9rj9zAkTI2SxdidBHqG9+skdw43borCXO/ZcJdraPWdv22uIEiLA4q7nvvCug8WTqzQveOH26fodo7g6uFe/a17W3+nFBAkRYENRdb1vkkz1CH9cPsVy/jrhr27PqMYvENYNlHAIesRiBYwRy0V+8iXP8+/fvX11Mr7L7ECueb/r48eMqm7FuI2BGWDEG8cm+7G3NEOfmdcTQw4h9/55lhm7DekRYKQPZF2ArbXTAyu4kDYB2YxUzwg0gi/41ztHnfQG26HbGel/crVrm7tNY+/1btkOEAZ2M05r4FB7r9GbAIdxaZYrHdOsgJ/wCEQY0J74TmOKnbxxT9n3FgGGWWsVdowHtjt9Nnvf7yQM2aZU/TIAIAxrw6dOnAWtZZcoEnBpNuTuObWMEiLAx1HY0ZQJEmHJ3HNvGCBBhY6jtaMoEiJB0Z29vL6ls58vxPcO8/zfrdo5qvKO+d3Fx8Wu8zf1dW4p/cPzLly/dtv9Ts/EbcvGAHhHyfBIhZ6NSiIBTo0LNNtScABFyNiqFCBChULMNNSdAhJyNSiECRCjUbEPNCRAhZ6NSiAARCjXbUHMCRMjZqBQiQIRCzTbUnAARcjYqhQgQoVCzDTUnQIScjUohAkQo1GxDzQkQIWejUogAEQo121BzAkTI2agUIkCEQs021JwAEXI2KoUIEKFQsw01J0CEnI1KIQJEKNRsQ80JECFno1KIABEKNdtQcwJEyNmoFCJAhELNNtScABFyNiqFCBChULMNNSdAhJyNSiECRCjUbEPNCRAhZ6NSiAARCjXbUHMCRMjZqBQiQIRCzTbUnAARcjYqhQgQoVCzDTUnQIScjUohAkQo1GxDzQkQIWejUogAEQo121BzAkTI2agUIkCEQs021JwAEXI2KoUIEKFQsw01J0CEnI1KIQJEKNRsQ80JECFno1KIABEKNdtQcwJEyNmoFCJAhELNNtScABFyNiqFCBChULMNNSdAhJyNSiECRCjUbEPNCRAhZ6NSiAARCjXbUHMCRMjZqBQiQIRCzTbUnAARcjYqhQgQoVCzDTUnQIScjUohAkQo1GxDzQkQIWejUogAEQo121BzAkTI2agUIkCEQs021JwAEXI2KoUIEKFQsw01J0CEnI1KIQJEKNRsQ80JECFno1KIABEKNdtQcwJEyNmoFCJAhELNNtScABFyNiqFCBChULMNNSdAhJyNSiEC/wGgKKC4YMA4TAAAAABJRU5ErkJggg=="
+                            >
+                            </Image>
+                          </div>
+                          <div class="history-item-content">
+                            <div class="history-item-title">
+                              {{ item.title }}
+                            </div>
+                            <div class="history-item-description">
+                              {{ item.description }}
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+                <clock-circle-outlined title="播放记录" />
+              </Popover>
               <sync-outlined title="刷新界面" @click="openGit()" />
               <github-outlined title="查看源码" @click="openGit()" />
               <comment-outlined title="反馈" @click="openGit()" />
@@ -58,13 +91,14 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-
+import { getCacheImages } from "@/plugins/utils.js";
 import {
   Layout,
   LayoutHeader,
   LayoutContent,
   LayoutFooter,
   Input,
+  Popover,
 } from "ant-design-vue";
 
 // 图标
@@ -83,6 +117,7 @@ export default defineComponent({
     LayoutContent,
     LayoutFooter,
     Input,
+    Popover,
     SearchOutlined,
     GithubOutlined,
     SyncOutlined,
@@ -99,6 +134,9 @@ export default defineComponent({
       });
     };
     return {
+      playHistoryList: [
+        { title: "播放记录1", imgSrc: "", description: "这是描述" },
+      ],
       keywords: ref(router.currentRoute.value.query.keywords || ""),
       selectedKey: ref([router.currentRoute.value.path]),
       toPath,
@@ -119,6 +157,10 @@ export default defineComponent({
     // 查看git源码
     openGit() {
       window.open("https://github.com/danhuaxiansheng/vue3-books");
+    },
+    // 获取图片缓存
+    getImgUrl(src) {
+      return getCacheImages(src);
     },
   },
 });
@@ -242,24 +284,70 @@ export default defineComponent({
     margin-top: 25px;
   }
 }
+</style>
 
-.layout .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
-  background: none;
-  color: #ff5c38;
+<style lang="less">
+.ant-popover-inner-content {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 28px 50px rgb(25 24 40 / 35%);
 }
 
-.layout .ant-menu.ant-menu-dark .ant-menu-item {
-  background: none;
-  font-size: 18px;
-  color: #111;
-  font-weight: 500;
-  font-style: oblique;
-  padding: 0px;
-}
+.play-history {
+  width: 310px;
 
-.layout .ant-menu.ant-menu-dark,
-.layout .ant-menu-dark .ant-menu-sub,
-.layout .ant-menu.ant-menu-dark .ant-menu-sub {
-  background: none;
+  .play-history-title {
+    position: relative;
+    color: #ff5c38;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    outline: 0 none;
+    background: 0 0;
+    font-size: 14px;
+    line-height: 50px;
+    vertical-align: top;
+    cursor: pointer;
+  }
+
+  .play-history-content {
+    .history-item {
+      .img-info {
+        display: inline-block;
+        width: 100px;
+        height: 56px;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+
+      .history-item-content {
+        display: inline-block;
+        .history-item-title {
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          display: block;
+          height: 36px;
+          overflow: hidden;
+          color: #111;
+          font-size: 13px;
+          line-height: 18px;
+          cursor: pointer;
+          overflow: hidden;
+        }
+        .history-item-title:hover {
+          color: #ff5c38;
+        }
+        .history-item-description {
+          display: block;
+          margin-top: 2px;
+          font-size: 12px;
+          overflow: hidden;
+          color: #999;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }
 </style>
