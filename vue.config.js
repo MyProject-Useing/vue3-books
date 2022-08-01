@@ -1,5 +1,11 @@
 const { defineConfig } = require("@vue/cli-service");
 const CompressionPlugin = require("compression-webpack-plugin");
+
+// var { showDebugger } = require("./src/plugins/safe");
+// if (process.env.NODE_ENV === "production") {
+//   showDebugger();
+// }
+
 // const setting = require("./src/setting.js");
 module.exports = defineConfig({
   publicPath: "./", // 设置打包路径
