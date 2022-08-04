@@ -304,7 +304,7 @@ export default {
       // 打开遮罩框
       this.bookLoading = true;
       // 修改章节名称
-      this.bookTitle = bookObj.index + " " + bookObj.title;
+      this.bookTitle = bookObj.index ?? "" + " " + bookObj.title ?? "";
 
       bookObj.hasVip
         ? this.getVipContent(bookObj)
