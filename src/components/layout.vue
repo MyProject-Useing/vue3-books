@@ -7,16 +7,6 @@
             <div class="logo-bg"></div>
             <span class="logo-label"> 酷我视频</span>
           </div>
-          <!-- <a-menu
-            class="head-menu"
-            v-model:selectedKeys="selectedKey"
-            theme="dark"
-            mode="horizontal"
-          >
-            <a-menu-item key="/videoIndex" @click="toPath('/videoIndex')">
-              酷我视频</a-menu-item
-            >
-          </a-menu> -->
           <div class="header-side">
             <Input
               class="head-search-btn"
@@ -97,6 +87,7 @@ import {
   LayoutContent,
   LayoutFooter,
   Input,
+  Image,
   Popover,
 } from "ant-design-vue";
 
@@ -115,6 +106,7 @@ export default defineComponent({
     LayoutContent,
     LayoutFooter,
     Input,
+    Image,
     Popover,
     SearchOutlined,
     GithubOutlined,
