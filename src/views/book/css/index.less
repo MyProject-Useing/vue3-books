@@ -4,6 +4,25 @@
   width: 1200px;
   margin-top: 25px;
   min-height: 300px;
+
+  .new-rec-wrap {
+    min-height: 200px;
+  }
+
+  .hot-classify-wrap {
+    min-height: 300px;
+  }
+
+  .rank-list-row {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .lang {
+    font-family: FZZCYSK;
+    font-weight: 400;
+  }
 }
 
 @media (max-width: 1280px) {
@@ -12,14 +31,7 @@
     width: 990px;
   }
 }
-.new-rec-wrap {
-  min-height: 200px;
-}
 
-.lang {
-  font-family: FZZCYSK;
-  font-weight: 400;
-}
 .rank-list {
   margin-right: 30px;
   position: relative;
@@ -137,76 +149,82 @@ h3.wrap-title {
   border-bottom: 1px solid #666;
 }
 
-.hot-classify-wrap{
-  min-height: 300px;
-}
-
-.hot-classify-wrap .hot-book-list dd {
-  max-height: 32px;
-  display: flex;
-  align-items: center;
-}
-.hot-classify-wrap .hot-book-list dd a {
-  color: #1a1a1a;
-  float: left;
-  font: 14px/32px PingFangSC-Regular, -apple-system, Simsun;
-}
-.hot-classify-wrap .hot-book-list dd a.name {
-  height: 32px;
-  max-width: 168px;
-  overflow: hidden;
-}
-.hot-classify-wrap .hot-book-list dd .classify {
-  color: gray;
-  margin-left: -8px;
-}
-
 .hot-book-list {
   margin-top: 8px;
+
+  dd {
+    max-height: 32px;
+    display: flex;
+    align-items: center;
+    a {
+      color: #1a1a1a;
+      float: left;
+      font: 14px/32px PingFangSC-Regular, -apple-system, Simsun;
+    }
+    .name {
+      height: 32px;
+      max-width: 168px;
+      overflow: hidden;
+    }
+    .classify {
+      color: gray;
+      margin-left: -8px;
+    }
+  }
 }
+
 .center-book-list ul {
   overflow: hidden;
   position: relative;
   width: 100%;
   margin-top: 20px;
+  li {
+    float: left;
+    height: 96px;
+    margin: 0 30px 43px 0;
+    width: 370px;
+    .book-info {
+      width: 255px;
+      p {
+        color: #666;
+        font: 12px/20px PingFangSC-Regular, -apple-system, Simsun;
+        height: 40px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+      h3 {
+        height: 21px;
+        line-height: 13px;
+        a {
+          color: #1a1a1a;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
 .book-img {
   height: 96px;
   margin-right: 12px;
   width: 72px;
-}
-.center-book-list ul li {
-  float: left;
-  height: 96px;
-  margin: 0 30px 43px 0;
-  width: 370px;
-}
-.center-book-list ul li .book-info {
-  width: 255px;
-}
-.center-book-list ul li .book-info h3 a {
-  color: #1a1a1a;
-}
-.center-book-list ul li .book-info p {
-  color: #666;
-  font: 12px/20px PingFangSC-Regular, -apple-system, Simsun;
-  height: 40px;
-  margin-bottom: 10px;
-  overflow: hidden;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 35%), inset 0 0 5px #f9f2e9;
 }
 .state-box {
   display: flex;
   align-items: center;
   color: #a6a6a6;
+  .author {
+    overflow: hidden;
+    padding-right: 10px;
+    margin-left: 5px;
+    font-size: 12px;
+  }
 }
-.state-box .author {
-  overflow: hidden;
-  padding-right: 10px;
-  margin-left: 5px;
-}
-.center-book-list ul li .book-img,
-.center-book-list ul li .book-info {
-  float: left;
+.center-book-list ul li {
+  .book-img,
+  .book-info {
+    float: left;
+  }
 }
 
 .hot-classify-wrap li {
@@ -228,9 +246,4 @@ h3.wrap-title {
   .rank-list-row {
     width: auto;
   }
-}
-.rank-list-row {
-  overflow: hidden;
-  width: 100%;
-  margin-top: 20px;
 }
