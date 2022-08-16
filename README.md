@@ -26,7 +26,10 @@ npm run lint
 
 ### 在线地址
 
-http://111.229.92.181/#/
+### 视频网站
+http://onlyyii.work:3000/#/videoIndex
+### 小说网站
+http://onlyyii.work:3000/#/bookIndex
 
 ### 运行截图
 
